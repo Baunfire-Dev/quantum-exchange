@@ -34,8 +34,6 @@ Thumbs.db
 phpcs.xml
 
 # Composer (repo root only)
-/vendor/
-!/private/vendor/
 
 # Twig cache files
 twig_cache/
