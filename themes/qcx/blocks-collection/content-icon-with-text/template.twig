@@ -1,0 +1,48 @@
+<section class="{{ block.slug }} {{ block.className }} bg-black border-b-[1px] border-b-dark-grey">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	{% set item_count = fields.items|length %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }} flex flex-col ~gap-[2rem]/[3rem] self-stretch">
+			{% if fields.heading or fields.paragraph %}
+				<div class="flex flex-col items-center ~gap-[1rem]/[1.5rem] self-stretch">
+					{% if fields.heading %}
+						<h2 class="block-heading alpha text-white text-center max-w-[55.25rem]">{{fields.heading}}</h2>
+					{% endif %}
+
+					{% if fields.paragraph %}
+						<p class="block-para alpha text-center text-white-75 max-w-[41.125rem]">{{fields.paragraph}}</p>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{% if item_count %}
+				<div class="{{ item_count == 2 or item_count == 4 ? 'grid grid-cols-2' : 'flex flex-wrap' }} ~gap-x-[1.25rem]/[3rem] ~gap-y-[1.25rem]/[1.5rem] justify-center mx-auto max-w-[90rem]">
+					{% for item in fields.items %}
+						<div class="flex lg:items-center ~gap-[0.5rem]/[0.75rem] w-full max-w-[26rem]">
+							<div class="~h-[4.5rem]/[5.5rem] ~w-[4.5rem]/[5.5rem] flex items-center justify-center rounded-[0.25rem] border border-dark-grey bg-neutral-700 shrink-0">
+								{% include 'components/image.twig' with {
+                                    'image': item.icon,
+                                    'class': "h-[2.5rem] w-[2.5rem] object-contain",
+                                    'size': "medium",
+                                } %}
+							</div>
+
+							<div class="flex flex-col items-start gap-[0.25rem]">
+								<p class="text-white">{{item.title}}</p>
+								<p class="text-white-75">{{item.description}}</p>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</section>
+

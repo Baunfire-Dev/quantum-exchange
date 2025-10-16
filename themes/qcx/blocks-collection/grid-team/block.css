@@ -1,0 +1,49 @@
+@layer components {
+	.grid-team {
+		.tabs {
+			@apply w-full flex border-[1px] border-light-grey rounded-[3.125rem] p-[0.25rem]  items-center;
+		}
+
+		.tab {
+			@apply ~py-[0.5rem]/[0.75rem] w-full flex-1 rounded-[2.5rem] flex flex-col items-center;
+
+			.orby {
+				@apply relative transition-all duration-300 ease-power2-out block w-fit text-center;
+
+				&::before {
+					content: "";
+					@apply h-[0.375rem] w-[0.375rem] rounded-[0.5rem] absolute center-y left-0 bg-teal opacity-0;
+					@apply duration-300 ease-power2-out transition-opacity;
+				}
+			}
+
+			&:hover,
+			&.active {
+				.orby {
+					@apply pl-[1rem];
+
+					&::before {
+						@apply opacity-100;
+					}
+				}
+			}
+
+			&.active {
+				@apply bg-black text-white;
+			}
+		}
+
+        .panels {
+            @apply relative border-y-[1px] border-light-grey overflow-hidden;
+        }
+
+		.panel {
+			@apply grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 absolute w-full top-0 translate-y-[2.5rem] opacity-0 z-[2];
+
+			&.active {
+				@apply visible relative translate-y-0 opacity-100;
+                @apply transition-all duration-300 ease-power2-out;
+			}
+		}
+	}
+}

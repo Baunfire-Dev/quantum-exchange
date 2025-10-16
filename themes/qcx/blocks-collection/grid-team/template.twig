@@ -1,0 +1,104 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-none" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="flex flex-col ~gap-[2rem]/[3rem]">
+			{% if fields.heading or fields.paragraph %}
+				<div class="container">
+					<div class="flex flex-col items-center ~gap-[1rem]/[1.5rem] text-center">
+						{% if fields.heading %}
+							<h2 class="block-heading alpha w-full max-w-[55.25rem]">
+								{{ fields.heading }}
+							</h2>
+						{% endif %}
+
+						{% if fields.paragraph %}
+							<p class="block-para alpha max-w-[41.125rem]">
+								{{fields.paragraph}}
+							</p>
+						{% endif %}
+					</div>
+				</div>
+			{% endif %}
+
+			{% if fields.items|length %}
+				<div class="flex flex-col ~gap-[1rem]/[1.5rem]">
+                    {% if fields.items|length > 1 %}
+                        <div class="container">
+                            <div class="tabs">
+                                {% for item in fields.items %}
+                                    <button class="tab {{ loop.index == 1 ? " active" }}" type="button" data-index="{{ loop.index }}">
+                                        <p class="button orby">{{ item.tab_labels }}</p>
+                                    </button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+					<div class="panels">
+                        {% for item in fields.items %}
+                            {% if item.team|length %}
+                                <div class="panel {{ loop.index == 1 ? " active" }}" data-index="{{ loop.index }}">
+                                    {% for member in item.team %}
+                                        <div class="team-member ~p-[1rem]/[1.5rem] border-r-[1px] border-y-[1px] border-light-grey bg-white my-[-0.0625rem]">
+                                            <div class="flex flex-col ~gap-[0.5rem]/[0.75rem]">
+                                                {% if member.image %}
+                                                    <div class="relative h-auto aspect-square">
+                                                        {% include 'components/image.twig' with {
+                                                            'class': "rounded-[0.25rem]",
+                                                            'image': member.image,
+                                                            'size': "large",
+                                                        } %}
+
+                                                        {% if member.linkedin %}
+                                                            <a href="{{ member.linkedin.url }}" target="{{ member.linkedin.target }}" rel="nofollow noreferrer noopener" class="rounded-[0.25rem] h-[2.25rem] w-[2.25rem] flex justify-center items-center border-[1px] border-white-20 backdrop-blur-[1.25rem] bg-white/[0.01] absolute right-[0.75rem] bottom-[0.75rem]">
+                                                                <svg class="h-[1.5rem] w-[1.5rem]" width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M6.4668 21.2016H2.4668V9.20156H6.4668V21.2016ZM4.4676 7.60156C3.3612 7.60156 2.4668 6.70476 2.4668 5.60076C2.4668 4.49676 3.3628 3.60156 4.4676 3.60156C5.57 3.60156 6.4668 4.49836 6.4668 5.60076C6.4668 6.70476 5.57 7.60156 4.4676 7.60156ZM20.8668 21.2016H17.0212V15.3616C17.0212 13.9688 16.9948 12.1776 15.022 12.1776C13.0196 12.1776 12.7116 13.6944 12.7116 15.2608V21.2016H8.8668V9.19276H12.558V10.8336H12.61C13.1236 9.88956 14.3788 8.89436 16.2508 8.89436C20.1468 8.89436 20.8668 11.3816 20.8668 14.6152V21.2016Z" fill="white"/>
+                                                                </svg>
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+
+                                                {% if member.position or member.name %}
+                                                    <div class="flex flex-col gap-[0.25rem]">
+                                                        {% if member.position %}
+                                                            <small class="text-rust">{{ member.position }}</small>
+                                                        {% endif %}
+
+                                                        {% if member.name %}
+                                                            <h4 class="name">{{ member.name }}</h4>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+
+                                                {% if member.bio %}
+                                                    <p class="text-black-75">{{ member.bio|nl2br }}</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+						{% if bg %}
+							<div class="absolute top-0 left-0 h-full w-full">
+								{% include 'components/image.twig' with {
+                                    'image': bg,
+                                    'size': "full",
+                                } %}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</section>
+

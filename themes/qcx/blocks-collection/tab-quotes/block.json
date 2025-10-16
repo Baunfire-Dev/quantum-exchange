@@ -1,0 +1,11 @@
+{
+	"name": "tab-quotes",
+	"title": "Tab Quotes",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

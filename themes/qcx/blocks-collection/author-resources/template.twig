@@ -1,0 +1,21 @@
+<section class="{{ block.slug }} {{ block.className }} border-t-[1px] mt-[-1px] border-b-[1px] border-light-grey">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% if posts|length %}
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 lg:border-l-[1px] border-light-grey">
+			{% for item in posts %}
+				{% include 'components/card.twig' with {
+                    data: item,
+                    class: "listing-author",
+                    source: fields.source
+                } %}
+			{% endfor %}
+		</div>
+	{% else %}
+		<div class="container">
+			<h6 class="text-center text-black-75 sb-xl st-xl">No posts found.</h6>
+		</div>
+	{% endif %}
+</section>

@@ -1,0 +1,40 @@
+@layer components {
+	.content-overlapping-cards {
+		.items {
+			@apply flex flex-col relative h-auto;
+		}
+
+		.item {
+			@apply relative md:py-[1.5rem] max-md:pt-[1rem] max-md:pb-[2rem] flex ~gap-[2rem]/[5rem] lg:sticky lg:top-0 bg-white dark:bg-black max-md:flex-col;
+
+            &::after {
+                content: '';
+                @apply absolute top-0 left-0 w-screen center-x h-[1px] bg-light-grey dark:bg-dark-grey;
+            }
+		}
+
+		.item-content {
+			@apply flex flex-col ~gap-[1.25rem]/[2rem] md:py-[5rem] md:basis-[35.625rem] md:flex-1;
+		}
+
+		.media-container-outer {
+			@apply md:basis-[41.25rem] md:flex-1 max-md:~h-[21.625rem]/[41.625rem] md:~min-h-[21.625rem]/[41.625rem] md:max-h-[90vh] md:aspect-[110/111];
+		}
+
+		.media-container-inner {
+			@apply h-full w-full relative bg-black rounded-[0.25rem] overflow-hidden;
+		}
+
+		.media-container {
+			@apply h-full;
+
+			&.video {
+                @apply relative bg-pitch-black pointer-events-none;
+                
+				iframe, video {
+					@apply absolute center-xy min-h-full min-w-full h-auto w-auto aspect-video;
+				}
+			}
+		}
+	}
+}

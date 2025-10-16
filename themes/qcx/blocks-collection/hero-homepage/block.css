@@ -1,0 +1,17 @@
+@layer components {
+	.hero-homepage {
+		@apply bg-black;
+
+        .media-container {
+            @apply absolute top-0 left-0 w-full h-full;
+
+            &.video {
+                @apply bg-pitch-black;
+                
+				iframe {
+					@apply absolute min-h-full min-w-full h-auto w-auto aspect-video translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%] scale-[1.1];
+				}
+			}
+        }
+	}
+}

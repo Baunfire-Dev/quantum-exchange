@@ -1,0 +1,92 @@
+<section class="{{ block.slug }} {{ block.className }} {{ fields.dark_mode ? "dark" }} border-b-[1px] border-b-light-grey dark:bg-black dark:border-b-dark-grey">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-none" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="container">
+			<div class="flex flex-col ~gap-[2rem]/[3rem]">
+				{% if fields.heading or fields.paragraph %}
+					<div class="flex flex-col ~gap-[1.25rem]/[1.5rem] justify-center items-center mx-auto text-center">
+						{% if fields.heading %}
+							<h2 class="block-heading alpha flex-1 max-w-[55.25rem]">{{ fields.heading }}</h2>
+						{% endif %}
+
+						{% if fields.paragraph %}
+							<p class="block-para alpha text-black-75 max-w-[41.125rem]">
+								{{ fields.paragraph }}
+							</p>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if fields.item|length %}
+					<div class="items">
+						{% for index, item in fields.item %}
+							{% set link_url = "#" %}
+							{% set link_title = "" %}
+							{% set link_target = "_self" %}
+
+							{% if item.cta %}
+								{% set link_url = item.cta.url ?: "#" %}
+								{% set link_title = item.cta.title %}
+								{% set link_target = item.cta.target ?: "_self" %}
+							{% endif %}
+
+							<div class="item">
+								{% if item.media_type == "image" and item.media_image %}
+									<div class="media-container-outer">
+										<div class="media-container-inner">
+											<div class="media-container image">
+												{% include 'components/image.twig' with {
+                                                    'image': item.media_image,
+                                                    'size': "large",
+                                                } %}
+											</div>
+										</div>
+									</div>
+								{% endif %}
+
+								{% if fields.media_type == "video" and fields.media_video %}
+                                    <div class="media-container video" data-video="{{ fields.media_video }}"></div>
+                                {% endif %}
+
+								<div class="item-content">
+									{% if item.eyebrow or item.title or item.paragraph %}
+										<div class="flex flex-col ~gap-[1rem]/[1.5rem]">
+											{% if item.eyebrow or item.title %}
+												<div class="flex flex-col ~gap-[0.5rem]/[0.75rem]">
+													{% if item.eyebrow %}
+														<small class="text-rust-light dark:text-rust">{{ item.eyebrow }}</small>
+													{% endif %}
+
+													{% if item.title %}
+														<h2 class="dark:text-white">{{ item.title }}</h2>
+													{% endif %}
+												</div>
+											{% endif %}
+
+											{% if item.paragraph %}
+                                                <div class="rich-text is-basic {{ fields.dark_mode ? "on-dark" }}">{{ item.paragraph }}</div>
+											{% endif %}
+										</div>
+									{% endif %}
+
+									{% include 'components/cta.twig' with {
+                                        'class' : 'filled black',
+                                        'cta': item.cta,
+                                        'icon': true,
+                                    } %}
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>
+

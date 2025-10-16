@@ -1,0 +1,11 @@
+{
+	"name": "content-kitty-corner-grid",
+	"title": "Content Kitty Corner Grid",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

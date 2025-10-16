@@ -1,0 +1,19 @@
+@layer components {
+	.hero-title-centered-above-image {
+		.media-container {
+			@apply ~min-h-[10.75rem]/[42.125rem] h-auto relative ~px-[1rem]/[3rem] aspect-[672/337] w-full;
+		}
+
+        .media-container-inner {
+            @apply h-full rounded-[0.25rem] overflow-clip w-full relative;
+
+            img, iframe {
+                @apply min-w-full max-w-[90rem] absolute top-0 left-0 h-full center-x;
+            }
+
+            iframe {
+                @apply center-xy aspect-video h-auto min-h-full pointer-events-none;
+            }
+        }
+	}
+}

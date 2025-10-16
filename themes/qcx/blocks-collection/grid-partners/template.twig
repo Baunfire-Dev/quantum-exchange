@@ -1,0 +1,83 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-none" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="flex flex-col ~gap-[2rem]/[3rem]">
+			{% if fields.heading or fields.paragraph %}
+				<div class="container">
+					<div class="flex flex-col items-center ~gap-[1rem]/[1.5rem] text-center">
+						{% if fields.heading %}
+							<h2 class="block-heading alpha w-full max-w-[55.25rem]">
+								{{ fields.heading }}
+							</h2>
+						{% endif %}
+
+						{% if fields.paragraph %}
+							<p class="block-para alpha max-w-[41.125rem] text-black-75">
+								{{fields.paragraph}}
+							</p>
+						{% endif %}
+					</div>
+				</div>
+			{% endif %}
+
+			{% if fields.items|length %}
+                <div class="items">
+                    {% for item in fields.items %}
+                        <div class="~p-[1rem]/[1.5rem] border-r-[1px] border-y-[1px] border-light-grey bg-white my-[-0.0625rem] relative z-[2]">
+                            <div class="flex flex-col ~gap-[0.5rem]/[0.75rem]">
+                                {% if item.image %}
+                                    <div class="h-[13.25rem]">
+                                        {% include 'components/image.twig' with {
+                                            'class': "rounded-[0.25rem]",
+                                            'image': item.image,
+                                            'size': "large",
+                                        } %}
+                                    </div>
+                                {% endif %}
+
+                                {% if item.eyebrow or item.title %}
+                                    <div class="flex flex-col gap-[0.25rem]">
+                                        {% if item.eyebrow %}
+                                            <small class="text-rust">{{ item.eyebrow }}</small>
+                                        {% endif %}
+
+                                        {% if item.title %}
+                                            <h4>{{ item.title }}</h4>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+
+                                {% if item.description %}
+                                    <p class="text-black-75">{{ item.description }}</p>
+                                {% endif %}
+
+                                {% include 'components/cta.twig' with {
+                                    'class' : 'plain rust',
+                                    'cta': item.cta, 
+                                    'plain': true,
+                                    'icon': true,
+                                } %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% if bg %}
+                        <div class="absolute top-0 left-0 h-full w-full">
+                            {% include 'components/image.twig' with {
+                                'image': bg,
+                                'size': "full",
+                            } %}
+                        </div>
+                    {% endif %}
+                </div>
+			{% endif %}
+		</div>
+	</div>
+</section>
+

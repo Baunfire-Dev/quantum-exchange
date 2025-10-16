@@ -1,0 +1,19 @@
+@layer components {
+	.hero-scrolling-gallery {
+		.marquee {
+			@apply overflow-hidden w-full border-y-[1px] border-light-grey;
+
+			&-inner {
+				@apply flex w-max;
+			}
+
+            &-item {
+                @apply ~p-[1rem]/[1.5rem] shrink-0 border-r-[1px] border-light-grey mr-[-1px];
+
+				img {
+					@apply ~h-[23rem]/[32rem] w-auto rounded-[0.25rem] overflow-hidden;
+				}
+            }
+		}
+	}
+}

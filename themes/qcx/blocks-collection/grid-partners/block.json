@@ -1,0 +1,11 @@
+{
+	"name": "grid-partners",
+	"title": "Grid Partners",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

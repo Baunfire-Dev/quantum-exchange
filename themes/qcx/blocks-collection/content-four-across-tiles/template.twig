@@ -1,0 +1,95 @@
+<section class="{{ block.slug }} {{ block.className }} {{ fields.dark_mode ? "dark" }} dark:bg-black mb-[-1px] border-b-[1px] border-light-grey dark:border-dark-grey relative z-[2]">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+    {% set item_count = fields.item|length %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex flex-col ~gap-[2.5rem]/[3rem]">
+                {% if fields.heading or fields.paragraph %}
+                    <div class="flex flex-col ~gap-[1rem]/[1.5rem] max-w-[55.25rem] mx-auto text-center">
+                        {% if fields.heading %}
+                            <h2 class="block-heading alpha dark:text-white">{{ fields.heading }}</h2>
+                        {% endif %}
+
+                        {% if fields.paragraph %}
+                            <p class="block-para alpha text-black-75 dark:text-white-75 max-w-[42.8125rem] mx-auto">{{ fields.paragraph }}</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+				{% if item_count %}
+                    {% set grid_class = "md:grid-cols-2 xl:grid-cols-4" %}
+                    
+                    {% if item_count == 3 %}
+                       {% set grid_class = "lg:grid-cols-3" %}
+                    {% elseif item_count == 2 %}
+                        {% set grid_class = "md:grid-cols-2" %}
+                    {% endif %}
+                    
+					<div class="grid grid-cols-1 {{ grid_class }} rounded-[0.25rem] overflow-hidden max-xl:border-b-0 border-[1px] border-light-grey dark:border-dark-grey">
+						{% for index, item in fields.item %}
+							{% set link_url = "#" %}
+							{% set link_title = "" %}
+							{% set link_target = "_self" %}
+
+							{% if item.cta %}
+								{% set link_url = item.cta.url ?: "#" %}
+								{% set link_title = item.cta.title %}
+								{% set link_target = item.cta.target ?: "_self" %}
+							{% endif %}
+
+							<a class="item btn-trigger {{ (link_url != "#" or link_title) ? "hoverable" }}" href="{{ link_url }}" target="{{ link_target }}">
+								<div class="item-content alpha h-full flex flex-col ~gap-[1rem]/[1.5rem] relative ~p-[2rem]/[3rem] z-[1]">
+									{% if item.icon %}
+										<div class="item-image h-[4rem] w-[4rem]">
+											{% include 'components/image.twig' with {
+                                                'image': item.icon,
+                                                'class': "object-contain",
+                                                'size': [64, 64],
+                                            } %}
+										</div>
+									{% endif %}
+
+                                    {% if item.title or item.paragraph or link_title %}
+                                        <div class="flex flex-col ~gap-[1.5rem]/[3.25rem] flex-1">
+                                            {% if item.title or item.paragraph %}
+                                                <div class="flex flex-col ~gap-[0.5rem]/[0.75rem]">
+                                                    {% if item.title %}
+                                                        <h4 class="dark:text-white">{{ item.title }}</h6>
+                                                    {% endif %}
+
+                                                    {% if item.paragraph %}
+                                                        <p class="text-black-75 dark:text-white-75">{{ item.paragraph }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+
+                                            {% if link_title %}
+                                                <div class="btn plain has-arrow {{ fields.dark_mode ? " teal" : " rust" }} mt-auto">
+                                                    <p>{{ link_title }}</p>
+
+                                                    <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"/>
+                                                    </svg>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+								</div>
+
+								<div class="item-overlay absolute top-0 left-0 h-full w-full z-[2] bg-light-grey dark:bg-dark-grey"></div>
+							</a>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>
+

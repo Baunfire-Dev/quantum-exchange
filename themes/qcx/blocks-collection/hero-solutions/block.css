@@ -1,0 +1,17 @@
+@layer components {
+	.hero-solutions {
+		@apply bg-black;
+
+        .media-container {
+            @apply relative h-auto ~min-h-[14.125rem]/[31.75rem] aspect-[3/2] rounded-[0.25rem] overflow-hidden;
+
+            &.video {
+                @apply bg-pitch-black;
+                
+				iframe {
+					@apply absolute center-xy min-h-full min-w-full h-auto w-auto aspect-video;
+				}
+			}
+        }
+	}
+}

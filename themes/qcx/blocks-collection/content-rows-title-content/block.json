@@ -1,0 +1,11 @@
+{
+	"name": "content-rows-title-content",
+	"title": "Content Rows Title Content",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

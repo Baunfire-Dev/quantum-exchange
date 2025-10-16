@@ -1,0 +1,8 @@
+@layer components {
+	.grid-partners {
+        .items {
+            @apply relative border-y-[1px] border-light-grey overflow-hidden;
+            @apply grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1;
+		}
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name": "content-image-video-carousel",
+	"title": "Content Image Video Carousel",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["bf-owl-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

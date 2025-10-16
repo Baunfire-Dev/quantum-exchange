@@ -1,0 +1,232 @@
+@layer components {
+	.content-image-video-carousel-with-overlay {
+		.carousel-container {
+			@apply lg:~min-h-[29.75rem]/[36.25rem] flex max-xl:flex-col gap-[1.25rem];
+
+			.owl-stage-outer {
+				@apply !overflow-visible;
+			}
+
+			.owl-item {
+				&.active {
+					.item-inner {
+						@apply opacity-100;
+					}
+
+					.item-desc {
+						@apply opacity-100 visible translate-y-0 delay-[600ms];
+						@apply transition-all duration-500 ease-power2-out;
+					}
+				}
+
+				&:not(.active) {
+					@apply pointer-events-none;
+
+					.media-container {
+						@apply lg:h-[25.875rem];
+					}
+				}
+			}
+
+			.owl-nav,
+			.owl-dots {
+				@apply hidden;
+			}
+
+			.arrow {
+				@apply rounded-[50%] p-[1px] h-[2.25rem] w-[2.25rem] cursor-pointer flex items-center justify-center relative bg-black;
+
+				&-inner {
+					@apply absolute top-0 left-0 h-full w-full flex items-center justify-center z-[2];
+
+					svg {
+						@apply h-[0.625rem] w-[0.625rem];
+
+						path {
+							@apply fill-white-40 transition-colors duration-300 ease-power2-out;
+						}
+					}
+				}
+
+				&-progress {
+					@apply absolute top-0 left-0 h-full w-full rotate-[-90deg];
+
+					svg {
+						@apply h-[2.25rem] w-[2.25rem];
+
+						circle {
+							@apply stroke-[1px] transition-colors duration-300 ease-power2-out;
+						}
+					}
+				}
+
+				&.prev {
+					.arrow-inner {
+						svg {
+							@apply scale-x-[-100%];
+						}
+					}
+				}
+
+				&:hover {
+					.arrow-inner {
+						svg {
+							path {
+								@apply fill-white;
+							}
+						}
+					}
+
+					.arrow-progress {
+						svg {
+							circle {
+								@apply stroke-rust;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.item {
+			@apply ~h-[29.75rem]/[36.25rem];
+		}
+
+		.item-inner {
+			@apply ~p-[1rem]/[1.5rem] rounded-[0.25rem] overflow-hidden relative opacity-20 flex h-full;
+			@apply transition-all duration-500 ease-power2-out;
+		}
+
+		.item-desc {
+			@apply mt-auto border-[1px] border-white-20 backdrop-blur-[3.125rem] rounded-[0.25rem] ~p-[1.25rem]/[2rem] flex flex-col ~gap-[1rem]/[1.5rem] relative z-[2] lg:max-w-[32.625rem] opacity-0 translate-y-[1.875rem] invisible;
+			background: #1f212033;
+		}
+
+		.media-container {
+			@apply absolute top-0 left-0 w-full h-full bg-pitch-black rounded-[0.25rem];
+			@apply transition-all duration-500 ease-power2-out overflow-hidden;
+
+			iframe {
+				@apply w-full h-full;
+			}
+
+			iframe,
+			img {
+				/* @apply h-[36.25rem]; */
+			}
+		}
+
+		.dialog {
+			@apply flex items-center justify-center h-full w-full;
+
+			&-inner {
+				@apply h-full w-full overflow-hidden max-w-[69.75rem] mx-auto;
+			}
+
+			&-item {
+				@apply ~h-[14rem]/[37rem];
+			}
+
+			.arrow {
+				@apply rounded-[50%] p-[1px] h-[2.25rem] w-[2.25rem] cursor-pointer flex items-center justify-center relative bg-transparent border-[1px] border-white-40;
+
+				&-inner {
+					@apply absolute top-0 left-0 h-full w-full flex items-center justify-center z-[2];
+
+					svg {
+						@apply h-[0.625rem] w-[0.625rem];
+
+						path {
+							@apply fill-white-40 transition-colors duration-300 ease-power2-out;
+						}
+					}
+				}
+
+				&.prev {
+					.arrow-inner {
+						svg {
+							@apply scale-x-[-100%];
+						}
+					}
+				}
+
+				&:hover {
+					@apply border-white;
+
+					.arrow-inner {
+						svg {
+							path {
+								@apply fill-white;
+							}
+						}
+					}
+				}
+			}
+
+			.owl-nav {
+				@apply mt-[0.75rem] flex justify-between;
+			}
+
+			.owl-dots {
+				@apply hidden;
+			}
+
+			.media-thumbnail {
+				@apply absolute top-0 left-0 h-full w-full z-[2];
+
+				img {
+					@apply absolute top-0 left-0 object-cover h-full w-full z-[1];
+				}
+			}
+
+			.media-play {
+				@apply border-[1px] border-white-20 rounded-[0.25rem] h-[4rem] w-[4rem] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] scale-100 absolute bg-[rgba(255,255,255,0.01)] cursor-pointer z-[3] flex items-center justify-center backdrop-blur-[0.9375rem];
+				@apply transition-transform duration-300 ease-power2-out hover:scale-110 will-change-transform;
+
+				svg {
+					@apply h-[0.875rem];
+				}
+			}
+
+			.media-control {
+				@apply border-[1px] border-white-20 rounded-[0.25rem] h-[2.25rem] w-[2.25rem] left-[0.75rem] bottom-[0.75rem] scale-100 absolute bg-[rgba(255,255,255,0.01)] cursor-pointer z-[3] flex items-center justify-center backdrop-blur-[0.9375rem];
+				@apply transition-transform duration-300 ease-power2-out hover:scale-110 will-change-transform;
+
+				svg {
+					&:first-of-type {
+						@apply hidden;
+					}
+
+					&:last-of-type {
+						@apply block;
+					}
+				}
+
+				&.active {
+					svg {
+						&:first-of-type {
+							@apply block;
+						}
+
+						&:last-of-type {
+							@apply hidden;
+						}
+					}
+				}
+			}
+
+			.media-container {
+				@apply h-full;
+
+				&.video {
+					@apply relative bg-pitch-black aspect-video;
+
+					iframe,
+					video {
+						@apply absolute center-xy min-h-full min-w-full w-full h-full aspect-video;
+					}
+				}
+			}
+		}
+	}
+}

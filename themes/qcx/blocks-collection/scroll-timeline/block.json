@@ -1,0 +1,11 @@
+{
+	"name": "scroll-timeline",
+	"title": "Scroll Timeline",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["bf-owl-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

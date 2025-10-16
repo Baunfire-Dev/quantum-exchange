@@ -1,0 +1,16 @@
+name: Production Deployment
+on:
+  push:
+    branches:
+     - main
+jobs:
+  deploy-action:
+    name: Deploy action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./deployment
+        with:
+          WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
+          WPE_ENV: ${{ vars.PRD_ENV }}
+          THEME_ENVIRONMENT: "production"

@@ -1,0 +1,16 @@
+{% if cta %}
+	{% set link_url = cta.url ?: "#" %}
+	{% set link_title = cta.title %}
+	{% set link_target = cta.target ?: "_self" %}
+
+	{% set words = link_title|split(' ') %}
+
+	<a class="btn {{ class ? class }}" type="button" href="{{ link_url }}" target="{{ link_target }}">
+		{% for word in words %}
+			<p>
+				<span class="front" data-original="{{ word }}">{{ word }}</span>
+				<span class="back">{{ word }}{% if not loop.last %}&nbsp;{% endif %}</span>
+			</p>
+		{% endfor %}
+	</a>
+{% endif %}

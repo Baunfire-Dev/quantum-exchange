@@ -1,0 +1,33 @@
+@layer components {
+	.content-framed-image-video {
+		.media-container-outer {
+			@apply absolute top-0 left-0 h-full w-full;
+
+            .container {
+                @apply h-full w-full md:px-0;
+            }
+		}
+
+        .media-container {
+            @apply h-full w-full relative md:~px-[1rem]/[3rem];
+        }
+
+		.media-container-inner {
+			@apply h-full rounded-[0.25rem] overflow-clip w-full relative;
+
+			img,
+			iframe {
+				@apply min-w-[100vw] max-w-[90rem] absolute top-0 h-full center-x;
+			}
+
+            iframe {
+                @apply center-xy aspect-video h-auto min-h-full pointer-events-none;
+            }
+		}
+
+		.content-box {
+			@apply ~p-[1.25rem]/[2rem] flex flex-col ~gap-[1rem]/[1.5rem] max-w-[47.125rem] rounded-[0.25rem] overflow-hidden backdrop-blur-[3.125rem] border-[1px] border-white-20;
+			background: rgba(31, 33, 32, 0.2);
+		}
+	}
+}

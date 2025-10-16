@@ -1,0 +1,71 @@
+<section class="{{ block.slug }} {{ block.className }} lg:min-h-[calc(100svh-3.75rem)] flex border-b-[1px] border-dark-grey">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	<div class="w-full relative lg:flex-1 max-lg:pt-[380px]">
+		<div class="w-full relative z-[2] h-full">
+			<div class="container h-full">
+				<div class="h-full flex flex-col">
+					<div class="flex relative lg:basis-[30.75rem] lg:flex-1">
+						<div class="lg:basis-[55.5rem] lg:flex-1 lg:~pt-[1rem]/[6.625rem] ~lg:~pb-[2rem]/[9.25rem] lg:~pr-[1rem]/[7.25rem] lg:border-r-[1px] border-r-white-20">
+							{% if fields.heading %}
+								<h1 class="block-heading alpha text-white w-full max-w-[48.25rem]">
+									{{ fields.heading }}
+								</h1>
+							{% endif %}
+						</div>
+
+						<div class="max-lg:hidden lg:basis-[28rem] lg:flex-1">
+							<div class="~pl-[1rem]/[5rem] ~py-[1rem]/[5rem]"></div>
+						</div>
+
+						<div class="max-lg:hidden absolute bottom-0 left-0 w-screen h-[1px] bg-white-20 center-x"></div>
+					</div>
+
+					<div class="flex relative lg:basis-[21.25rem] lg:flex-1">
+						<div class="max-lg:hidden lg:basis-[55.5rem] flex-1 ~pt-[1rem]/[6.625rem] ~pb-[1rem]/[9.25rem] ~pr-[1rem]/[7.25rem] border-r-[1px] border-r-white-20"></div>
+
+						<div class="lg:basis-[28rem] lg:flex-1">
+							<div class="flex flex-col ~gap-[1.25rem]/[1.625rem] lg:~pl-[1rem]/[5rem] ~pb-[3.5rem]/[5rem] lg:~pt-[1rem]/[5rem] h-full justify-center">
+								{% if fields.paragraph %}
+									<p class="block-para alpha text-white-75">
+										{{ fields.paragraph }}
+									</p>
+								{% endif %}
+
+								{% if fields.ctas|length %}
+                                    <div class="flex gap-[0.75rem] flex-wrap">
+                                        {% for cta in fields.ctas %}
+                                            {% include 'components/cta.twig' with {
+                                                'class' : 'filled ' ~ cta.type,
+                                                'cta': cta.cta, 
+                                                'icon': true,
+                                            } %}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% if fields.media_type == "image" and fields.media_image %}
+			<div class="media-container image">
+				{% include 'components/image.twig' with {
+                    'class': "object-[50%_38%] lg:object-top object-contain",
+                    'image': fields.media_image,
+                    'size': [1920, 1080],
+                    'loading': "eager",
+                } %}
+			</div>
+		{% endif %}
+
+        {% if fields.media_type == "video" and fields.media_video %}
+			<div class="media-container video" data-video="{{ fields.media_video }}"></div>
+		{% endif %}
+	</div>
+</section>
+

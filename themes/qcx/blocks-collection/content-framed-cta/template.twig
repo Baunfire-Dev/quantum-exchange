@@ -1,0 +1,81 @@
+<section class="{{ block.slug }} {{ block.className }} {{ "bg-" ~ fields.bg }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+            <div class="relative rounded-[0.25rem] overflow-hidden border-[1px] {{ fields.mode == "grid" ? "border-dark-grey" : "border-white-20" }}">
+                {% if fields.mode == "grid" %}
+                    <div class="relative z-[2] flex flex-col max-md:gap-[1rem] max-md:backdrop-blur-[0.9375rem] max-md:bg-[#12121203]">
+                        <div class="max-md:contents flex">
+                            <div class="flex md:basis-[31.625rem] flex-1 max-md:pb-0 ~py-[2.5rem]/[4rem] ~px-[2rem]/[4rem] md:backdrop-blur-[1.5625rem] md:bg-[#12121203] border-r-[1px] border-r-dark-grey md:border-b-[1px] md:border-b-dark-grey md:mb-[-1px]">
+                                {% if fields.heading %}
+                                    <h2 class="block-heading alpha text-white">{{ fields.heading }}</h2>
+                                {% endif %}
+                            </div>
+
+                            <div class="flex md:basis-[48.375rem] flex-1 ~py-[2.5rem]/[4rem] ~px-[2rem]/[4rem] max-md:hidden"></div>
+                        </div>
+
+                        <div class="max-md:contents flex">
+                            <div class="flex md:basis-[31.625rem] flex-1 ~py-[2.5rem]/[4rem] ~px-[2rem]/[4rem] border-r-[1px] border-r-dark-grey max-md:hidden"></div>
+                            <div class="flex md:basis-[48.375rem] flex-1 max-md:pt-0 ~py-[2.5rem]/[4rem] ~px-[2rem]/[4rem] md:backdrop-blur-[1.5625rem] md:bg-[#12121203] flex-col ~gap-[1rem]/[1.5rem] md:border-t-[1px] md:border-t-dark-grey">
+                                {% if fields.paragraph %}
+                                    <p class="block-para alpha text-white-75">{{ fields.paragraph }}</p>
+                                {% endif %}
+
+                                {% include 'components/cta.twig' with {
+                                    'class' : 'filled teal',
+                                    'cta': fields.cta, 
+                                    'icon': true,
+                                } %}
+                            </div>
+                        </div>
+                    </div>
+                
+                    {% if grid_bg %}
+                        <div class="absolute top-0 left-0 h-full w-full {{ fields.theme == "grayscale" ? "grayscale saturate-0 brightness-[0.4]" }}">
+                            {% include 'components/image.twig' with {
+                                'image': grid_bg,
+                                'size': "full",
+                            } %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="flex relative z-[2] max-lg:flex-col">
+                        <div class="lg:basis-[21.375rem] lg:flex-1 border-r-[1px] border-r-white-20 max-lg:hidden"></div>
+                        <div class="lg:basis-[62.625rem] lg:flex-1 flex flex-col ~gap-[1rem]/[1.5rem] ~px-[2rem]/[7.5rem] ~py-[2.5rem]/[3.75rem] bg-[#12121203] backdrop-blur-[1.5625rem]">
+                            {% if fields.heading %}
+                                <h2 class="block-heading alpha text-white">{{ fields.heading }}</h2>
+                            {% endif %}
+                                
+                            {% if fields.paragraph %}
+                                <p class="block-para alpha text-white-75">{{ fields.paragraph }}</p>
+                            {% endif %}
+
+                            {% include 'components/cta.twig' with {
+                                'class' : 'filled teal',
+                                'cta': fields.cta, 
+                                'icon': true,
+                            } %}
+                        </div>
+                    </div>
+
+                    {% if single_bg %}
+                        <div class="absolute top-0 left-0 h-full w-full {{ fields.theme == "grayscale" ? "grayscale saturate-0 brightness-[0.4]" }}">
+                            {% include 'components/image.twig' with {
+                                'image': single_bg,
+                                'size': "full",
+                            } %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+		</div>
+	</div>
+</section>
+

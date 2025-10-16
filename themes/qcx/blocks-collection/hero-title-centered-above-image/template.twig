@@ -1,0 +1,56 @@
+<section class="{{ block.slug }} {{ block.className }} bg-black">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="flex flex-col ~gap-[2.5rem]/[3rem]">
+			{% if fields.heading or fields.paragraph or fields.cta %}
+				<div class="container">
+					<div class="flex flex-col ~gap-[1rem]/[1.5rem] max-w-[55.25rem] mx-auto text-center items-center justify-center">
+						{% if fields.heading %}
+							<h1 class="block-heading alpha text-white">{{ fields.heading }}</h1>
+						{% endif %}
+
+						{% if fields.paragraph %}
+							<p class="block-para alpha text-white-75 max-w-[41.125rem] mx-auto">{{ fields.paragraph }}</p>
+						{% endif %}
+
+						{% include 'components/cta.twig' with {
+                            'class' : 'filled teal',
+                            'cta': fields.cta, 
+                            'icon': true,
+                        } %}
+					</div>
+				</div>
+			{% endif %}
+
+			{% if fields.media_type == "image" and fields.media_image %}
+				<div class="container no-pd">
+					<div class="media-container image">
+						<div class="media-container-inner">
+							{% include 'components/image.twig' with {
+                                'class': "object-top",
+                                'image': fields.media_image,
+                                'size': "full",
+                                'loading': 'eager'
+                            } %}
+						</div>
+					</div>
+				</div>
+			{% endif %}
+
+			{% if fields.media_type == "video" and fields.media_video %}
+				<div class="container no-pd">
+					<div class="media-container video">
+						<div class="media-container-inner" data-video="{{ fields.media_video }}"></div>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</section>
+

@@ -1,0 +1,15 @@
+@layer components {
+	.hero-resource-detail {
+        .media-container {
+            @apply relative h-full w-full;
+
+            &.video {
+                @apply bg-pitch-black;
+                
+				iframe, video {
+					@apply absolute center-xy min-h-full min-w-full h-auto w-auto aspect-video pointer-events-none;
+				}
+			}
+        }
+	}
+}

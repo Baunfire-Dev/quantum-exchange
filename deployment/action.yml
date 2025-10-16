@@ -1,0 +1,35 @@
+name: "Deploy to WP Engine"
+description: "Deployment actions on WP Engine"
+
+inputs:
+  WPE_SSHG_KEY_PRIVATE:
+    required: true
+  WPE_ENV:
+    required: true
+  THEME_ENVIRONMENT:
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: "Check repo configuration"
+      shell: bash
+      run: |
+        if [ -z "${{ inputs.WPE_SSHG_KEY_PRIVATE }}" ]; then
+          echo "WPE_SSHG_KEY_PRIVATE secret is not configured"
+          exit 1
+        fi
+        if [ -z "${{ inputs.WPE_ENV }}" ]; then
+          echo "WPE_ENV environment is not configured"
+          exit 1
+        fi
+
+    - name: Deploy to WP Engine
+      uses: wpengine/github-action-wpe-site-deploy@v3
+      with:
+        WPE_SSHG_KEY_PRIVATE: ${{ inputs.WPE_SSHG_KEY_PRIVATE }}
+        WPE_ENV: ${{ inputs.WPE_ENV }}
+        REMOTE_PATH: "wp-content/"
+        FLAGS: -azvr --inplace --delete --exclude=.* --exclude-from=.deployignore
+        PHP_LINT: FALSE
+        CACHE_CLEAR: TRUE

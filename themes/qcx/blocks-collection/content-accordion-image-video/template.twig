@@ -1,0 +1,98 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+    <div class="section-inner {{ pt }} {{ pb }}">
+        <div class="container">
+            <div class="flex flex-col ~gap-[2.5rem]/[5rem]">
+                <div class="section-head flex max-lg:flex-col ~gap-[1.25rem]/[1.5rem] justify-between">
+                    {% if fields.heading %}
+                        <h2 class="block-heading alpha flex-1 max-w-[55.25rem]">{{ fields.heading }}</h2>
+                    {% endif %}
+
+                    {% include 'components/cta.twig' with {
+                        'class' : 'filled black shrink-0 lg:self-end',
+                        'cta': fields.cta, 
+                        'icon': true,
+                    } %}
+                </div>
+
+                {% if fields.item|length %}
+                    <div class="items-outer">
+                        <div class="items">
+                            {% for index, item in fields.item %}
+                                {% set link_url = "#" %}
+                                {% set link_title = "" %}
+                                {% set link_target = "_self" %}
+
+                                {% if item.cta %}
+                                    {% set link_url = item.cta.url ?: "#" %}
+                                    {% set link_title = item.cta.title %}
+                                    {% set link_target = item.cta.target ?: "_self" %}
+                                {% endif %}
+
+                                <div class="item">
+                                    <div class="item-content">
+                                        {% if item.eyebrow or item.title or item.paragraph %}
+                                            <div class="flex flex-col ~gap-[1.25rem]/[2rem] xl:max-w-[25.125rem]">
+                                                {% if item.eyebrow or item.title %}
+                                                    <div class="flex flex-col ~gap-[0.5rem]/[0.75rem]">
+                                                        {% if item.eyebrow %}
+                                                            <small class="text-rust-light">{{ item.eyebrow }}</small>
+                                                        {% endif %}
+
+                                                        {% if item.title %}
+                                                            <h3>{{ item.title }}</h3>
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+
+                                                {% if item.paragraph %}
+                                                    <p class="text-black-75">{{ item.paragraph }}</p>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+
+                                        {% include 'components/cta.twig' with {
+                                            'class' : 'mt-auto plain rust',
+                                            'cta': item.cta,
+                                            'plain': true,
+                                            'icon': true,
+                                        } %}
+                                    </div>
+
+                                    {% if item.media_type == "image" and item.media_image %}
+                                        <div class="media-container-outer">
+                                            <div class="media-container-inner">
+                                                <div class="media-container image">
+                                                    {% include 'components/image.twig' with {
+                                                        'class': "object-top",
+                                                        'image': item.media_image,
+                                                        'size': "large",
+                                                    } %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                    {% if item.media_type == "video" and item.media_video %}
+                                        <div class="media-container-outer">
+                                            <div class="media-container-inner">
+                                                <div class="media-container video" data-video="{{ item.media_video }}"></div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+

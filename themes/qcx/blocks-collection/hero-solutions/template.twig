@@ -1,0 +1,69 @@
+<section class="{{ block.slug }} {{ block.className }} bg-black">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+    {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xs" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xs" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="container">
+			<div class="flex ~gap-[2rem]/[8.75rem] max-lg:flex-col items-center">
+				{% if fields.heading or fields.paragraph or field.cta %}
+					<div class="flex flex-col ~gap-[1rem]/[1.5rem] lg:basis-[27rem] lg:flex-1 relative lg:~py-[0rem]/[7.25rem] self-stretch justify-center max-lg:w-full">
+                        {% if back_cta %}
+                            <div class="lg:absolute lg:top-0 lg:left-0">
+                                {% set link_url = back_cta.url ?: "#" %}
+                                {% set link_title = back_cta.title %}
+                                {% set link_target = back_cta.target ?: "_self" %}
+
+                                <a class="btn back white has-arrow" type="button" href="{{ link_url }}" target="{{ link_target }}">
+                                    <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"/>
+                                    </svg>
+                                    
+                                    <p>{{ link_title }}</p>
+                                </a>
+                            </div>
+						{% endif %}
+                        
+                        {% if fields.heading %}
+                            <h2 class="block-heading alpha text-white">
+                                {{ fields.heading }}
+                            </h2>
+                        {% endif %}
+
+                        {% if fields.paragraph %}
+                            <p class="block-para alpha text-white-75">
+                                {{ fields.paragraph }}
+                            </p>
+                        {% endif %}
+
+                        {% include 'components/cta.twig' with {
+                            'class' : 'filled teal',
+                            'cta': fields.cta, 
+                            'icon': true,
+                        } %}
+					</div>
+				{% endif %}
+
+				<div class="lg:flex-1 lg:basis-[48.25rem] max-lg:w-full">
+					{% if fields.media_type == "image" and fields.media_image %}
+						<div class="media-container image">
+							{% include 'components/image.twig' with {
+                                'image': fields.media_image,
+                                'size': "large",
+                                'loading': "eager",
+                            } %}
+						</div>
+					{% endif %}
+
+					{% if fields.media_type == "video" and fields.media_video %}
+						<div class="media-container video" data-video="{{ fields.media_video }}"></div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

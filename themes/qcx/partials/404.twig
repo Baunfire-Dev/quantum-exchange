@@ -1,0 +1,39 @@
+<section class="not-found bg-black pt-[3.75rem]">
+	<div class="container relative z-[2]">
+		<div class="st-xxl sb-xxl">
+			<div class="flex flex-col ~gap-[2rem]/[3rem] items-center justify-center text-center">
+				<h1 class="alpha text-white ~tracking-[-0.2963rem]/[-0.4275rem] leading-[105%] ~text-[9.875rem]/[14.25rem] will-change-transform">404</h1>
+
+				<div class="flex flex-col ~gap-[1rem]/[1.5rem] justify-center items-center max-w-[34.875rem] mx-auto">
+					{% if nt_heading %}
+						<h3 class="text-white alpha">{{ nt_heading }}</h3>
+					{% endif %}
+
+                    {% if nt_description %}
+						<p class="text-white-75 alpha">{{ nt_description }}</p>
+					{% endif %}
+
+					{% include 'components/cta.twig' with {
+                        'class' : 'filled teal',
+                        'cta': nt_cta, 
+                        'icon': true,
+                    } %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% if nt_media_type == "image" and nt_image %}
+		<div class="media-container image">
+			{% include 'components/image.twig' with {
+                'image': nt_image,
+                'size': [1920, 1080],
+                'loading': "eager",
+            } %}
+		</div>
+	{% endif %}
+
+	{% if nt_media_type == "video" and nt_video %}
+		<div class="media-container video" data-video="{{ nt_video }}">{# to follow #}</div>
+	{% endif %}
+</section>

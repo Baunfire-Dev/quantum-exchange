@@ -1,0 +1,24 @@
+<section class="{{ block.slug }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="flex flex-col ~gap-[2rem]/[3rem]">
+			{% if fields.heading %}
+				<div class="container">
+					<h2 class="block-heading alpha">{{ fields.heading }}</h2>
+				</div>
+			{% endif %}
+
+			{% if fields.embed_code %}
+				<div class="embed-area">
+					{{ fields.embed_code }}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</section>

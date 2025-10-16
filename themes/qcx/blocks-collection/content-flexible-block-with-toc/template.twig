@@ -1,0 +1,221 @@
+<section class="{{ block.slug }} {{ block.className }} bg-black border-y-[0.0625rem] border-y-dark-grey">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="container no-pd">
+			<div class="flex max-lg:flex-col">
+				<div class="flex lg:flex-1 lg:basis-[65.625rem] flex-col lg:border-r-[1px] border-dark-grey self-stretch">
+					{% for content in fields.items %}
+						<div class="content-group" data-index="{{ loop.index }}">
+							{% if not loop.last %}
+								<div class="h-[1px] bg-dark-grey absolute right-0 w-screen bottom-0"></div>
+							{% endif %}
+
+							{% for item in content.content_types %}
+								{% if item.content_type == 'paragraph' %}
+									{% if loop.first %}
+										<div class="flex flex-col items-start gap-[.75rem] self-stretch">
+											{% if content.title %}
+												<h4 class="block-heading alpha">{{ content.title }}</h4>
+											{% endif %}
+
+											<div class="text-white-75">{{ item.paragraph }}</div>
+										</div>
+									{% else %}
+										<div class="text-white-75">{{item.paragraph}}</div>
+									{% endif %}
+								{% endif %}
+
+								{% if item.content_type == 'list_items' %}
+									{% if loop.first %}
+										{% if item.list_paragraph %}
+											<div class="flex flex-col items-start gap-[.75rem] self-stretch">
+												{% if content.title %}
+													<h4 class="block-heading alpha">{{ content.title }}</h4>
+												{% endif %}
+
+												<div class="flex flex-col ~gap-[0.5rem]/[0.75rem] self-stretch">
+													<div class="text-white-75">{{ item.list_paragraph }}</div>
+
+													<div class="flex flex-col self-stretch border border-dark-grey rounded-[0.25rem] overflow-hidden">
+														{% for list_item in item.list_items %}
+															<div class="list-item">
+																<p class="{{ list_item.description ? 'lg text-white' : 'text-white-75' }}">{{ list_item.title }}</p>
+																
+                                                                {% if list_item.description %}
+																	<p class="text-white-75">{{ list_item.description }}</p>
+																{% endif %}
+															</div>
+														{% endfor %}
+													</div>
+												</div>
+											</div>
+										{% else %}
+											{% if content.title %}
+												<h4 class="block-heading alpha">{{ content.title }}</h4>
+											{% endif %}
+
+											<div class="flex flex-col self-stretch">
+												<div class="flex flex-col self-stretch border border-dark-grey rounded-[0.25rem] overflow-hidden">
+													{% for list_item in item.list_items %}
+														<div class="list-item">
+															<p class="{{ list_item.description ? 'lg text-white' : 'text-white-75' }}">{{ list_item.title }}</p>
+															
+                                                            {% if list_item.description %}
+                                                                <p class="text-white-75">{{ list_item.description }}</p>
+                                                            {% endif %}
+														</div>
+													{% endfor %}
+												</div>
+											</div>
+										{% endif %}
+									{% else %}
+										<div class="flex flex-col ~gap-[0.5rem]/[0.75rem] self-stretch">
+											<div class="text-white-75">{{item.list_paragraph}}</div>
+											<div class="flex flex-col self-stretch border border-dark-grey rounded-[0.25rem] overflow-hidden">
+												{% for list_item in item.list_items %}
+													<div class="bg-neutral-700 ~py-[0.5rem]/[0.75rem] ~px-[1rem]/[1.5rem] {{loop.index < item.list_items|length ? 'border-b border-dark-grey' : ''}}">
+														<p class="{{list_item.description ? 'lg text-white' : 'text-white-75'}}">{{list_item.title}}</p>
+														{% if list_item.description %}
+															<div class="text-white-75">{{list_item.description}}</div>
+														{% endif %}
+													</div>
+												{% endfor %}
+											</div>
+										</div>
+									{% endif %}
+								{% endif %}
+
+								{% if item.content_type == 'stats' %}
+									{% if loop.first %}
+										{% if content.title %}
+											<h4 class="block-heading alpha is-stats">{{ content.title }}</h4>
+										{% endif %}
+
+                                        {% if item.stats|length %}
+                                            <div class="stat-items">
+                                                {% for stat in item.stats %}
+                                                    <div class="stat-item">
+                                                        <p class="h1 text-white"><span data-amount="{{ stat.number }}">0</span>{{ stat.suffix }}</p>
+                                                        <p class="text-white-75">{{ stat.subtext }}</p>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+									{% else %}
+                                        {% if item.stats|length %}
+                                            <div class="stat-items">
+                                                {% for stat in item.stats %}
+                                                    <div class="stat-item">
+                                                        <p class="h1 text-white"><span data-amount="{{ stat.number }}">0</span>{{ stat.suffix }}</p>
+                                                        <p class="text-white-75">{{ stat.subtext }}</p>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+									{% endif %}
+								{% endif %}
+
+								{% if item.content_type == 'accordion' %}
+                                    {% if item.accordion_with_image|length %}
+                                        <div class="accs-container">
+                                            <div class="accs">
+                                                {% for accordion_item in item.accordion_with_image %}
+                                                    {% if accordion_item.title %}
+                                                        <div class="acc {{ loop.index == 1 ? "active" }}" data-index="{{ loop.index }}">
+                                                            <div class="acc-head">
+                                                                <p class="lg">{{ accordion_item.title }}</p>
+
+                                                                <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"/>
+                                                                </svg>
+                                                            </div>
+
+                                                            <div class="acc-body">
+                                                                <div class="acc-body-inner">
+                                                                    <p class="text-white-75">{{ accordion_item.subtext }}</p>
+
+                                                                    {% include 'components/image.twig' with {
+                                                                        'image': accordion_item.image,
+                                                                        'size': "large",
+                                                                    } %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+
+                                            <div class="acc-images">
+                                                {% for accordion_item in item.accordion_with_image %}
+                                                    <div class="acc-image {{ loop.index == 1 ? "active" }}" data-index="{{ loop.index }}">
+                                                        {% include 'components/image.twig' with {
+                                                            'image': accordion_item.image,
+                                                            'size': "large",
+                                                        } %}
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+								{% endif %}
+
+								{% if item.content_type == 'video' %}
+									{% if loop.first %}
+										{% if content.title %}
+											<h4 class="block-heading alpha">{{ content.title }}</h4>
+										{% endif %}
+                                        
+                                        {% if item.video %}
+										    <div class="media-container video" data-video="{{ item.video }}">
+                                                <div class="media-play">
+                                                    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M0 0V14L12 7L0 0Z" fill="white"/>
+                                                    </svg>
+                                                </div>
+
+                                                <div class="media-thumbnail"></div>
+                                            </div>
+                                        {% endif %}
+									{% else %}
+										{% if item.video %}
+										    <div class="media-container video" data-video="{{ item.video }}">
+                                                <div class="media-play">
+                                                    <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M0 0V14L12 7L0 0Z" fill="white"/>
+                                                    </svg>
+                                                </div>
+
+                                                <div class="media-thumbnail"></div>
+                                            </div>
+                                        {% endif %}
+									{% endif %}
+								{% endif %}
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
+
+				{% if fields.items|length %}
+					<div class="lg:flex-1 lg:basis-[24.375rem] ~px-[1rem]/[3rem] max-lg:hidden">
+						<div class="st-xl sb-xl flex flex-col gap-[0.75rem] lg:sticky top-0">
+							{% for item in fields.items %}
+								{% if item.title %}
+									<a class="item {{ loop.index == 1 ? " active" }}" href="" data-index="{{ loop.index }}">
+										<p class="button text-white">{{ item.title }}</p>
+									</a>
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>
+

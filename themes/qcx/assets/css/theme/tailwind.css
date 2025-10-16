@@ -1,0 +1,12 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "typography";
+@import "header";
+@import "footer";
+@import "global";
+@import "image";
+@import "buttons";
+@import "dialog";
+@import "spacings";
+@import-glob "../../../blocks/**/*.css";

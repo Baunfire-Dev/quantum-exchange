@@ -1,0 +1,95 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-none" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		{% if fields.heading %}
+			<div class="container sb-xs">
+				<h2 class="block-heading main-heading alpha">{{ fields.heading }}</h2>
+			</div>
+		{% endif %}
+
+		{% if fields.item|length %}
+			<div class="flex flex-col border-t-[1px] border-t-light-grey">
+				{% for item in fields.item %}
+					{% set has_children = item.children|length %}
+
+					<div class="flex flex-col">
+						{% if item.title or item.cta_text %}
+							<div class="container">
+								<div class="flex justify-between md:items-end st-lg sb-xs max-md:flex-col gap-[0.75rem]">
+									{% if item.title %}
+										<h3 class="block-heading alpha">{{ item.title }}</h3>
+									{% endif %}
+
+									{% if item.cta_text %}
+										{% set link_url = item.cta_link ?: "#" %}
+
+										<a class="btn filled black has-arrow" type="button" href="{{ link_url }}" target="_self">
+											<p>{{ item.cta_text }}</p>
+
+											<div class="btn-arrow">
+												<svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"></path>
+												</svg>
+											</div>
+										</a>
+									{% endif %}
+								</div>
+							</div>
+						{% endif %}
+
+						{% if has_children %}
+							<div class="flex flex-col border-light-grey border-b-[1px]">
+								{% if has_children == 4 %}
+									{% for child in item.children %}
+										{% if loop.index == 1 %}
+											{% include 'components/card.twig' with {
+                                                data: child,
+                                                class: "is-resource-cat is-wide",
+                                                source: "latest",
+                                                show_desc: true
+                                            } %}
+										{% endif %}
+									{% endfor %}
+
+									{% if has_children > 1 %}
+										<div class="max-md:flex max-md:flex-col md:grid md:grid-cols-2 lg:grid-cols-3">
+											{% for child in item.children %}
+												{% if loop.index > 1 %}
+													{% include 'components/card.twig' with {
+                                                        data: child,
+                                                        class: "is-resource-cat",
+                                                        source: "latest",
+                                                    } %}
+												{% endif %}
+											{% endfor %}
+										</div>
+									{% endif %}
+								{% else %}
+									<div class="max-md:flex max-md:flex-col md:grid md:grid-cols-2 lg:grid-cols-3 border-light-grey border-t-[1px]">
+										{% for child in item.children %}
+											{% include 'components/card.twig' with {
+                                                data: child,
+                                                class: "is-resource-cat",
+                                                source: "latest",
+                                            } %}
+										{% endfor %}
+									</div>
+								{% endif %}
+							</div>
+						{% else %}
+							<div class="container border-light-grey border-y-[1px]">
+								<h6 class="text-center text-black-75 dark:text-white-75 st-lg sb-lg">No posts found.</h6>
+							</div>
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+</section>

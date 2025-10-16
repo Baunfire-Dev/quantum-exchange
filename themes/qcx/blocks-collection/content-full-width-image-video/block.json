@@ -1,0 +1,11 @@
+{
+	"name": "content-full-width-image-video",
+	"title": "Content Full Width Image Video",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

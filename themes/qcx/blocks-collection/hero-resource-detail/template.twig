@@ -1,0 +1,147 @@
+<section class="{{ block.slug }} {{ block.className }} bg-black">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	<div class="flex flex-col ~gap-[1rem]/[1.5rem] st-xs sb-xs">
+		<div class="container">
+			<div class="flex flex-col ~gap-[1rem]/[4.5rem] relative">
+				{% if back_cta %}
+					{% set link_url = back_cta.url ?: "#" %}
+					{% set link_title = back_cta.title %}
+					{% set link_target = back_cta.target ?: "_self" %}
+
+					<a class="btn back white has-arrow" type="button" href="{{ link_url }}" target="{{ link_target }}">
+						<svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"/>
+						</svg>
+
+						<p>{{ link_title }}</p>
+					</a>
+				{% else %}
+					<a href="#"></a>
+				{% endif %}
+
+				<h2 class="block-heading alpha text-white max-w-[59.625rem]">{{ title }}</h2>
+			</div>
+		</div>
+
+		<div class="w-full h-[1px] flex-shrink-0 self-stretch bg-dark-grey"></div>
+
+		<div class="container">
+			<div class="flex md:flex-row flex-col ~gap-[1rem]/[1.5rem]">
+				<div class="md:basis-[62.625rem] md:flex-1 rounded-[0.25rem] overflow-hidden ~min-h-[10.5rem]/[30.75rem] aspect-[1002/492] w-full">
+					{% if fields.override_feature_media %}
+						{% if fields.feature_media.media_type == "image" and fields.feature_media.media_image %}
+							<div class="media-container image">
+								{% include 'components/image.twig' with {
+                                    class: "object-top",
+                                    image: fields.feature_media.media_image,
+                                    size: "large",
+                                    loading: "eager",
+                                } %}
+							</div>
+						{% elseif fields.feature_media.media_type == "video" and ((fields.feature_media.video_type == "vimeo" and fields.feature_media.media_video) or (fields.feature_media.video_type == "file" and fields.feature_media.video_file)) %}
+                            {% if fielfields.feature_mediads.video_type == "vimeo" %}
+                                <div class="media-container video embed {{ fields.feature_media.video_type }}" data-video="{{ fields.feature_media.media_video }}"></div>
+                            {% else %}
+                                <div class="media-container video file" data-video="{{ fields.feature_media.video_file }}"></div>
+                            {% endif %}
+						{% else %}
+							<img src="{{ function("png", "placeholder") }}" loading="eager" alt="placeholder image">
+						{% endif %}
+					{% else %}
+						{% if feature_image %}
+							{% include 'components/image.twig' with {
+                                image: feature_image,
+                                size: "large",
+                                loading: "eager",
+                            } %}
+						{% else %}
+							<img src="{{ function("png", "placeholder") }}" loading="eager" alt="placeholder image">
+						{% endif %}
+					{% endif %}
+				</div>
+
+				<div class="md:basis-[19.875rem] md:flex-1 flex flex-col justify-end ~gap-[1.25rem]/[2rem]">
+					<div class="flex flex-col gap-[0.5rem]">
+						<p class="lg  text-white">Date</p>
+						<small class="eyebrow  text-white">{{ publish_date|date("F j, Y") }}</small>
+					</div>
+
+					{% if categories|length %}
+						<div class="flex flex-col gap-[0.5rem]">
+							<p class="lg  text-white">Category</p>
+
+							<div class="flex gap-[0.5rem] flex-wrap">
+								{% for cat in categories %}
+									<a href="{{ cat.url ?: "#" }}" class="px-[0.25rem] rounded-[0.25rem] flex flex-col items-center justify-center bg-neutral-700 border-[1px] border-dark-grey">
+										<p class="sm text-white-75">{{ cat.name }}</p>
+									</a>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+
+					<div class="flex flex-col gap-[0.5rem]">
+						<p class="lg  text-white">Author</p>
+
+						<a class="flex items-center gap-[0.75rem]" href="{{ author_url ?: "#" }}">
+							<div class="w-[3rem] h-[3rem] rounded-[0.25rem] overflow-hidden">
+								{% if author_avatar %}
+									<div class="author-image">
+                                        {% include 'components/image.twig' with {
+                                            image: author_avatar,
+                                            size: "large"
+                                        } %}
+                                    </div>
+								{% else %}
+									<div class="bg-teal w-full h-full flex justify-center items-center">
+										<svg xmlns="http://www.w3.org/2000/svg" width="33" height="19" viewbox="0 0 33 19" fill="none">
+											<path d="M33 0C33 3.8043 33 5.6957 31.8395 6.87783C30.679 8.05995 28.8223 8.05995 25.0876 8.05995H6.22442C6.22442 3.61086 9.76918 0 14.1368 0H33ZM1.16049 12.1222C0 13.3043 0 15.1957 0 19H18.8632C23.2308 19 26.7756 15.3891 26.7756 10.94H7.9124C4.17775 10.94 2.32097 10.94 1.16049 12.1222Z" fill="#121212"/>
+										</svg>
+									</div>
+								{% endif %}
+							</div>
+
+							<p class="text-white">{{ author_name }}</p>
+						</a>
+					</div>
+
+					<div class="flex flex-col gap-[0.5rem]">
+						<p class="lg  text-white">Share</p>
+
+						<div class="flex ~gap-[1rem]/[1.5rem] flex-wrap items-center">
+							<a href="https://twitter.com/intent/tweet?url={{ site_link }}" target="_blank" rel="nofollow noreferrer noopener">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M10.1302 12.3599L11.3202 14.0399L5.38023 20.9999H2.74023L10.1302 12.3599Z" fill="white" fill-opacity="0.75"/>
+									<path fill-rule="evenodd" clip-rule="evenodd" d="M20.7396 3L13.7796 11.16L12.5996 9.47L18.1396 3H20.7396Z" fill="white" fill-opacity="0.75"/>
+									<path d="M8.25516 5L18.0342 19H16.0022L6.20816 5H8.25516ZM9.29816 3H2.36816L14.9612 21H21.8712L9.29816 3Z" fill="white" fill-opacity="0.75"/>
+								</svg>
+							</a>
+
+							<a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site_link }}" target="_blank" rel="nofollow noreferrer noopener">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+									<path d="M6.4668 21.2001H2.4668V9.2001H6.4668V21.2001ZM4.4676 7.6001C3.3612 7.6001 2.4668 6.7033 2.4668 5.5993C2.4668 4.4953 3.3628 3.6001 4.4676 3.6001C5.57 3.6001 6.4668 4.4969 6.4668 5.5993C6.4668 6.7033 5.57 7.6001 4.4676 7.6001ZM20.8668 21.2001H17.0212V15.3601C17.0212 13.9673 16.9948 12.1761 15.022 12.1761C13.0196 12.1761 12.7116 13.6929 12.7116 15.2593V21.2001H8.8668V9.1913H12.558V10.8321H12.61C13.1236 9.8881 14.3788 8.8929 16.2508 8.8929C20.1468 8.8929 20.8668 11.3801 20.8668 14.6137V21.2001Z" fill="white" fill-opacity="0.75"/>
+								</svg>
+							</a>
+
+							<a href="mailto:?subject={{ title }}&body=Check out this article: {{ site_link }}" rel="nofollow noreferrer noopener">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
+									<path d="M21 6L12 13L3 6M3 6H21V19H3V6Z" stroke="white" stroke-opacity="0.75" stroke-linejoin="round"/>
+								</svg>
+							</a>
+
+							<div class="copy-link-btn cursor-pointer" data-url="{{ site_link }}" rel="nofollow noreferrer noopener">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
+									<path d="M10.3685 14.7788L7.06013 18.0869C6.47497 18.6718 5.6815 19.0003 4.85417 19.0003C4.02684 19.0003 3.23337 18.6718 2.6482 18.0869L1.91327 17.3521C1.32851 16.7672 1 15.974 1 15.147C1 14.32 1.32851 13.5268 1.91327 12.9419L6.69228 8.16238C7.27744 7.57755 8.07091 7.24902 8.89824 7.24902C9.72558 7.24902 10.519 7.57755 11.1042 8.16238L11.8391 8.89805" stroke="white" stroke-opacity="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M9.63178 5.22141L12.9401 1.914C13.2298 1.62424 13.5737 1.39438 13.9522 1.23755C14.3307 1.08072 14.7364 1 15.1461 1C15.5558 1 15.9615 1.08072 16.34 1.23755C16.7185 1.39438 17.0624 1.62424 17.3521 1.914L18.087 2.64811C18.6718 3.23298 19.0003 4.02615 19.0003 4.85318C19.0003 5.68021 18.6718 6.47338 18.087 7.05825L13.308 11.8378C13.0184 12.1276 12.6745 12.3574 12.2959 12.5142C11.9174 12.6711 11.5117 12.7518 11.102 12.7518C10.6923 12.7518 10.2866 12.6711 9.90811 12.5142C9.5296 12.3574 9.18571 12.1276 8.89606 11.8378L8.16113 11.1021" stroke="white" stroke-opacity="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

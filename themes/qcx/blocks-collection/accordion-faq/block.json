@@ -1,0 +1,11 @@
+{
+	"name": "accordion-faq",
+	"title": "Accordion FAQ",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

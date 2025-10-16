@@ -1,0 +1,15 @@
+@layer components {
+    .content-two-across-image-text {
+        .media-container {
+            @apply relative ~h-[18.5rem]/[37rem] rounded-[0.25rem] overflow-hidden;
+
+            &.video {
+                @apply bg-pitch-black;
+                
+				iframe {
+					@apply absolute center-xy min-h-full min-w-full h-auto w-auto aspect-video;
+				}
+			}
+        }
+    }
+}

@@ -1,0 +1,47 @@
+node_modules
+## Avoid package*.json files only at repo root
+/package.json
+/package-lock.json
+
+/plugins/akismet/
+
+# Uploads directory
+/uploads/
+/f4-tree/
+/wflogs/
+/ai1wm-backups/
+
+/upgrade/
+
+/mu-plugins/
+
+/object-cache.php
+/db.php
+/debug.log
+/error.log
+
+# Ignore temporary OS files
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+
+# Local PHPCS configuration files
+.phpcs.xml
+phpcs.xml
+
+# Composer (repo root only)
+/vendor/
+!/private/vendor/
+
+# Twig cache files
+twig_cache/
+
+# Tailwind dist file
+bf.css
+
+#.env file
+/private/.env

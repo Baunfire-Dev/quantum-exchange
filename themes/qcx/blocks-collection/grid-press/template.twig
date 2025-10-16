@@ -1,0 +1,46 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-none" %}
+
+	{% set items_per_page = 12 %}
+	{% set has_posts = posts and posts|length %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="flex flex-col ~gap-[1rem]/[1.5rem]">
+			{% if fields.heading %}
+				<div class="container">
+					<h2 class="block-heading alpha max-w-[45.375rem]">
+						{{ fields.heading }}
+					</h2>
+				</div>
+			{% endif %}
+
+            {% if has_posts %}
+                <div class="items-container" data-per-page="{{ items_per_page }}">
+                    <div class="items">
+                        {% for post in posts %}
+                            <a class="item" href="{{ post.meta("external_resource_link") }}" target="_blank">
+                                <small class="text-black-75">{{ post.date|date("F j, Y") }}</small>
+                                <p>{{ post.title }}</p>
+                                <div class="flex mt-auto">
+                                    <p class="button text-rust-light">{{ post.meta("external_resource_source") }}</p>
+                                    <svg width="34" height="24" viewbox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20 14.5413H18.7025V11.2148L14.9174 15L14 14.0826L17.7852 10.2975H14.4587V9H20V14.5413Z" fill="#D03722"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+
+                    <div class="container">
+                        <div class="pagination"></div>
+                    </div>
+                </div>
+            {% endif %}
+		</div>
+	</div>
+</section>

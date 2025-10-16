@@ -1,0 +1,106 @@
+<section class="{{ block.slug }} {{ block.className }} bg-black border-t-[1px] border-dark-grey">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+	<div class="{{ pt }} {{ pb }}">
+		<div class="container">
+			<div class="flex max-lg:flex-col ~gap-[2rem]/[7.125rem] items-start">
+				<div class="lg:flex-1 lg:basis-[21.5rem] flex flex-col ~gap-[2.5rem]/[4rem] h-fit lg:sticky lg:top-[5rem]">
+					{% if fields.heading %}
+						<h2 class="block-heading alpha text-white">{{ fields.heading }}</h2>
+					{% endif %}
+
+					{% if fields.badges|length %}
+						<div class="flex flex-col gap-[0.25rem]">
+							{% if fields.eyebrow %}
+								<small class="text-white">{{ fields.eyebrow }}</small>
+							{% endif %}
+
+							<div class="flex flex-wrap gap-[0.25rem]">
+								{% for item in fields.badges %}
+									<div class="~h-[4.5rem]/[5.75rem]">
+										{% include 'components/image.twig' with {
+                                            'image': item,
+                                            'class': 'object-contain',
+                                            'size': "medium",
+                                        } %}
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					{% endif %}
+				</div>
+
+				{% if fields.item|length %}
+					<div class="lg:flex-1 lg:basis-[55.5rem] rounded-[0.25rem] border-[1px] border-dark-grey overflow-hidden">
+						{% for index, item in fields.item %}
+							{% if item.is_link %}
+								{% set link_url = "#" %}
+								{% set link_title = "" %}
+								{% set link_target = "_self" %}
+
+								{% if item.title %}
+									{% set link_url = item.title.url ?: "#" %}
+									{% set link_title = item.title.title %}
+									{% set link_target = item.title.target ?: "_self" %}
+								{% endif %}
+
+								<a class="item hoverable flex max-md:flex-col ~gap-[1rem]/[1.5rem] ~py-[1.25rem]/[2rem] ~px-[1rem]/[1.5rem] bg-neutral-700 border-b-[1px] border-b-dark-grey last:border-b-0" href="{{ link_url }}" target="{{ link_target }}">
+									<div class="flex ~gap-[1.25rem]/[3rem] md:flex-1">
+										<small class="text-rust shrink-0">{{ loop.index < 10 ? "0" ~ loop.index : loop.index }}</small>
+
+										{% if link_title %}
+											<h4 class="text-white md:basis-[14.875rem] flex-1">{{ link_title }}</h4>
+										{% endif %}
+
+										{% if item.paragraph %}
+											<p class="text-white-75 md:basis-[26.875rem] md:flex-1 max-md:hidden">{{ item.paragraph }}</p>
+										{% endif %}
+
+										<div class="btn-arrow md:!hidden shrink-0">
+											<svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"/>
+											</svg>
+										</div>
+									</div>
+
+									{% if item.paragraph %}
+										<p class="text-white-75 md:hidden">{{ item.paragraph }}</p>
+									{% endif %}
+
+									<div class="btn-arrow shrink-0 max-md:!hidden">
+										<svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"/>
+										</svg>
+									</div>
+								</a>
+							{% else %}
+								<div class="item flex max-md:flex-col ~gap-[1rem]/[1.5rem] ~py-[1.25rem]/[2rem] ~px-[1rem]/[1.5rem] bg-neutral-700 border-b-[1px] border-b-dark-grey last:border-b-0">
+									<div class="flex ~gap-[1.25rem]/[3rem] md:flex-1">
+										<small class="text-rust shrink-0">{{ loop.index < 10 ? "0" ~ loop.index : loop.index }}</small>
+
+										{% if item.title_plain %}
+											<h4 class="text-white md:basis-[14.875rem] flex-1">{{ item.title_plain }}</h4>
+										{% endif %}
+
+										{% if item.paragraph %}
+											<p class="text-white-75 md:basis-[26.875rem] md:flex-1 max-md:hidden">{{ item.paragraph }}</p>
+										{% endif %}
+									</div>
+
+									{% if item.paragraph %}
+										<p class="text-white-75 md:hidden">{{ item.paragraph }}</p>
+									{% endif %}
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>

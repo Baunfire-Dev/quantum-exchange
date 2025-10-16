@@ -1,0 +1,19 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	<div class="container">
+        {% if fields.stats|length %}
+            <div class="stat-items">
+                {% for stat in fields.stats %}
+                    <div class="stat-item">
+                        <p class="h1 text-black"><span data-amount="{{ stat.amount }}">0</span>{{ stat.suffix }}</p>
+                        <p class="text-black-75">{{ stat.paragraph }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+	</div>
+</section>
+

@@ -1,0 +1,39 @@
+@layer base {
+	dialog {
+		@apply !outline-none w-full h-full m-0 max-w-full max-h-full;
+		background: none;
+
+		&:not([open]) {
+			animation: dialogFadeOut 0.5s ease forwards;
+		}
+
+		&[open] {
+			animation: dialogFadeIn 0.5s ease forwards;
+		}
+
+		&::backdrop {
+			background: rgba(18, 18, 18, 0.5);
+			backdrop-filter: blur(3.125rem);
+		}
+	}
+}
+
+@keyframes dialogFadeIn {
+	from {
+		transform: translateY(2.5rem);
+	}
+
+	to {
+		transform: translateY(0%);
+	}
+}
+
+@keyframes dialogFadeOut {
+	from {
+		transform: translateY(0%);
+	}
+
+	to {
+		transform: translateY(2.5rem);
+	}
+}

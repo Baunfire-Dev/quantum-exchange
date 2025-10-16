@@ -1,0 +1,10 @@
+{
+	"name": "content-form",
+	"title": "Content Form",
+	"viewScript": ["file:./script.js"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+		"postTypes": ["page", "solution", "post", "webinar", "customer-story", "ebook"]
+	}
+}

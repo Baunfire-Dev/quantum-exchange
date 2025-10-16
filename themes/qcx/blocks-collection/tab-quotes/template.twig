@@ -1,0 +1,138 @@
+{% if fields.item|length %}
+	<section class="{{ block.slug }} {{ block.className }} bg-black">
+		{% if block.anchor %}
+			<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+		{% endif %}
+
+		{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+		{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-none" %}
+
+		<div class="{{ pt }} {{ pb }}">
+			<div class="items flex flex-col ~gap-[2.5rem]/[7.5rem]">
+				<div class="container">
+					<div class="item-quotes">
+						{% for item in fields.item %}
+							<div class="item-quote {{ loop.index == 1 ? " active" }}">
+								<div class="item-quote-inner">
+									{% if item.profile %}
+										<div class="rounded-[0.5rem] overflow-hidden w-[12.5rem] h-[12.25rem] shrink-0">
+											{% include 'components/image.twig' with {
+                                                'image': item.profile,
+                                                'size': "large",
+                                            } %}
+										</div>
+									{% endif %}
+
+									<div class="item-quote-content">
+										{% if item.paragraph %}
+											<p class="item-quote-message">{{ item.paragraph }}</h3>
+										{% endif %}
+
+										<div class="item-quote-author">
+											{% if item.name or item.position %}
+												<div class="flex items-center ~gap-[0.5rem]/[0.75rem]">
+													{% if item.name %}
+														<p class="text-white-75">{{ item.name }}</p>
+													{% endif %}
+
+													{% if item.name and item.position %}
+														<div class="bg-teal h-[0.375rem] w-[0.375rem] rounded-[50%]"></div>
+													{% endif %}
+
+													{% if item.position %}
+														<p class="text-white-75">{{ item.position }}</p>
+													{% endif %}
+												</div>
+											{% endif %}
+
+											{% include 'components/cta.twig' with {
+                                                'class' : 'plain teal',
+                                                'cta': item.cta,
+                                                'plain': true,
+                                                'icon': true,
+                                            } %}
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+
+                        {% for item in fields.item %}
+							<div class="item-shadow-quote">
+								<div class="item-quote-inner">
+									{% if item.profile %}
+										<div class="rounded-[0.25rem] overflow-hidden w-[12.5rem] h-[12.25rem] shrink-0">
+											{% include 'components/image.twig' with {
+                                                'image': item.profile,
+                                                'size': "large",
+                                            } %}
+										</div>
+									{% endif %}
+
+									<div class="item-quote-content">
+										{% if item.paragraph %}
+											<p class="item-quote-message">{{ item.paragraph }}</p>
+										{% endif %}
+
+										<div class="item-quote-details">
+											{% if item.name or item.position %}
+												<div class="flex items-center ~gap-[0.5rem]/[0.75rem]">
+													{% if item.name %}
+														<p class="text-white-75">{{ item.name }}</p>
+													{% endif %}
+
+													{% if item.name and item.position %}
+														<div class="bg-teal h-[0.375rem] w-[0.375rem] rounded-[50%]"></div>
+													{% endif %}
+
+													{% if item.position %}
+														<p class="text-white-75">{{ item.position }}</p>
+													{% endif %}
+												</div>
+											{% endif %}
+
+											{% include 'components/cta.twig' with {
+                                                'class' : 'plain teal',
+                                                'cta': item.cta,
+                                                'plain': true,
+                                                'icon': true,
+                                            } %}
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+
+				<div class="item-navs">
+                    <div class="arrow prev">
+                        <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"/>
+                        </svg>
+                    </div>
+
+					{% for item in fields.item %}
+						{% if item.company %}
+							<div class="item-nav  {{ loop.index == 1 ? " active" }}">
+								<div class="item-bar"></div>
+
+								{% include 'components/image.twig' with {
+                                    'image': item.company,
+                                    'size': "medium",
+                                } %}
+							</div>
+						{% endif %}
+					{% endfor %}
+
+                    <div class="arrow next">
+                        <svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 4.99946L4.99946 10L3.82882 8.82936L6.83087 5.82731H0V4.17161H6.83087L3.82882 1.17064L4.99946 0L10 4.99946Z" fill="#8BFFF7"/>
+                        </svg>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endif %}

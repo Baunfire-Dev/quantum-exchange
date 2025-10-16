@@ -1,0 +1,22 @@
+{
+    "viewports": {
+        "sm": "36rem",
+        "md": "48rem",
+        "lg": "62rem",
+        "xl": "75rem",
+        "1xl": "81.25rem",
+        "2xl": "87.5rem",
+        "3xl": "100rem"
+    },
+    "colors": {
+        "black": "#000",
+        "blue": "#206EEC",
+        "gray": "#D9D9D9",
+        "light-blue": "#00A1FF"
+    },
+    "eases": {
+        "power2-out": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "power3-out": "cubic-bezier(0.19, 1, 0.22, 1)",
+        "expo-out": "cubic-bezier(0.19, 1, 0.22, 1)"
+    }
+}

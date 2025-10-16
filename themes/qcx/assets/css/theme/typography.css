@@ -1,0 +1,95 @@
+@layer base {
+    @font-face {
+		font-family: "inter";
+		src: url("../../fonts/inter/Inter-Regular.woff") format("woff");
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	}
+
+    @font-face {
+		font-family: "aeonik";
+		src: url("../../fonts/aeonik/Aeonik-Regular.woff") format("woff");
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+		/* descent-override: 15%; */
+	}
+
+    @font-face {
+		font-family: "a-mono";
+		src: url("../../fonts/a-mono/AeonikFono-Regular.woff") format("woff");
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+		/* descent-override: 15%; */
+	}
+
+	h1,
+	.h1 {
+		@apply font-aeonik ~text-[3.5rem]/[6rem] font-normal leading-[100%] ~tracking-[-0.105rem]/[-0.18rem];
+	}
+
+	h2,
+	.h2 {
+		@apply font-aeonik ~text-[3rem]/[4.5rem] font-normal leading-[100%] ~tracking-[-0.09rem]/[-0.135rem];
+	}
+
+	h3,
+	.h3 {
+		@apply font-aeonik ~text-[2.75rem]/[4rem] font-normal leading-[100%] ~tracking-[-0.0825rem]/[-0.12rem];
+	}
+
+	h4,
+	.h4 {
+		@apply font-aeonik ~text-[2.25rem]/[3.5rem] font-normal leading-[134%] tracking-[-0.045rem];
+	}
+
+	h5,
+	.h5 {
+		@apply font-aeonik ~text-[1.5rem]/[2.25rem] font-normal leading-[100%] ~tracking-[-0.045rem]/[-0.0675rem];
+	}
+
+	h6,
+	.h6 {
+		@apply font-aeonik ~text-[1.25rem]/[2rem] font-normal leading-[100%];
+	}
+
+	b,
+	strong {
+		@apply font-normal;
+	}
+
+	p {
+		@apply font-aeonik text-[1.125rem] font-normal leading-[140%];
+
+        &.lg {
+			@apply ~text-[1.25rem]/[1.5rem] leading-[140%];
+		}
+
+		&.sm {
+			@apply text-[1rem] leading-[130%];
+		}
+	}
+
+	p.button,
+	.btn p {
+		@apply font-a-mono text-[0.75rem] font-normal tracking-[0.075rem] leading-[130%] uppercase;
+	}
+
+	small,
+	.overline {
+		@apply font-a-mono font-normal leading-[120%] text-[1rem] tracking-[0.1rem] uppercase;
+	}
+
+	a,
+	.link {
+		@apply no-underline text-black;
+	}
+}
+
+@layer components {
+	.rich-text {
+
+	}
+}

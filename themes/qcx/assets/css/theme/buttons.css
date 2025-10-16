@@ -1,0 +1,46 @@
+@layer components {
+	.btn {
+		@apply px-[1.5rem] py-[1rem] flex items-center justify-center w-fit rounded-[0.25rem];
+		@apply transition-colors duration-300 ease-power2-out;
+
+		&,
+		& * {
+			@apply cursor-pointer;
+		}
+
+		&.filled {
+			&.blue {
+				@apply bg-blue;
+
+				p {
+					@apply text-white;
+				}
+
+				&:hover {
+				}
+			}
+		}
+
+        p {
+            @apply relative;
+
+            span {
+                &.front {
+                    @apply absolute top-0 left-0 h-full w-full;
+                }
+
+                &.back {
+                    @apply invisible;
+                }
+            }
+        }
+
+		&.navi {
+			@apply px-[1rem] py-[0.5625rem] bg-blue;
+
+			p {
+				@apply text-white;
+			}
+		}
+	}
+}

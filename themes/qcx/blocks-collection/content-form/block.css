@@ -1,0 +1,25 @@
+@layer components {
+	.content-form {
+		@apply bg-black last-of-type:mb-[-1px];
+
+		.item {
+			@apply flex items-center justify-center w-auto h-[3.75rem];
+
+            &:hover {
+                @apply grayscale-0;
+            }
+		}
+
+        .media-container {
+            @apply absolute top-0 left-0 w-full h-full;
+
+            &.video {
+                @apply bg-pitch-black;
+                
+				iframe {
+					@apply absolute center-xy min-h-full min-w-full h-auto w-auto aspect-video;
+				}
+			}
+        }
+	}
+}

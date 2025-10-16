@@ -1,0 +1,71 @@
+.st-xxl {
+	@apply ~pt-[4.5rem]/[7.5rem];
+}
+
+.sb-xxl {
+	@apply ~pb-[4.5rem]/[7.5rem];
+}
+
+.st-xl {
+	@apply ~pt-[3.5rem]/[5rem];
+}
+
+.sb-xl {
+	@apply ~pb-[3.5rem]/[5rem];
+}
+
+.st-lg {
+	@apply ~pt-[2.5rem]/[4rem];
+}
+
+.sb-lg {
+	@apply ~pb-[2.5rem]/[4rem];
+}
+
+.st-md {
+	@apply ~pt-[2rem]/[3rem];
+}
+
+.sb-md {
+	@apply ~pb-[2rem]/[3rem];
+}
+
+.st-sm {
+	@apply ~pt-[1.25rem]/[2rem];
+}
+
+.sb-sm {
+	@apply ~pb-[1.25rem]/[2rem];
+}
+
+.st-xs {
+	@apply ~pt-[1rem]/[1.5rem];
+}
+
+.sb-xs {
+	@apply ~pb-[1rem]/[1.5rem];
+}
+
+.st-xxs {
+	@apply ~pt-[0.5rem]/[0.75rem];
+}
+
+.sb-xxs {
+	@apply ~pb-[0.5rem]/[0.75rem];
+}
+
+.st-xxxs {
+	@apply pt-[0.25rem];
+}
+
+.sb-xxxs {
+	@apply pb-[0.25rem];
+}
+
+.st-none {
+	@apply !pt-0;
+}
+
+.sb-none {
+	@apply !pb-0;
+}

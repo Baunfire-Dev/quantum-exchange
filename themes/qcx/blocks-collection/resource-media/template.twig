@@ -1,0 +1,56 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	<div class="container">
+		{% if fields.media_type == "image" and fields.media_image %}
+			<div class="media-container-outer">
+				<div class="media-container-inner">
+					<div class="media-container image">
+						{% include 'components/image.twig' with {
+                            'class': "object-top",
+                            'image': fields.media_image,
+                            'size': "large",
+                        } %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+		{% if fields.media_type == "video" and (((fields.video_type == "youtube" or fields.video_type == "vimeo") and fields.media_video) or (fields.video_type == "file" and fields.video_file)) %}
+			<div class="media-container-outer">
+				<div class="media-container-inner">
+					{% if fields.video_type == "youtube" or fields.video_type == "vimeo" %}
+						<div class="media-container video embed {{ fields.video_type }}" data-video="{{ fields.media_video }}">
+							<div class="media-play">
+								<svg width="12" height="14" viewbox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 0V14L12 7L0 0Z" fill="white"/>
+								</svg>
+							</div>
+
+							<div class="media-thumbnail"></div>
+						</div>
+					{% else %}
+						<div class="media-container video file" data-video="{{ fields.video_file }}">
+							<div class="media-control">
+								<svg width="10" height="12" viewbox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M6.5 12V0H9.5V12H6.5ZM0.5 12V0H3.5V12H0.5Z" fill="white"/>
+								</svg>
+
+								<svg width="12" height="14" viewbox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 0V14L12 7L0 0Z" fill="white"/>
+								</svg>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		{% endif %}
+
+		{% if fields.caption %}
+			<figcaption>{{ fields.caption }}</figcaption>
+		{% endif %}
+	</div>
+</section>
+

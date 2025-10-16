@@ -1,0 +1,10 @@
+{
+	"name": "hero-form",
+	"title": "Hero Form",
+	"viewScript": ["file:./script.js"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+		"postTypes": ["page"]
+	}
+}

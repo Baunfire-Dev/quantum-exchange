@@ -1,0 +1,33 @@
+@layer components {
+    .content-kitty-corner-grid {
+        .overlay {
+            @apply bg-[#12121203] backdrop-blur-[1.5625rem];
+        }
+
+        .row {
+            @apply flex relative z-[2];
+
+            &:first-child {
+                .col {
+                    @apply border-b-[1px] border-white-20;
+                }
+            }
+        }
+
+        .col {
+            @apply lg:flex-1 flex flex-col gap-[0.75rem] ~px-[1rem]/[4rem];
+
+            &.left {
+                @apply lg:basis-[38.625rem] ~py-[2.5rem]/[4rem] lg:border-r-[1px] border-white-20;
+            }
+
+            &.right {
+                @apply lg:basis-[51.375rem] ~py-[2.5rem]/[5.125rem];
+            }
+
+            &:empty {
+                @apply max-lg:hidden;
+            }
+        }
+    }
+}

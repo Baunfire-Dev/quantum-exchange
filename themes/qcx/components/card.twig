@@ -1,0 +1,95 @@
+{% set eyebrow = "" %}
+{% set title = "" %}
+{% set desc = "" %}
+{% set permalink = "#" %}
+{% set image = "" %}
+{% set target = "_self" %}
+{% set tags = [] %}
+{% set is_sol = is_solution ?: false %}
+{% set is_res = is_resource ?: false %}
+{% set is_grid = is_on_grid ?: false %}
+{% set cats = category_names ?: [] %}
+
+{% if source == "manual" %}
+    {% set eyebrow = data.eyebrow %}
+
+    {% if data.post_link %}
+        {% set permalink = data.post_link.url ?: "#" %}
+        {% set title = data.post_link.title %}
+        {% set target = data.post_link.target ?: "_self" %}
+    {% endif %}
+    
+    {% set image = data.image %}
+    {% set desc = data.description %}
+
+    {% set tags = data.tags %}
+{% else %}
+    {% set post_id = (source == "latest" or is_grid) ? data.ID : data.post_object %}
+    {# {% set eyebrow = function("get_cpt_name", function('get_post_type', post_id), post_id) %} #}
+    {% set eyebrow = function("get_post_type_object", function('get_post_type', post_id)).labels.singular_name %}
+    {% set title = function('get_the_title', post_id) %}
+    {% set desc  = function('get_post_field', 'post_excerpt', post_id) %}
+    {% set permalink  = function('get_permalink', post_id) %}
+    {% set image   = function('get_post_thumbnail_id', post_id) %}
+
+    {% if is_sol or is_grid %}
+        {% set tags = function('get_field', "solution_type", post_id) %}
+    {% endif %}
+{% endif %}
+
+<a class="card {{ class }}" href="{{ permalink }}" target="{{ target }}" {{ cats ? "data-category='" ~ cats | json_encode | raw ~ "'" }}>
+    <div class="card-inner">
+        {% if not is_grid %}
+            <div class="card-image">
+                <div class="card-image-inner">
+                    {% if image %}
+                        {% include 'components/image.twig' with {
+                            'image': image,
+                            'size': "large",
+                        } %}
+                    {% else %}
+                        <img src="{{ function("png", "placeholder") }}" loading="lazy" alt="placeholder image">
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div class="card-image {{ is_grid ? "is-listing-image" }}">
+                <div class="card-image-inner">
+                    <img data-src="{{ function("get_image_url_by_id", image, "large") }}" loading="lazy" alt="{{ title }}">
+                </div>
+            </div>
+        {% endif %}
+
+        {% if eyebrow or title %}
+            <div class="card-content">
+                {% if (is_sol or is_grid) and not is_res %}
+                    {% if title %}
+                        <h4 class="title">{{ title }}</h4>
+                    {% endif %}
+                {% else %}
+                    {% if eyebrow %}
+                        <small>{{ eyebrow }}</small>
+                    {% endif %}
+
+                    {% if title %}
+                        <p class="title">{{ title }}</p>
+                    {% endif %}
+                {% endif %}
+
+                {% if desc and show_desc %}
+                    <p class="desc line-clamp-3 text-ellipsis">{{ desc }}</p>
+                {% endif %}
+
+                {% if tags|length %}
+                    <div class="tags">
+                        {% for tag in tags %}
+                            {% if tag.name %}
+                                <p class="sm" {{ is_sol ? "data-click-tag='" ~ sol_back_cta.url ~ "?category=" ~ tag.slug ~ "'" }}>{{ tag.name }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</a>
