@@ -1,5 +1,13 @@
 @layer components {
-    .content-two-across-tiles {
-        /* Add your styles here */
+  .content-two-across-tiles {
+    .item-card {
+      @apply border-[1px] border-green rounded-[0.5rem] backdrop-blur-[0.9375rem];
+      background: rgba(32, 110, 236, 0.2);
+      will-change: transform;
     }
+    
+    .left-card, .rigth-card {
+      will-change: transform;
+    }
+  }
 }
