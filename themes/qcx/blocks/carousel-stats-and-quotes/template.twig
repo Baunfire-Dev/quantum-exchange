@@ -1,18 +1,116 @@
 {# {% cache "block;" ~ post.id ~ ";" ~ block.id ~ ";" ~ post.modified_timestamp ~ ";" ~ cache_key %} #}
 
 <section class="{{ block.slug }} {{ block.className }}">
-    {% if block.anchor %}
-        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-    {% endif %}
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-    {# {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %} #}
-    {# {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %} #}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
 
-    <div class="container">
-        <div class="{{ pt }} {{ pb }}">
-            
-        </div>
-    </div>
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+
+			<div class="flex flex-col ~gap-[2.5rem]/[4rem]">
+			<div class="flex flex-col ~gap-[1.25rem]/[2rem] max-w-[68.125rem] w-full">
+			{% if fields.heading %}
+			<h2 >{{fields.heading}}</h2>
+			{% if fields.paragraph %}
+			<p class="md:ml-[6.875rem] max-w-[30.5rem] w-full">{{fields.paragraph}}</p>
+			{% endif %}
+			
+			{% endif %}
+			
+			</div>
+
+			{% if fields.items|length %}
+				<div class="flex flex-col ~gap-[1.3125rem]/[1.8094rem]">
+					<div class="carousel-nav w-full flex items-center justify-end gap-[1.5rem]">
+						<button class="ar-l flex items-center gap-[0.5rem]" type="button">
+							<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+								<path d="M5 9L1 5L5 1" stroke="black" stroke-linecap="square"/>
+							</svg>
+							<span class="button">Previous</span>
+						</button>
+						<div class="bg-gray w-[1px] h-[20px]"></div>
+						<button class="ar-r flex items-center gap-[0.5rem]" type="button">
+							<span class="button">Next</span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+								<path d="M1 1L5 5L1 9" stroke="black" stroke-linecap="square"/>
+							</svg>
+						</button>
+					</div>
+					<div class="relative box w-full">
+						<div class="owl-carousel owl-theme">
+							{% for index, item in fields.items %}
+								{% set stats = item.item_type == "stats" %}
+								{% set quotes = item.item_type == "quotes" %}
+
+								<div class="item relative flex flex-col ~gap-[1.3125rem]/[1.8094rem]">
+									<div class="item-line relative">
+										<svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<rect width="10" height="10" rx="2" fill="#08E8BD"/>
+										</svg>
+
+									</div>
+									<div class="item-card flex flex-col ~gap-[1rem]/[1.5rem] border-[1px] rounded-[8px] border-gray ~p-[1.25rem]/[2rem]">
+										{% if stats %}
+											{% if item.stats %}
+												<h2>{{item.stats}}</h2>
+											{% endif %}
+											{% if item.title %}
+												<p class="eyebrow text-blue uppercase">{{item.title}}</p>
+											{% endif %}
+										{% endif %}
+
+										{% if quotes %}
+											<svg xmlns="http://www.w3.org/2000/svg" width="52" height="38" viewbox="0 0 52 38" fill="none">
+												<path d="M52 4C52 1.79086 50.2091 0 48 0H32.7368C30.5277 0 28.7368 1.79086 28.7368 4V19.4862C28.7368 20.3176 28.9959 21.1282 29.4779 21.8056L39.9213 36.4796C40.6002 37.4335 41.6987 38 42.8695 38C45.4927 38 47.2443 35.2959 46.1717 32.902L43.6842 27.3497C42.4986 24.7034 44.4348 21.7143 47.3346 21.7143H48C50.2091 21.7143 52 19.9234 52 17.7143V4ZM23.2632 4C23.2632 1.79086 21.4723 0 19.2632 0H4C1.79086 0 0 1.79086 0 4V19.4862C0 20.3176 0.259029 21.1282 0.741074 21.8056L11.1845 36.4796C11.8634 37.4335 12.9618 38 14.1326 38C16.7559 38 18.5075 35.2959 17.4349 32.902L14.9474 27.3497C13.7617 24.7034 15.6979 21.7143 18.5977 21.7143H19.2632C21.4723 21.7143 23.2632 19.9234 23.2632 17.7143V4Z" fill="#00A1FF"/>
+											</svg>
+										{% endif %}
+
+										{% if item.description %}
+											<p>{{item.description}}</p>
+										{% endif %}
+
+										{% if quotes %}
+											<div class="flex flex-col gap-[0.5625rem]">
+												{% if item.author %}
+													<p>{{item.author}}</p>
+												{% endif %}
+												<div class="flex gap-[12px]">
+													{% if item.position %}
+														<p class="xsm">{{item.position}}</p>
+													{% endif %}
+
+													{% if item.company %}
+														<p class="xsm">{{item.company}}</p>
+													{% endif %}
+												</div>
+											</div>
+										{% endif %}
+
+
+										{% if stats %}
+											{% include 'components/cta.twig' with {
+                                            'class' : 'filled blue',
+                                            'cta': item.link,
+                                        } %}
+										{% endif %}
+									</div>
+
+								</div>
+							{% endfor %}
+						</div>
+
+
+					</div>
+				</div>
+			{% endif %}
+			</div>
+
+		</div>
+	</div>
 </section>
 
 {# {% endcache %} #}

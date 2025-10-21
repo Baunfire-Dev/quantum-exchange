@@ -1,5 +1,45 @@
 @layer components {
-    .carousel-stats-and-quotes {
-        /* Add your styles here */
+  .carousel-stats-and-quotes {
+    .owl-carousel .owl-stage-outer {
+      @apply !overflow-visible;
     }
+    
+    @media (max-width: 1440px) {
+      &::before {
+        content: '';
+        @apply absolute left-0 top-0 bottom-0 w-[1rem] md:w-[4rem] z-10 pointer-events-none;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 1) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
+    }
+    
+    .item-card {
+      @apply opacity-0;
+      transform: translateY(30px);
+    }
+    
+    .item-line {
+      --line-width: 0;
+      
+      svg {
+        @apply opacity-0;
+        transform: scale(0);
+      }
+      
+      &::after {
+        content: '';
+        @apply h-[0.0625rem] absolute bottom-0 top-[0.3125rem] left-0 right-0;
+        width: var(--line-width);
+        background: linear-gradient(
+          90deg,
+          rgba(8, 232, 189, 0) 1.37%,
+          #08e8bd 3.79%
+        );
+      }
+    }
+  }
 }
