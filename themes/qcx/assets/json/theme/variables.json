@@ -12,7 +12,8 @@
         "black": "#000",
         "blue": "#206EEC",
         "gray": "#D9D9D9",
-        "light-blue": "#00A1FF"
+        "light-blue": "#00A1FF",
+        "green": "#08E8BD"
     },
     "eases": {
         "power2-out": "cubic-bezier(0.25, 1, 0.5, 1)",

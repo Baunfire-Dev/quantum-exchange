@@ -1,0 +1,45 @@
+{# {% cache "block;" ~ post.id ~ ";" ~ block.id ~ ";" ~ post.modified_timestamp ~ ";" ~ cache_key %} #}
+
+<section class="{{ block.slug }} {{ block.className }} bg-blue relative h-full">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+	<div class="container relative z-[2]">
+		<div class="{{ pt }} {{ pb }}">
+			<div class=" flex items-center justify-center">
+            <div class="w-fit backdrop-blur-[11.5px] bg-black/[0.04] px-[5rem] py-[4rem] flex items-center flex-col ~gap-[1.25rem]/[2rem]  border-[1px] rounded-[0.5rem] border-green">
+				<div class="flex flex-col gap-[1.5rem] max-w-[36.125rem] w-full ">
+					{% if fields.heading %}
+						<h3 class="text-white text-center">{{fields.heading}}</h3>
+
+					{% endif %}
+					{% if fields.paragraph %}
+						<p class="text-white text-center">{{fields.paragraph}}</p>
+					{% endif %}
+				</div>
+				{% include 'components/cta.twig' with {
+                            'class' : 'filled white',
+                            'cta': fields.cta, 
+                        } %}
+			</div>
+            </div>
+		</div>
+	</div>
+	{% if fields.marquee %}
+		<div class="marquee absolute bottom-0 top-0 flex flex-col justify-center left-0 w-full pointer-events-none">
+			<div class="marquee-inner flex gap-[1.875rem]">
+				{% for i in 1..3 %}
+					<div class="marquee-text shrink-0">
+						<p class="text-transparent">{{ fields.marquee }}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+</section>
+
+{# {% endcache %} #}

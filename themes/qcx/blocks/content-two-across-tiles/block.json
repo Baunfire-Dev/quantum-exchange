@@ -1,0 +1,11 @@
+{
+	"name": "content-two-across-tiles",
+	"title": "Content Two Across Tiles",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

@@ -19,6 +19,13 @@
 				&:hover {
 				}
 			}
+			&.white{
+				@apply bg-white;
+				p{
+					@apply text-blue;
+				}
+
+			}
 		}
 
         p {
