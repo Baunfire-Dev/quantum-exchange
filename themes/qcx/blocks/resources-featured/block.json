@@ -1,0 +1,11 @@
+{
+	"name": "resources-featured",
+	"title": "Resources - Featured",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["swiper-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}
