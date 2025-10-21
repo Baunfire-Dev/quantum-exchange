@@ -1,18 +1,154 @@
 {# {% cache "block;" ~ post.id ~ ";" ~ block.id ~ ";" ~ post.modified_timestamp ~ ";" ~ cache_key %} #}
 
 <section class="{{ block.slug }} {{ block.className }}">
-    {% if block.anchor %}
-        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-    {% endif %}
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-    {# {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %} #}
-    {# {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %} #}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
 
-    <div class="container">
-        <div class="{{ pt }} {{ pb }}">
-            
-        </div>
-    </div>
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex flex-col items-center ~gap-[2.5rem]/[4rem]">
+				<div class="flex flex-col md:flex-row ~gap-[1.25rem]/[16.5625rem] justify-between item-start md:items-end max-w-[68.0625rem]">
+					<div class="max-w-[43.125rem] flex flex-col ~gap-[1.25rem]/[2rem] w-full">
+						{% if fields.heading %}
+							<h2>{{fields.heading}}</h2>
+							{% if fields.paragraph %}
+								<p class="md:ml-[6.875rem] max-w-[30.5rem] w-full">{{fields.paragraph}}</p>
+							{% endif %}
+						{% endif %}
+					</div>
+					<div>
+						{% include 'components/cta.twig' with {
+                            'class' : 'filled blue',
+                            'cta': fields.cta, 
+                        } %}
+					</div>
+				</div>
+				<div class="flex flex-col ~gap-[1.25rem]/[1.5rem] w-full">
+					<div class="carousel-nav w-full flex items-center justify-end gap-[1.5rem]">
+						<button class="ar-l flex items-center gap-[0.5rem]" type="button">
+							<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+								<path d="M5 9L1 5L5 1" stroke="black" stroke-linecap="square"/>
+							</svg>
+							<span class="button">Previous</span>
+						</button>
+						<div class="bg-gray w-[1px] h-[20px]"></div>
+						<button class="ar-r flex items-center gap-[0.5rem]" type="button">
+							<span class="button">Next</span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+								<path d="M1 1L5 5L1 9" stroke="black" stroke-linecap="square"/>
+							</svg>
+						</button>
+					</div>
+					{% if videos %}
+						<div class="videos-carousel owl-carousel">
+							{% for video in videos %}
+								<div class="video-item flex flex-col ~gap-[2rem]/[3rem] ~p-[1.25rem]/[2rem] border-[1px] border-gray rounded-[0.5rem]">
+									<div class="flex flex-col gap-[1.5rem]">
+										<div class="flex gap-[0.5rem] items-center">
+											<svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<rect width="10" height="10" rx="2" fill="#08E8BD"/>
+											</svg>
+											<p class="eyebrow">VIDEO</p>
+										</div>
+										<p class="lg">{{ video.title }}</p>
+									</div>
+
+									<div class="video-wrapper relative  w-full h-[17.2356rem]">
+
+										<div>
+											{% if video.source == 'vimeo' and video.vimeo_id %}
+												<div class="media-container video embed vimeo w-full h-full" data-video="{{ video.vimeo_id }}">
+													<button class="media-control play-button">
+														<svg xmlns="http://www.w3.org/2000/svg" width="76" height="77" viewbox="0 0 76 77" fill="none">
+															<circle cx="38" cy="38.9619" r="38" fill="url(#paint0_linear_7740_2494)"/>
+															<path d="M52 38.9619C52 38.5859 51.784 38.2709 51.477 38.0999L51.483 38.0899L31.583 27.1479L31.563 27.1579C31.401 27.0439 31.214 26.9619 31 26.9619C30.448 26.9619 30 27.4099 30 27.9619C30 27.9629 30.001 27.9639 30.001 27.9659L30 38.9619V49.9579C30 49.9599 30 49.9609 30 49.9619C30 50.5139 30.448 50.9619 31 50.9619C31.214 50.9619 31.401 50.8799 31.564 50.7659L31.583 50.7759L51.483 39.8339L51.477 39.8239C51.784 39.6529 52 39.3379 52 38.9619Z" fill="white"/>
+															<defs>
+																<linearGradient id="paint0_linear_7740_2494" x1="15" y1="7.96191" x2="66" y2="76.9619" gradientunits="userSpaceOnUse">
+																	<stop stop-color="#08E8BD" stop-opacity="0.1"/>
+																	<stop offset="1" stop-color="#08E8BD"/>
+																</linearGradient>
+															</defs>
+														</svg>
+													</button>
+													<div class="absolute top-0 left-0 right-0 bottom-0 w-full h-full">
+														{% if video.thumbnail %}
+															<div class="video-thumbnail">
+																{% include 'components/image.twig' with {
+                                                                'image': video.thumbnail,
+                                                                'size': 'large'
+                                                            } %}
+															</div>
+														{% endif %}
+													</div>
+												</div>
+											{% elseif video.source == 'youtube' and video.youtube_id %}
+												<div class="media-container video embed youtube" data-video="{{ video.youtube_id }}">
+													<button class="media-control play-button">
+														<svg xmlns="http://www.w3.org/2000/svg" width="76" height="77" viewbox="0 0 76 77" fill="none">
+															<circle cx="38" cy="38.9619" r="38" fill="url(#paint0_linear_7740_2494)"/>
+															<path d="M52 38.9619C52 38.5859 51.784 38.2709 51.477 38.0999L51.483 38.0899L31.583 27.1479L31.563 27.1579C31.401 27.0439 31.214 26.9619 31 26.9619C30.448 26.9619 30 27.4099 30 27.9619C30 27.9629 30.001 27.9639 30.001 27.9659L30 38.9619V49.9579C30 49.9599 30 49.9609 30 49.9619C30 50.5139 30.448 50.9619 31 50.9619C31.214 50.9619 31.401 50.8799 31.564 50.7659L31.583 50.7759L51.483 39.8339L51.477 39.8239C51.784 39.6529 52 39.3379 52 38.9619Z" fill="white"/>
+															<defs>
+																<linearGradient id="paint0_linear_7740_2494" x1="15" y1="7.96191" x2="66" y2="76.9619" gradientunits="userSpaceOnUse">
+																	<stop stop-color="#08E8BD" stop-opacity="0.1"/>
+																	<stop offset="1" stop-color="#08E8BD"/>
+																</linearGradient>
+															</defs>
+														</svg>
+													</button>
+													<div class="absolute top-0 left-0 right-0 bottom-0 w-full h-full">
+														{% if video.thumbnail %}
+															<div class="video-thumbnail">
+																{% include 'components/image.twig' with {
+                                                                'image': video.thumbnail,
+                                                                'size': 'large'
+                                                            } %}
+															</div>
+														{% endif %}
+													</div>
+												</div>
+											{% elseif video.source == 'media' and video.select_media %}
+												<div class="media-container video file" data-video="{{ video.select_media.url }}">
+													<button class="media-control play-button">
+														<svg xmlns="http://www.w3.org/2000/svg" width="76" height="77" viewbox="0 0 76 77" fill="none">
+															<circle cx="38" cy="38.9619" r="38" fill="url(#paint0_linear_7740_2494)"/>
+															<path d="M52 38.9619C52 38.5859 51.784 38.2709 51.477 38.0999L51.483 38.0899L31.583 27.1479L31.563 27.1579C31.401 27.0439 31.214 26.9619 31 26.9619C30.448 26.9619 30 27.4099 30 27.9619C30 27.9629 30.001 27.9639 30.001 27.9659L30 38.9619V49.9579C30 49.9599 30 49.9609 30 49.9619C30 50.5139 30.448 50.9619 31 50.9619C31.214 50.9619 31.401 50.8799 31.564 50.7659L31.583 50.7759L51.483 39.8339L51.477 39.8239C51.784 39.6529 52 39.3379 52 38.9619Z" fill="white"/>
+															<defs>
+																<linearGradient id="paint0_linear_7740_2494" x1="15" y1="7.96191" x2="66" y2="76.9619" gradientunits="userSpaceOnUse">
+																	<stop stop-color="#08E8BD" stop-opacity="0.1"/>
+																	<stop offset="1" stop-color="#08E8BD"/>
+																</linearGradient>
+															</defs>
+														</svg>
+													</button>
+													<div class="absolute top-0 left-0 right-0 bottom-0 w-full h-full">
+														{% if video.thumbnail %}
+															<div class="video-thumbnail">
+																{% include 'components/image.twig' with {
+                                                                'image': video.thumbnail,
+                                                                'size': 'large'
+                                                            } %}
+															</div>
+														{% endif %}
+													</div>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+
+
+								</div>
+							{% endfor %}
+						</div>
+
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
-
 {# {% endcache %} #}

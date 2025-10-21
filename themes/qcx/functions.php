@@ -44,6 +44,8 @@ require_once 'includes/theme/setup-shortcodes.php';
 
 require_once 'includes/theme/support-helpers.php';
 require_once 'includes/theme/support-visual-overrides.php';
+
+require_once 'includes/theme/support-videos.php';
 // require_once 'includes/theme/support-transients.php';
 // require_once 'includes/theme/support-block-templates.php';
 

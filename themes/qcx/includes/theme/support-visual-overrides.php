@@ -22,7 +22,8 @@ add_action('registered_post_type', function ($post_type, $args) {
         'customer-story',
         'webinar',
         'ebook',
-        'press'
+        'press',
+        'videos'
     ))) return;
 
     // Set menu icon

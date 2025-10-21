@@ -2,7 +2,7 @@
 	"name": "carousel-videos",
 	"title": "Carousel Videos",
     "viewScript": ["file:./script.js"],
-    "viewStyle": [],
+    "viewStyle": ["bf-owl-style"],
 	"acf": {
 		"mode": "edit",
 		"renderTemplate": "./controller.php",

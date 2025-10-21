@@ -1,5 +1,33 @@
 @layer components {
-    .carousel-videos {
-        /* Add your styles here */
+  .carousel-videos {
+     .owl-carousel .owl-stage-outer {
+      @apply !overflow-visible;
     }
+    .video-wrapper {
+      @apply relative;
+    }
+    
+    .video-thumbnail, .video-preview {
+      @apply w-full h-full object-cover;
+    }
+    
+    .media-container {
+      @apply relative h-[17.2356rem] rounded-[8px] overflow-hidden;
+      
+      .video-preview {
+        @apply absolute inset-0 w-full h-full rounded-[8px] object-cover;
+      }
+    }
+    
+    .media-control {
+      @apply absolute overflow-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors cursor-pointer z-10;
+    }
+    
+    video, iframe {
+      @apply w-full h-full;
+      transform: scale(1.5);
+      
+    }
+
+  }
 }
