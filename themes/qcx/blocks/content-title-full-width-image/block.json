@@ -1,0 +1,11 @@
+{
+	"name": "content-title-full-width-image",
+	"title": "Content Title Full Width Image",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["swiper-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}
