@@ -1,6 +1,6 @@
 <?php
 return [
-    "dependencies" => ["jquery"],
+    "dependencies" => ["jquery", "bf-owl-script"],
     "version" => _S_VERSION,
     "in_footer" => [
         "strategy" => "defer",

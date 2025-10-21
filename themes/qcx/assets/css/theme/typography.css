@@ -70,6 +70,12 @@
 		&.sm {
 			@apply text-[1rem] leading-[130%];
 		}
+		&.xsm{
+			@apply text-[0.875rem];
+		}
+		&.eyebrow{
+			@apply text-[1rem] tracking-[1.6px] leading-[120%]
+		}
 	}
 
 	p.button,
