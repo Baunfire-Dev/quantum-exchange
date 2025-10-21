@@ -256,3 +256,19 @@ function custom_block_category($categories, $post)
 }
 
 add_filter('block_categories_all', 'custom_block_category', 10, 2);
+
+function allow_json_uploads($mimes) {
+    $mimes['json'] = 'application/json';
+    return $mimes;
+}
+add_filter('upload_mimes', 'allow_json_uploads');
+
+add_action('wp_enqueue_scripts', function() {
+	wp_enqueue_script(
+		'lottie-player',
+		'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js',
+		[],
+		null,
+		true
+	);
+});

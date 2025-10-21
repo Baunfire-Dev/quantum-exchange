@@ -1,0 +1,64 @@
+{% cache "block;" ~ post.id ~ ";" ~ block.id ~ ";" ~ post.modified_timestamp ~ ";" ~ cache_key %}
+<section class="{{ block.slug }} {{ not fields.dark_mode ? 'bg-' ~ fields.bg : 'bg-[#F7F9FB]' }} {{ fields.dark_mode ? 'dark' }} overflow-x-clip overflow-y-visible">
+
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor | default(block.id) }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xxl' %}
+	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex flex-col items-center ~gap-[3.5rem]/[5rem]">
+				<div class="flex max-md:flex-col justify-between md:items-end w-full max-w-[68.125rem] ~gap-[2rem]/[2.5rem]">
+					<div class="flex flex-col items-start ~gap-[1.25rem]/[2rem]">
+						{% include 'components/heading.twig' with {
+							class: 'main-title',
+							value: fields.heading.value, 
+							type: fields.heading.type != 'default' ? fields.heading.type : 'h2',
+							has_custom_style: fields.heading.has_custom_style,
+							style: fields.heading.style,
+							to_words: true
+						} %}
+
+						{% if fields.paragraph %}
+							<div class="flex md:pl-[6.875rem] items-center justify-center gap-[0.625rem]">
+								<p class="w-full max-w-[30.5rem]">{{ fields.paragraph }}</p>
+							</div>
+						{% endif %}
+					</div>
+
+					<div class="flex flex-col items-start ~gap-[1.25rem]/[2rem]">
+						{% include 'components/cta.twig' with {
+							class: 'cta filled blue md:shrink-0 md:self-end',
+							cta: fields.cta,
+						} %}
+					</div>
+				</div>
+
+				{% if fields.asset_type == 'lottie' and fields.lottie_json_file %}
+					<div class="w-full md:h-[28.25rem] h-full">
+						<lottie-player
+							src="{{ fields.lottie_json_file.url }}"
+							background="transparent"
+							speed="1"
+							style="width: 100%; height: 100%; object-fit: cover;"
+							loop
+							autoplay
+						></lottie-player>
+					</div>
+				{% else %}
+					{% include 'components/image.twig' with {
+						image: fields.image,
+						size: 'large',
+						class: 'object-cover h-full md:h-[28.25rem] w-full',
+						loading: 'eager'
+					} %}
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+</section>
+{% endcache %}
