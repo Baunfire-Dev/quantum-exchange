@@ -2,7 +2,7 @@ typeof app !== 'undefined' && app.ready(() => {
     var $ = jQuery.noConflict();
 
     const script = () => {
-        const els = $("section.content-title-full-width-image");
+        const els = $("section.resources-featured");
         if (!els.length) return;
 
         els.each(function () {
