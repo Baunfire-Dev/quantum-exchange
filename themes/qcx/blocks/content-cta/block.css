@@ -3,12 +3,9 @@
     .marquee-text {
       @apply will-change-transform;
       p {
+        @apply text-[262px] font-medium leading-[100%];
         -webkit-text-stroke-width: 2px;
         -webkit-text-stroke-color: #000;
-        font-size: 262px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 100%; /* 262px */
       }
     }
   }
