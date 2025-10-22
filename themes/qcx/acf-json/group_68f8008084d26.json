@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_68f80080ddb81",
-            "label": "Thumnail (Optional)",
+            "label": "Thumbnail (Optional)",
             "name": "thumnail",
             "aria-label": "",
             "type": "image",
@@ -170,5 +170,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1761089499
+    "modified": 1761091556
 }
