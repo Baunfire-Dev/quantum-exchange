@@ -1,39 +1,66 @@
-<section class="not-found bg-black pt-[3.75rem]">
+<section class="not-found bg-[#206EEC] ~pt-[5.5rem]/[7.5rem] md:h-[56.25rem]">
+	<svg 
+		class="absolute inset-0 w-full h-full object-cover" 
+		xmlns="http://www.w3.org/2000/svg" 
+		viewBox="0 0 1440 900" 
+		preserveAspectRatio="xMidYMid slice" 
+		fill="none"
+	>
+		<g filter="url(#filter0_n_7766_89)">
+			<rect width="1440" height="900" fill="#206EEC"/>
+		</g>
+		<defs>
+			<filter id="filter0_n_7766_89" x="0" y="0" width="1440" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+				<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+				<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+				<feTurbulence type="fractalNoise" baseFrequency="0.66666668653488159 0.66666668653488159" stitchTiles="stitch" numOctaves="3" result="noise" seed="514"/>
+				<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+				<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+					<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+				</feComponentTransfer>
+				<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
+				<feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
+				<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
+				<feMerge result="effect1_noise_7766_89">
+					<feMergeNode in="shape"/>
+					<feMergeNode in="color1"/>
+				</feMerge>
+			</filter>
+		</defs>
+	</svg>
+
+	{% if nt_media_type == "image" and nt_image %}
+		{% include 'components/image.twig' with {
+			'image': nt_image,
+			'size': full,
+			'class': 'absolute inset-0 w-full h-auto object-cover',
+		} %}
+	{% endif %}
+
+	{% if nt_media_type == "video" and nt_video %}
+		<div class="media-container video absolute inset-0 w-full h-auto object-cover data-video="{{ nt_video }}">{# to follow #}</div>
+	{% endif %}
+
 	<div class="container relative z-[2]">
-		<div class="st-xxl sb-xxl">
-			<div class="flex flex-col ~gap-[2rem]/[3rem] items-center justify-center text-center">
-				<h1 class="alpha text-white ~tracking-[-0.2963rem]/[-0.4275rem] leading-[105%] ~text-[9.875rem]/[14.25rem] will-change-transform">404</h1>
-
-				<div class="flex flex-col ~gap-[1rem]/[1.5rem] justify-center items-center max-w-[34.875rem] mx-auto">
-					{% if nt_heading %}
-						<h3 class="text-white alpha">{{ nt_heading }}</h3>
+		<div class="flex flex-col w-full items-start justify-center">
+			<div class="flex max-md:flex-col justify-between w-full max-md:gap-[2.5rem]">
+				<div class="flex flex-col w-full max-w-[33.3125rem] ~gap-[1.25rem]/[2rem] items-end md:pt-[5rem]">
+					<h1 class="~text-[3.5rem]/[6rem] text-[#ffffff] -tracking-[0.18rem] self-stretch">{{ nt_heading }}</h1>
+					{% if nt_description %}
+						<p class="text-[#ffffff] w-full max-w-[26.1875rem]">{{ nt_description }}</p>
 					{% endif %}
+				</div>
+				<div class="flex flex-col w-full max-w-[40.25rem] gap-[3rem] items-center ~p-[2rem]/[3rem] rounded-[0.5rem] border-1 border-[#08E8BD] bg-[#ffffff]">
+					<svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" viewBox="0 0 34 27" fill="none">
+						<path d="M7.3133 0H0L9.50044 13.4354L0 26.8708H7.3133L16.8138 13.4354L7.3133 0Z" fill="#838786"/>
+						<path d="M26.3237 0H33.637L24.1365 13.4354L33.637 26.8708H26.3237L16.8135 13.4354L26.3237 0Z" fill="#155086"/>
+					</svg>
 
-                    {% if nt_description %}
-						<p class="text-white-75 alpha">{{ nt_description }}</p>
-					{% endif %}
-
-					{% include 'components/cta.twig' with {
-                        'class' : 'filled teal',
-                        'cta': nt_cta, 
-                        'icon': true,
-                    } %}
+					<div class="flex flex-col items-start gap-[1.5rem] md:h-[37.5rem]">
+						<h2 class="text-[2rem] text-[#206EEC] -tracking-[0.06rem]">Form here</h2>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	{% if nt_media_type == "image" and nt_image %}
-		<div class="media-container image">
-			{% include 'components/image.twig' with {
-                'image': nt_image,
-                'size': [1920, 1080],
-                'loading': "eager",
-            } %}
-		</div>
-	{% endif %}
-
-	{% if nt_media_type == "video" and nt_video %}
-		<div class="media-container video" data-video="{{ nt_video }}">{# to follow #}</div>
-	{% endif %}
 </section>

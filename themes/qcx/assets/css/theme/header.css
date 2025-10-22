@@ -299,3 +299,34 @@
         } */
 	}
 }
+
+.error404 {
+	header {
+		position: fixed;
+		z-index: 100;
+		width: 100%;
+		transition: background-color .3s ease;
+
+		.nav__logo {
+			svg path {
+				@apply fill-[#ffffff];
+			}
+		}
+
+		.nav__panel {
+			.nav__item {
+				@apply text-white
+			}
+
+			.nav__actions {
+				.btn.navi {
+					@apply bg-[#08E8BD];
+
+					p {
+						@apply text-black;
+					}
+				}
+			}
+		}
+	}
+}
