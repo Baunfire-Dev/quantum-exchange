@@ -1,33 +1,81 @@
 @layer components {
   .carousel-videos {
-     .owl-carousel .owl-stage-outer {
+    .owl-carousel .owl-stage-outer {
       @apply !overflow-visible;
     }
     .video-wrapper {
       @apply relative;
     }
-    
-    .video-thumbnail, .video-preview {
+
+    .video-thumbnail,
+    .video-preview {
       @apply w-full h-full object-cover;
     }
-    
+
     .media-container {
       @apply relative h-[17.2356rem] rounded-[8px] overflow-hidden;
-      
+
       .video-preview {
         @apply absolute inset-0 w-full h-full rounded-[8px] object-cover;
       }
     }
-    
+
     .media-control {
       @apply absolute overflow-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors cursor-pointer z-10;
     }
-    
-    video, iframe {
+
+    video,
+    iframe {
       @apply w-full h-full;
       transform: scale(1.5);
-      
     }
+    .video-item {
+      @apply cursor-pointer;
+      &:hover {
+        @apply border-[1px] border-green;
 
+        &::before {
+          @apply opacity-100;
+        }
+        .eyebrow {
+          animation: textFlicker 0.5s ease-in-out;
+        }
+        rect {
+          animation: svgFlicker 0.5s ease-in-out;
+        }
+      }
+      &::before {
+        content: "";
+        @apply absolute inset-0 bg-[radial-gradient(95.74%_72.48%_at_90.44%_105%,_#00A1FF_0%,_rgba(0,161,255,0)_100%)] opacity-0 transition-opacity duration-300 pointer-events-none;
+      }
+    }
+  }
+  @keyframes textFlicker {
+    0% {
+      -webkit-text-stroke: 0px;
+      text-stroke: 0px;
+    }
+    50% {
+      -webkit-text-stroke: 0.5px currentColor;
+      text-stroke: 0.5px currentColor;
+    }
+    100% {
+      -webkit-text-stroke: 0px;
+      text-stroke: 0px;
+    }
+  }
+  @keyframes svgFlicker {
+    0% {
+      stroke: transparent;
+      stroke-width: 0;
+    }
+    50% {
+      stroke: black;
+      stroke-width: 0.5px;
+    }
+    100% {
+      stroke: transparent;
+      stroke-width: 0;
+    }
   }
 }

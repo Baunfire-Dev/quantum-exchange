@@ -12,23 +12,23 @@
 				<div class="flex flex-col md:flex-row ~gap-[1.25rem]/[16.5625rem] justify-between item-start md:items-end max-w-[68.0625rem]">
 					<div class="max-w-[43.125rem] flex flex-col ~gap-[1.25rem]/[2rem] w-full">
 						{% if fields.heading %}
-							<h2>{{fields.heading}}</h2>
+							<h2 class="block-title alpha">{{fields.heading}}</h2>
 							{% if fields.paragraph %}
-								<p class="md:ml-[6.875rem] max-w-[30.5rem] w-full">{{fields.paragraph}}</p>
+								<p class="para-desc alpha md:pl-[6.875rem] max-w-[30.5rem] w-full">{{fields.paragraph}}</p>
 							{% endif %}
 						{% endif %}
 					</div>
 					<div>
 						{% include 'components/cta.twig' with {
-                            'class' : 'filled blue',
+                            'class' : 'filled blue alpha cta-btn',
                             'cta': fields.cta, 
                         } %}
 					</div>
 				</div>
-				<div class="flex flex-col ~gap-[1.25rem]/[1.5rem] w-full">
+				<div class="pagination alpha flex flex-col ~gap-[1.25rem]/[1.5rem] w-full">
 					<div class="carousel-nav w-full flex items-center justify-end gap-[1.5rem]">
 						<button class="ar-l flex items-center gap-[0.5rem]" type="button">
-							<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+							<svg class="svg-flick" xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
 								<path d="M5 9L1 5L5 1" stroke="black" stroke-linecap="square"/>
 							</svg>
 							<span class="button">Previous</span>
@@ -44,7 +44,7 @@
 					{% if videos %}
 						<div class="videos-carousel owl-carousel">
 							{% for video in videos %}
-								<div class="video-item flex flex-col ~gap-[2rem]/[3rem] ~p-[1.25rem]/[2rem] border-[1px] border-gray rounded-[0.5rem]">
+								<div class="video-item relative flex flex-col ~gap-[2rem]/[3rem] ~p-[1.25rem]/[2rem] border-[1px] border-gray rounded-[0.5rem]">
 									<div class="flex flex-col gap-[1.5rem]">
 										<div class="flex gap-[0.5rem] items-center">
 											<svg width="10" height="10" viewbox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
