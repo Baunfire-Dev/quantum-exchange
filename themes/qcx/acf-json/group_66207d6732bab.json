@@ -143,9 +143,10 @@
                     "choices": {
                         "linkedin": "Linkedin",
                         "x": "X",
-                        "youtube": "Youtube"
+                        "youtube": "Youtube",
+                        "facebook": "Facebook"
                     },
-                    "default_value": "vimeo",
+                    "default_value": "linkedin",
                     "return_format": "value",
                     "allow_null": 0,
                     "allow_in_bindings": 1,
@@ -416,5 +417,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1760623565
+    "modified": 1761241265
 }
