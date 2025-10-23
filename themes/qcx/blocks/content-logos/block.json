@@ -1,0 +1,10 @@
+{
+	"name": "content-logos",
+	"title": "Carousel Logos",
+    "viewScript": ["file:./script.js"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "solution"]
+	}
+}

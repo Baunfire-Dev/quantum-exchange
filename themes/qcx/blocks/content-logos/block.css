@@ -1,0 +1,37 @@
+@layer components {
+	.content-logos {
+		.marquee {
+			@apply flex w-full;
+
+			&__content {
+				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem];
+				animation: scroll 100s linear infinite;
+			}
+
+			@keyframes scroll {
+				0% {
+					transform: translateX(0);
+				}
+
+				100% {
+					transform: translateX(-100%);
+				}
+			}
+		}
+
+        /* &:has(.item:hover), */
+        .marquee.paused {
+            .marquee__content {
+                animation-play-state: paused;
+            }
+        }
+
+		.item {
+			@apply flex items-center justify-center w-auto h-[2.25rem];
+
+            &:hover {
+                @apply grayscale-0;
+            }
+		}
+	}
+}

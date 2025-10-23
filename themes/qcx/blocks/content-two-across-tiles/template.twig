@@ -1,5 +1,3 @@
-{# {% cache "block;" ~ post.id ~ ";" ~ block.id ~ ";" ~ post.modified_timestamp ~ ";" ~ cache_key %} #}
-
 <section class="{{ block.slug }} {{ block.className }} bg-blue relative overflow-hidden">
 	{% if block.anchor %}
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
@@ -112,5 +110,3 @@
     <img class="mix-blend-multiply" src="{{function("png", "across-tile-bg")}}" loading="lazy" alt="across-tile-bg">
     </div>
 </section>
-
-{# {% endcache %} #}

@@ -1,5 +1,3 @@
-{# {% cache "block;" ~ post.id ~ ";" ~ block.id ~ ";" ~ post.modified_timestamp ~ ";" ~ cache_key %} #}
-
 <section class="{{ block.slug }} {{ block.className }}">
     {% if block.anchor %}
         <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
@@ -14,5 +12,3 @@
         </div>
     </div>
 </section>
-
-{# {% endcache %} #}

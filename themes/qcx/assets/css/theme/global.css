@@ -20,9 +20,8 @@
 	}
 
 	html {
-		@apply font-inter font-normal m-0 p-0 max-w-[100svw] min-w-full w-full h-[100svh] min-h-[100svh] max-h-[100svh] text-black text-[1rem] min-[120rem]:text-[clamp(100%,0.72vw,300%)];
-		@apply overflow-x-clip;
-		@apply overflow-y-auto;
+		@apply bg-light-grey font-inter font-normal m-0 p-0 max-w-[100svw] min-w-full w-full h-[100svh] min-h-[100svh] max-h-[100svh] text-black text-[1rem] min-[120rem]:text-[clamp(100%,0.72vw,300%)];
+		@apply overflow-x-clip overflow-y-auto;
 
 		&.disable-scrolling,
 		&:has(dialog[open]) {

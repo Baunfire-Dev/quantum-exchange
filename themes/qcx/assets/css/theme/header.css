@@ -1,40 +1,36 @@
 @layer base {
-	.nav {
-		@apply fixed w-full z-[100];
+    header {
+        @apply sticky top-0;
+    }
 
-		&-space {
-			@apply h-[5rem];
-		}
+	.nav {
+		@apply w-full;
 
 		&-outer {
-			@apply h-[5rem];
-
-			& > .container {
-				@apply h-full;
-			}
+            @apply bg-light-grey;
 		}
 
 		&-burger {
-			@apply hidden;
+			@apply xl:hidden self-center;
 		}
 
 		&-inner {
-			@apply flex gap-[0.75rem] items-stretch h-full;
+			@apply flex gap-[0.75rem] items-stretch h-full justify-between;
 		}
 
 		&-logo {
 			@apply flex items-center ~py-[1rem]/[1.375rem] shrink-0;
 
 			svg {
-				@apply h-[1.625rem] w-auto;
+				@apply ~h-[1.375rem]/[1.625rem] w-auto;
 			}
 		}
 
-        &-panel {
-			@apply contents;
+		&-panel {
+			@apply max-xl:hidden contents;
 		}
 
-        &-items {
+		&-items {
 			@apply flex gap-[0.75rem] ml-auto;
 		}
 
@@ -42,15 +38,18 @@
 			@apply flex h-full items-center;
 
 			&.parent {
-
 			}
 		}
-        
-        &-item-inner {
+
+		&-item-inner {
 			@apply flex py-[0.5625rem] px-[1rem] rounded-[2.5rem] border border-[#D9D9D9];
 		}
-		
-        /*
+
+		&-actions {
+			@apply flex items-center;
+		}
+
+		/*
 		&-dd {
 			@screen xl {
 				@apply absolute w-fit left-[50%] translate-x-[-50%] top-[calc(100%+0.25rem)] pointer-events-none invisible overflow-hidden translate-y-[1.5rem] opacity-0;
@@ -296,25 +295,29 @@
 	}
 }
 
+main {
+    @apply min-h-[62.5rem];
+}
+
 .error404 {
 	header {
 		position: fixed;
 		z-index: 100;
 		width: 100%;
-		transition: background-color .3s ease;
+		transition: background-color 0.3s ease;
 
-		.nav__logo {
+		.nav-logo {
 			svg path {
 				@apply fill-[#ffffff];
 			}
 		}
 
-		.nav__panel {
-			.nav__item {
-				@apply text-white
+		.nav-panel {
+			.nav-item {
+				@apply text-white;
 			}
 
-			.nav__actions {
+			.nav-actions {
 				.btn.navi {
 					@apply bg-[#08E8BD];
 

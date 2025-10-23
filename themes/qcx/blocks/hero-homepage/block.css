@@ -1,0 +1,13 @@
+@layer components {
+	.hero-homepage {
+		.media-container {
+			@apply absolute bottom-[1.125rem] md:top-0 left-0 w-full h-full md:translate-x-[19.5rem] max-md:h-[19.375rem];
+
+			&.video {
+				iframe {
+					@apply absolute min-h-full h-auto max-md:w-[42.5rem] w-auto aspect-video translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%];
+				}
+			}
+		}
+	}
+}

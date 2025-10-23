@@ -1,0 +1,38 @@
+{% set is_home = function("is_home") or function("is_front_page") %}
+
+<section class="{{ block.slug }} {{ block.className }} {{ is_home ? "alpha" }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "~pt-[2.5rem]/[5rem]" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "~pb-[2.5rem]/[5rem]" %}
+
+	<div class="{{ pt }} {{ pb }} flex flex-col gap-[1rem] items-center">
+		{% if fields.heading %}
+			<div class="container">
+				<p>{{ fields.heading }}</p>
+			</div>
+		{% endif %}
+
+		{% if fields.logos|length %}
+			<div class="marquee paused">
+				{% for i in 1..2 %}
+					<div class="marquee__content">
+						{% for i in 1..2 %}
+							{% for logo in fields.logos %}
+								<div class="item">
+									{% include 'components/image.twig' with {
+                                        'image': logo,
+                                        'class': 'object-contain h-full w-full',
+                                        'size': "full",
+                                    } %}
+								</div>
+							{% endfor %}
+						{% endfor %}
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+</section>
