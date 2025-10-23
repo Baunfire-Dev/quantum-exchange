@@ -37,12 +37,8 @@ module.exports = {
         screens: theme.viewports,
         extend: {
             fontFamily: {
-                "kh": ["kh-teka", "sans-serif"],
-                "f-mono": ["f-mono", "sans-serif"],
-                "abc": ["abc", "sans-serif"],
-                "geist": ["geist", "sans-serif"],
                 "inter": ["inter", "sans-serif"],
-                "aeonik": ["aeonik", "sans-serif"],
+                "at-aero": ["at-aero", "sans-serif"],
                 "a-mono": ["a-mono", "sans-serif"],
             },
             colors: theme.colors,
