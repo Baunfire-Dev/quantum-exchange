@@ -1,0 +1,22 @@
+<section class="{{ block.slug }} {{ block.className }} {{ fields.dark_mode ? "dark" }} dark:bg-black border-b-[1px] border-light-grey dark:border-dark-grey mb-[-1px]">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	<div class="st-xxl sb-md">
+		<div class="container">
+			<div class="flex max-md:flex-col gap-[2rem] md:justify-between md:items-end">
+				{% if fields.heading %}
+					<h1 class="heading alpha md:flex-1 max-w-[45.3125rem]">
+						{{ fields.heading }}
+					</h1>
+				{% endif %}
+
+                {% if fields.subtext %}
+                    <small class="subtext alpha text-blue">{{ fields.subtext }}</small>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+</section>
+

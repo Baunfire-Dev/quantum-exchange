@@ -21,7 +21,7 @@
         @apply top-[0.5rem] rounded-[0.25rem] border-[1px] border-[#121212];
 
         .select2-results__option {
-          @apply text-[1rem] font-abc font-normal leading-[150%] px-[1rem] py-[0.75rem] text-black transition-colors duration-300;
+          @apply text-[1rem] font-inter font-normal leading-[150%] px-[1rem] py-[0.75rem] text-black transition-colors duration-300;
           
           &.select2-results__option--selectable {
             @apply bg-[greenyellow] text-white;
@@ -35,7 +35,7 @@
       }
 
       .select2-search__field {
-        @apply h-[2.75rem] m-0 text-[1rem] font-abc font-normal leading-[150%] px-0 py-[0.625rem];
+        @apply h-[2.75rem] m-0 text-[1rem] font-inter font-normal leading-[150%] px-0 py-[0.625rem];
       }
     }
 

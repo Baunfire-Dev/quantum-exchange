@@ -1,0 +1,99 @@
+@layer components {
+	.content-rich-text-rc-start {
+		@apply opacity-0;
+
+		& ~ :not(.content-rich-text-rc-end) {
+			@apply hidden;
+		}
+	}
+
+	.content-rich-text {
+		.content-outer {
+			@apply ~px-[0rem]/[13.375rem] relative;
+		}
+
+		.content {
+			@apply font-inter text-[1.125rem] font-normal leading-[140%];
+
+            .container {
+                @apply contents;
+            }
+
+			& > * {
+				@apply ~mb-[1rem]/[1.5rem];
+
+				&:first-child {
+					@apply !mt-0;
+				}
+
+				&:last-child {
+					@apply !mb-0;
+				}
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+            .post-quote {
+				@apply block ~mt-[1.25rem]/[2rem];
+			}
+
+			& > .wp-block-heading {
+				@apply relative;
+			}
+
+			b,
+			strong {
+				@apply font-normal;
+			}
+
+			p {
+				&:empty {
+					@apply hidden;
+				}
+			}
+
+			a:not(.wp-block-button__link):not(.btn):not(
+					.wp-block-file__button
+				) {
+				@apply text-blue underline underline-offset-[0.125rem];
+			}
+
+			ul.wp-block-list,
+			ol.wp-block-list {
+				@apply flex flex-col gap-[0.5rem];
+			}
+
+			ul.wp-block-list {
+				list-style-type: disc;
+			}
+
+			ol.wp-block-list {
+				list-style-type: decimal;
+			}
+
+			ul.wp-block-list {
+				@apply ml-[1.625rem];
+			}
+
+			ol.wp-block-list {
+				@apply ml-[1.25rem];
+			}
+
+			ul.wp-block-list ul,
+			ol.wp-block-list ul {
+				list-style-type: circle;
+				@apply ml-[1.625rem] pt-[0.5rem];
+			}
+
+			ol.wp-block-list ol,
+			ul.wp-block-list ol {
+				list-style-type: lower-latin;
+				@apply ml-[1.625rem] pt-[0.5rem];
+			}
+		}
+	}
+}
