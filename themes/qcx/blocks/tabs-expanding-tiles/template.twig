@@ -1,14 +1,88 @@
 <section class="{{ block.slug }} {{ block.className }}">
-    {% if block.anchor %}
-        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-    {% endif %}
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-    {# {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %} #}
-    {# {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %} #}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
 
-    <div class="container">
-        <div class="{{ pt }} {{ pb }}">
-            
-        </div>
-    </div>
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex flex-col ~gap-[2.5rem]/[4rem]">
+				{% if fields.heading %}
+					<h2 class="block-title alpha max-w-[47.125rem] w-full">{{fields.heading}}</h2>
+				{% endif %}
+
+				{% if fields.items|length %}
+					<div class="flex flex-col ~gap-[1.25rem]/[2rem]">
+						<div class="category-tabs alpha flex gap-[0.75rem] flex-wrap">
+							<div class="mobile-select md:hidden w-full">
+								<select class="tab-select w-full px-[1rem] py-[0.5625rem] border-[1px] border-gray rounded-[2.5rem]">
+									{% for index, item in fields.items %}
+										<option value="{{ index }}" {{ index == 0 ? 'selected' : '' }}>{{ item.category }}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="desktop-tabs hidden md:flex gap-[0.75rem] flex-wrap">
+								{% for index, item in fields.items %}
+									<button class="btn tab-btn {{ index == 0 ? 'active' : '' }} px-[1rem] py-[0.5625rem] border-[1px] border-gray rounded-[2.5rem] button" data-tab="{{ index }}">
+										<p>{{ item.category }}</p>
+									</button>
+								{% endfor %}
+							</div>
+						</div>
+
+						<div class="tabs-content">
+							{% for tabIndex, tabItem in fields.items %}
+								<div class="tab-panel {{ tabIndex == 0 ? 'active' : '' }}" data-panel="{{ tabIndex }}">
+									<div class="pagination flex flex-col ~gap-[1rem]/[1.5rem]">
+										<div class="carousel-nav w-full flex items-center justify-end gap-[1.5rem]">
+											<button class="ar-l flex items-center gap-[0.5rem]" type="button">
+												<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+													<path d="M5 9L1 5L5 1" stroke="black" stroke-linecap="square"/>
+												</svg>
+												<span class="button">Previous</span>
+											</button>
+											<div class="bg-gray w-[1px] h-[20px]"></div>
+											<button class="ar-r flex items-center gap-[0.5rem]" type="button">
+												<span class="button">Next</span>
+												<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+													<path d="M1 1L5 5L1 9" stroke="black" stroke-linecap="square"/>
+												</svg>
+											</button>
+										</div>
+
+										{% if tabItem.item|length %}
+											<div class="owl-carousel owl-theme">
+												{% for item in tabItem.item %}
+													<div class="item-content relative h-[26.3125rem] ~py-[1.25rem]/[2rem] ~px-[1.25rem]/[2rem] rounded-[8px] bg-blue overflow-hidden">
+														<div class="overlay-content relative z-[3] flex flex-col ~gap-[1.25rem]/[2rem]">
+															<h5 class="text-white">{{item.title}}</h5>
+															<div class="onhover-content flex flex-col gap-[1.5rem]">
+																<p class="text-white">{{item.description}}</p>
+																{% include 'components/cta.twig' with {
+                                                                    'class' : 'filled white',
+                                                                    'cta': item.link,
+                                                                } %}
+															</div>
+														</div>
+														<div class="overlay-image absolute top-0 right-0 left-0 bottom-0 w-full h-full">
+															{% include 'components/image.twig' with {
+                                                                'image': item.image,
+                                                                'size': 'large'
+                                                            } %}
+														</div>
+													</div>
+												{% endfor %}
+											</div>
+										{% endif %}
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </section>

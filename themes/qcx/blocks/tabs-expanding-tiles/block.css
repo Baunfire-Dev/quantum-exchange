@@ -1,5 +1,109 @@
 @layer components {
-    .tabs-expanding-tiles {
-        /* Add your styles here */
+  .tabs-expanding-tiles {
+    .select2-container {
+      .select2-selection {
+        @apply !rounded-[2.5rem] bg-blue border-blue min-h-[2.75rem] pl-0 py-0 pr-[1rem] flex items-center;
+
+        .select2-selection__rendered {
+          @apply flex gap-[0.25rem] flex-wrap py-[1rem] pl-[1rem] text-white;
+
+          .select2-selection__choice {
+            @apply m-0;
+          }
+        }
+        
+        .select2-selection__arrow {
+          @apply h-[26px] absolute top-[9px] right-[16px] flex w-[20px] justify-center items-center;
+        }
+      }
+
+      .select2-dropdown {
+        @apply top-[0.5rem] rounded-[0.25rem] border-[1px] border-[#121212];
+
+        .select2-results__option {
+          @apply text-[1rem] font-abc font-normal leading-[150%] px-[1rem] py-[0.75rem] text-black transition-colors duration-300;
+          
+          &.select2-results__option--selectable {
+            @apply bg-[greenyellow] text-white;
+          }
+          
+          &.select2-results__option--highlighted,
+          &.select2-results__option--selected {
+            @apply bg-gray;
+          }
+        }
+      }
+
+      .select2-search__field {
+        @apply h-[2.75rem] m-0 text-[1rem] font-abc font-normal leading-[150%] px-0 py-[0.625rem];
+      }
     }
+
+    .tab-btn {
+      @apply transition-all duration-300 ease-in-out;
+
+      &.active {
+        @apply bg-blue text-white border-blue;
+      }
+    }
+
+    .tab-panel {
+      @apply hidden;
+
+      &.active {
+        @apply block;
+      }
+    }
+    
+    .owl-carousel .owl-stage-outer {
+      @apply !overflow-visible;
+    }
+    
+    .onhover-content {
+      @apply opacity-0 transition-opacity duration-300 ease-in-out;
+
+      &::after {
+        content: "";
+        @apply opacity-100 absolute top-0 left-0 right-0 bottom-0;
+      }
+    }
+
+    .overlay-image {
+      &::before {
+        content: "";
+        @apply absolute top-0 left-0 w-full h-full bg-black/[0.10] backdrop-blur-[40px] opacity-0 transition-opacity duration-300 ease-in-out z-[2];
+      }
+    }
+
+    .item-content {
+      @apply transition-all duration-300 ease-in-out;
+
+      &::after {
+        content: "";
+        @apply absolute z-[1] bottom-[-217px] top-0 left-0 w-full h-full opacity-0 transition-opacity duration-300 ease-in-out;
+        background: linear-gradient(
+          70deg,
+          rgba(8, 232, 189, 0) 0%,
+          #08e8bd 100%
+        );
+        mix-blend-mode: hard-light;
+      }
+
+      &:hover {
+        @apply border-[1px] border-green;
+
+        &::after {
+          @apply opacity-100;
+        }
+
+        .overlay-image::before {
+          @apply opacity-100;
+        }
+
+        .onhover-content {
+          @apply opacity-100;
+        }
+      }
+    }
+  }
 }
