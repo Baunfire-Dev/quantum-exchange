@@ -1,84 +1,15 @@
-<section class="{{ block.slug }}-{{ fields.coverage }} {{ block.className }} {{ is_resource ? "is-resource" }}">
+<section class="{{ block.slug }}-{{ fields.coverage }} {{ block.className }}">
 	{% if block.anchor %}
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
 	{% endif %}
 
-	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
-	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "~pb-[4.5rem]/[13.875rem]" %}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-md" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
 
 	<div class="inner {{ pt }} {{ pb }}">
 		<div class="container">
 			<div class="content-outer">
-				{% if is_resource %}
-					<div class="content-toc is-mobile"></div>
-				{% endif %}
-
 				<div class="content"></div>
-
-				{% if is_resource %}
-					<div class="content-sidebar">
-                        <div class="content-toc is-desktop"></div>
-
-						{% if res_form.enabled %}
-							<div class="~py-[2rem]/[3rem] ~px-[1.25rem]/[2rem] rounded-[0.25rem] overflow-hidden flex flex-col gap-[2rem] w-full bg-black">
-								{% if res_form.title or res_form.subtext %}
-									<div class="flex flex-col gap-[0.25rem]">
-										{% if res_form.title %}
-											<h5 class="text-white">{{ res_form.title }}</h5>
-										{% endif %}
-
-										{% if res_form.subtext %}
-											<div class="rich-text on-dark">{{ res_form.subtext }}</div>
-										{% endif %}
-									</div>
-								{% endif %}
-
-                                {% if res_form.shortcode %}
-                                    <div id="form">{{ function('do_shortcode', fields.shortcode) }}</div>
-                                {% endif %}
-							</div>
-						{% endif %}
-
-                        <div class="~py-[2rem]/[3rem] ~px-[1.25rem]/[2rem] flex flex-col ~gap-[1.25rem]/[2rem] rounded-[0.25rem] overflow-hidden bg-neutral-10 border-[1px] border-light-grey min-h-[16.25rem]">
-                            {% if res_letter.title %}
-                                <h4>{{ res_letter.title }}</h4>
-                            {% endif %}
-                        </div>
-
-						{% if res_cta.enabled %}
-							<div class="relative w-full bg-black rounded-[0.25rem] overflow-hidden">
-								<div class="~py-[2rem]/[3rem] ~px-[1.25rem]/[2rem] flex flex-col ~gap-[1rem]/[1.5rem] relative z-[2]">
-									{% if res_cta.title or res_cta.subtext %}
-										<div class="flex flex-col ~gap-[0.5rem]/[0.75rem]">
-											{% if res_cta.title %}
-												<h5 class="text-white">{{ res_cta.title }}</h5>
-											{% endif %}
-
-											{% if res_cta.subtext %}
-												<p class="text-white-75">{{ res_cta.subtext }}</p>
-											{% endif %}
-										</div>
-									{% endif %}
-
-									{% include 'components/cta.twig' with {
-                                        'class' : 'filled teal',
-                                        'cta': res_cta.cta, 
-                                        'icon': true,
-                                    } %}
-								</div>
-
-								{% if res_cta_bg %}
-									<div class="absolute top-0 left-0 h-full w-full">
-										{% include 'components/image.twig' with {
-                                            'image': res_cta_bg,
-                                            'size': "full",
-                                        } %}
-									</div>
-								{% endif %}
-							</div>
-						{% endif %}
-					</div>
-				{% endif %}
 			</div>
 		</div>
 	</div>
