@@ -1,0 +1,11 @@
+{
+	"name": "hero-contact-form",
+	"title": "Hero Contact Form",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["swiper-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}
