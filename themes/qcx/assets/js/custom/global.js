@@ -4,7 +4,6 @@
     baunfire.Global = {
         init() {
             this.handleSpecialLinks();
-            this.handleCardTags();
         },
 
         debounce(func, delay = 300) {
@@ -173,77 +172,6 @@
                 });
         },
 
-        handleFooter() {
-            const handleForm = () => {
-                const formContainer = $("footer .form-container.footer-form");
-                if (!formContainer.length) return;
-
-                const region = formContainer.data("region");
-                const formId = formContainer.data("form-id");
-                const portalId = formContainer.data("portal-id");
-
-                const addPlaceHolders = (fields, type = "text") => {
-                    if (!fields.length) return;
-
-                    fields.each(function () {
-                        const subSelf = $(this);
-                        const labelText = subSelf.find("label span:not(.hs-form-required)").text();
-
-                        if (type == "text") {
-                            const input = subSelf.find(".input input");
-
-                            if (input.attr("placeholder") != "") return;
-                            input.attr("placeholder", labelText);
-
-                        } else if (type == "select") {
-                            const select = subSelf.find(".input select");
-                            const targetOption = select.find("option[disabled]");
-                            targetOption.text(labelText);
-                        }
-                    });
-                }
-
-                const stylizeSubmitBtn = (container) => {
-                    const submitBTN = container.find('.hs_submit .actions input[type="submit"]');
-                    const iconHTML = $('<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.55697 10.375L11.8486 6.94618L8.55697 3.51736" stroke="white" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M1.01411 0.500006L1.0141 5.84896C1.0141 6.45463 1.50566 6.94618 2.11133 6.94618L11.9863 6.94618" stroke="white" stroke-width="1.5" stroke-miterlimit="10"></path></svg>');
-                    const buttonHTML = $('<div class="btn form-btn blue"></div>');
-
-                    submitBTN.wrap(buttonHTML);
-                    submitBTN.after(iconHTML);
-
-                    ScrollTrigger.refresh();
-                }
-
-                hbspt.forms.create({
-                    region,
-                    portalId,
-                    formId,
-                    target: ".footer .form-container.footer-form",
-                    onFormReady: function () {
-                        stylizeSubmitBtn(formContainer);
-                        addPlaceHolders(formContainer.find(".hs-fieldtype-text"));
-                        ScrollTrigger.refresh();
-                    },
-                    onFormSubmit: function () {
-                        console.log('Form submitted!');
-                        ScrollTrigger.refresh();
-                    }
-                });
-            };
-
-            const handleCookieButtonText = () => {
-                $("button.ot-sdk-show-settings").filter(function () {
-                    return $(this).text().trim() === "Do Not Sell or Share My Personal Information";
-                }).addClass("is-cali");
-            };
-
-            handleCookieButtonText();
-
-            this.importHubspotScript(() => {
-                handleForm();
-            });
-        },
-
         fancyLog(message, type = "info") {
             const styles = {
                 info: {
@@ -297,26 +225,6 @@
             let s = (+value).toLocaleString("en-US").split(".");
             return decimals ? s[0] + "." + ((s[1] || "") + "00000000").substr(0, decimals) : s[0];
         },
-
-        handleCardTags() {
-            const cards = $(".card.carousel, .card.listing-sol, .card.is-sol");
-
-            cards.each(function () {
-                const card = $(this);
-                const tags = card.find("p[data-click-tag]");
-
-                tags.each(function () {
-                    const tag = $(this);
-
-                    tag.on("click", function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const tagLink = tag.data("click-tag");
-                        if (tagLink) window.location.href = tagLink;
-                    });
-                });
-            });
-        }
     };
 
     baunfire.addModule(baunfire.Global);

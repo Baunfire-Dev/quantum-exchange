@@ -1,0 +1,11 @@
+{
+	"name": "tabs-expanding-tiles",
+	"title": "Tabs Expanding Tiles",
+    "viewScript": ["file:./script.js"],
+     "viewStyle": ["select-two-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

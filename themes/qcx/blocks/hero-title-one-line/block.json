@@ -1,0 +1,10 @@
+{
+	"name": "hero-title-one-line",
+	"title": "Hero Title One Line",
+	"viewScript": ["file:./script.js"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+		"postTypes": ["page", "solution"]
+	}
+}

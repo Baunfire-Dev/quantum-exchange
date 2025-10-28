@@ -1,4 +1,3 @@
-{% cache "block;" ~ post.id ~ ";" ~ block.id ~ ";" ~ post.modified_timestamp ~ ";" ~ cache_key %}
 <section class="{{ block.slug }} {{ not fields.dark_mode ? 'bg-' ~ fields.bg : 'bg-[#F7F9FB]' }} {{ fields.dark_mode ? 'dark' }} bg-[#F7F9FB] overflow-x-clip overflow-y-visible">
 
 	{% if block.anchor %}
@@ -61,4 +60,3 @@
 		</div>
 	</div>
 </section>
-{% endcache %}

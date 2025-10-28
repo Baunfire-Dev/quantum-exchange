@@ -1,0 +1,17 @@
+<section class="{{ block.slug }}-{{ fields.coverage }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-md" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="inner {{ pt }} {{ pb }}">
+		<div class="container">
+			<div class="content-outer">
+				<div class="content"></div>
+			</div>
+		</div>
+	</div>
+</section>
+

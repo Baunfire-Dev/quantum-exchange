@@ -1,58 +1,58 @@
 @layer base {
-    @font-face {
+	@font-face {
 		font-family: "inter";
 		src: url("../../fonts/inter/Inter-Regular.woff") format("woff");
 		font-weight: 400;
 		font-style: normal;
-		font-display: swap;
+		font-display: fallback;
 	}
 
-    @font-face {
-		font-family: "aeonik";
-		src: url("../../fonts/aeonik/Aeonik-Regular.woff") format("woff");
+	@font-face {
+		font-family: "at-aero";
+		src: url("../../fonts/at-aero/AtAero-Regular.woff") format("woff");
 		font-weight: 400;
 		font-style: normal;
-		font-display: swap;
+		font-display: fallback;
 		/* descent-override: 15%; */
 	}
 
-    @font-face {
+	@font-face {
 		font-family: "a-mono";
 		src: url("../../fonts/a-mono/AeonikFono-Regular.woff") format("woff");
 		font-weight: 400;
 		font-style: normal;
-		font-display: swap;
+		font-display: fallback;
 		/* descent-override: 15%; */
 	}
 
 	h1,
 	.h1 {
-		@apply font-aeonik ~text-[3.5rem]/[6rem] font-normal leading-[100%] ~tracking-[-0.105rem]/[-0.18rem];
+		@apply font-at-aero ~text-[3.5rem]/[6rem] font-normal leading-[100%] ~tracking-[-0.105rem]/[-0.18rem];
 	}
 
 	h2,
 	.h2 {
-		@apply font-aeonik ~text-[3rem]/[4.5rem] font-normal leading-[100%] ~tracking-[-0.09rem]/[-0.135rem];
+		@apply font-at-aero ~text-[3rem]/[4.5rem] font-normal leading-[100%] ~tracking-[-0.09rem]/[-0.135rem];
 	}
 
 	h3,
 	.h3 {
-		@apply font-aeonik ~text-[2.75rem]/[4rem] font-normal leading-[100%] ~tracking-[-0.0825rem]/[-0.12rem];
+		@apply font-at-aero ~text-[2.75rem]/[4rem] font-normal leading-[100%] ~tracking-[-0.0825rem]/[-0.12rem];
 	}
 
 	h4,
 	.h4 {
-		@apply font-aeonik ~text-[2.25rem]/[3.5rem] font-normal leading-[134%] tracking-[-0.045rem];
+		@apply font-at-aero ~text-[2.25rem]/[3.5rem] font-normal leading-[134%] tracking-[-0.045rem];
 	}
 
 	h5,
 	.h5 {
-		@apply font-aeonik ~text-[1.5rem]/[2.25rem] font-normal leading-[100%] ~tracking-[-0.045rem]/[-0.0675rem];
+		@apply font-at-aero ~text-[1.5rem]/[2.25rem] font-normal leading-[100%] ~tracking-[-0.045rem]/[-0.0675rem];
 	}
 
 	h6,
 	.h6 {
-		@apply font-aeonik ~text-[1.25rem]/[2rem] font-normal leading-[100%];
+		@apply font-at-aero ~text-[1.25rem]/[2rem] font-normal leading-[100%];
 	}
 
 	b,
@@ -61,20 +61,22 @@
 	}
 
 	p {
-		@apply font-aeonik text-[1.125rem] font-normal leading-[140%];
+		@apply font-inter text-[1.125rem] font-normal leading-[140%];
 
-        &.lg {
+		&.lg {
 			@apply ~text-[1.25rem]/[1.5rem] leading-[140%];
 		}
 
 		&.sm {
 			@apply text-[1rem] leading-[130%];
 		}
-		&.xsm{
+        
+		&.xsm {
 			@apply text-[0.875rem];
 		}
-		&.eyebrow{
-			@apply text-[1rem] tracking-[1.6px] leading-[120%]
+
+		&.eyebrow {
+			@apply text-[1rem] tracking-[0.1rem] leading-[120%];
 		}
 	}
 
@@ -96,6 +98,5 @@
 
 @layer components {
 	.rich-text {
-
 	}
 }

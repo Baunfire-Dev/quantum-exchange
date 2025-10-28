@@ -9,8 +9,35 @@ baunfire.addModule({
       els.each(function () {
         const self = $(this);
         handleCarousel(self);
+        handleEntranceAnim(self);
         animateSection(self);
       });
+    };
+
+    const handleEntranceAnim = (self) => {
+      const blockTitle = self.find(".block-title");
+      const paraDesc = self.find(".para-desc");
+      const pagination = self.find(".pagination");
+
+      const entranceAnim = gsap.timeline({
+        scrollTrigger: {
+          trigger: self,
+          start: baunfire.anim.start
+        }
+      })
+        .fromTo([blockTitle, paraDesc, pagination],
+          {
+            y: "40",
+            autoAlpha: 0
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.8,
+            stagger: { each: 0.2 },
+            ease: Power2.easeOut
+          }
+        );
     };
 
     const animateSection = (self) => {

@@ -1,11 +1,12 @@
 {% set theme = override_nav_theme and nav_theme ? nav_theme %}
+{% set is_home = function("is_home") or function("is_front_page") %}
 
 <header>
 	<nav class="nav {{ theme }}">
-		<div class="nav__outer">
+		<div class="nav-outer {{ is_home ? "translate-y-[-100%] opacity-0" }}">
 			<div class="container">
-				<div class="nav__inner">
-					<a href="{{ function('home_url') }}" class="nav__logo">
+				<div class="nav-inner">
+					<a href="{{ function('home_url') }}" class="nav-logo">
 						<svg width="243" height="27" viewbox="0 0 243 27" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M19.8429 20.2104H9.30393C7.96597 20.2104 6.73093 19.9772 5.59882 19.5106C4.45984 19.044 3.47868 18.3853 2.64846 17.5482C1.81825 16.7043 1.16641 15.7094 0.699846 14.5567C0.233277 13.404 0 12.1415 0 10.7693C0 9.39702 0.233277 8.13453 0.699846 6.98183C1.16641 5.82913 1.81825 4.83424 2.64846 3.9903C3.47868 3.14636 4.4667 2.49454 5.59882 2.02797C6.73779 1.5614 7.97283 1.32812 9.30393 1.32812C10.635 1.32812 11.8495 1.5614 12.9816 2.02797C14.1206 2.49454 15.1017 3.15322 15.932 3.9903C16.7622 4.83424 17.414 5.82913 17.8806 6.98183C18.3471 8.13453 18.5804 9.39702 18.5804 10.7693C18.5804 12.4366 18.2374 13.9323 17.5512 15.2566C16.8651 16.5808 15.7673 17.6443 14.2578 18.4402V18.4951H19.8223V20.2104H19.8429ZM2.02408 10.7693C2.02408 11.7916 2.18876 12.7659 2.5181 13.6991C2.84744 14.6253 3.32773 15.4487 3.95211 16.1554C4.57649 16.869 5.33809 17.4316 6.24378 17.857C7.14261 18.2824 8.17181 18.4951 9.31079 18.4951C10.4498 18.4951 11.4515 18.2824 12.3572 17.857C13.256 17.4316 14.0245 16.8621 14.6489 16.1554C15.2733 15.4418 15.7536 14.6253 16.0829 13.6991C16.4122 12.7728 16.5769 11.7985 16.5769 10.7693C16.5769 9.74008 16.4122 8.77263 16.0829 7.8395C15.7536 6.91322 15.2733 6.08986 14.6489 5.38315C14.0245 4.66957 13.2629 4.10695 12.3572 3.68155C11.4584 3.25615 10.4429 3.04345 9.31079 3.04345C8.17867 3.04345 7.14261 3.25615 6.24378 3.68155C5.34495 4.10695 4.57649 4.67643 3.95211 5.38315C3.32773 6.09672 2.84744 6.91322 2.5181 7.8395C2.18876 8.76577 2.02408 9.74008 2.02408 10.7693Z" fill="#838786"/>
 							<path d="M31.5757 20.2105C31.5414 19.8812 31.5208 19.5587 31.514 19.2362C31.5071 18.9137 31.5002 18.5913 31.5002 18.2619H31.4453C31.2532 18.5913 31.0131 18.8931 30.718 19.1745C30.423 19.4489 30.0937 19.6891 29.73 19.888C29.3664 20.087 28.9821 20.2448 28.5705 20.3546C28.1656 20.4644 27.7608 20.5261 27.3629 20.5261C25.8054 20.5261 24.6458 20.1145 23.9048 19.2911C23.1569 18.4678 22.7864 17.2945 22.7864 15.7644V8.03857H24.5017V14.7764C24.5017 15.4556 24.5566 16.0526 24.6595 16.574C24.7624 17.0955 24.9408 17.5346 25.1947 17.8846C25.4486 18.2413 25.7848 18.5089 26.2102 18.6942C26.6356 18.8794 27.1708 18.9686 27.8089 18.9686C27.8981 18.9686 28.1382 18.9343 28.5362 18.8657C28.9341 18.7971 29.3526 18.605 29.7986 18.2962C30.2378 17.9875 30.6357 17.514 30.9856 16.8897C31.3287 16.2653 31.5071 15.4007 31.5071 14.2892V8.04543H33.2224V17.5415C33.2224 17.8708 33.2361 18.2894 33.2636 18.7902C33.291 19.2911 33.3185 19.7714 33.3528 20.2242H31.5826L31.5757 20.2105Z" fill="#838786"/>
@@ -26,18 +27,24 @@
 						</svg>
 					</a>
 
-					<div class="nav__burger"></div>
+					<div class="nav-burger">
+						<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M2 12H22" stroke="black" stroke-width="1.5"/>
+							<path d="M2 17H22" stroke="black" stroke-width="1.5"/>
+							<path d="M2 7H22" stroke="black" stroke-width="1.5"/>
+						</svg>
+					</div>
 
 					{% if header_nav_item %}
-						<div class="nav__panel">
-							<div class="nav__items">
+						<div class="nav-panel">
+							<div class="nav-items">
 								{% for nav_item in header_nav_item %}
 									{% set nav_index = loop.index %}
 
 									{% if not nav_item.is_cta %}
 										{% if nav_item.is_parent %}
-											<div class="nav__item parent">
-												<div class="nav__item-inner">
+											<div class="nav-item parent">
+												<div class="nav-item-inner">
 													<p class="button">{{ nav_item.name }}</p>
 
 													<svg width="24" height="25" viewbox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,15 +55,15 @@
 												{% if nav_item.is_parent %}
 													{% set nav_groups = nav_item.nav_group %}
 
-													<div class="nav__dd">
-														<div class="nav__dd-inner">
+													<div class="nav-dd">
+														<div class="nav-dd-inner">
 															{% if nav_groups|length %}
-																<div class="nav__dd-group-content {{ nav_groups|length > 2 ? " is-special" }}">
-																	<div class="nav__dd-groups">
+																<div class="nav-dd-group-content {{ nav_groups|length > 2 ? " is-special" }}">
+																	<div class="nav-dd-groups">
 																		{% for group in nav_groups %}
 																			{% set nav_group_index = loop.index %}
 
-																			<div class="nav__dd-group">
+																			<div class="nav-dd-group">
 																				{% if group.name %}
 																					<small>{{ group.name }}</small>
 																				{% endif %}
@@ -71,7 +78,7 @@
 																							{% set link_target = child.link.target ?: "_self" %}
 																							{% set has_image = group.has_featured_images and child.feature_image %}
 
-																							<a class="nav__dd-group-link orby w-fit {{ has_image ? " hoverable" }}" href="{{ link_url }}" target="{{ link_target }}" {{ has_image ? 'data-image-index="' ~ nav_index ~ nav_group_index ~ child_index ~ '"' }}>
+																							<a class="nav-dd-group-link orby w-fit {{ has_image ? " hoverable" }}" href="{{ link_url }}" target="{{ link_target }}" {{ has_image ? 'data-image-index="' ~ nav_index ~ nav_group_index ~ child_index ~ '"' }}>
 																								<p class="lg">{{ link_title }}</p>
 																							</a>
 																						{% endif %}
@@ -86,7 +93,7 @@
 																		{% set link_title = bottom_link.title %}
 																		{% set link_target = bottom_link.target ?: "_self" %}
 
-																		<div class="nav__dd-blink">
+																		<div class="nav-dd-blink">
 																			<a class="orby" href="{{ link_url }}" target="{{ link_target }}">
 																				<p class="lg">{{ link_title }}</p>
 																			</a>
@@ -104,8 +111,8 @@
 												{% set link_title = nav_item.link.title %}
 												{% set link_target = nav_item.link.target ?: "_self" %}
 
-												<a class="nav__item" href="{{ link_url }}" target="{{ link_target }}">
-													<div class="nav__item-inner">
+												<a class="nav-item" href="{{ link_url }}" target="{{ link_target }}">
+													<div class="nav-item-inner">
 														<p class="button">{{ link_title }}</p>
 													</div>
 												</a>
@@ -115,14 +122,14 @@
 								{% endfor %}
 							</div>
 
-							<div class="nav__actions">
+							<div class="nav-actions">
 								{% for nav_item in header_nav_item %}
 									{% if nav_item.is_cta and nav_item.link %}
-                                        {% set link_url = nav_item.link.url ?: "#" %}
-                                        {% set link_title = nav_item.link.title %}
-                                        {% set link_target = nav_item.link.target ?: "_self" %}
+										{% set link_url = nav_item.link.url ?: "#" %}
+										{% set link_title = nav_item.link.title %}
+										{% set link_target = nav_item.link.target ?: "_self" %}
 
-                                        {% include 'components/cta.twig' with {
+										{% include 'components/cta.twig' with {
                                             class : 'navi',
                                             cta: nav_item.link
                                         } %}
@@ -135,6 +142,4 @@
 			</div>
 		</div>
 	</nav>
-
-	<div class="nav__space"></div>
 </header>
