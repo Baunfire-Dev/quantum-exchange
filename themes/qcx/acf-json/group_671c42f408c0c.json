@@ -1,0 +1,218 @@
+{
+    "key": "group_671c42f408c0c",
+    "title": "Content Rich Text",
+    "fields": [
+        {
+            "key": "field_671c42f40ddf2",
+            "label": "Content Rich Text",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_671c42f40e0d2",
+            "label": "Block",
+            "name": "block",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_671c42f410e4f",
+                    "label": "Coverage",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 1,
+                    "placement": "left",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_671c42f414146",
+                    "label": "Coverage",
+                    "name": "coverage",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "Put this in between built-in guternberg blocks to add rich-content. Must always have START and END. Please refrain from adding start without end and vice versa.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 1,
+                    "choices": {
+                        "rc-start": "Start",
+                        "rc-end": "End"
+                    },
+                    "default_value": "rc-start",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "layout": "horizontal"
+                },
+                {
+                    "key": "field_671c42f41810a",
+                    "label": "Extras",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_671c42f414146",
+                                "operator": "==",
+                                "value": "rc-start"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_68fac19c84505",
+                    "label": "Padding Top",
+                    "name": "padding_top",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_671c42f414146",
+                                "operator": "==",
+                                "value": "rc-start"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "unset": "Default",
+                        "st-none": "None",
+                        "st-xxxs": "XXXS",
+                        "st-xxs": "XXS",
+                        "st-xs": "XS",
+                        "st-sm": "SM",
+                        "st-md": "MD",
+                        "st-lg": "LG",
+                        "st-xl": "XL",
+                        "st-xxl": "XXL"
+                    },
+                    "default_value": "unset",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal"
+                },
+                {
+                    "key": "field_68fac1b684506",
+                    "label": "Padding Bottom",
+                    "name": "padding_bottom",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_671c42f414146",
+                                "operator": "==",
+                                "value": "rc-start"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "unset": "Default",
+                        "sb-none": "None",
+                        "sb-xxxs": "XXXS",
+                        "sb-xxs": "XXS",
+                        "sb-xs": "XS",
+                        "sb-sm": "SM",
+                        "sb-md": "MD",
+                        "sb-lg": "LG",
+                        "sb-xl": "XL",
+                        "sb-xxl": "XXL"
+                    },
+                    "default_value": "unset",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal"
+                }
+            ],
+            "acfe_seamless_style": 0,
+            "acfe_group_modal": 0,
+            "acfe_group_modal_close": 0,
+            "acfe_group_modal_button": "",
+            "acfe_group_modal_size": "large"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/content-rich-text"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1761852766
+}
