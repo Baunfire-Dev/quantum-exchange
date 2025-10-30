@@ -6,10 +6,6 @@
 	.nav {
 		@apply w-full;
 
-		&-outer {
-            @apply bg-light-grey;
-		}
-
 		&-burger {
 			@apply xl:hidden self-center;
 		}
@@ -299,31 +295,29 @@ main {
     @apply min-h-[62.5rem];
 }
 
-.error404 {
-	header {
-		position: fixed;
-		z-index: 100;
-		width: 100%;
-		transition: background-color 0.3s ease;
+header.dark {
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+	transition: background-color 0.3s ease;
 
-		.nav-logo {
-			svg path {
-				@apply fill-[#ffffff];
-			}
+	.nav-logo {
+		svg path {
+			@apply fill-[#ffffff];
+		}
+	}
+
+	.nav-panel {
+		.nav-item {
+			@apply text-white;
 		}
 
-		.nav-panel {
-			.nav-item {
-				@apply text-white;
-			}
+		.nav-actions {
+			.btn.navi {
+				@apply bg-[#08E8BD];
 
-			.nav-actions {
-				.btn.navi {
-					@apply bg-[#08E8BD];
-
-					p {
-						@apply text-black;
-					}
+				p {
+					@apply text-black;
 				}
 			}
 		}

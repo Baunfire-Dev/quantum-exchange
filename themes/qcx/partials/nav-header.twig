@@ -1,9 +1,40 @@
 {% set theme = override_nav_theme and nav_theme ? nav_theme %}
 {% set is_home = function("is_home") or function("is_front_page") %}
 
-<header>
+<header class="{{ dark_mode ? 'dark' : '' }}">
+	{% if dark_mode %}
+    <svg 
+      class="header-bg absolute inset-0 w-full h-full object-cover" 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 1440 900" 
+      preserveAspectRatio="xMidYMid slice" 
+      fill="none"
+    >
+      <g filter="url(#filter0_n_7766_89)">
+        <rect width="1440" height="900" fill="#206EEC"/>
+      </g>
+      <defs>
+        <filter id="filter0_n_7766_89" x="0" y="0" width="1440" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.6666" stitchTiles="stitch" numOctaves="3" result="noise" seed="514"/>
+          <feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+          <feComponentTransfer in="alphaNoise" result="coloredNoise1">
+            <feFuncA type="discrete" tableValues="1 1 1 0 0 0"/>
+          </feComponentTransfer>
+          <feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
+          <feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
+          <feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
+          <feMerge result="effect1_noise_7766_89">
+            <feMergeNode in="shape"/>
+            <feMergeNode in="color1"/>
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+  {% endif %}
 	<nav class="nav {{ theme }}">
-		<div class="nav-outer {{ is_home ? "translate-y-[-100%] opacity-0" }}">
+		<div class="nav-outer {{ dark_mode ? '' : 'bg-light-grey' }} {{ is_home ? "translate-y-[-100%] opacity-0" }}">
 			<div class="container">
 				<div class="nav-inner">
 					<a href="{{ function('home_url') }}" class="nav-logo">

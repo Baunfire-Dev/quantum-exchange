@@ -53,6 +53,7 @@
     $context = Timber::context([
         "header_nav_item" => get_field("header_nav_item", "option"),
         "override_nav_theme" => get_field("override_nav_theme"),
+        "dark_mode" => get_field("dark_mode"),
     ]);
 
     Timber::render("./partials/nav-header.twig", $context); ?>
