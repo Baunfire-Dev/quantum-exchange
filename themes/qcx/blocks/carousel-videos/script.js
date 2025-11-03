@@ -22,23 +22,25 @@ baunfire.addModule({
       const ctaBtn = self.find(".cta-btn");
       const pagination = self.find(".pagination");
 
-      const entranceAnim = gsap.timeline({
-        scrollTrigger: {
-          trigger: self,
-          start: baunfire.anim.start
-        }
-      })
-        .fromTo([blockTitle, paraDesc, ctaBtn, pagination],
+      const entranceAnim = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: self,
+            start: baunfire.anim.start,
+          },
+        })
+        .fromTo(
+          [blockTitle, paraDesc, ctaBtn, pagination],
           {
             y: "40",
-            autoAlpha: 0
+            autoAlpha: 0,
           },
           {
             y: 0,
             autoAlpha: 1,
             duration: 0.8,
             stagger: { each: 0.2 },
-            ease: Power2.easeOut
+            ease: Power2.easeOut,
           }
         );
     };
@@ -54,6 +56,9 @@ baunfire.addModule({
         margin: 24,
         nav: false,
         dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
         responsive: {
           0: {
             items: 1,
@@ -73,7 +78,7 @@ baunfire.addModule({
       carousel.on("translate.owl.carousel", function () {
         pauseAllVideos();
       });
-      
+
       next.click(function () {
         carousel.trigger("next.owl.carousel");
       });
@@ -85,12 +90,12 @@ baunfire.addModule({
 
     const animateVideos = (self) => {
       const videoItems = self.find(".video-item");
-      
+
       gsap.set(videoItems, {
         opacity: 0,
-        y: 40
+        y: 40,
       });
-      
+
       ScrollTrigger.create({
         trigger: self,
         start: "top 80%",
@@ -101,9 +106,9 @@ baunfire.addModule({
             y: 0,
             duration: 0.8,
             stagger: 0.2,
-            ease: "power2.out"
+            ease: "power2.out",
           });
-        }
+        },
       });
     };
 

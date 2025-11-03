@@ -266,6 +266,13 @@
                                         "operator": "==",
                                         "value": "stats"
                                     }
+                                ],
+                                [
+                                    {
+                                        "field": "field_68f7bf87e2acd",
+                                        "operator": "==",
+                                        "value": "quotes"
+                                    }
                                 ]
                             ],
                             "wrapper": {
@@ -425,5 +432,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1761067409
+    "modified": 1762172355
 }

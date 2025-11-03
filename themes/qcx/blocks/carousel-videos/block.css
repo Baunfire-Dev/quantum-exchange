@@ -46,7 +46,7 @@
       }
       &::before {
         content: "";
-        @apply absolute inset-0 bg-[radial-gradient(95.74%_72.48%_at_90.44%_105%,_#00A1FF_0%,_rgba(0,161,255,0)_100%)] opacity-0 transition-opacity duration-300 pointer-events-none;
+        @apply absolute inset-0 bg-[radial-gradient(95.74%_72.48%_at_90.44%_105%,_#00a1ff80_0%,_rgba(0,161,255,0)_65%)] opacity-0 transition-opacity duration-300 pointer-events-none;
       }
     }
   }

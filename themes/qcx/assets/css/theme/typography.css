@@ -81,9 +81,10 @@
 	}
 
 	p.button,
-	.btn p {
+	.btn p, button span {
 		@apply font-a-mono text-[0.75rem] font-normal tracking-[0.075rem] leading-[130%] uppercase;
 	}
+
 
 	small,
 	.overline {
