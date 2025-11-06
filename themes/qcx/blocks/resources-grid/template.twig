@@ -1,5 +1,5 @@
 {# Resource Grid V1 — parent/child (category/category) filters with AJAX #}
-<section class="{{ block.slug }} {{ block.className }}" style="background:#F7F9FB;">
+<section class="{{ block.slug }} {{ block.className }} rgs" style="background:#F7F9FB;">
   {% if block.anchor %}<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>{% endif %}
 
   <div class="mx-auto max-w-[90rem] px-[1rem] md:px-[4rem] py-[4.5rem] md:py-[7.5rem] flex flex-col items-center gap-[3rem] w-full">
@@ -82,10 +82,10 @@
     </div>
   </div>
 
-  {# Inline JS (self-contained). You can move to an external file later. #}
+  {# Inline JS (self-contained). will change or move later #}
   <script>
   (function(){
-    const root    = document.currentScript.closest('section');
+    const root = document.currentScript.closest('.rgs');
     const grid    = root.querySelector('#rg-grid');
     const more    = root.querySelector('.rg-more'); // <a ...> from CTA
     const selects = root.querySelectorAll('.rg-select');
