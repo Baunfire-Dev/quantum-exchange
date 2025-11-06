@@ -111,3 +111,4 @@ if ($cta && is_array($cta)) {
     });
   }, 300);
 });
+</script>
