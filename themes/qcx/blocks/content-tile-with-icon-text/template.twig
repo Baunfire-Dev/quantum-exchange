@@ -1,0 +1,80 @@
+<section class="{{ block.slug }} {{ not fields.dark_mode ? 'bg-' ~ fields.bg : 'bg-[#F7F9FB]' }} {{ fields.dark_mode ? 'dark' }} bg-[#F7F9FB] overflow-x-clip overflow-y-visible">
+
+  {% if block.anchor %}
+    <div class="section-anchor" id="{{ block.anchor | default(block.id) }}"></div>
+  {% endif %}
+
+  {% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xxl' %}
+  {% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
+
+  <div class="container">
+    <div class="{{ pt }} {{ pb }}">
+      <div class="flex flex-col items-center ~gap-[3.5rem]/[5rem]">
+        <!-- Header row -->
+        <div class="flex max-md:flex-col justify-between md:items-end w-full max-w-[68.125rem] ~gap-[2rem]/[2.5rem]">
+          <div class="flex flex-col items-start ~gap-[1.25rem]/[2rem]">
+            {% include 'components/heading.twig' with {
+              class: 'main-title',
+              value: fields.heading.value, 
+              type: fields.heading.type != 'default' ? fields.heading.type : 'h2',
+              has_custom_style: fields.heading.has_custom_style,
+              style: fields.heading.style,
+              to_words: true
+            } %}
+
+            {% if fields.paragraph %}
+              <div class="flex md:pl-[6.875rem] items-center justify-center gap-[0.625rem]">
+                <p class="w-full max-w-[30.5rem]">{{ fields.paragraph }}</p>
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="flex flex-col items-start ~gap-[1.25rem]/[2rem]">
+            {% include 'components/cta.twig' with {
+              class: 'cta filled blue md:shrink-0 md:self-end',
+              cta: fields.cta,
+            } %}
+          </div>
+        </div>
+
+        {# ---- FLEX GRID (1:1 with your spec) ---- #}
+        {% if fields.items %}
+          <div class="flex items-center self-stretch gap-[1.5rem] flex-wrap w-full max-w-[85rem]">
+            {% for item in fields.items %}
+              <article             class="basis-full md:basis-[calc(50%-0.75rem)] lg:basis-[calc(25%-1.125rem)]
+                    flex flex-col items-start gap-[1.5rem] p-[1.5rem]
+                    rounded-[0.5rem] border border-[#D9D9D9] bg-white/0">
+                <!-- SVG icon (top) -->
+                <div class="w-[3rem] h-[3rem]" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <path d="M42.3259 15.9999C39.9819 10.6589 35.3679 6.53094 29.7109 4.84094C31.4789 7.60594 32.7189 11.6099 33.3959 15.9999H42.3259Z" fill="url(#paint0)"/>
+                    <path d="M43.3632 28.9999C43.7772 27.4009 44.0002 25.7269 44.0002 23.9999C44.0002 22.2729 43.7772 20.5989 43.3632 18.9999H33.7632C33.9182 20.6549 34.0002 22.3339 34.0002 23.9999C34.0002 25.6659 33.9182 27.3449 33.7632 28.9999H43.3632Z" fill="url(#paint0)"/>
+                    <path d="M14 23.9999C14 22.3339 14.082 20.6549 14.237 18.9999H4.637C4.223 20.5989 4 22.2729 4 23.9999C4 25.7269 4.223 27.4009 4.637 28.9999H14.237C14.082 27.3449 14 25.6659 14 23.9999Z" fill="url(#paint0)"/>
+                    <path d="M31 23.9999C31 22.2559 30.905 20.5899 30.748 18.9999H17.252C17.095 20.5899 17 22.2559 17 23.9999C17 25.7439 17.095 27.4099 17.252 28.9999H30.748C30.905 27.4099 31 25.7439 31 23.9999Z" fill="url(#paint0)"/>
+                    <path d="M30.3622 15.9999C29.1642 8.79188 26.4732 3.99988 24.0002 3.99988C21.5272 3.99988 18.8362 8.79188 17.6382 15.9999H30.3622Z" fill="url(#paint0)"/>
+                    <path d="M17.6382 31.9999C18.8362 39.2079 21.5282 43.9999 24.0002 43.9999C26.4722 43.9999 29.1642 39.2079 30.3622 31.9999H17.6382Z" fill="url(#paint0)"/>
+                    <path d="M14.6038 15.9999C15.2808 11.6099 16.5208 7.60594 18.2888 4.84094C12.6318 6.53094 8.01783 10.6589 5.67383 15.9999H14.6038Z" fill="url(#paint0)"/>
+                    <path d="M33.3959 31.9999C32.7189 36.3899 31.4789 40.3939 29.7109 43.1589C35.3679 41.4689 39.9819 37.3419 42.3259 31.9999H33.3959Z" fill="url(#paint0)"/>
+                    <path d="M5.67383 31.9999C8.01783 37.3409 12.6318 41.4689 18.2888 43.1589C16.5208 40.3939 15.2808 36.3899 14.6038 31.9999H5.67383Z" fill="url(#paint0)"/>
+                    <defs>
+                      <linearGradient id="paint0" x1="4" y1="4" x2="44" y2="49" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#D9F3EE"/><stop offset="1" stop-color="#08E8BD"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+
+                <!-- Paragraph (lg spec: 24px, 140%) -->
+                <p class="text-black leading-[1.4] text-[1rem] md:text-[1.25rem] lg:text-[1.5rem]">
+                  {{ item.title }}
+                </p>
+              </article>
+            {% endfor %}
+          </div>
+        {% endif %}
+        {# ---- /FLEX GRID ---- #}
+
+      </div>
+    </div>
+  </div>
+</section>

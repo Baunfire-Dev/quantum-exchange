@@ -1,0 +1,11 @@
+{
+	"name": "hero-resources-landing",
+	"title": "Hero Resources Landing",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

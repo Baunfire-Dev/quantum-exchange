@@ -1,0 +1,26 @@
+{# Card item for a single Blog post #}
+<article data-rg-item
+  class="video-item group relative flex flex-col ~gap-[2rem]/[3rem] ~p-[1.25rem]/[2rem] border border-[#D9D9D9] rounded-[0.5rem] bg-[#F7F9FB] overflow-hidden">
+
+  {# Invisible link overlay (stretches over the whole card) #}
+  <a href="{{ r.link }}" class="absolute inset-0 z-[24]"></a>
+
+  <div class="relative flex flex-col gap-[1.5rem] z-20">
+    <div class="flex gap-[0.5rem] items-center">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="10" height="10" rx="2" fill="#08E8BD"/>
+      </svg>
+      {% set cats = r.terms({ taxonomy:'category' }) %}
+      <p class="eyebrow uppercase overline-r">{{ (cats|length ? cats[0].name : 'BLOG') }}</p>
+    </div>
+    <p class="lg leading-[1.1] transition-colors duration-200 group-hover:text-[#08E8BD]">
+      {{ r.title }}
+    </p>
+  </div>
+
+  <div class="video-wrapper relative w-full h-[17.2356rem] overflow-hidden rounded-[0.5rem] z-0">
+    {% if function('has_post_thumbnail', r.ID) %}
+      {{ function('get_the_post_thumbnail', r.ID, 'large', { class: 'w-full h-full object-cover transition-transform duration-300 ' })|raw }}
+    {% endif %}
+  </div>
+</article>

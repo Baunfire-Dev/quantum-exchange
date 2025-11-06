@@ -16,6 +16,7 @@
 get_header();
 ?>
 
+<h1> test</h1>
 <main>
     <?php the_content(); ?>
 </main>

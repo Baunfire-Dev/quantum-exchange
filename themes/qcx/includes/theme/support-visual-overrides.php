@@ -23,7 +23,9 @@ add_action('registered_post_type', function ($post_type, $args) {
         'webinar',
         'ebook',
         'press',
-        'videos'
+        'videos',
+        'partner' 
+
     ))) return;
 
     // Set menu icon
@@ -170,7 +172,7 @@ add_action('init', function () {
 // Hide category
 add_filter('rest_prepare_taxonomy', function ($response, $taxonomy) {
     if ('category' === $taxonomy->name) {
-        $response->data['visibility']['show_ui'] = false;
+        $response->data['visibility']['show_ui'] = true;
     }
 
     return $response;

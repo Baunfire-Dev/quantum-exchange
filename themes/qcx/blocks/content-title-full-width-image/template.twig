@@ -51,7 +51,7 @@
 					{% include 'components/image.twig' with {
 						image: fields.image,
 						size: 'large',
-						class: 'object-cover h-full md:h-[28.25rem] w-full',
+						class: 'object-cover h-full md:min-h-[28.25rem] w-full',
 						loading: 'eager'
 					} %}
 				{% endif %}

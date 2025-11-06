@@ -1,54 +1,74 @@
+// Fade-in + slide-up on scroll (content-tile-with-icon-text only)
 baunfire.addModule({
-    init(baunfire) {
-        const $ = baunfire.$;
+  init(baunfire) {
+    const $ = baunfire.$;
+    const gsap = window.gsap;
+    if (!gsap || !window.ScrollTrigger) return;
+    gsap.registerPlugin(ScrollTrigger);
 
-        const script = () => {
-            const els = $("section.content-two-across-tiles");
-            if (!els.length) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const $sections = $('section.content-tile-with-icon-text');
+    if (!$sections.length) return;
 
-            els.each(function () {
-                const self = $(this);
-                const leftColumn = self.find('.left-card');
-                const rightColumn = self.find('.rigth-card');
-                
-                const mm = gsap.matchMedia();
-                
-                mm.add("(min-width: 768px)", () => {
-                    gsap.fromTo(leftColumn, 
-                        {
-                            yPercent: 15
-                        },
-                        {
-                            yPercent: -15,
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: self,
-                                start: "top bottom",
-                                end: "bottom top",
-                                scrub: 1.5
-                            }
-                        }
-                    );
-                    
-                    gsap.fromTo(rightColumn,
-                        {
-                            yPercent: 15
-                        },
-                        {
-                            yPercent: -20,
-                            ease: "none",
-                            scrollTrigger: {
-                                trigger: self,
-                                start: "top bottom",
-                                end: "bottom top",
-                                scrub: 1
-                            }
-                        }
-                    );
-                });
-            });
+    $sections.each(function () {
+      const $section = $(this);
+      if ($section.data('initFadeSlide')) return;
+      $section.data('initFadeSlide', true);
+
+      const $heading = $section.find('.main-title').first();
+      const $words   = $heading.find('.word, .split-word'); // optional splitter
+      const $para    = $section.find('p').first();
+      const $cta     = $section.find('.cta').first();
+      const $tiles   = $section.find('article');
+
+      const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        scrollTrigger: {
+          trigger: $section[0],
+          start: 'top 75%',
+          once: true
         }
+      });
 
-        script();
-    }
+      // Heading
+      if (!prefersReduced) {
+        if ($words.length) {
+          gsap.set($words, { yPercent: 30, autoAlpha: 0, willChange: 'transform,opacity' });
+          tl.to($words, {
+            yPercent: 0, autoAlpha: 1, duration: 0.8, stagger: 0.035, clearProps: 'will-change'
+          }, 0);
+        } else if ($heading.length) {
+          gsap.set($heading, { y: 40, autoAlpha: 0, willChange: 'transform,opacity' });
+          tl.to($heading, { y: 0, autoAlpha: 1, duration: 0.9, clearProps: 'will-change' }, 0);
+        }
+      } else if ($heading.length) {
+        tl.set($heading, { autoAlpha: 1 });
+      }
+
+      // Paragraph + CTA
+      const headerBits = [$para[0], $cta[0]].filter(Boolean);
+      if (headerBits.length) {
+        if (!prefersReduced) {
+          gsap.set(headerBits, { y: 30, autoAlpha: 0, willChange: 'transform,opacity' });
+          tl.to(headerBits, {
+            y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.08, clearProps: 'will-change'
+          }, '>-0.25');
+        } else {
+          tl.set(headerBits, { autoAlpha: 1 });
+        }
+      }
+
+      // Tiles
+      if ($tiles.length) {
+        if (!prefersReduced) {
+          gsap.set($tiles, { y: 32, autoAlpha: 0, willChange: 'transform,opacity' });
+          tl.to($tiles, {
+            y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.08, clearProps: 'will-change'
+          }, '>-0.1');
+        } else {
+          tl.set($tiles, { autoAlpha: 1 });
+        }
+      }
+    });
+  }
 });

@@ -1,0 +1,11 @@
+{
+	"name": "content-tile-with-icon-text",
+	"title": "Content Tile with icon and text",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

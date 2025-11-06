@@ -1,0 +1,145 @@
+{# Block expects:
+   fields.heading (text)
+   fields.paragraph (textarea)
+   post1 (Post Object), post1_cat (Term or null)
+   post2 (Post Object), post2_cat (Term or null)
+#}
+
+<section
+  class="{{ block.slug }} {{ block.className }}"
+  style="background-image:url('/wp-content/uploads/Rectangle-7863.svg'); background-repeat:no-repeat; background-size:cover;"
+>
+  {% if block.anchor %}
+    <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+  {% endif %}
+
+  {# Wrapper — 1440px max, top 80px, bottom 120px, left/right 64px, gap 64px #}
+  <div class="mx-auto max-w-[90rem] px-[1rem] md:px-[4rem] py-[4.5rem] md:pt-[5rem] md:pb-[7.5rem] flex flex-col items-center gap-[2.5rem] md:gap-[4rem]">
+
+    {# 50/50 layout #}
+    <div class="flex flex-col lg:flex-row gap-[2.5rem] md:gap-[4rem] w-full">
+
+      {# LEFT COLUMN #}
+      <div class="flex flex-col items-start gap-[2.5rem] md:gap-[4rem] flex-[1_0_0]">
+
+        {# Heading + paragraph wrapper #}
+        <div class="flex flex-col items-start gap-[2rem] self-stretch">
+          {% if fields.heading %}
+            <h2 class="text-white font-[350] leading-[1] tracking-[-0.135rem] text-[clamp(2rem,4vw,4.5rem)]">
+              {{ fields.heading }}
+            </h2>
+          {% endif %}
+
+          {% if fields.paragraph %}
+            <p class="text-white/90 text-[1.125rem] leading-[1.4] md:pl-[6.875rem] max-w-[38rem]">
+              {{ fields.paragraph }}
+            </p>
+          {% endif %}
+        </div>
+
+        {# Post Object 1 Card #}
+        {% if post1 %}
+          <a href="{{ post1.link }}" class="group w-full">
+            <article class="flex flex-col items-start gap-[3rem] self-stretch p-[2rem] rounded-[0.5rem] border border-[#08E8BD] bg-[rgba(32,110,236,0.20)] backdrop-blur-[15px] transition">
+              
+              {# Category + Title wrapper #}
+              <div class="flex flex-col items-start gap-[1.5rem] self-stretch">
+                <div class="flex justify-center items-center gap-[0.5rem]">
+                  <span class="inline-block w-[0.625rem] h-[0.625rem] rounded-[0.125rem] bg-[#08E8BD]"></span>
+                  <p class="overline-r uppercase text-white/90 text-[0.8rem] leading-[1.2] tracking-[0.1rem]">
+                    {{ post1_cat ? post1_cat.name : 'Uncategorized' }}
+                  </p>
+                </div>
+                <h5 class="text-white font-[400] leading-[1] tracking-[-0.0675rem] text-[2.25rem]">
+                  {{ post1.title }}
+                </h5>
+              </div>
+
+              {# Featured Image #}
+                {% if function('has_post_thumbnail', post1.ID) %}
+            <figure
+                class="relative inline-block self-start w-full aspect-[560/432.58]
+                    overflow-hidden rounded-[0.5rem]
+                    transition-[width] duration-300 ease-out
+                    group-hover:w-[90%] lg:group-hover:w-[26.25rem]">
+                {{ function('get_the_post_thumbnail', post1.ID, 'large', {
+                class: 'w-full h-full object-cover'
+                }) | raw }}
+            </figure>
+            {% endif %}
+
+
+
+            </article>
+          </a>
+        {% endif %}
+      </div>
+
+      {# RIGHT COLUMN #}
+      <div class="flex flex-col items-start gap-[2rem] flex-[1_0_0]">
+
+        {# Post Object 2 Card #}
+        {% if post2 %}
+          <a href="{{ post2.link }}" class="group w-full">
+            <article class="flex flex-col items-start gap-[3rem] self-stretch p-[2rem] rounded-[0.5rem] border border-[#08E8BD] bg-[rgba(32,110,236,0.20)] backdrop-blur-[15px] transition">
+              
+              {# Category + Title wrapper #}
+              <div class="flex flex-col items-start gap-[1.5rem] self-stretch">
+                <div class="flex justify-center items-center gap-[0.5rem]">
+                  <span class="inline-block w-[0.625rem] h-[0.625rem] rounded-[0.125rem] bg-[#08E8BD]"></span>
+                  <p class="overline-r uppercase text-white/90 text-[0.8rem] leading-[1.2] tracking-[0.1rem]">
+                    {{ post2_cat ? post2_cat.name : 'Uncategorized' }}
+                  </p>
+                </div>
+                <h5 class="text-white font-[400] leading-[1] tracking-[-0.0675rem] text-[2.25rem]">
+                  {{ post2.title }}
+                </h5>
+              </div>
+
+              {# Featured Image #}
+                {% if function('has_post_thumbnail', post2.ID) %}
+                <figure
+                    class="relative inline-block self-start w-full aspect-[560/432.58]
+                        overflow-hidden rounded-[0.5rem]
+                        transition-[width] duration-300 ease-out
+                        group-hover:w-[90%] lg:group-hover:w-[26.25rem]">
+                    {{ function('get_the_post_thumbnail', post2.ID, 'large', {
+                    class: 'w-full h-full object-cover'
+                    }) | raw }}
+                </figure>
+                {% endif %}
+
+
+            </article>
+          </a>
+        {% endif %}
+
+        {# Newsletter card #}
+        <div class="flex flex-col items-start gap-[0.75rem] self-stretch rounded-[0.5rem] bg-[#040D20] backdrop-blur-[15px] px-[3rem] py-[2rem]">
+          <p class="text-white text-[1.125rem] leading-[1.4] font-[400]">
+            Sign up for our latest newsletters
+          </p>
+
+          <form class="flex items-start gap-[0.5rem] self-stretch" action="#" method="post">
+            <input
+              type="email"
+              name="email"
+              placeholder="EMAIL"
+              class="flex-1 h-[2.4375rem] px-5 py-3 !rounded-[2.5rem] border border-white/30 bg-transparent text-white placeholder-white/80 uppercase text-[0.75rem] leading-[1.2] tracking-[0.075rem] outline-none"
+              required
+            />
+            <button
+              type="submit"
+              class="w-[2.4375rem] h-[2.4375rem] rounded border border-[#08E8BD] bg-[#08E8BD] grid place-items-center"
+              aria-label="Submit"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+                <path d="M0.707153 10.7071L5.70715 5.70709L0.707153 0.707092" stroke="black" stroke-linecap="square"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

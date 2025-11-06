@@ -1,0 +1,11 @@
+{
+	"name": "partner-form",
+	"title": "Partner Form",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

@@ -76,3 +76,34 @@ add_action('admin_enqueue_scripts', function ($hook) {
 // wp.blocks.getBlockTypes().forEach(block => {
 //   console.log(block.name);
 // });
+
+add_filter('allowed_block_types_all', function ($allowed_block_types, $editor_context) {
+    if (empty($editor_context->post)) return $allowed_block_types;
+
+    $post_type = $editor_context->post->post_type;
+
+    // ✅ Let Partner use ALL blocks
+    if ($post_type === 'partner') {
+        return true; // allow all registered blocks
+    }
+
+    // Build list of all ACF blocks
+    $allowed_acf = [];
+    foreach (WP_Block_Type_Registry::get_instance()->get_all_registered() as $bt) {
+        if (strpos($bt->name, 'acf/') === 0) $allowed_acf[] = $bt->name;
+    }
+
+    // Your existing allow-list for core blocks
+    if (in_array($post_type, ['page','post','news','webinar','ebook','customer-story'], true)) {
+        $core_supported = [
+            'core/heading','core/paragraph','core/image','core/gallery','core/list','core/list-item',
+            'core/quote','core/audio','core/button','core/buttons','core/code','core/column','core/columns',
+            'core/file','core/group','core/html','core/preformatted','core/pullquote','core/block',
+            'core/spacer','core/table','core/video','core/embed'
+        ];
+        return array_merge($allowed_acf, $core_supported);
+    }
+
+    // Default: only ACF blocks
+    return $allowed_acf;
+}, 10, 2);

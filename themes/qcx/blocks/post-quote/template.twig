@@ -1,67 +1,40 @@
-<section class="{{ block.slug }} {{ block.className }}">
-	{% if block.anchor %}
-		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-	{% endif %}
+<section class="{{ block.slug }} {{ block.className }}"
+         style="background: url('/wp-content/uploads/Rectangle-7863-1.svg') center/cover no-repeat;">
+  {% if block.anchor %}
+    <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+  {% endif %}
 
-	<div class="container">
-		<div class="relative bg-blue rounded-[0.5rem] overflow-hidden">
-			<div class="flex flex-col ~gap-[1.25rem]/[2rem] ~p-[2.5rem]/[4rem] relative z-[2]">
-				<div class="flex flex-col ~gap-[1rem]/[1.5rem]">
-					<svg class="~h-[1.75rem]/[2.375rem] w-fit" width="52" height="38" viewbox="0 0 52 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M52 4C52 1.79086 50.2091 0 48 0H32.7368C30.5277 0 28.7368 1.79086 28.7368 4V19.4862C28.7368 20.3176 28.9959 21.1282 29.4779 21.8056L39.9213 36.4796C40.6002 37.4335 41.6987 38 42.8695 38C45.4927 38 47.2443 35.2959 46.1717 32.902L43.6842 27.3497C42.4986 24.7034 44.4348 21.7143 47.3346 21.7143H48C50.2091 21.7143 52 19.9234 52 17.7143V4ZM23.2632 4C23.2632 1.79086 21.4723 0 19.2632 0H4C1.79086 0 0 1.79086 0 4V19.4862C0 20.3176 0.259029 21.1282 0.741074 21.8056L11.1845 36.4796C11.8634 37.4335 12.9618 38 14.1326 38C16.7559 38 18.5075 35.2959 17.4349 32.902L14.9474 27.3497C13.7617 24.7034 15.6979 21.7143 18.5977 21.7143H19.2632C21.4723 21.7143 23.2632 19.9234 23.2632 17.7143V4Z" fill="#00A1FF"/>
-					</svg>
+  <div class="mx-auto  p-[4rem] flex flex-col items-start gap-[2rem] rounded-[0.5rem] border border-[#08E8BD] text-white">
+    
+    {# Quote icon + message #}
+    <div class="flex flex-col items-start gap-[1.5rem] w-full">
+      <!-- Quote Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="52" height="38" viewBox="0 0 52 38" fill="none" aria-hidden="true" focusable="false">
+        <path d="M52 4C52 1.79086 50.2091 0 48 0H32.7368C30.5277 0 28.7368 1.79086 28.7368 4V19.4862C28.7368 20.3176 28.9959 21.1282 29.4779 21.8056L39.9213 36.4796C40.6002 37.4335 41.6987 38 42.8695 38C45.4927 38 47.2443 35.2959 46.1717 32.902L43.6842 27.3497C42.4986 24.7034 44.4348 21.7143 47.3346 21.7143H48C50.2091 21.7143 52 19.9234 52 17.7143V4ZM23.2632 4C23.2632 1.79086 21.4723 0 19.2632 0H4C1.79086 0 0 1.79086 0 4V19.4862C0 20.3176 0.259029 21.1282 0.741074 21.8056L11.1845 36.4796C11.8634 37.4335 12.9618 38 14.1326 38C16.7559 38 18.5075 35.2959 17.4349 32.902L14.9474 27.3497C13.7617 24.7034 15.6979 21.7143 18.5977 21.7143H19.2632C21.4723 21.7143 23.2632 19.9234 23.2632 17.7143V4Z" fill="#00A1FF"/>
+      </svg>
 
-					{% if fields.message %}
-						<p class="text-white lg">{{ fields.message }}</p>
-					{% endif %}
-				</div>
+      {% if fields.message %}
+        <p class="lg text-white">{{ fields.message }}</p>
+      {% endif %}
+    </div>
 
-				<div class="flex flex-col ~gap-[0.5rem]/[0.75rem]">
-					{% if fields.person %}
-						<p class="text-white">{{ fields.person }}</p>
-					{% endif %}
+    {# Name, position, company #}
+    <div class="flex flex-col items-start gap-[0.75rem] shrink-0">
+      {% if fields.person %}
+        <p class="text-[18px] leading-[1.4] font-[400] text-white">{{ fields.person }}</p>
+      {% endif %}
 
-					{% if fields.position or fields.company %}
-						<div class="flex gap-[0.75rem] flex-wrap">
-							{% if fields.position %}
-								<p class="text-white xsm">{{ fields.position }}</p>
-							{% endif %}
+      {% if fields.position or fields.company %}
+        <div class="flex items-center gap-[12px] w-full text-white">
+          {% if fields.position %}
+            <p class="sm text-white font-at-aero">{{ fields.position }}</p>
+          {% endif %}
+          {% if fields.company %}
+            <p class="sm text-white font-at-aero">{{ fields.company }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
 
-							{% if fields.company %}
-								<p class="text-white xsm">{{ fields.company }}</p>
-							{% endif %}
-						</div>
-					{% endif %}
-				</div>
-			</div>
-
-			<svg class="h-auto w-auto min-w-full min-h-full object-cover absolute top-0 left-0" xmlns="http://www.w3.org/2000/svg" width="886" height="483" viewbox="0 0 886 483" fill="none">
-				<g filter="url(#filter0_n_7554_4293)">
-					<rect x="-277" y="-276" width="1440" height="1035" fill="url(#paint0_linear_7554_4293)"/>
-				</g>
-				<defs>
-					<filter id="filter0_n_7554_4293" x="-277" y="-276" width="1440" height="1035" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
-						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-						<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-						<feTurbulence type="fractalNoise" basefrequency="0.66666668653488159 0.66666668653488159" stitchtiles="stitch" numoctaves="3" result="noise" seed="514"/>
-						<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
-						<feComponentTransfer in="alphaNoise" result="coloredNoise1">
-							<feFuncA type="discrete" tablevalues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
-						</feComponentTransfer>
-						<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
-						<feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
-						<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
-						<feMerge result="effect1_noise_7554_4293">
-							<feMergeNode in="shape"/>
-							<feMergeNode in="color1"/>
-						</feMerge>
-					</filter>
-					<linearGradient id="paint0_linear_7554_4293" x1="615" y1="104" x2="827" y2="618" gradientunits="userSpaceOnUse">
-						<stop stop-color="#206EEC"/>
-						<stop offset="1" stop-color="#040D20"/>
-					</linearGradient>
-				</defs>
-			</svg>
-		</div>
-	</div>
+  </div>
 </section>

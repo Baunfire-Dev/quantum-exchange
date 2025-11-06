@@ -1,0 +1,11 @@
+{
+	"name": "content-text-bullet",
+	"title": "Partner Text Bullet",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

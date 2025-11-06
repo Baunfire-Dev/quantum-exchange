@@ -91,6 +91,11 @@
 		@apply font-a-mono font-normal leading-[120%] text-[1rem] tracking-[0.1rem] uppercase;
 	}
 
+	.overline-r {
+		@apply font-a-mono font-normal leading-[120%] text-[1rem] tracking-[0.1rem] uppercase;
+	}
+
+	
 	a,
 	.link {
 		@apply no-underline text-black;
@@ -100,4 +105,43 @@
 @layer components {
 	.rich-text {
 	}
+}
+
+/* ================================
+   Block List Styling
+   (Only color bullets / numbers)
+   ================================ */
+
+/* Unordered and Ordered Lists */
+ul.wp-block-list,
+ol.wp-block-list {
+  margin: 0;
+  padding-left: 1.75rem; /* keep natural indent */
+  list-style-position: outside;
+}
+
+/* Force correct list types in case theme reset removes them */
+ul.wp-block-list { list-style-type: disc; }
+ol.wp-block-list { list-style-type: decimal; }
+
+/* Bullet / Number color only */
+ul.wp-block-list > li::marker,
+ol.wp-block-list > li::marker {
+  color: #206EEC; /* Primary Blue */
+}
+
+/* Spacing between list items (optional but nice) */
+.wp-block-list > li {
+  margin-bottom: 0.75rem;
+  display: list-item;
+}
+
+/* Nested lists (maintains spacing & indent) */
+.wp-block-list .wp-block-list {
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.wp-block-list .wp-block-list > li::marker {
+  color: #206EEC;
 }

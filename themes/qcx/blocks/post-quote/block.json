@@ -1,10 +1,11 @@
 {
 	"name": "post-quote",
 	"title": "Post Quote",
+    "viewScript": ["file:./script.js"],
     "viewStyle": [],
 	"acf": {
 		"mode": "edit",
 		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
+        "postTypes": ["post"]
 	}
 }
