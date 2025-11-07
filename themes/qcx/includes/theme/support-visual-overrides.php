@@ -12,6 +12,7 @@ add_action('login_head', 'custom_admin_favicon', 10, 2);
 // Customize custom post type icon
 add_action('registered_post_type', function ($post_type, $args) {
     if (!in_array($post_type, array(
+        // === Existing CPTs ===
         'resource',
         'news',
         'case-study',
@@ -24,8 +25,16 @@ add_action('registered_post_type', function ($post_type, $args) {
         'ebook',
         'press',
         'videos',
-        'partner' 
+        'partner',
 
+        // === New CPTs ===
+        'award',
+        'blog_podcast',
+        'media_coverage',
+        'resource_library',
+        'press_release',
+        'webinar_event',
+        'team'
     ))) return;
 
     // Set menu icon
@@ -34,6 +43,7 @@ add_action('registered_post_type', function ($post_type, $args) {
     global $wp_post_types;
     $wp_post_types[$post_type] = $args;
 }, 10, 2);
+
 
 // Customize wp-admin login logo
 add_action('login_enqueue_scripts', function () {

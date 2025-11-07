@@ -22,8 +22,9 @@ get_header();
  */
 
 get_header();
+?>
 
-
+<?php
 get_template_part('components/single-hero');
 get_template_part('components/content');
 Timber::render('components/newsletter.twig');

@@ -66,10 +66,7 @@ add_action('init', function () {
     add_post_type_support('partner', ['editor','thumbnail','excerpt','revisions','custom-fields']);
 }, 0);
 
-// === Ensure Gutenberg stays enabled ===
-add_filter('use_block_editor_for_post_type', function ($use, $type) {
-    return $type === 'partner' ? true : $use;
-}, 100, 2);
+
 /**
  * Duplicate Partner Post
  */

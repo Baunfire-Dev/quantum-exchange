@@ -53,6 +53,8 @@ require_once 'includes/theme/support-videos.php';
 require_once 'includes/theme/disable-native-blocks.php';
 require_once 'includes/theme/resource-ajax.php';
 require_once 'includes/theme/partners.php';
+require_once 'includes/theme/support-cpt.php';
+
 
 
 
