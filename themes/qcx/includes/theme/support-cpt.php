@@ -147,3 +147,19 @@ add_filter('single_template', function ($template) {
 
     return $template;
 });
+
+add_action('template_redirect', function () {
+
+    // which CPTs have redirect behavior
+    $types = ['resource', 'news', 'resource_library', 'press_release'];
+
+    if ( is_singular($types) ) {
+
+        $redirect_url = get_field('redirect_url'); // ACF field name
+
+        if ($redirect_url) {
+            wp_redirect( esc_url($redirect_url), 301 );
+            exit;
+        }
+    }
+});
