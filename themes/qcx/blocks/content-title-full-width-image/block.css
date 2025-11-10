@@ -1,5 +1,7 @@
 @layer components {
     .content-title-full-width-image {
-        
+        .media-container {
+            @apply w-full h-auto aspect-[1312/452];
+        }
     }
 }

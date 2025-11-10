@@ -41,7 +41,7 @@ baunfire.addModule({
                 )
                 .fromTo([upperText, lowerText, contentGroup, contentLogo],
                     {
-                        y: 40,
+                        y: "40",
                         autoAlpha: 0
                     },
                     {
@@ -66,19 +66,25 @@ baunfire.addModule({
         };
 
         const setupVideo = (self, videoContainer) => {
-            const videoRaw = videoContainer.find("video");
-            if (!videoRaw.length) return;
+            baunfire.Global.importVimeoScript(() => {
+                const videoID = videoContainer.data("video");
+                videoContainer.append(baunfire.Global.generateVimeoIframe(videoID, true));
 
-            const video = videoRaw.get(0);
+                const playerContainer = videoContainer.find("iframe");
+                if (!playerContainer.length) return;
 
-            ScrollTrigger.create({
-                trigger: videoContainer,
-                start: "top center",
-                end: "bottom 30%",
-                onEnter: () => video.play(),
-                onEnterBack: () => video.play(),
-                onLeave: () => video.pause(),
-                onLeaveBack: () => video.pause()
+                const playerInstance = new Vimeo.Player(playerContainer.get(0));
+                playerInstance.play();
+
+                ScrollTrigger.create({
+                    trigger: videoContainer,
+                    start: "top center",
+                    end: "bottom 30%",
+                    onEnter: () => playerInstance.play(),
+                    onEnterBack: () => playerInstance.play(),
+                    onLeave: () => playerInstance.pause(),
+                    onLeaveBack: () => playerInstance.pause()
+                });
             });
         };
 

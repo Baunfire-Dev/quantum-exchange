@@ -1,13 +1,22 @@
 @layer base {
-    header {
-        @apply sticky top-0 z-[100];
-    }
+	header {
+		@apply sticky top-0 z-[100];
+	}
 
 	.nav {
 		@apply w-full;
+		@apply transition-all duration-500 ease-power2-out;
 
 		&-burger {
-			@apply xl:hidden self-center;
+			@apply xl:hidden flex items-center justify-center self-stretch;
+
+			svg {
+				@apply w-[1.5rem] h-[1.5rem];
+
+				path {
+					@apply transition-all ease-[ease] duration-300;
+				}
+			}
 		}
 
 		&-inner {
@@ -22,27 +31,231 @@
 			}
 		}
 
-		&-panel {
-			@apply max-xl:hidden contents;
-		}
-
 		&-items {
 			@apply flex gap-[0.75rem] ml-auto;
+
+			@media not all and (min-width: 75rem) {
+				@apply flex flex-col gap-[1.5rem] w-full;
+			}
 		}
 
 		&-item {
-			@apply flex h-full items-center;
+			@screen xl {
+				@apply flex h-full items-center;
 
-			&.parent {
+				&.parent {
+					@apply relative cursor-default;
+
+					&.open {
+						.nav {
+							&-dd {
+								@apply xl:visible xl:pointer-events-auto xl:opacity-100 xl:translate-y-0;
+								@apply xl:transition-transform xl:duration-[0.6s] xl:ease-power2-out;
+							}
+
+							&-item-inner {
+								@apply border-green;
+							}
+						}
+					}
+				}
+			}
+
+			@media not all and (min-width: 75rem) {
+				&.parent {
+					&.open {
+						.nav {
+							&-item-inner {
+								svg {
+									@apply rotate-180;
+								}
+							}
+
+							&-dd {
+								@apply h-auto pointer-events-auto;
+							}
+
+							&-dd-inner {
+								@apply opacity-100 translate-y-0;
+								@apply transition-all duration-[0.4s] ease-power2-out;
+							}
+						}
+					}
+				}
 			}
 		}
 
 		&-item-inner {
-			@apply flex py-[0.5625rem] px-[1rem] rounded-[2.5rem] border border-[#D9D9D9];
+			@apply flex gap-[0.75rem] items-center justify-between;
+
+			@screen xl {
+				@apply py-[0.5625rem] px-[1rem] rounded-[2.5rem] border border-gray;
+				@apply transition-colors duration-300 ease-power2-out;
+
+				svg {
+					@apply xl:hidden;
+				}
+			}
+
+			@media not all and (min-width: 75rem) {
+				p {
+					@apply font-inter text-[1.125rem] font-normal leading-[140%] normal-case;
+				}
+			}
+
+			svg {
+				@apply transition-transform duration-300 ease-power2-out;
+			}
 		}
 
 		&-actions {
 			@apply flex items-center;
+
+            .btn.navi {
+                @apply max-sm:w-full py-[1rem];
+            }
+		}
+
+		&-dd {
+			@screen xl {
+				@apply absolute w-fit left-[50%] translate-x-[-50%] top-[calc(50%+1.625rem)];
+				@apply pointer-events-none invisible overflow-hidden translate-y-[1rem] opacity-0 will-change-transform;
+			}
+
+			@media not all and (min-width: 75rem) {
+				@apply h-0 overflow-hidden w-full pointer-events-none;
+			}
+		}
+
+		&-dd-inner {
+			@screen xl {
+				@apply backdrop-blur-[1.125rem] rounded-[0.75rem] border border-green p-[1.5rem];
+				background: rgba(255, 255, 255, 0.8);
+			}
+
+			@media not all and (min-width: 75rem) {
+				@apply opacity-0 translate-y-[1.25rem] pt-[0.75rem];
+			}
+		}
+
+		&-dd-groups {
+			@apply flex max-xl:flex-col ~gap-[1.5rem]/[3rem];
+		}
+
+		&-dd-group {
+			@apply flex flex-col ~gap-[0.75rem]/[1.5rem];
+		}
+
+		&-dd-group-links {
+			@apply flex flex-col gap-[0.75rem];
+		}
+
+		&-dd-group-link {
+			@apply min-w-max relative w-fit;
+
+			&::after {
+				content: "";
+				@apply absolute left-0 bottom-0 w-full h-[1px] bg-black scale-x-0 origin-right transition-transform ease-in duration-[400ms];
+				transition-property: background, transform;
+			}
+
+			&:hover::after {
+				@apply scale-x-100 origin-left ease-out;
+			}
+		}
+
+		&-panel,
+		&-panel-inner {
+			@apply xl:contents;
+		}
+
+		&-panel {
+			@media not all and (min-width: 75rem) {
+				@apply pointer-events-none invisible absolute top-[100%] w-full h-auto left-0;
+			}
+		}
+
+		&-panel-inner {
+			@media not all and (min-width: 75rem) {
+				@apply flex flex-col gap-[3rem] opacity-0 translate-y-[1.5rem];
+				@apply backdrop-blur-[1.125rem] rounded-[0.75rem] border border-green p-[1.5rem];
+				background: rgba(255, 255, 255, 0.8);
+                
+                @apply max-h-[calc(100svh-4.625rem)] overflow-x-clip overflow-y-auto;
+			}
+		}
+
+		&.at-homepage {
+			.nav {
+				&-outer {
+					@apply opacity-0 translate-y-[-140%];
+				}
+			}
+		}
+
+		&.nav-hidden {
+			@apply pointer-events-none;
+			@apply translate-y-[-100%] pointer-events-none;
+		}
+
+		&.nav-scrolled {
+			@apply bg-light-grey;
+            /* @apply border-b-gray; */
+		}
+
+		&.mob-active {
+			.nav {
+				&-burger {
+					path {
+						&:nth-child(1) {
+							transform: rotate(45deg) translate(5px, -12px);
+						}
+
+						&:nth-child(2) {
+							@apply hidden;
+						}
+
+						&:nth-child(3) {
+							transform: rotate(-45deg) translate(-12px, 10px);
+						}
+					}
+				}
+
+				&-inner {
+					@apply relative;
+				}
+
+				&-panel {
+					@apply pointer-events-auto visible;
+				}
+
+				&-panel-inner {
+                    @apply opacity-100 translate-y-0;
+                    @apply transition-all duration-[0.4s] ease-power2-out;
+				}
+
+				/* &-item {
+					&.open {
+						@apply bg-neutral-700;
+
+						.nav {
+							&-item-inner {
+								svg {
+									@apply rotate-180;
+								}
+							}
+
+							&-dd {
+								@apply h-auto;
+							}
+
+							&-dd-inner {
+								@apply opacity-100 translate-y-0 visible;
+							}
+						}
+					}
+				} */
+			}
 		}
 
 		/*
@@ -66,39 +279,9 @@
 			}
 		}
 
-		&-dd-group-content {
-			@apply flex xl:basis-[26.5rem] flex-col;
+		
 
-			&.is-special {
-				@apply ~xl/2xl:~w-[40rem]/[47.25rem] xl:basis-[unset];
-
-				.nav__dd-groups {
-					@apply xl:grid xl:grid-cols-2;
-				}
-
-				.nav__dd-group {
-					&:nth-child(2) {
-						@apply xl:order-3;
-					}
-
-					&:nth-child(3) {
-						@apply xl:row-span-2 xl:order-2;
-					}
-				}
-			}
-		}
-
-		&-dd-groups {
-			@apply flex max-xl:flex-col ~gap-[1.25rem]/[1.5rem] ~pb-[1.25rem]/[1.5rem] xl:pt-[1.5rem] xl:px-[2rem] max-sm:flex max-xl:grid max-xl:grid-cols-2;
-		}
-
-		&-dd-group {
-			@apply flex xl:w-[22.5rem] flex-col ~gap-[0.5rem]/[0.75rem] xl:shrink-0;
-
-			small {
-				@apply text-white-75;
-			}
-		}
+		
 
 		&-dd-group-link {
 			p {
@@ -292,7 +475,7 @@
 }
 
 main {
-    @apply min-h-[62.5rem];
+	@apply min-h-[62.5rem];
 }
 
 header.dark {

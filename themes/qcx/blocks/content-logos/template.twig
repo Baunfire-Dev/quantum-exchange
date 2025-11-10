@@ -1,30 +1,24 @@
 {% set is_home = function("is_home") or function("is_front_page") %}
 
-<section class="{{ block.slug }} {{ block.className }} {{ fields.dark_mode ? "dark" }} dark:bg-black mt-[-1px] relative overflow-hidden">
+<section class="{{ block.slug }} {{ block.className }} {{ fields.dark_mode ? "dark" }} {{ is_home ? "alpha" }} dark:bg-black mt-[-1px] relative overflow-hidden">
 
 	{% if block.anchor %}
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
 	{% endif %}
 
 	{% if fields.dark_mode %}
-		<svg 
-			class="absolute inset-0 w-full h-full object-cover"
-			xmlns="http://www.w3.org/2000/svg" 
-			viewBox="0 0 1440 900" 
-			preserveAspectRatio="xMidYMid slice" 
-			fill="none"
-		>
+		<svg class="absolute inset-0 w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1440 900" preserveaspectratio="xMidYMid slice" fill="none">
 			<g filter="url(#filter0_n_7766_89)">
 				<rect width="1440" height="900" fill="#206EEC"/>
 			</g>
 			<defs>
-				<filter id="filter0_n_7766_89" x="0" y="0" width="1440" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+				<filter id="filter0_n_7766_89" x="0" y="0" width="1440" height="900" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
 					<feFlood flood-opacity="0" result="BackgroundImageFix"/>
 					<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-					<feTurbulence type="fractalNoise" baseFrequency="0.66666668653488159 0.66666668653488159" stitchTiles="stitch" numOctaves="3" result="noise" seed="514"/>
+					<feTurbulence type="fractalNoise" basefrequency="0.66666668653488159 0.66666668653488159" stitchtiles="stitch" numoctaves="3" result="noise" seed="514"/>
 					<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
 					<feComponentTransfer in="alphaNoise" result="coloredNoise1">
-						<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+						<feFuncA type="discrete" tablevalues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
 					</feComponentTransfer>
 					<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
 					<feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
@@ -52,16 +46,14 @@
 			<div class="marquee paused">
 				{% for i in 1..2 %}
 					<div class="marquee__content">
-						{% for i in 1..2 %}
-							{% for logo in fields.logos %}
-								<div class="item">
-									{% include 'components/image.twig' with {
-										'image': logo,
-										'class': 'object-contain h-full w-full',
-										'size': "full",
-									} %}
-								</div>
-							{% endfor %}
+						{% for logo in fields.logos %}
+							<div class="item">
+								{% include 'components/image.twig' with {
+                                    'image': logo,
+                                    'class': 'object-contain h-full w-full',
+                                    'size': "full",
+                                } %}
+							</div>
 						{% endfor %}
 					</div>
 				{% endfor %}

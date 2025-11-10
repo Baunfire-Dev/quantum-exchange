@@ -1,7 +1,7 @@
 <section class="{{ block.slug }} {{ not fields.dark_mode ? 'bg-' ~ fields.bg : 'bg-[#F7F9FB]' }} {{ fields.dark_mode ? 'dark' }} bg-[#F7F9FB] overflow-x-clip overflow-y-visible">
 
   {% if block.anchor %}
-    <div class="section-anchor" id="{{ block.anchor | default(block.id) }}"></div>
+    <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
   {% endif %}
 
   {% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xxl' %}

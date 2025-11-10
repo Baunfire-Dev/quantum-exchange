@@ -85,7 +85,6 @@
 		@apply font-a-mono text-[0.75rem] font-normal tracking-[0.075rem] leading-[130%] uppercase;
 	}
 
-
 	small,
 	.overline {
 		@apply font-a-mono font-normal leading-[120%] text-[1rem] tracking-[0.1rem] uppercase;

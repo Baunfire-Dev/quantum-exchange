@@ -1,6 +1,6 @@
 <?php
 return [
-    "dependencies" => ["jquery", "bf-rellax-script"],
+    "dependencies" => ["jquery"],
     "version" => _S_VERSION,
     "in_footer" => [
         "strategy" => "defer",

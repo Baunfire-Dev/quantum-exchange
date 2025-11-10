@@ -20,7 +20,8 @@
 	}
 
 	html {
-		@apply bg-light-grey font-inter font-normal m-0 p-0 max-w-[100svw] min-w-full w-full h-[100svh] min-h-[100svh] max-h-[100svh] text-black text-[1rem] min-[120rem]:text-[clamp(100%,0.72vw,300%)];
+		@apply bg-light-grey font-inter font-normal m-0 p-0 max-w-[100svw] min-w-full w-full h-[100svh] min-h-[100svh] max-h-[100svh] text-black;
+        @apply text-[1rem] min-[120rem]:text-[clamp(100%,0.72vw,300%)];
 		@apply overflow-x-clip overflow-y-auto;
 
 		&.disable-scrolling,
@@ -32,6 +33,10 @@
 	body {
 		@apply bg-none max-w-[inherit] min-w-[inherit] w-[inherit] m-0 p-0;
 	}
+
+    main {
+        @apply bg-light-grey;
+    }
 
 	section {
 		@apply overflow-clip relative;
@@ -80,7 +85,7 @@
 @layer components {
 	.container {
 		@apply ~px-[1rem]/[4rem] w-full relative;
-        @apply max-w-[90rem] mx-auto;
+        @apply max-w-[120rem] mx-auto;
 
 		&.no-pd {
 			@apply px-0;

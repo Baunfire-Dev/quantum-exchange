@@ -1,98 +1,99 @@
-<section class="{{ block.slug }} {{ block.className }} bg-blue relative overflow-hidden">
+<section class="{{ block.slug }} {{ block.className }} min-h-[110vh] flex items-center justify-center">
 	{% if block.anchor %}
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
 	{% endif %}
 
-	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
-	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
 
-	<div class="container relative z-[2]">
-		<div class="{{ pt }} {{ pb }}">
+	<div class="{{ pt }} {{ pb }} relative z-[2]">
+		<div class="container">
 			<div class="flex flex-col ~gap-[2.5rem]/[4rem]">
-				<div class="flex flex-col ~gap-[1rem]/[1.5rem]">
+				<div class="flex flex-col ~gap-[1rem]/[1.5rem] ~md:~px-[0rem]/[7rem]">
 					{% if fields.logo %}
-						<div class="w-[12.5rem] h-[3.1562rem] aspect-ratio: 200.00/50.50">
+						<div class="block-logo alpha w-[12.5rem] h-[3.125rem] aspect-[250/50]">
 							{% include 'components/image.twig' with {
-                            'image': fields.logo,
-                            'size': "full",
-                        } %}
+                                'image': fields.logo,
+                                'size': "full",
+                            } %}
 						</div>
 					{% endif %}
-					<div class="flex md:flex-row flex-col gap-[1.25rem] items-start md:items-end justify-between">
+
+					<div class="block-heading alpha flex md:flex-row flex-col ~gap-[12.5rem]/[1.25rem] items-start md:items-end justify-between">
 						{% if fields.heading %}
 							<h2 class="max-w-[47.25rem] text-white">{{fields.heading}}</h2>
 						{% endif %}
-						<div>
-							{% include 'components/cta.twig' with {
-                                'class' : 'filled white',
-                                'cta': fields.cta, 
-                            } %}
-						</div>
+                    
+                        {% include 'components/cta.twig' with {
+                            class : 'filled white',
+                            cta: fields.cta, 
+                        } %}
 					</div>
-
 				</div>
+
 				{% if fields.items %}
-					<div class="flex md:flex-row flex-col gap-[1.5rem]">
-						<div class="left-card flex flex-col gap-[1.5rem] md:mt-[4rem]">
+					<div class="item-cards-container">
+						<div class="item-cards left">
 							{% for item in fields.items|filter((v, k) => k in [0, 2]) %}
-								<div class="item-card flex md:flex-row flex-col ~gap-[1.5rem]/[3rem]  p-[2.5rem]">
+								<div class="item-card alpha">
 									{% if item.image %}
-										<div class="flex md:block gap-[2rem] items-center">
-											<div class="flex-none ~w-[3.5rem]/[6rem] ~h-[3.875rem]/[7.125rem]">
+										<div class="item-head">
+											<div class="item-image">
 												{% include 'components/image.twig' with {
-                                                'class': "object-contain",
-                                                'image': item.image,
-                                                'size': "full",
-                                            } %}
+                                                    'class': "object-contain",
+                                                    'image': item.image,
+                                                    'size': "full",
+                                                } %}
 											</div>
+
 											{% if item.title %}
-												<h5 class="block md:hidden  max-w-[11.5625rem] text-white">{{item.title}}</h5>
+												<h5 class="block md:hidden">{{item.title}}</h5>
 											{% endif %}
 										</div>
 									{% endif %}
-									<div class=" flex flex-col gap-[2rem]">
+
+									<div class="item-body">
 										{% if item.title %}
-											<h5 class="hidden md:block text-white">{{item.title}}</h5>
+											<h5 class="hidden md:block">{{item.title}}</h5>
 										{% endif %}
+
 										{% if item.description %}
-											<p class="text-white">{{item.description}}</p>
+											<p>{{item.description}}</p>
 										{% endif %}
-
 									</div>
-
-
 								</div>
 							{% endfor %}
 
 						</div>
-						<div class="rigth-card flex flex-col gap-[1.5rem] md:mb-[4rem]">
+
+						<div class="item-cards right">
 							{% for item in fields.items|filter((v, k) => k in [1, 3]) %}
-								<div class=" item-card flex md:flex-row flex-col gap-[3rem]  p-[2.5rem]">
+								<div class="item-card alpha">
 									{% if item.image %}
-										<div class="flex md:block gap-[2rem] items-center">
-											<div class="flex-none ~w-[3.5rem]/[6rem] ~h-[3.875rem]/[7.125rem]">
+										<div class="item-head">
+											<div class="item-image">
 												{% include 'components/image.twig' with {
-                                                'class': "object-contain",
-                                                'image': item.image,
-                                                'size': "full",
-                                            } %}
+                                                    'class': "object-contain",
+                                                    'image': item.image,
+                                                    'size': "full",
+                                                } %}
 											</div>
+
 											{% if item.title %}
-												<h5 class="block md:hidden  max-w-[11.5625rem] text-white">{{item.title}}</h5>
+												<h5 class="block md:hidden">{{item.title}}</h5>
 											{% endif %}
 										</div>
 									{% endif %}
-									<div class=" flex flex-col gap-[2rem]">
+
+									<div class="item-body">
 										{% if item.title %}
-											<h5 class="hidden md:block text-white">{{item.title}}</h5>
+											<h5 class="hidden md:block">{{item.title}}</h5>
 										{% endif %}
+
 										{% if item.description %}
-											<p class="text-white">{{item.description}}</p>
+											<p>{{item.description}}</p>
 										{% endif %}
-
 									</div>
-
-
 								</div>
 							{% endfor %}
 
@@ -103,10 +104,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="grainy-bg absolute top-0 bottom-0 left-0 right-0 w-full h-full">
-		 <img  src="{{function("png", "grainy-bg-blue")}}" loading="lazy" alt="grainy-bg-blue">
+
+	<div class="bg-graphic absolute top-0 left-0 w-full h-full bg-blue">
+		<div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full">
+			<img src="{{ function("png", "grainy-bg-blue" )}}" loading="eager" alt="grainy-bg-blue">
+		</div>
+
+		<img class="mix-blend-multiply sticky top-0 object-cover" src="{{function("png", "across-tile-bg")}}" loading="eager" alt="across-tile-bg">
 	</div>
-    <div class="absolute bottom-0 right-0">
-    <img class="mix-blend-multiply" src="{{function("png", "across-tile-bg")}}" loading="lazy" alt="across-tile-bg">
-    </div>
 </section>

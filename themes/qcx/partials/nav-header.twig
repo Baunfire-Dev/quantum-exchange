@@ -2,39 +2,8 @@
 {% set is_home = function("is_home") or function("is_front_page") %}
 
 <header class="{{ dark_mode ? 'dark' : '' }}">
-	{% if dark_mode %}
-    <svg 
-      class="header-bg absolute inset-0 w-full h-full object-cover" 
-      xmlns="http://www.w3.org/2000/svg" 
-      viewBox="0 0 1440 900" 
-      preserveAspectRatio="xMidYMid slice" 
-      fill="none"
-    >
-      <g filter="url(#filter0_n_7766_89)">
-        <rect width="1440" height="900" fill="#206EEC"/>
-      </g>
-      <defs>
-        <filter id="filter0_n_7766_89" x="0" y="0" width="1440" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-          <feTurbulence type="fractalNoise" baseFrequency="0.6666" stitchTiles="stitch" numOctaves="3" result="noise" seed="514"/>
-          <feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
-          <feComponentTransfer in="alphaNoise" result="coloredNoise1">
-            <feFuncA type="discrete" tableValues="1 1 1 0 0 0"/>
-          </feComponentTransfer>
-          <feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
-          <feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
-          <feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
-          <feMerge result="effect1_noise_7766_89">
-            <feMergeNode in="shape"/>
-            <feMergeNode in="color1"/>
-          </feMerge>
-        </filter>
-      </defs>
-    </svg>
-  {% endif %}
-	<nav class="nav {{ theme }}">
-		<div class="nav-outer {{ dark_mode ? '' : 'bg-light-grey' }} {{ is_home ? "translate-y-[-100%] opacity-0" }}">
+	<nav class="nav {{ theme }} {{ is_home ? " at-homepage" }}">
+		<div class="nav-outer">
 			<div class="container">
 				<div class="nav-inner">
 					<a href="{{ function('home_url') }}" class="nav-logo">
@@ -68,104 +37,93 @@
 
 					{% if header_nav_item %}
 						<div class="nav-panel">
-							<div class="nav-items">
-								{% for nav_item in header_nav_item %}
-									{% set nav_index = loop.index %}
+							<div class="nav-panel-inner">
+								<div class="nav-items">
+									{% for nav_item in header_nav_item %}
+										{% set nav_index = loop.index %}
 
-									{% if not nav_item.is_cta %}
-										{% if nav_item.is_parent %}
-											<div class="nav-item parent">
-												<div class="nav-item-inner">
-													<p class="button">{{ nav_item.name }}</p>
+										{% if not nav_item.is_cta %}
+											{% if nav_item.is_parent %}
+												<div class="nav-item parent">
+													<div class="nav-item-inner">
+														<p class="button">{{ nav_item.name }}</p>
 
-													<svg width="24" height="25" viewbox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M18 9.5L12 15.5L6 9.5" stroke="white" stroke-opacity="0.75"/>
-													</svg>
-												</div>
+														<svg width="10" height="6" viewbox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M10 0.78355L5 6L0 0.78355L0.751037 0L5 4.4329L9.24896 0L10 0.78355Z" fill="black"/>
+														</svg>
+													</div>
 
-												{% if nav_item.is_parent %}
-													{% set nav_groups = nav_item.nav_group %}
+													{% if nav_item.is_parent %}
+														{% set nav_groups = nav_item.nav_group %}
 
-													<div class="nav-dd">
-														<div class="nav-dd-inner">
-															{% if nav_groups|length %}
-																<div class="nav-dd-group-content {{ nav_groups|length > 2 ? " is-special" }}">
+														<div class="nav-dd">
+															<div class="nav-dd-inner">
+																{% if nav_groups|length %}
 																	<div class="nav-dd-groups">
 																		{% for group in nav_groups %}
 																			{% set nav_group_index = loop.index %}
 
 																			<div class="nav-dd-group">
 																				{% if group.name %}
-																					<small>{{ group.name }}</small>
+																					<p class="button">{{ group.name }}</p>
 																				{% endif %}
 
 																				{% if group.links|length %}
-																					{% for child in group.links %}
-																						{% set child_index = loop.index %}
+																					<div class="nav-dd-group-links">
+																						{% for child in group.links %}
+																							{% set child_index = loop.index %}
 
-																						{% if child.link %}
-																							{% set link_url = child.link.url ?: "#" %}
-																							{% set link_title = child.link.title %}
-																							{% set link_target = child.link.target ?: "_self" %}
-																							{% set has_image = group.has_featured_images and child.feature_image %}
+																							{% if child.link %}
+																								{% set link_url = child.link.url ?: "#" %}
+																								{% set link_title = child.link.title %}
+																								{% set link_target = child.link.target ?: "_self" %}
 
-																							<a class="nav-dd-group-link orby w-fit {{ has_image ? " hoverable" }}" href="{{ link_url }}" target="{{ link_target }}" {{ has_image ? 'data-image-index="' ~ nav_index ~ nav_group_index ~ child_index ~ '"' }}>
-																								<p class="lg">{{ link_title }}</p>
-																							</a>
-																						{% endif %}
-																					{% endfor %}
+																								<a class="nav-dd-group-link" href="{{ link_url }}" target="{{ link_target }}">
+																									<p class="sm">{{ link_title }}</p>
+																								</a>
+																							{% endif %}
+																						{% endfor %}
+																					</div>
 																				{% endif %}
 																			</div>
 																		{% endfor %}
 																	</div>
-
-																	{% if bottom_link %}
-																		{% set link_url = bottom_link.url ?: "#" %}
-																		{% set link_title = bottom_link.title %}
-																		{% set link_target = bottom_link.target ?: "_self" %}
-
-																		<div class="nav-dd-blink">
-																			<a class="orby" href="{{ link_url }}" target="{{ link_target }}">
-																				<p class="lg">{{ link_title }}</p>
-																			</a>
-																		</div>
-																	{% endif %}
-																</div>
-															{% endif %}
+																{% endif %}
+															</div>
 														</div>
-													</div>
-												{% endif %}
-											</div>
-										{% else %}
-											{% if nav_item.link %}
-												{% set link_url = nav_item.link.url ?: "#" %}
-												{% set link_title = nav_item.link.title %}
-												{% set link_target = nav_item.link.target ?: "_self" %}
+													{% endif %}
+												</div>
+											{% else %}
+												{% if nav_item.link %}
+													{% set link_url = nav_item.link.url ?: "#" %}
+													{% set link_title = nav_item.link.title %}
+													{% set link_target = nav_item.link.target ?: "_self" %}
 
-												<a class="nav-item" href="{{ link_url }}" target="{{ link_target }}">
-													<div class="nav-item-inner">
-														<p class="button">{{ link_title }}</p>
-													</div>
-												</a>
+													<a class="nav-item" href="{{ link_url }}" target="{{ link_target }}">
+														<div class="nav-item-inner">
+															<p class="button">{{ link_title }}</p>
+														</div>
+													</a>
+												{% endif %}
 											{% endif %}
 										{% endif %}
-									{% endif %}
-								{% endfor %}
-							</div>
+									{% endfor %}
+								</div>
 
-							<div class="nav-actions">
-								{% for nav_item in header_nav_item %}
-									{% if nav_item.is_cta and nav_item.link %}
-										{% set link_url = nav_item.link.url ?: "#" %}
-										{% set link_title = nav_item.link.title %}
-										{% set link_target = nav_item.link.target ?: "_self" %}
+								<div class="nav-actions">
+									{% for nav_item in header_nav_item %}
+										{% if nav_item.is_cta and nav_item.link %}
+											{% set link_url = nav_item.link.url ?: "#" %}
+											{% set link_title = nav_item.link.title %}
+											{% set link_target = nav_item.link.target ?: "_self" %}
 
-										{% include 'components/cta.twig' with {
-                                            class : 'navi',
-                                            cta: nav_item.link
-                                        } %}
-									{% endif %}
-								{% endfor %}
+											{% include 'components/cta.twig' with {
+                                                class : 'navi',
+                                                cta: nav_item.link
+                                            } %}
+										{% endif %}
+									{% endfor %}
+								</div>
 							</div>
 						</div>
 					{% endif %}

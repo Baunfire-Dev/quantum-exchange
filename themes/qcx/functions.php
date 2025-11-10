@@ -96,16 +96,34 @@ function front_js_scripts()
     wp_enqueue_script("bf-scroll-trigger-script", get_template_directory_uri() . '/assets/js/external/ScrollTrigger.min.js', array('jquery'), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));
     wp_enqueue_script("bf-scramble-text-script", get_template_directory_uri() . '/assets/js/external/ScrambleTextPlugin.min.js', array(), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
     wp_enqueue_script("bf-scroll-to-script", get_template_directory_uri() . '/assets/js/external/ScrollToPlugin.min.js', array('jquery'), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));
-    // wp_enqueue_script("bf-split-text-script", get_template_directory_uri() . '/assets/js/external/SplitText.min.js', array(), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
     wp_enqueue_script("bf-lenis-script", get_template_directory_uri() . '/assets/js/external/lenis.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
 
     wp_register_script("bf-vimeo-script", get_template_directory_uri() . '/assets/js/external/vimeo-player.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-
     wp_register_script('bf-owl-script', get_template_directory_uri() . '/assets/js/external/owl.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
     wp_register_script("select-two-script", get_template_directory_uri() . '/assets/js/external/select2.min.js', array(), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));
     wp_register_script("bf-toastify-script", get_template_directory_uri() . '/assets/js/external/toastify.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
+    wp_register_script("bf-rellax-script", get_template_directory_uri() . '/assets/js/external/rellax.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
 
-    wp_enqueue_script("bf-custom-min-js", get_template_directory_uri() . '/assets/js/custom.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
+    
+// function allow_json_uploads($mimes) {
+//     $mimes['json'] = 'application/json';
+//     return $mimes;
+// }
+// add_filter('upload_mimes', 'allow_json_uploads');
+
+// add_action('wp_enqueue_scripts', function() {
+// 	wp_enqueue_script(
+// 		'lottie-player',
+// 		'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js',
+// 		[],
+// 		null,
+// 		true
+// 	);
+// });
+
+// will clean
+
+    wp_enqueue_script("bf-custom-min-js", get_template_directory_uri() . '/assets/js/custom.min.js', array('jquery', 'bf-gsap-script', 'bf-scroll-trigger-script', 'bf-lenis-script', 'bf-scramble-text-script', 'bf-scroll-to-script'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
 }
 
 function back_css_styles($hook)
@@ -259,21 +277,3 @@ function custom_block_category($categories, $post)
 }
 
 add_filter('block_categories_all', 'custom_block_category', 10, 2);
-
-function allow_json_uploads($mimes) {
-    $mimes['json'] = 'application/json';
-    return $mimes;
-}
-add_filter('upload_mimes', 'allow_json_uploads');
-
-add_action('wp_enqueue_scripts', function() {
-	wp_enqueue_script(
-		'lottie-player',
-		'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js',
-		[],
-		null,
-		true
-	);
-});
-
-// will clean

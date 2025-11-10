@@ -1,13 +1,53 @@
 @layer components {
-  .content-two-across-tiles {
-    .item-card {
-      @apply border-[1px] border-green rounded-[0.5rem] backdrop-blur-[0.9375rem];
-      background: rgba(32, 110, 236, 0.2);
-      will-change: transform;
-    }
-    
-    .left-card, .rigth-card {
-      will-change: transform;
-    }
-  }
+	.content-two-across-tiles {
+		.item {
+			&-cards-container {
+				@apply flex md:flex-row flex-col gap-[1.5rem];
+			}
+
+			&-cards {
+				@apply flex flex-col gap-[1.5rem];
+
+				&.left {
+					@apply md:mt-[4rem];
+				}
+
+				&.right {
+					@apply md:mb-[4rem];
+				}
+			}
+
+			&-card {
+                @apply flex md:flex-row flex-col ~gap-[1.5rem]/[3rem] p-[2.5rem] will-change-transform;
+                @apply border border-green rounded-[0.5rem] backdrop-blur-[15px];
+                background: rgba(32, 110, 236, 0.2);
+			}
+
+			&-head {
+				@apply flex md:block gap-[2rem] items-center;
+
+				h5 {
+					@apply max-w-[11.5625rem] text-white;
+				}
+			}
+
+			&-image {
+				@apply flex-none ~w-[3.5rem]/[6rem] ~h-[3.875rem]/[7.125rem];
+			}
+
+			&-body {
+				@apply flex flex-col gap-[2rem];
+
+				h5,
+				p {
+					@apply text-white;
+				}
+			}
+		}
+
+		.left-card,
+		.rigth-card {
+			will-change: transform;
+		}
+	}
 }

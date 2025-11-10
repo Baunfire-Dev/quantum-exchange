@@ -10,31 +10,26 @@ $context = Timber::context([
 
 $context["block"]["slug"] = preg_replace('/^acf\//', '', $block["name"]);
 
-$select_videos = $context["fields"]["select_videos"] ?? "all";
-$videos_data = array();
+$select_videos = $context["fields"]["source"] ?? "all";
+$raw_videos = array();
+$clean_videos = array();
 
 if ($select_videos === "all") {
-    $videos = get_posts(array(
+    $raw_videos = get_posts(array(
         'post_type' => 'videos',
         'posts_per_page' => -1,
         'orderby' => 'date',
         'order' => 'DESC',
         'post_status' => 'publish'
     ));
-} elseif ($select_videos === "latest") {
-    $videos = get_posts(array(
-        'post_type' => 'videos',
-        'posts_per_page' => 5,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'post_status' => 'publish'
-    ));
-} elseif ($select_videos === "manual" && !empty($context["fields"]["videos"])) {
+}elseif ($select_videos === "manual" && !empty($context["fields"]["videos"])) {
     $video_ids = $context["fields"]["videos"];
+
     if (!is_array($video_ids)) {
         $video_ids = array($video_ids);
     }
-    $videos = get_posts(array(
+
+    $raw_videos = get_posts(array(
         'post_type' => 'videos',
         'post__in' => $video_ids,
         'orderby' => 'post__in',
@@ -43,29 +38,23 @@ if ($select_videos === "all") {
     ));
 }
 
-if (!empty($videos)) {
-    foreach ($videos as $video) {
+if (!empty($raw_videos)) {
+    foreach ($raw_videos as $video) {
         $video_fields = get_fields($video->ID);
+        
         $video_item = array(
-            'id' => $video->ID,
             'title' => $video->post_title,
-            'excerpt' => $video->post_excerpt,
-            'thumbnail' => $video_fields['thumnail'] ?? null,
-            'source' => $video_fields['source'] ?? 'media',
-            'select_media' => $video_fields['select_media'] ?? null,
-            'vimeo_id' => $video_fields['vimeo_id'] ?? null,
-            'youtube_id' => $video_fields['youtube_id'] ?? null
+            'source' => $video_fields['source'] ?? 'direct',
+            'video_url' => $video_fields['video_url'] ?? null,
+            'youtube_id' => $video_fields['youtube_id'] ?? null,
+            'thumbnail' => isset($video_fields['thumbnail']) ? $video_fields['thumbnail'] : '',
         );
         
-        if (!$video_item['thumbnail'] && has_post_thumbnail($video->ID)) {
-            $video_item['thumbnail'] = get_post_thumbnail_id($video->ID);
-        }
-        
-        $videos_data[] = $video_item;
+        $clean_videos[] = $video_item;
     }
 }
 
-$context["videos"] = $videos_data;
+$context["videos"] = $clean_videos;
 
 acf_reset_meta($block["id"]);
 

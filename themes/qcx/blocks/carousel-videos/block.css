@@ -1,81 +1,129 @@
 @layer components {
-  .carousel-videos {
-    .owl-carousel .owl-stage-outer {
-      @apply !overflow-visible;
-    }
-    .video-wrapper {
-      @apply relative;
-    }
+	.carousel-videos {
+		.owl-carousel {
+			.owl-stage-outer {
+				@apply !overflow-visible;
+			}
 
-    .video-thumbnail,
-    .video-preview {
-      @apply w-full h-full object-cover;
-    }
+			.owl-dots,
+			.owl-nav {
+				@apply hidden;
+			}
+		}
 
-    .media-container {
-      @apply relative h-[17.2356rem] rounded-[8px] overflow-hidden;
+		.items {
+			@apply flex flex-col ~gap-[1.25rem]/[1.5rem] w-full;
 
-      .video-preview {
-        @apply absolute inset-0 w-full h-full rounded-[8px] object-cover;
-      }
-    }
+			&-nav {
+				@apply w-full flex items-center justify-end gap-[1.5rem];
+			}
+		}
 
-    .media-control {
-      @apply absolute overflow-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors cursor-pointer z-10;
-    }
+		.item {
+			&::before {
+				content: "";
+				@apply absolute top-0 left-0 h-full w-full pointer-events-none scale-y-[-1] z-[1] rounded-[0.5rem] overflow-hidden;
+                @apply opacity-0 duration-300 ease-power2-out transition-opacity;
 
-    video,
-    iframe {
-      @apply w-full h-full;
-      transform: scale(1.5);
-    }
-    .video-item {
-      @apply cursor-pointer;
-      &:hover {
-        @apply border-[1px] border-green;
+				background: radial-gradient(
+					95.74% 72.48% at 90.44% -25.87%,
+					#00a1ff 0%,
+					rgba(0, 161, 255, 0) 100%
+				);
+			}
 
-        &::before {
-          @apply opacity-100;
-        }
-        .eyebrow {
-          animation: textFlicker 0.5s ease-in-out;
-        }
-        rect {
-          animation: svgFlicker 0.5s ease-in-out;
-        }
-      }
-      &::before {
-        content: "";
-        @apply absolute inset-0 bg-[radial-gradient(95.74%_72.48%_at_90.44%_105%,_#00a1ff80_0%,_rgba(0,161,255,0)_65%)] opacity-0 transition-opacity duration-300 pointer-events-none;
-      }
-    }
-  }
-  @keyframes textFlicker {
-    0% {
-      -webkit-text-stroke: 0px;
-      text-stroke: 0px;
-    }
-    50% {
-      -webkit-text-stroke: 0.5px currentColor;
-      text-stroke: 0.5px currentColor;
-    }
-    100% {
-      -webkit-text-stroke: 0px;
-      text-stroke: 0px;
-    }
-  }
-  @keyframes svgFlicker {
-    0% {
-      stroke: transparent;
-      stroke-width: 0;
-    }
-    50% {
-      stroke: black;
-      stroke-width: 0.5px;
-    }
-    100% {
-      stroke: transparent;
-      stroke-width: 0;
-    }
-  }
+			&-card {
+				@apply relative flex flex-col ~gap-[2rem]/[3rem] ~p-[1.25rem]/[2rem] border border-gray rounded-[0.5rem] z-[2];
+			}
+
+			&-head {
+				@apply flex flex-col gap-[1.5rem];
+			}
+
+			&-tag {
+				@apply flex gap-[0.5rem] items-center;
+			}
+
+			&-square {
+				@apply h-[0.625rem] w-[0.625rem] aspect-square bg-green rounded-[0.125rem];
+			}
+
+			&-media {
+				@apply w-full h-auto aspect-[303/170] md:aspect-[357/256] relative cursor-pointer;
+
+				&:hover {
+					.item-play {
+						@apply scale-110;
+					}
+				}
+			}
+
+			&-play {
+				@apply ~h-[4rem]/[4.75rem] ~w-[4rem]/[4.75rem] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[3];
+				@apply transition-transform duration-300 ease-power2-out;
+			}
+
+			&-thumbnail {
+				@apply rounded-[0.5rem] overflow-hidden absolute top-0 left-0 h-full w-full z-[2];
+			}
+
+            &:hover {
+                &::before {
+                    @apply opacity-50;
+                }
+            }
+		}
+
+		.dg {
+			&[open] {
+				@apply flex items-center justify-center;
+			}
+
+			&-outer {
+				@apply w-full h-auto aspect-video max-w-[90vw] bg-black relative;
+			}
+
+			&-inner {
+				@apply w-full h-full relative;
+
+				iframe,
+				video {
+					@apply absolute center-xy min-h-full min-w-full h-auto w-auto;
+				}
+			}
+
+			&-close {
+				@apply absolute top-[-2.5rem] right-0 cursor-pointer;
+
+				svg {
+					@apply h-[1.5rem] w-[1.5rem];
+				}
+			}
+		}
+	}
+
+	.ar-l,
+	.ar-r {
+		@apply flex items-center gap-[0.5rem];
+
+		svg {
+			@apply transition-transform duration-300 ease-power2-out;
+		}
+	}
+
+	.ar-l {
+		&:hover {
+			svg {
+				@apply translate-x-[-0.25rem];
+			}
+		}
+	}
+
+	.ar-r {
+		&:hover {
+			svg {
+				@apply translate-x-[0.25rem];
+			}
+		}
+	}
 }

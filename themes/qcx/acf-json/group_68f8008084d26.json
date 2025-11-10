@@ -4,11 +4,11 @@
     "fields": [
         {
             "key": "field_68f80080ddb81",
-            "label": "Thumbnail (Optional)",
-            "name": "thumnail",
+            "label": "Thumbnail",
+            "name": "thumbnail",
             "aria-label": "",
             "type": "image",
-            "instructions": "",
+            "instructions": "Optional",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -45,8 +45,7 @@
                 "id": ""
             },
             "choices": {
-                "media": "Media",
-                "vimeo": "Vimeo",
+                "direct": "Direct Link",
                 "youtube": "YouTube"
             },
             "default_value": "media",
@@ -56,39 +55,9 @@
             "layout": "horizontal"
         },
         {
-            "key": "field_68f80160ddb83",
-            "label": "Select Media",
-            "name": "select_media",
-            "aria-label": "",
-            "type": "file",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_68f800f8ddb82",
-                        "operator": "==",
-                        "value": "media"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "uploader": "",
-            "return_format": "array",
-            "min_size": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "library": "all"
-        },
-        {
             "key": "field_68f8017fddb84",
-            "label": "Vimeo ID",
-            "name": "vimeo_id",
+            "label": "Video URL",
+            "name": "video_url",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -98,7 +67,7 @@
                     {
                         "field": "field_68f800f8ddb82",
                         "operator": "==",
-                        "value": "vimeo"
+                        "value": "direct"
                     }
                 ]
             ],
@@ -170,5 +139,5 @@
     "acfe_form": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1761091556
+    "modified": 1762718968
 }
