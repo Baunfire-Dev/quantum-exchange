@@ -60,16 +60,27 @@ function qcx_rg_filter() {
     $type_id   = intval($_POST['type_id'] ?? 0);                 // parent term_id
     $cat_id    = intval($_POST['cat_id']  ?? 0);                 // child term_id
 
+    // UPDATED: map "all" to all CPTs + blog
+    $all_types = array(
+        'news','award','blog_podcast','media_coverage','resource_library',
+        'press_release','webinar_event','team','post'
+    );
+
     $args = array(
-        'post_type'      => $post_type,
         'post_status'    => 'publish',
         'posts_per_page' => $ppp,
         'paged'          => $page,
     );
 
+    if ($post_type === 'all') {
+        $args['post_type'] = $all_types;
+    } else {
+        $args['post_type'] = $post_type;
+    }
+
     // Build tax_query
     $tax_query = array();
-    if ($type_id) {
+    if ($type_id && taxonomy_exists($tax_type)) {
         $tax_query[] = array(
             'taxonomy'         => $tax_type,
             'field'            => 'term_id',
@@ -78,7 +89,7 @@ function qcx_rg_filter() {
             'operator'         => 'IN',
         );
     }
-    if ($cat_id) {
+    if ($cat_id && $tax_cat && taxonomy_exists($tax_cat)) {
         $tax_query[] = array(
             'taxonomy'         => $tax_cat,
             'field'            => 'term_id',
@@ -109,13 +120,18 @@ function qcx_rg_filter() {
                 continue;
             }
 
-            // Fallback: your original PHP card markup (kept intact)
+            // Fallback: PHP card markup
             $label = 'ARTICLE';
-            $t = get_the_terms(get_the_ID(), $tax_cat);
-            if (!is_wp_error($t) && !empty($t)) {
-                $t = array_values($t);
-                $label = strtoupper($t[0]->name);
+
+            // UPDATED: only query terms if taxonomy exists/non-empty; decode entities for clean display
+            if ($tax_cat && taxonomy_exists($tax_cat)) {
+                $t = get_the_terms(get_the_ID(), $tax_cat);
+                if (!is_wp_error($t) && !empty($t)) {
+                    $t = array_values($t);
+                    $label = strtoupper( html_entity_decode( $t[0]->name ) );
+                }
             }
+
             ?>
             <article data-rg-item
             class="video-item group relative flex flex-col ~gap-[2rem]/[3rem] ~p-[1.25rem]/[2rem] border border-[#D9D9D9] rounded-[0.5rem] bg-[#F7F9FB] overflow-hidden">
@@ -147,7 +163,6 @@ function qcx_rg_filter() {
                 <?php endif; ?>
             </div>
             </article>
-
             <?php
         endwhile;
         wp_reset_postdata();
@@ -168,8 +183,8 @@ function qcx_rg_filter() {
 function qcx_rg_categories() {
     check_ajax_referer('rg_nonce', 'nonce');
 
-    $tax_type = sanitize_key($_POST['tax_type'] ?? 'category'); // parent taxonomy
-    $type_id  = intval($_POST['type_id'] ?? 0);
+    $tax_type = sanitize_key($_POST['tax_type'] ?? 'category'); // taxonomy slug
+    $type_id  = intval($_POST['type_id'] ?? 0);                  // parent term id
 
     $children = get_terms(array(
         'taxonomy'   => $tax_type,
@@ -182,11 +197,11 @@ function qcx_rg_categories() {
         foreach ($children as $c) {
             $cats[] = array(
                 'term_id' => $c->term_id,
-                'name'    => $c->name,
+                // UPDATED: decode to avoid showing &amp; in UI
+                'name'    => html_entity_decode($c->name),
             );
         }
     }
 
     wp_send_json(array('cats' => $cats));
 }
-

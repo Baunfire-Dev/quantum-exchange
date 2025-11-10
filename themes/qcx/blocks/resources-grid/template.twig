@@ -1,42 +1,47 @@
-{# Resource Grid V1 — parent/child (category/category) filters with AJAX #}
+{# Resource Grid V2 — All CPTs + Blog, dynamic taxonomy + URL sync #}
 <section class="{{ block.slug }} {{ block.className }} rgs" style="background:#F7F9FB;">
   {% if block.anchor %}<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>{% endif %}
 
   <div class="mx-auto max-w-[90rem] px-[1rem] md:px-[4rem] py-[4.5rem] md:py-[7.5rem] flex flex-col items-center gap-[3rem] w-full">
 
     {# FILTER BAR ------------------------------------------------------------ #}
-    <div class="flex flex-col md:flex-row flex-wrap  items-start gap-[1.5rem] w-full z-[25]">
-      {# TYPE (parent) #}
+    <div class="flex flex-col md:flex-row flex-wrap items-start gap-[1.5rem] w-full z-[25]">
+
+      {# TYPE (post type) #}
       <div class="rg-select relative w-full md:w-auto">
         <button class="rg-btn flex w-full md:w-[16.25rem] h-[3.0625rem] px-5 py-3 justify-between items-center rounded-[2.5rem] border border-[#D9D9D9] bg-[#f8f9fb]"
                 type="button" data-toggle="type">
-          <span class="text-[0.75rem] font-[500] leading-[1.2] tracking-[0.075rem] uppercase">Type</span>
-               <svg class="rg-arrow transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-         <path d="M18 9L12 15L6 9" stroke="black" stroke-width="1.5"/>
-        </svg>
+          <span class="text-[0.75rem] font-[500] leading-[1.2] tracking-[0.075rem] uppercase">
+            {{ cpt_map[rg.post_type]['label'] ?? 'All' }}
+          </span>
+          <svg class="rg-arrow transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 9L12 15L6 9" stroke="black" stroke-width="1.5"/>
+          </svg>
         </button>
+
         <div class="rg-menu py-[0.625rem] absolute z-[25] mt-2 w-full md:w-[16.25rem] max-h-[16rem] overflow-auto rounded-[0.5rem] border border-[#D9D9D9] bg-[#f8f9fb] shadow hidden"
-             data-menu="type"> {# IMPORTANT: 'type', not 'cat' #}
-          <button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[0.75rem] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>
-          {% for t in type_terms %}
-            <button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[0.75rem] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="{{ t.term_id }}">{{ t.name }}</button>
+             data-menu="type">
+          {% for key, c in cpt_map %}
+            <button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[0.75rem] font-medium leading-[1.2] tracking-[1.2px] uppercase"
+                    data-value="{{ key }}" data-tax="{{ c.tax|default('') }}">{{ c.label }}</button>
           {% endfor %}
         </div>
       </div>
 
-      {# CATEGORY (child) #}
+      {# CATEGORY (taxonomy terms of selected CPT) #}
       <div class="rg-select relative w-full md:w-auto">
-        <button class="rg-btn flex w-full md:w-[16.25rem] h-[3.0625rem] px-5 py-3 justify-between items-center rounded-[2.5rem] border border-[#D9D9D9] disabled:opacity-60 bg-[#f8f9fb]"
-                type="button" data-toggle="cat" disabled>
+        {% set catDisabled = (rg.post_type == 'all') %}
+        <button class="rg-btn flex w-full md:w-[16.25rem] h-[3.0625rem] px-5 py-3 justify-between items-center rounded-[2.5rem] border border-[#D9D9D9] {{ catDisabled ? 'opacity-60' : '' }} bg-[#f8f9fb]"
+                type="button" data-toggle="cat" {{ catDisabled ? 'disabled' : '' }}>
           <span class="text-[0.75rem] font-[500] leading-[1.2] tracking-[0.075rem] uppercase">Category</span>
-            <svg class="rg-arrow transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <svg class="rg-arrow transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M18 9L12 15L6 9" stroke="black" stroke-width="1.5"/>
-            </svg>
+          </svg>
         </button>
-        <div class="rg-menu py-[0.625rem] absolute z-20 mt-2 w-full md:w-[16.25rem] max-h-[16rem] overflow-auto rounded-[0.5rem] border border-[#D9D9D9]  bg-[#f8f9fb] shadow hidden"
+        <div class="rg-menu py-[0.625rem] absolute z-20 mt-2 w-full md:w-[16.25rem] max-h-[16rem] overflow-auto rounded-[0.5rem] border border-[#D9D9D9] bg-[#f8f9fb] shadow hidden"
              data-menu="cat">
           <button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 text-[0.75rem] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>
-          {# Child options are injected after parent selection #}
+          {# JS will inject terms when a CPT (not "All") is chosen #}
         </div>
       </div>
     </div>
@@ -47,28 +52,26 @@
            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-[2rem] gap-x-[1.5rem] w-full"
            data-ppp="{{ rg.ppp }}"
            data-page="1"
-           data-type=""
-           data-cat=""
-           data-post-type="{{ rg.post_type }}"
+           data-type=""              {# not used now (was parent term id) #}
+           data-cat=""               {# selected term id #}
+           data-post-type="{{ rg.post_type }}"           {# 'all' or a CPT slug #}
            data-nonce="{{ rg_nonce }}"
            data-ajax="{{ function('admin_url','admin-ajax.php') }}"
-           data-tax-type="{{ rg.tax_type }}"
-           data-tax-cat="{{ rg.tax_category }}">
+           data-tax-type=""          {# deprecated in this flow #}
+           data-tax-cat="{{ rg.tax_category ?? '' }}">   {# taxonomy slug for selected CPT (blank when 'all') #}
 
-       {# inside #rg-grid #}
         {% if resources and resources|length %}
-        {% for r in resources %}
+          {% for r in resources %}
             {% include __DIR__ ~ '/_item.twig' with { r: r, rg_tax: rg.tax_category } %}
-        {% endfor %}
+          {% endfor %}
         {% else %}
-        <p id="rg-empty" class="text-center text-gray-500 w-full">No results found.</p>
+          <p id="rg-empty" class="text-center text-gray-500 w-full">No results found.</p>
         {% endif %}
 
       </div>
 
       {# LOAD MORE ----------------------------------------------------------- #}
       <div class="w-full flex justify-center">
-
         {% include 'components/cta.twig' with {
             'class': 'filled blue rg-more',
             'id': 'rg-more',
@@ -82,16 +85,32 @@
     </div>
   </div>
 
-  {# Inline JS (self-contained). will change or move later #}
+  {# Inline JS will move after updating cards -------------------------------------------------------------- #}
   <script>
   (function(){
-    const root = document.currentScript.closest('.rgs');
+    const root    = document.currentScript.closest('.rgs');
     const grid    = root.querySelector('#rg-grid');
-    const more    = root.querySelector('.rg-more'); // <a ...> from CTA
+    const more    = root.querySelector('.rg-more');
     const selects = root.querySelectorAll('.rg-select');
     let loading   = false;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- URL helpers
+    const urlParams   = new URLSearchParams(window.location.search);
+    const initialType = urlParams.get('type') || grid.dataset.postType || 'all';
+    const initialCat  = urlParams.get('cat')  || '';
+
+    function updateURL(){
+      const type = grid.dataset.postType || 'all';
+      const cat  = grid.dataset.cat || '';
+      const params = new URLSearchParams();
+      if (type && type !== 'all') params.set('type', type);
+      if (cat) params.set('cat', cat);
+      const qs = params.toString();
+      const newUrl = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+      history.pushState({}, '', newUrl);
+    }
 
     function toggleMenu(btn){
       const wrap  = btn.closest('.rg-select');
@@ -122,32 +141,25 @@
           catMenu.classList.add('hidden');
           btn.querySelector('.rg-arrow')?.classList.remove('rotate-180');
           refresh(true);
+          updateURL();
         });
       });
     }
 
-    function fetchCats(type_id, catMenu){
+    // Fetch top-level terms for selected taxonomy (pass tax slug)
+    function fetchTerms(taxSlug, catMenu){
       catMenu.innerHTML = '<button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[12px] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>';
-
-      if(!type_id){
-        const row = document.createElement('div');
-        row.className = 'px-4 py-3 text-gray-400 text-sm';
-        row.textContent = 'No parent selected';
-        catMenu.appendChild(row);
-        wireCatClicks(catMenu);
-        return;
-      }
 
       const fd = new FormData();
       fd.append('action','rg_categories');
       fd.append('nonce', grid.dataset.nonce);
-      fd.append('tax_type', grid.dataset.taxType);
-      fd.append('type_id',  type_id);
+      fd.append('tax_type', taxSlug); // reuse endpoint: tax_type = taxonomy slug
+      fd.append('type_id',  0);       // parent=0 => top-level terms
 
       fetch(grid.dataset.ajax, { method:'POST', body: fd })
         .then(r=>r.json())
         .then(data=>{
-          if(Array.isArray(data.cats) && data.cats.length){
+          if (Array.isArray(data.cats) && data.cats.length){
             data.cats.forEach(c=>{
               const b = document.createElement('button');
               b.className = 'rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100';
@@ -179,27 +191,19 @@
       more.style.display = (items >= ppp ? 'inline-flex' : 'none');
     }
 
-    // Smooth animate-in for newly added items only
     function animateNewItems(){
       if(!window.gsap || reduceMotion) return;
       const newEls = Array.from(grid.querySelectorAll('[data-rg-item]:not(.is-animated)'));
       if(!newEls.length) return;
-
-      // perf hint
       gsap.set(newEls, { willChange: 'transform, opacity, filter' });
-
       gsap.fromTo(newEls,
         { autoAlpha: 0, y: 24, filter: 'blur(4px)' },
         {
-          autoAlpha: 1,
-          y: 0,
-          filter: 'blur(0px)',
-          duration: 0.55,
-          ease: 'power3.out',
+          autoAlpha: 1, y: 0, filter: 'blur(0px)',
+          duration: 0.55, ease: 'power3.out',
           stagger: { each: 0.06, from: 'start' },
           onComplete: () => {
             newEls.forEach(el => el.classList.add('is-animated'));
-            // clear perf hint
             gsap.set(newEls, { clearProps: 'will-change' });
           }
         }
@@ -214,13 +218,15 @@
       const fd = new FormData();
       fd.append('action','rg_filter');
       fd.append('nonce', grid.dataset.nonce);
-      fd.append('post_type', grid.dataset.postType);
+      fd.append('post_type', grid.dataset.postType || 'all'); // 'all' handled server-side (controller initial; AJAX can support via WP_Query with array if needed)
       fd.append('ppp', grid.dataset.ppp);
       fd.append('page', grid.dataset.page);
-      fd.append('tax_type', grid.dataset.taxType);
-      fd.append('tax_cat',  grid.dataset.taxCat);
-      fd.append('type_id',  grid.dataset.type);
-      fd.append('cat_id',   grid.dataset.cat);
+
+      // Legacy fields kept but not used in this mode
+      fd.append('tax_type', '');                 // no parent taxonomy filter
+      fd.append('type_id',  '');                 // no parent term
+      fd.append('tax_cat',  grid.dataset.taxCat || ''); // selected CPT taxonomy slug
+      fd.append('cat_id',   grid.dataset.cat || '');    // selected term id
 
       grid.style.opacity = '0.4';
 
@@ -231,15 +237,10 @@
           if(resetPage){ grid.innerHTML = ''; }
 
           if(data.html){
-            // Insert and then animate ONLY the new nodes
             const beforeCount = grid.querySelectorAll('[data-rg-item]').length;
             grid.insertAdjacentHTML('beforeend', data.html);
 
-            // mark previously existing as animated to avoid re-animating
-            if(resetPage){
-              // fresh render — animate first batch too but still tag them
-              // do nothing here; animateNewItems() will catch them
-            } else {
+            if(!resetPage){
               const existing = Array.from(grid.querySelectorAll('[data-rg-item]')).slice(0, beforeCount);
               existing.forEach(el => el.classList.add('is-animated'));
             }
@@ -261,40 +262,60 @@
         .finally(()=> loading = false);
     }
 
-    // wire menus
+    // Wire dropdowns
     selects.forEach(s=>{
       const btn = s.querySelector('.rg-btn');
       btn.addEventListener('click', ()=> toggleMenu(btn));
 
       s.querySelectorAll('.rg-opt').forEach(opt=>{
         opt.addEventListener('click', e=>{
-          const val  = e.currentTarget.dataset.value || '';
           const span = btn.querySelector('span');
           span.textContent = e.currentTarget.textContent.trim();
           s.querySelector('.rg-menu').classList.add('hidden');
           btn.querySelector('.rg-arrow').classList.remove('rotate-180');
 
+          // TYPE changed (CPT)
           if(btn.dataset.toggle === 'type'){
-            grid.dataset.type = val;
-            grid.dataset.cat  = '';
+            const chosenType = e.currentTarget.dataset.value || 'all';
+            const taxSlug    = e.currentTarget.dataset.tax || '';
 
+            // Update dataset for AJAX
+            grid.dataset.postType = chosenType;
+            grid.dataset.taxCat   = (chosenType === 'all') ? '' : taxSlug;
+            grid.dataset.cat      = ''; // reset selected term
+
+            // Manage Category button state
             const catBtn  = root.querySelector('[data-toggle="cat"]');
             const catMenu = root.querySelector('[data-menu="cat"]');
-            catBtn.disabled = false;
-            catBtn.querySelector('span').textContent = 'Category';
-            catMenu.innerHTML = '<button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[12px] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>';
-            fetchCats(val, catMenu);
+            if (chosenType === 'all'){
+              catBtn.disabled = true;
+              catBtn.classList.add('opacity-60');
+              catBtn.querySelector('span').textContent = 'Category';
+              catMenu.innerHTML = '<button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[12px] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>';
+            } else {
+              catBtn.disabled = false;
+              catBtn.classList.remove('opacity-60');
+              catBtn.querySelector('span').textContent = 'Category';
+              catMenu.innerHTML = '<button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[12px] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>';
+              // Load top-level terms for selected taxonomy
+              fetchTerms(taxSlug, catMenu);
+            }
 
             refresh(true);
+            updateURL();
+
           } else {
+            // CATEGORY changed (term)
+            const val = e.currentTarget.dataset.value || '';
             grid.dataset.cat = val;
             refresh(true);
+            updateURL();
           }
         });
       });
     });
 
-    // close dropdowns when clicking outside
+    // Close dropdowns on outside click
     document.addEventListener('click', (e)=>{
       if(!e.target.closest('.rg-select')){
         root.querySelectorAll('.rg-menu').forEach(m=>m.classList.add('hidden'));
@@ -302,7 +323,7 @@
       }
     });
 
-    // Load more (anchor — prevent jump)
+    // Load more
     if(more){
       more.addEventListener('click', (e)=>{
         e.preventDefault();
@@ -312,17 +333,33 @@
       });
     }
 
-    // initial states
+    // Initial states
     syncMoreVisibilityInitial();
-    // Animate initial batch once on page load (if GSAP is present)
-    // Mark existing items so they don't re-animate on next loads
+
     if(!reduceMotion && window.gsap){
       animateNewItems();
     } else {
       grid.querySelectorAll('[data-rg-item]').forEach(el => el.classList.add('is-animated'));
     }
+
+    // Preselect from URL (type + cat)
+    // We simulate a user click so labels and menus sync properly.
+    const typeMenu = root.querySelector('[data-menu="type"]');
+    const initTypeBtn = typeMenu?.querySelector(`[button][data-value="${initialType}"]`) || typeMenu?.querySelector(`[data-value="${initialType}"]`);
+    if (initialType && initialType !== (grid.dataset.postType || 'all') && initTypeBtn){
+      initTypeBtn.click();
+      if (initialCat){
+        // Wait a bit for categories to load before selecting term
+        setTimeout(()=>{
+          const catMenu = root.querySelector('[data-menu="cat"]');
+          const catBtn  = catMenu?.querySelector(`[data-value="${initialCat}"]`);
+          if(catBtn) catBtn.click();
+        }, 600);
+      }
+    } else {
+      // If initialType matches existing, still set URL (to clean unknown params)
+      updateURL();
+    }
   })();
-</script>
-
-
+  </script>
 </section>
