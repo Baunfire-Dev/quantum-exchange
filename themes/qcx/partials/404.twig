@@ -10,7 +10,7 @@
 					{% include 'components/cta.twig' with {
                         class: 'filled blue',
                         cta: {
-                            link: "#",
+                            url: function("home_url"),
                             title: nf_cta_text
                         },
                     } %}
