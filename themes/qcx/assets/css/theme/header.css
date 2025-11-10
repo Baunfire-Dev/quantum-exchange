@@ -112,7 +112,7 @@
 			@apply flex items-center;
 
             .btn.navi {
-                @apply max-sm:w-full py-[1rem];
+                @apply max-sm:w-full max-sm:py-[1rem];
             }
 		}
 
