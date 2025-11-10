@@ -1,187 +1,167 @@
 baunfire.addModule({
-  init(baunfire) {
-    const $ = baunfire.$;
+    init(baunfire) {
+        const $ = baunfire.$;
 
-    const script = () => {
-      const els = $("section.tabs-expanding-tiles");
-      if (!els.length) return;
+        const script = () => {
+            const els = $("section.tabs-expanding-tiles");
+            if (!els.length) return;
 
-      els.each(function () {
-        const self = $(this);
-        handleEntranceAnim(self);
-        initSelect2(self);
-        handleTabContent(self);
-        handleCarousel(self);
-        animateInitialCards(self);
-      });
-    };
+            els.each(function () {
+                const self = $(this);
+                const data = {
+                    items: self.find(".tab-item"),
+                    panels: self.find(".tab-panel")
+                }
 
-    const initSelect2 = (self) => {
-      const select = self.find(".tab-select");
+                handleCarousels(self, data);
+                handleEntranceAnim(self);
+                handleSelect(self, data);
+                handleTabs(self, data);
+            });
+        };
 
-      if (select.length) {
-        select.select2({
-          minimumResultsForSearch: -1,
-          width: "100%",
-        });
+        const handleEntranceAnim = (self) => {
+            const title = self.find(".block-title");
+            const tabsNav = self.find(".block-duo");
+            const cards = self.find('.tab-panel.active .item-card');
 
-        const arrowSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                    <path d="M8.70703 0.707031L4.70703 4.70703L0.707031 0.707032" stroke="white" stroke-linecap="square"/>
-                </svg>`;
+            const entranceAnim = gsap.timeline({
+                scrollTrigger: {
+                    trigger: self,
+                    start: baunfire.anim.start
+                }
+            })
+                .fromTo([title, tabsNav],
+                    {
+                        y: 40,
+                        autoAlpha: 0
+                    },
+                    {
+                        y: 0,
+                        autoAlpha: 1,
+                        duration: 0.8,
+                        stagger: { each: 0.2 },
+                        ease: Power2.easeOut
+                    }
+                );
 
-        select
-          .data("select2")
-          .$container.find(".select2-selection__arrow b")
-          .replaceWith(arrowSvg);
+            if (cards.length) {
+                entranceAnim
+                    .fromTo(cards,
+                        {
+                            y: 40,
+                            autoAlpha: 0
+                        },
+                        {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: Power2.easeOut,
+                            stagger: { each: 0.2 }
+                        },
+                        ">-1.2"
+                    );
+            }
+        };
 
-        select.on("change", function () {
-          const tabIndex = $(this).val();
-          switchTab(self, tabIndex);
-        });
-      }
-    };
+        const handleCarousels = (self, data) => {
+            const panels = data.panels;
 
-    const switchTab = (self, tabIndex) => {
-      const tabPanels = self.find(".tab-panel");
-      const targetPanel = self.find(`.tab-panel[data-panel="${tabIndex}"]`);
-      const currentPanel = self.find(".tab-panel.active");
+            panels.each(function () {
+                const subSelf = $(this);
+                const carousel = subSelf.find(".owl-carousel");
 
-      if (currentPanel.data("panel") == tabIndex) return;
+                const next = subSelf.find(".ar-r");
+                const prev = subSelf.find(".ar-l");
 
-      tabPanels.removeClass("active").hide();
-      targetPanel.addClass("active").show();
+                const carouselInstance = carousel.owlCarousel({
+                    rewind: true,
+                    dots: true,
+                    dotsEach: true,
+                    margin: 24,
+                    autoplay: false,
+                    responsive: {
+                        0: {
+                            items: 1,
+                        },
+                        768: {
+                            items: 2,
+                        },
+                        1024: {
+                            items: 3,
+                        },
+                    },
+                    onInitialized: () => {
+                        baunfire.Global.screenSizeChange();
+                    },
+                    onResized: () => {
+                        baunfire.Global.screenSizeChange();
+                    }
+                });
 
-      const carousel = targetPanel.find(".owl-carousel");
-      if (carousel.length && carousel.data("owl.carousel")) {
-        carousel.trigger("refresh.owl.carousel");
-      }
-    };
+                next.click(function () {
+                    carousel.trigger('next.owl.carousel');
+                });
 
-    const handleEntranceAnim = (self) => {
-      const blockTitle = self.find(".block-title");
-      const categoryTabs = self.find(".category-tabs");
-      const pagination = self.find(".pagination").first();
+                prev.click(function () {
+                    carousel.trigger('prev.owl.carousel');
+                });
+            })
+        };
 
-      const entranceAnim = gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: self,
-            start: baunfire.anim.start,
-          },
-        })
-        .fromTo(
-          [blockTitle, categoryTabs, pagination],
-          {
-            y: "40",
-            autoAlpha: 0,
-          },
-          {
-            y: 0,
-            autoAlpha: 1,
-            duration: 0.8,
-            stagger: { each: 0.2 },
-            ease: Power2.easeOut,
-          }
-        );
-    };
+        const handleSelect = (self, data) => {
+            const select = self.find(".tab-select select");
 
-    const animateInitialCards = (self) => {
-      const activePanel = self.find(".tab-panel.active");
-      const items = activePanel.find(".owl-item:not(.cloned) .item-content");
+            if (select.length) {
+                select.select2({
+                    minimumResultsForSearch: -1,
+                    width: "100%",
+                });
 
-      ScrollTrigger.create({
-        trigger: self,
-        start: "top 80%",
-        once: true,
-        onEnter: () => {
-          items.each(function (index) {
-            const card = $(this);
+                select.on("change", function () {
+                    const tabIndex = $(this).val();
+                    self.find(`.tab-item[data-index="${tabIndex}"]`).trigger("click");
+                });
+            }
+        };
 
-            gsap.fromTo(
-              card,
-              { opacity: 0, y: 30 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                delay: index * 0.2,
-                ease: "power2.out",
-              }
-            );
-          });
-        },
-      });
-    };
+        const handleTabs = (self, data) => {
+            const { items, panels } = data;
 
-    const handleTabContent = (self) => {
-      const tabBtns = self.find(".tab-btn");
-      const tabPanels = self.find(".tab-panel");
+            items.click(function () {
+                const subSelf = $(this);
+                if (subSelf.hasClass("active")) return;
 
-      tabBtns.on("click", function () {
-        const btn = $(this);
-        const tabIndex = btn.data("tab");
+                const tabIndex = subSelf.data("index");
+                panels.removeClass("active");
+                items.removeClass("active");
+                subSelf.addClass("active");
 
-        tabBtns.removeClass("active");
-        btn.addClass("active");
+                switchTab(self, tabIndex);
+                updateSelect(self, tabIndex);
+            });
+        };
 
-        switchTab(self, tabIndex);
-      });
+        const switchTab = (self, tabIndex) => {
+            const targetPanel = self.find(`.tab-panel[data-index="${tabIndex}"]`);
+            targetPanel.addClass("active");
 
-      tabPanels.each(function (index) {
-        if (index !== 0) {
-          $(this).hide();
-        }
-      });
-    };
+            const carousel = targetPanel.find(".owl-carousel");
 
-    const handleCarousel = (self) => {
-      const tabPanels = self.find(".tab-panel");
+            if (carousel.length && carousel.data("owl.carousel")) {
+                carousel.trigger("refresh.owl.carousel");
+                baunfire.Global.screenSizeChange();
+            }
+        };
 
-      tabPanels.each(function () {
-        const panel = $(this);
-        const carousel = panel.find(".owl-carousel");
-        const next = panel.find(".ar-r");
-        const prev = panel.find(".ar-l");
+        const updateSelect = (self, tabIndex) => {
+            const select = self.find(".tab-select select");
+            
+            if (select.length) {
+                select.val(tabIndex).trigger("change.select2");
+            }
+        };
 
-        if (!carousel.length) return;
-
-        carousel.owlCarousel({
-          loop: true,
-          rewind: true,
-          dots: true,
-          dotsEach: true,
-          items: 3,
-          margin: 24,
-          center: true,
-          autoWidth: false,
-          autoplay: true,
-          autoplayTimeout: 5000,
-          autoplayHoverPause: true,
-          responsive: {
-            0: {
-              items: 1,
-              center: true,
-            },
-            768: {
-              items: 2,
-              center: true,
-            },
-            1024: {
-              items: 3,
-              center: true,
-            },
-          },
-        });
-        next.on("click", function () {
-          carousel.trigger("next.owl.carousel");
-        });
-
-        prev.on("click", function () {
-          carousel.trigger("prev.owl.carousel");
-        });
-      });
-    };
-
-    script();
-  },
+        script();
+    },
 });

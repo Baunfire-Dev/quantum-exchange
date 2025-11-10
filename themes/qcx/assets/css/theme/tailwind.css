@@ -9,4 +9,5 @@
 @import "buttons";
 @import "dialog";
 @import "spacings";
+@import "select";
 @import-glob "../../../blocks/**/*.css";

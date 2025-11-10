@@ -2,7 +2,7 @@
 	"name": "grid-resources",
 	"title": "Grid Resources",
 	"viewScript": ["file:./script.js"],
-    "viewStyle": ["bf-toastify-style", "select-two-style"],
+    "viewStyle": ["bf-toastify-style", "bf-select-two-style"],
 	"acf": {
 		"mode": "edit",
 		"renderTemplate": "./controller.php",

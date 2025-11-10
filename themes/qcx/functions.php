@@ -88,7 +88,7 @@ function front_css_styles()
     wp_register_style('bf-lenis-style', get_template_directory_uri() . '/assets/css/external/lenis.css', array(), _S_VERSION);
 
     wp_register_style('bf-owl-style', get_template_directory_uri() . '/assets/css/external/owl.css', array(), _S_VERSION);
-    wp_register_style('select-two-style', get_template_directory_uri() . '/assets/css/external/select2.min.css', array(), _S_VERSION);
+    wp_register_style('bf-select-two-style', get_template_directory_uri() . '/assets/css/external/select2.min.css', array(), _S_VERSION);
     wp_register_style('bf-toastify-style', get_template_directory_uri() . '/assets/css/external/toastify.min.css', array(), _S_VERSION);
 }
 
@@ -102,7 +102,7 @@ function front_js_scripts()
 
     wp_register_script("bf-vimeo-script", get_template_directory_uri() . '/assets/js/external/vimeo-player.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
     wp_register_script('bf-owl-script', get_template_directory_uri() . '/assets/js/external/owl.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-    wp_register_script("select-two-script", get_template_directory_uri() . '/assets/js/external/select2.min.js', array(), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));
+    wp_register_script("bf-select-two-script", get_template_directory_uri() . '/assets/js/external/select2.min.js', array(), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));
     wp_register_script("bf-toastify-script", get_template_directory_uri() . '/assets/js/external/toastify.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
     wp_register_script("bf-rellax-script", get_template_directory_uri() . '/assets/js/external/rellax.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
 

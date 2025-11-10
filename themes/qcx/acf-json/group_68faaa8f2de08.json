@@ -112,13 +112,12 @@
                         "class": "",
                         "id": ""
                     },
-                    "acfe_repeater_stylised_button": 0,
                     "layout": "row",
                     "pagination": 0,
                     "min": 0,
                     "max": 0,
                     "collapsed": "",
-                    "button_label": "Add Row",
+                    "button_label": "Add Item",
                     "rows_per_page": 20,
                     "sub_fields": [
                         {
@@ -165,6 +164,7 @@
                             "collapsed": "",
                             "button_label": "Add Row",
                             "rows_per_page": 20,
+                            "parent_repeater": "field_68faaac035541",
                             "sub_fields": [
                                 {
                                     "key": "field_68faaca66a444",
@@ -232,10 +232,9 @@
                                         "id": ""
                                     },
                                     "default_value": "",
-                                    "acfe_textarea_code": 0,
                                     "maxlength": "",
                                     "allow_in_bindings": 0,
-                                    "rows": "",
+                                    "rows": 3,
                                     "placeholder": "",
                                     "new_lines": "",
                                     "parent_repeater": "field_68faaaf435544"
@@ -258,8 +257,7 @@
                                     "allow_in_bindings": 0,
                                     "parent_repeater": "field_68faaaf435544"
                                 }
-                            ],
-                            "parent_repeater": "field_68faaac035541"
+                            ]
                         }
                     ]
                 },
@@ -312,12 +310,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1761258806
+    "modified": 1762801799
 }

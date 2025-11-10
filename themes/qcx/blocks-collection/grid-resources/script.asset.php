@@ -1,6 +1,6 @@
 <?php
 return [
-    "dependencies" => ["jquery", "bf-toastify-script", "select-two-script"],
+    "dependencies" => ["jquery", "bf-toastify-script", "bf-select-two-script"],
     "version" => _S_VERSION,
     "in_footer" => [
         "strategy" => "defer",

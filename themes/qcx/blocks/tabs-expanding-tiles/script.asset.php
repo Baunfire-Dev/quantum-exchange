@@ -1,6 +1,6 @@
 <?php
 return [
-    "dependencies" => ["jquery",  "select-two-script"],
+    "dependencies" => ["jquery",  "bf-select-two-script"],
     "version" => _S_VERSION,
     "in_footer" => [
         "strategy" => "defer",
