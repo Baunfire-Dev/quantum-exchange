@@ -74,6 +74,7 @@
             if (!nav.length) return;
 
             const parents = nav.find(".nav-item.parent");
+            const allNavItems = nav.find(".nav-item");
 
             const toggleNav = () => {
                 let lastScroll = 0;
@@ -132,8 +133,10 @@
                 let hideTimeout = null;
                 let timeoutDuration = 300;
 
+                const isBigScreen = () => window.matchMedia("(min-width: 1200px)").matches;
+
                 parents.on('mouseenter', function () {
-                    if (!window.matchMedia("(min-width: 1200px)").matches) return;
+                    if (!isBigScreen()) return;
                     const self = $(this);
 
                     clearTimeout(hideTimeout);
@@ -147,13 +150,23 @@
                 });
 
                 parents.on('mouseleave', function () {
-                    if (!window.matchMedia("(min-width: 1200px)").matches) return;
+                    if (!isBigScreen()) return;
                     const self = $(this);
 
                     hideTimeout = setTimeout(() => {
                         self.removeClass('open');
                         if (activeDropdown === this) activeDropdown = null;
                     }, timeoutDuration);
+                });
+
+                allNavItems.not('.parent').on('mouseenter', function () {
+                    if (!isBigScreen()) return;
+                    clearTimeout(hideTimeout);
+
+                    if (activeDropdown) {
+                        $(activeDropdown).removeClass('open');
+                        activeDropdown = null;
+                    }
                 });
             }
 
