@@ -82,8 +82,17 @@ add_filter('allowed_block_types_all', function ($allowed_block_types, $editor_co
 
     $post_type = $editor_context->post->post_type;
 
-    // ✅ Let Partner use ALL blocks
-    if ($post_type === 'partner') {
+    // ✅ Let Partner + new CPTs use ALL blocks
+    if (in_array($post_type, [
+        'partner',
+        'award',
+        'blog_podcast',
+        'media_coverage',
+        'resource_library',
+        'press_release',
+        'webinar_event',
+        'team'
+    ], true)) {
         return true; // allow all registered blocks
     }
 
