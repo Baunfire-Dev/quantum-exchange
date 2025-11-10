@@ -1,70 +1,75 @@
 baunfire.addModule({
-  init(baunfire) {
-    const $ = baunfire.$;
+    init(baunfire) {
+        const $ = baunfire.$;
 
-    const script = () => {
-      const els = $("section.content-cta");
-      if (!els.length) return;
+        const script = () => {
+            const els = $("section.content-cta");
+            if (!els.length) return;
 
-      els.each(function () {
-        const self = $(this);
-        loopingText(self);
-      });
-    };
-    const loopingText = (self, inner) => {
-      const marquees = self.find(".marquee-inner");
-      if (!marquees.length) return;
+            els.each(function () {
+                const self = $(this);
+                handleEntranceAnim(self);
+                handleMarquee(self);
+            });
+        };
 
-      marquees.each(function () {
-        const subSelf = $(this);
-        const items = subSelf.find(".marquee-text");
-        const toRight = subSelf.hasClass("to-right");
+        const handleEntranceAnim = (self) => {
+            const bg = self.find(".bg");
+            const box = self.find(".box");
 
-        let logoCarouselTween = null;
+            const entranceAnim = gsap.timeline({
+                scrollTrigger: {
+                    trigger: self,
+                    start: baunfire.anim.start
+                }
+            })
+                .fromTo(bg,
+                    {
+                        autoAlpha: 0
+                    },
+                    {
+                        autoAlpha: 1,
+                        duration: 0.8,
+                        ease: Power2.easeOut
+                    }
+                )
+                .fromTo(box,
+                    {
+                        y: 40,
+                        autoAlpha: 0
+                    },
+                    {
+                        y: 0,
+                        autoAlpha: 1,
+                        duration: 0.8,
+                        ease: Power2.easeOut
+                    },
+                    ">-0.6"
+                );
+        };
 
-        if (toRight) {
-          logoCarouselTween = gsap.fromTo(
-            items,
-            {
-              xPercent: -100,
-            },
-            {
-              xPercent: 0,
-              duration: 40,
-              ease: "linear",
-              repeat: -1,
-              paused: true,
-            }
-          );
-        } else {
-          logoCarouselTween = gsap.to(items, {
-            xPercent: -100,
-            duration: 40,
-            ease: "linear",
-            repeat: -1,
-            paused: true,
-          });
+        const handleMarquee = (self) => {
+            const marquee = self.find(".marquee");
+
+            ScrollTrigger.create({
+                trigger: marquee,
+                start: "top 90%",
+                end: "bottom top",
+                onEnter: () => {
+                    marquee.removeClass("paused");
+                },
+                onLeave: () => {
+                    marquee.addClass("paused");
+                },
+                onEnterBack: () => {
+                    marquee.removeClass("paused");
+                },
+                onLeaveBack: () => {
+                    marquee.addClass("paused");
+                }
+            });
         }
 
-        ScrollTrigger.create({
-          trigger: inner,
-          start: "top 90%",
-          end: "bottom top",
-          onEnter: function () {
-            logoCarouselTween.play();
-          },
-          onEnterBack: function () {
-            logoCarouselTween.play();
-          },
-          onLeave: function () {
-            logoCarouselTween.pause();
-          },
-          onLeaveBack: function () {
-            logoCarouselTween.pause();
-          },
-        });
-      });
-    };
-    script();
-  },
+        script();
+    }
 });

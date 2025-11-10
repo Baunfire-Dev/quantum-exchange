@@ -8,25 +8,29 @@ baunfire.addModule({
 
             els.each(function () {
                 const self = $(this);
-                const marquee = self.find(".marquee");
+                handleMarquee(self);
+            });
+        };
 
-                ScrollTrigger.create({
-                    trigger: marquee,
-                    start: "top 100%",
-                    end: "bottom top",
-                    onEnter: () => {
-                        marquee.removeClass("paused");
-                    },
-                    onLeave: () => {
-                        marquee.addClass("paused");
-                    },
-                    onEnterBack: () => {
-                        marquee.removeClass("paused");
-                    },
-                    onLeaveBack: () => {
-                        marquee.addClass("paused");
-                    }
-                });
+        const handleMarquee = (self) => {
+            const marquee = self.find(".marquee");
+
+            ScrollTrigger.create({
+                trigger: marquee,
+                start: "top 100%",
+                end: "bottom top",
+                onEnter: () => {
+                    marquee.removeClass("paused");
+                },
+                onLeave: () => {
+                    marquee.addClass("paused");
+                },
+                onEnterBack: () => {
+                    marquee.removeClass("paused");
+                },
+                onLeaveBack: () => {
+                    marquee.addClass("paused");
+                }
             });
         }
 

@@ -1,9 +1,9 @@
-{% cache "block;" ~ post.id ~ ";" ~ block.id ~ ";" ~ post.modified_timestamp ~ ";" ~ cache_key %}
-<section class="{{ block.slug }} {{ not fields.dark_mode ? 'bg-' ~ fields.bg : 'bg-[#F7F9FB]' }} {{ fields.dark_mode ? 'dark' }} bg-[#F7F9FB] overflow-x-clip overflow-y-visible">
-
+<section class="{{ block.slug }} {{ block.className }}">
 	{% if block.anchor %}
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
 	{% endif %}
+
+	{# {{ not fields.dark_mode ? 'bg-' ~ fields.bg : 'bg-[#F7F9FB]' }} {{ fields.dark_mode ? 'dark' }} bg-[#F7F9FB] overflow-x-clip overflow-y-visible #}
 
 	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xxl' %}
 	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
@@ -11,35 +11,27 @@
 	<div class="container">
 		<div class="{{ pt }} {{ pb }}">
 			<div class="flex flex-col items-center ~gap-[2.5rem]/[4rem]">
-				<div class="flex max-md:flex-col justify-between md:items-end w-full max-w-[68.125rem] ~gap-[1.25rem]/[2.5rem]">
+				<div class="flex max-md:flex-col justify-between md:items-end w-full ~md:~px-[0rem]/[7rem] ~gap-[1.25rem]/[5.625rem]">
 					<div class="flex flex-col items-start ~gap-[1.25rem]/[2rem]">
-						{% include 'components/heading.twig' with {
-							class: 'main-title',
-							value: fields.heading.value, 
-							type: fields.heading.type != 'default' ? fields.heading.type : 'h2',
-							has_custom_style: fields.heading.has_custom_style,
-							style: fields.heading.style,
-							to_words: true
-						} %}
+						{% if fields.heading %}
+							<h2 class="block-title alpha max-w-[52rem]">{{ fields.heading }}</h2>
+						{% endif %}
 
 						{% if fields.paragraph %}
-							<div class="flex md:pl-[6.875rem] items-center justify-center gap-[0.625rem]">
-								<p class="w-full max-w-[30.5rem]">{{ fields.paragraph }}</p>
-							</div>
+							<p class="block-duo alpha md:ml-[6.875rem] max-w-[30.5rem]">{{ fields.paragraph }}</p>
 						{% endif %}
 					</div>
 
-					<div class="flex flex-col items-start ~gap-[1.25rem]/[2rem]">
-						{% include 'components/cta.twig' with {
-							class: 'cta filled blue md:shrink-0 md:self-end',
-							cta: fields.cta,
-						} %}
-					</div>
+					{% include 'components/cta.twig' with {
+                        class: 'block-duo alpha filled blue md:shrink-0 md:self-end',
+                        cta: fields.cta,
+                    } %}
 				</div>
 
 				{% if fields.featured %}
 					{% set featured_posts = fields.featured|slice(0, 3) %}
-					<div class="grid md:grid-cols-3 ~gap-[1rem]/[1.5rem] items-end w-full">
+
+					<div class="grid md:grid-cols-2 lg:grid-cols-3 ~gap-[1rem]/[1.5rem]">
 						{% for item in featured_posts %}
 							{% set post_id = item.ID ?? item.id %}
 							{% set post_title = item.post_title ?? item.title %}
@@ -47,34 +39,37 @@
 							{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'medium') %}
 							{% set post_categories = function('get_the_category', post_id) %}
 
-							<article class="flex group flex-col ~p-[1rem]/[2rem] items-start ~gap-[2rem]/[3rem] flex-[1_0_0] bg-[#F7F9FB] rounded-[0.5rem] border border-[#D9D9D9] hover:border-[#08E8BD] overflow-hidden transition-all duration-300 relative">
-								<a href="{{ post_link }}" class="absolute top-0 left-0 w-full h-full z-20"></a>
+							<article class="item">
+								<a href="{{ post_link }}" class="item-link"></a>
 
-								<div class="hover-overlay"></div>
+								<div class="item-card alpha">
+									<div class="item-head">
+										{% if post_categories %}
+											<div class="item-tag">
+												<div class="item-square"></div>
+												<small>
+													{% for cat in post_categories %}
+														{{ cat.name }}{{ not loop.last ? ", " }}
+													{% endfor %}
+												</small>
+											</div>
+										{% endif %}
 
-								<div class="flex flex-col items-start gap-[1.5rem] relative z-10">
-									{% if post_categories %}
-										<div class="flex justify-center items-center gap-[0.5rem] rounded-[0.1875rem]">
-											{% for cat in post_categories %}
-												<div class="w-[0.625rem] h-[0.625rem] rounded-[0.125rem] bg-[#08E8BD]"></div>
-												<div class="uppercase tracking-[0.1rem] leading-[120%]">{{ cat.name }}</div>
-											{% endfor %}
+										{% if post_title %}
+											<p class="lg">{{ post_title }}</p>
+										{% endif %}
+									</div>
+
+									<div class="item-media">
+										<div class="item-thumbnail">
+											{% if post_thumbnail %}
+												<img src="{{ post_thumbnail }}" alt="{{ post_title }}" loading="lazy"/>
+											{% else %}
+												<img src="{{ function('png', 'thumbnail') }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
+											{% endif %}
 										</div>
-									{% endif %}
-
-									{% if post_title %}
-										<p class="lg">{{ post_title }}</p>
-									{% endif %}
+									</div>
 								</div>
-
-								{% if post_thumbnail %}
-									<img 
-										src="{{ post_thumbnail }}" 
-										alt="{{ post_title }}" 
-										class="w-full h-full object-cover rounded-[0.5rem] relative z-10"
-									/>
-								{% endif %}
-
 							</article>
 						{% endfor %}
 					</div>
@@ -84,4 +79,3 @@
 		</div>
 	</div>
 </section>
-{% endcache %}

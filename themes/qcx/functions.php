@@ -39,7 +39,7 @@ add_action('after_setup_theme', 'bf_setup');
 require_once 'includes/theme/allow-file-types.php';
 require_once 'includes/theme/disable-comments.php';
 
-require_once 'includes/theme/setup-timber.php';
+// require_once 'includes/theme/setup-timber.php';
 require_once 'includes/theme/setup-shortcodes.php';
 
 require_once 'includes/theme/support-helpers.php';

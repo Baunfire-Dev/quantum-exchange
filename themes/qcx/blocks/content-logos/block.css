@@ -3,9 +3,23 @@
 		.marquee {
 			@apply flex w-full;
 
-			&__content {
+			&-content {
 				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem];
 				animation: scroll 100s linear infinite;
+			}
+
+			&-item {
+				@apply flex items-center justify-center w-auto h-[2.25rem];
+
+				&:hover {
+					@apply grayscale-0;
+				}
+			}
+
+			&.paused {
+				.marquee-content {
+					animation-play-state: paused;
+				}
 			}
 
 			@keyframes scroll {
@@ -19,24 +33,11 @@
 			}
 		}
 
-        /* &:has(.item:hover), */
-        .marquee.paused {
-            .marquee__content {
-                animation-play-state: paused;
-            }
-        }
-
-		.item {
-			@apply flex items-center justify-center w-auto h-[2.25rem];
-
-            &:hover {
-                @apply grayscale-0;
-            }
-		}
-
 		&.dark {
-			.item img {
-				filter: brightness(0) invert(1);
+			.marquee-item {
+				img {
+					filter: brightness(0) invert(1);
+				}
 			}
 		}
 	}

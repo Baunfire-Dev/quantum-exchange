@@ -20,6 +20,8 @@
 		}
 
 		.item {
+            @apply relative;
+            
 			&::before {
 				content: "";
 				@apply absolute top-0 left-0 h-full w-full pointer-events-none scale-y-[-1] z-[1] rounded-[0.5rem] overflow-hidden;
@@ -34,6 +36,7 @@
 
 			&-card {
 				@apply relative flex flex-col ~gap-[2rem]/[3rem] ~p-[1.25rem]/[2rem] border border-gray rounded-[0.5rem] z-[2];
+                @apply transition-colors duration-300 ease-power2-out;
 			}
 
 			&-head {
@@ -70,6 +73,10 @@
             &:hover {
                 &::before {
                     @apply opacity-50;
+                }
+                
+                .item-card {
+                    @apply border-green;
                 }
             }
 		}

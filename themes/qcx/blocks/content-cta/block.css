@@ -1,12 +1,42 @@
 @layer components {
-  .content-cta {
-    .marquee-text {
-      @apply will-change-transform;
-      p {
-        @apply text-[262px] font-medium leading-[100%];
-        -webkit-text-stroke-width: 2px;
-        -webkit-text-stroke-color: #000;
-      }
-    }
-  }
+	.content-cta {
+		.marquee {
+			@apply flex w-full h-full items-center absolute top-[50%] translate-y-[-50%] z-[2];
+            @apply pointer-events-none;
+
+			&-content {
+				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem];
+				animation: scroll 200s linear infinite;
+			}
+
+			&-item {
+				@apply flex items-center justify-center w-fit h-fit;
+
+				&:hover {
+					@apply grayscale-0;
+				}
+			}
+
+			&.paused {
+				.marquee-content {
+					animation-play-state: paused;
+				}
+			}
+
+			@keyframes scroll {
+				0% {
+					transform: translateX(0);
+				}
+
+				100% {
+					transform: translateX(-100%);
+				}
+			}
+		}
+
+		.box {
+			@apply w-full max-w-[46.125rem] backdrop-blur-[0.75rem] bg-black/[0.04] ~px-[1.25rem]/[5rem] ~py-[2.5rem]/[4rem];
+			@apply flex items-center flex-col ~gap-[1.25rem]/[2rem] border rounded-[0.5rem] border-green;
+		}
+	}
 }
