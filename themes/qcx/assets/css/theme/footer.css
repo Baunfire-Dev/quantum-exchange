@@ -63,10 +63,10 @@
 		}
 
 		&-item {
-            @apply opacity-80;
+            @apply opacity-80 w-fit relative;
 
 			p {
-				@apply text-white;
+				@apply text-white hover:underline underline-offset-2;
 			}
 		}
 

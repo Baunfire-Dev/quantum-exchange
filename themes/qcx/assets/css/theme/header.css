@@ -155,9 +155,13 @@
 		}
 
 		&-dd-group-link {
-			@apply min-w-max relative w-fit;
+			@apply min-w-max relative;
 
-			&::after {
+            p {
+                @apply hover:underline underline-offset-2;
+            }
+
+			/* &::after {
 				content: "";
 				@apply absolute left-0 bottom-0 w-full h-[1px] bg-black scale-x-0 origin-right transition-transform ease-in duration-[400ms];
 				transition-property: background, transform;
@@ -165,7 +169,7 @@
 
 			&:hover::after {
 				@apply scale-x-100 origin-left ease-out;
-			}
+			} */
 		}
 
 		&-panel,

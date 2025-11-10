@@ -95,7 +95,7 @@
 													{% set link_title = child.link.title %}
 													{% set link_target = child.link.target ?: "_self" %}
 
-													<a class="footer-item uline uline-light" href="{{ link_url }}" target="{{ link_target }}">
+													<a class="footer-item" href="{{ link_url }}" target="{{ link_target }}">
 														<p class="sm">{{ link_title }}</p>
 													</a>
 												{% endif %}
@@ -140,7 +140,7 @@
 									{% set link_title = nav_item.link.title %}
 									{% set link_target = nav_item.link.target ?: "_self" %}
 
-									<a class="footer-item secondary uline uline-light" href="{{ link_url }}" target="{{ link_target }}">
+									<a class="footer-item secondary" href="{{ link_url }}" target="{{ link_target }}">
 										<p class="xsm">{{ link_title }}</p>
 									</a>
 								{% endif %}
