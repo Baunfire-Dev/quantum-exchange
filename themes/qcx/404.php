@@ -14,12 +14,8 @@
 use Timber\Timber;
 
 $context = Timber::context([
-    "nt_heading" => get_field("404_heading", "option"),
-    "nt_description" => get_field("404_description", "option"),
-    "nt_media_type" => get_field("404_media_type", "option"),
-    "nt_image" => get_field("404_media_image", "option"),
-    "nt_video" => get_field("404_media_video", "option"),
-    "nt_cta" => get_field("404_cta", "option"),
+    "nf_heading" => get_field("nf_heading", "option"),
+    "nf_cta_text" => get_field("nf_cta_text", "option"),
 ]);
 ?>
 

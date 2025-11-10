@@ -209,7 +209,7 @@
 
 		&.mob-active {
             @apply border-b-transparent;
-            
+
 			.nav {
 				&-burger {
 					path {
@@ -238,39 +238,6 @@
 				&-panel-inner {
 					@apply opacity-100 translate-y-0;
 					@apply transition-all duration-[0.4s] ease-power2-out;
-				}
-			}
-		}
-	}
-}
-
-main {
-	@apply min-h-[62.5rem];
-}
-
-header.dark {
-	position: fixed;
-	z-index: 100;
-	width: 100%;
-	transition: background-color 0.3s ease;
-
-	.nav-logo {
-		svg path {
-			@apply fill-[#ffffff];
-		}
-	}
-
-	.nav-panel {
-		.nav-item {
-			@apply text-white;
-		}
-
-		.nav-actions {
-			.btn.navi {
-				@apply bg-[#08E8BD];
-
-				p {
-					@apply text-black;
 				}
 			}
 		}
