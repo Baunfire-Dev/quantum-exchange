@@ -16,6 +16,7 @@ baunfire.addModule({
         const handleEntranceAnim = (self) => {
             const bg = self.find(".bg");
             const box = self.find(".box");
+            const marquee = self.find(".marquee-inner");
 
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
@@ -33,7 +34,7 @@ baunfire.addModule({
                         ease: Power2.easeOut
                     }
                 )
-                .fromTo(box,
+                .fromTo([marquee, box],
                     {
                         y: 40,
                         autoAlpha: 0
@@ -42,7 +43,8 @@ baunfire.addModule({
                         y: 0,
                         autoAlpha: 1,
                         duration: 0.8,
-                        ease: Power2.easeOut
+                        ease: Power2.easeOut,
+                        stagger: { each: 0.2 }
                     },
                     ">-0.6"
                 );

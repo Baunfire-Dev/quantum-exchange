@@ -1,8 +1,12 @@
 @layer components {
 	.content-cta {
 		.marquee {
-			@apply flex w-full h-full items-center absolute top-[50%] translate-y-[-50%] z-[2];
+            @apply flex w-full h-full items-center absolute top-[50%] translate-y-[-50%] z-[2];
             @apply pointer-events-none;
+
+			&-inner {
+				@apply flex w-full h-full items-center;
+			}
 
 			&-content {
 				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem];
