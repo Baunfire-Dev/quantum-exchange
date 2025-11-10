@@ -214,8 +214,8 @@ function my_acf_op_init()
         ));
 
         acf_add_options_sub_page(array(
-            'page_title' => '404',
-            'menu_title' => '404',
+            'page_title' => 'Not found',
+            'menu_title' => 'Not found',
             'parent_slug' => 'theme-general-settings',
             'capability' => 'manage_options',
         ));
