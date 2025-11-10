@@ -6,6 +6,6 @@
 	"acf": {
 		"mode": "edit",
 		"renderTemplate": "./controller.php",
-        "postTypes": ["post"]
+        "postTypes": ["page", "post"]
 	}
 }
