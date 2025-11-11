@@ -36,7 +36,7 @@
 							{% set post_id = item.ID ?? item.id %}
 							{% set post_title = item.post_title ?? item.title %}
 							{% set post_link = function('get_permalink', post_id) %}
-							{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'medium') %}
+							{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
 
 							{% set post_type_slug = function('get_post_type', post_id) %}
 							{% set post_type_obj = function('get_post_type_object', post_type_slug) %}
