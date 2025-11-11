@@ -13,6 +13,10 @@
             @apply !rounded-[8.375rem] !bg-light-grey border-gray !border-[1px] min-h-[3.125rem] pl-0 py-0 pr-[3.25rem] flex items-center;
         }
 
+        &-selection__placeholder {
+            @apply text-black;
+        }
+
         &-selection__rendered {
             @apply flex gap-[0.25rem] flex-wrap py-[1rem] pl-[1.25rem];
             @apply font-a-mono text-[0.75rem] font-medium tracking-[0.075rem] leading-[130%] uppercase;
