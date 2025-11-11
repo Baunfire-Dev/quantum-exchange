@@ -1,8 +1,8 @@
-{% set theme = override_nav_theme and nav_theme ? nav_theme %}
+{% set theme = override_nav_theme and nav_theme ? "is-" ~ nav_theme %}
 {% set is_home = function("is_home") or function("is_front_page") %}
 
-<header class="{{ dark_mode ? 'dark' : '' }}">
-	<nav class="nav {{ theme }} {{ is_home ? " at-homepage" }}">
+<header>
+	<nav class="nav {{ theme }} {{ is_home ? "at-homepage" }}">
 		<div class="nav-outer">
 			<div class="container">
 				<div class="nav-inner">

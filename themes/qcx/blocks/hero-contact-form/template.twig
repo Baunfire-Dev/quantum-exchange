@@ -1,81 +1,109 @@
-<section class="{{ block.slug }} {{ not fields.dark_mode ? 'bg-' ~ fields.bg : 'bg-[#F7F9FB]' }} {{ fields.dark_mode ? 'dark' }} bg-[#F7F9FB] relative overflow-x-clip overflow-y-visible">
-
+<section class="{{ block.slug }} {{ block.className }} bg-blue">
 	{% if block.anchor %}
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
 	{% endif %}
 
-	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xxl' %}
-	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
+	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : '~pt-[4.5rem]/[8.75rem]' %}
+	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : '~pb-[8rem]/[8.75rem]' %}
 
-	<svg 
-		class="absolute inset-0 w-full h-full object-cover" 
-		xmlns="http://www.w3.org/2000/svg" 
-		viewBox="0 0 1440 900" 
-		preserveAspectRatio="xMidYMid slice" 
-		fill="none"
-	>
-		<g filter="url(#filter0_n_7766_89)">
-			<rect width="1440" height="900" fill="#206EEC"/>
-		</g>
-		<defs>
-			<filter id="filter0_n_7766_89" x="0" y="0" width="1440" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-				<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-				<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-				<feTurbulence type="fractalNoise" baseFrequency="0.66666668653488159 0.66666668653488159" stitchTiles="stitch" numOctaves="3" result="noise" seed="514"/>
-				<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
-				<feComponentTransfer in="alphaNoise" result="coloredNoise1">
-					<feFuncA type="discrete" tableValues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
-				</feComponentTransfer>
-				<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
-				<feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
-				<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
-				<feMerge result="effect1_noise_7766_89">
-					<feMergeNode in="shape"/>
-					<feMergeNode in="color1"/>
-				</feMerge>
-			</filter>
-		</defs>
-	</svg>
+	<div class="{{ pt }} {{ pb }} relative z-[3]">
+		<div class="flex flex-col ~gap-[2.375rem]/[2.25rem]">
+			<div class="container">
+				<div class="flex max-md:flex-col ~gap-[2.5rem]/[8.4375rem]">
+					<div class="flex flex-col md:pt-[5rem] md:flex-1 md:basis-[33.3125rem] ~gap-[1.25rem]/[2rem]">
+						{% if fields.heading %}
+							<h1 class="block-title alpha text-white">{{ fields.heading }}</h1>
+						{% endif %}
 
-	{% if fields.media_type == "image" and fields.image %}
-		{% include 'components/image.twig' with {
-			image: fields.image,
-			size: 'full',
-			class: 'absolute inset-0 w-full h-full object-cover',
-		} %}
-	{% elseif fields.media_type == "video" and fields.video %}
-		<div class="absolute inset-0 w-full h-full object-cover media-container video" data-video="{{ fields.video }}"></div>
-	{% endif %}
-
-	<div class="container relative z-[2]">
-		<div class="{{ pt }} {{ pb }}">
-			<div class="flex flex-col w-full items-start justify-center">
-				<div class="flex max-md:flex-col justify-between w-full max-md:gap-[2.5rem]">
-					<div class="flex flex-col w-full max-w-[33.3125rem] ~gap-[1.25rem]/[2rem] items-end md:pt-[5rem]">
-						{% include 'components/heading.twig' with {
-							class: 'main-title text-[#ffffff] -tracking-[0.18rem] self-stretch',
-							value: fields.heading.value, 
-							type: fields.heading.type != 'default' ? fields.heading.type : 'h2',
-							has_custom_style: fields.heading.has_custom_style,
-							style: fields.heading.style,
-							to_words: true
-						} %}
 						{% if fields.paragraph %}
-							<p class="text-[#ffffff] w-full max-w-[26.1875rem]">{{ fields.paragraph }}</p>
+							<p class="block-para alpha text-white w-full md:pl-[7.125rem]">{{ fields.paragraph }}</p>
 						{% endif %}
 					</div>
-					<div class="flex flex-col w-full max-w-[40.25rem] gap-[3rem] items-center ~p-[2rem]/[3rem] rounded-[0.5rem] border-1 border-[#08E8BD] bg-[#ffffff]">
-						<svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" viewBox="0 0 34 27" fill="none">
-							<path d="M7.3133 0H0L9.50044 13.4354L0 26.8708H7.3133L16.8138 13.4354L7.3133 0Z" fill="#838786"/>
-							<path d="M26.3237 0H33.637L24.1365 13.4354L33.637 26.8708H26.3237L16.8135 13.4354L26.3237 0Z" fill="#155086"/>
-						</svg>
 
-						<div class="flex flex-col items-start gap-[1.5rem] md:h-[37.5rem]">
-							<h2 class="text-[2rem] text-[#206EEC] -tracking-[0.06rem]">Form here</h2>
+					<div class="block-form alpha md:flex-1 md:basis-[40.25rem]">
+						<div class="form">
+							<svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" viewbox="0 0 34 27" fill="none">
+								<path d="M7.3133 0H0L9.50044 13.4354L0 26.8708H7.3133L16.8138 13.4354L7.3133 0Z" fill="#838786"/>
+								<path d="M26.3237 0H33.637L24.1365 13.4354L33.637 26.8708H26.3237L16.8135 13.4354L26.3237 0Z" fill="#155086"/>
+							</svg>
+
+							<div class="form-inner"></div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			{% if fields.has_carousel and fields.logos|length %}
+				<div class="block-logos alpha flex flex-col gap-[1rem] items-center">
+					{% if fields.sub_heading %}
+						<div class="container">
+							<p class="text-white">{{ fields.sub_heading }}</p>
+						</div>
+					{% endif %}
+
+					{% if fields.logos|length %}
+						<div class="marquee paused">
+							{% for i in 1..2 %}
+								<div class="marquee-content">
+									{% for logo in fields.logos %}
+										<div class="marquee-item">
+											{% include 'components/image.twig' with {
+                                                image: logo,
+                                                class: 'object-contain h-full w-full brightness-0 invert',
+                                                size: "full",
+                                            } %}
+										</div>
+									{% endfor %}
+								</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+			{% endif %}
 		</div>
+	</div>
+
+	{% if fields.media_type == "image" and fields.media_image %}
+		<div class="media-container image">
+			{% include 'components/image.twig' with {
+                image: fields.media_image,
+                size: [1920, 1080],
+                loading: "eager",
+            } %}
+		</div>
+	{% endif %}
+
+	{% if fields.media_type == "video" and fields.media_video %}
+		<div class="media-container video">
+			<video src="{{ fields.media_video }}" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback>
+				Your browser does not support the video tag.
+			</video>
+		</div>
+	{% endif %}
+
+	<div class="absolute top-0 left-0 h-full w-full pointer-events-none z-[1]">
+		<svg class="absolute center-xy w-auto h-auto min-h-full min-w-full" xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewbox="0 0 1440 900" fill="none">
+			<g filter="url(#filter0_n_8588_8815)">
+				<rect width="1440" height="900" fill="#206EEC"/>
+			</g>
+			<defs>
+				<filter id="filter0_n_8588_8815" x="0" y="0" width="1440" height="900" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
+					<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+					<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+					<feTurbulence type="fractalNoise" basefrequency="0.66666668653488159 0.66666668653488159" stitchtiles="stitch" numoctaves="3" result="noise" seed="514"/>
+					<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+					<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+						<feFuncA type="discrete" tablevalues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+					</feComponentTransfer>
+					<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
+					<feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
+					<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
+					<feMerge result="effect1_noise_8588_8815">
+						<feMergeNode in="shape"/>
+						<feMergeNode in="color1"/>
+					</feMerge>
+				</filter>
+			</defs>
+		</svg>
 	</div>
 </section>

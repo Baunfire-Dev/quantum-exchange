@@ -1,16 +1,65 @@
 @layer components {
-    .hero-contact-form {
-        .media-container.video iframe {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            aspect-ratio: 16/9;
-            height: auto;
-            min-height: 100%;
-            width: auto;
-            --tw-translate-x: -50%;
-            --tw-translate-y: -50%;
-            transform: translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+	.hero-contact-form {
+        .form {
+            @apply ~p-[2rem]/[3rem] rounded-[0.5rem] border border-green bg-white;
+            @apply flex flex-col items-center justify-center ~gap-[2rem]/[3rem];
+
+            & > svg {
+                @apply h-[1.625rem] w-auto;
+            }
+
+            &-inner {
+                @apply min-h-[27.9375rem];
+            }
         }
+
+        .marquee {
+			@apply flex w-full;
+
+			&-content {
+				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem];
+				animation: scroll 100s linear infinite;
+			}
+
+			&-item {
+				@apply flex items-center justify-center w-auto h-[2.25rem];
+
+				&:hover {
+					@apply grayscale-0;
+				}
+			}
+
+			&.paused {
+				.marquee-content {
+					animation-play-state: paused;
+				}
+			}
+
+			@keyframes scroll {
+				0% {
+					transform: translateX(0);
+				}
+
+				100% {
+					transform: translateX(-100%);
+				}
+			}
+		}
+
+        .media-container {
+            @apply absolute top-0 left-0 w-full h-full z-[2];
+
+            &.video {
+                @apply mix-blend-multiply;
+
+				video {
+					@apply absolute h-auto min-w-[56.25rem] ~w-[56.25rem]/[83.25rem] aspect-[121/68] translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%] scale-[1.1];
+				}
+			}
+        }
+	}
+    
+    main > section.hero-contact-form:first-child {
+        @apply ~mt-[-3.625rem]/[-4.75rem];
     }
 }

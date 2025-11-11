@@ -58,15 +58,17 @@
             "max_size": "",
             "mime_types": "",
             "allow_in_bindings": 1,
-            "preview_size": "thumbnail"
+            "preview_size": "thumbnail",
+            "uploader": "",
+            "acfe_thumbnail": 0
         },
         {
             "key": "field_68a2e094964c7",
-            "label": "Video ID",
+            "label": "Video",
             "name": "media_video",
             "aria-label": "",
             "type": "text",
-            "instructions": "(Vimeo)",
+            "instructions": "(Direct Link)",
             "required": 0,
             "conditional_logic": [
                 [
@@ -108,5 +110,6 @@
     "active": false,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1759098090
+    "display_title": "",
+    "modified": 1762859078
 }

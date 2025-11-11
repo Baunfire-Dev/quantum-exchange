@@ -10,16 +10,16 @@ baunfire.addModule({
                 const self = $(this);
 
                 handleVideos(self);
+                handleMarquee(self);
                 handleEntranceAnim(self);
             });
         }
 
         const handleEntranceAnim = (self) => {
-            const navOuter = $(".nav-outer");
-            const upperText = self.find(".upper-text");
-            const lowerText = self.find(".lower-text");
-            const contentGroup = self.find(".content-group");
-            const contentLogo = $("section.content-logos");
+            const title = self.find(".block-title");
+            const para = self.find(".block-para");
+            const form = self.find(".block-form");
+            const logos = self.find('.block-logos');
 
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
@@ -27,21 +27,9 @@ baunfire.addModule({
                     start: baunfire.anim.start
                 }
             })
-                .fromTo(navOuter,
+                .fromTo([title, para, form, logos],
                     {
-                        y: "-100%",
-                        autoAlpha: 0
-                    },
-                    {
-                        y: 0,
-                        autoAlpha: 1,
-                        duration: 0.8,
-                        ease: Power2.easeOut
-                    }
-                )
-                .fromTo([upperText, lowerText, contentGroup, contentLogo],
-                    {
-                        y: "40",
+                        y: 40,
                         autoAlpha: 0
                     },
                     {
@@ -50,10 +38,31 @@ baunfire.addModule({
                         duration: 0.8,
                         stagger: { each: 0.2 },
                         ease: Power2.easeOut
-                    },
-                    "<0.4"
-                )
+                    }
+                );
         };
+
+        const handleMarquee = (self) => {
+            const marquee = self.find(".marquee");
+
+            ScrollTrigger.create({
+                trigger: marquee,
+                start: "top 100%",
+                end: "bottom top",
+                onEnter: () => {
+                    marquee.removeClass("paused");
+                },
+                onLeave: () => {
+                    marquee.addClass("paused");
+                },
+                onEnterBack: () => {
+                    marquee.removeClass("paused");
+                },
+                onLeaveBack: () => {
+                    marquee.addClass("paused");
+                }
+            });
+        }
 
         const handleVideos = (self) => {
             const videoContainers = self.find(".media-container.video");
@@ -66,25 +75,19 @@ baunfire.addModule({
         };
 
         const setupVideo = (self, videoContainer) => {
-            baunfire.Global.importVimeoScript(() => {
-                const videoID = videoContainer.data("video");
-                videoContainer.append(baunfire.Global.generateVimeoIframe(videoID, true));
+            const videoRaw = videoContainer.find("video");
+            if (!videoRaw.length) return;
 
-                const playerContainer = videoContainer.find("iframe");
-                if (!playerContainer.length) return;
+            const video = videoRaw.get(0);
 
-                const playerInstance = new Vimeo.Player(playerContainer.get(0));
-                playerInstance.play();
-
-                ScrollTrigger.create({
-                    trigger: videoContainer,
-                    start: "top center",
-                    end: "bottom 30%",
-                    onEnter: () => playerInstance.play(),
-                    onEnterBack: () => playerInstance.play(),
-                    onLeave: () => playerInstance.pause(),
-                    onLeaveBack: () => playerInstance.pause()
-                });
+            ScrollTrigger.create({
+                trigger: videoContainer,
+                start: "top center",
+                end: "bottom 30%",
+                onEnter: () => video.play(),
+                onEnterBack: () => video.play(),
+                onLeave: () => video.pause(),
+                onLeaveBack: () => video.pause()
             });
         };
 
