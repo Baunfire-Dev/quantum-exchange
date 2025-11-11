@@ -130,7 +130,7 @@
                     "label": "Featured",
                     "name": "featured",
                     "aria-label": "",
-                    "type": "post_object",
+                    "type": "relationship",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -140,23 +140,29 @@
                         "id": ""
                     },
                     "post_type": [
-                        "post"
+                        "news",
+                        "webinar_event",
+                        "resource_library",
+                        "blog_podcast",
+                        "press_release",
+                        "media_coverage"
                     ],
-                    "post_status": "",
+                    "post_status": [
+                        "publish"
+                    ],
                     "taxonomy": "",
+                    "filters": [
+                        "search",
+                        "post_type",
+                        "taxonomy"
+                    ],
                     "return_format": "object",
-                    "multiple": 1,
-                    "save_custom": 0,
-                    "save_post_status": "publish",
-                    "acfe_bidirectional": {
-                        "acfe_bidirectional_enabled": "0"
-                    },
-                    "allow_null": 0,
+                    "min": "",
+                    "max": "",
                     "allow_in_bindings": 0,
+                    "elements": "",
                     "bidirectional": 0,
-                    "ui": 1,
-                    "bidirectional_target": [],
-                    "save_post_type": ""
+                    "bidirectional_target": []
                 },
                 {
                     "key": "field_68f7dce73daec",
@@ -207,5 +213,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762815562
+    "modified": 1762898607
 }
