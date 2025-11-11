@@ -7,9 +7,8 @@
 		@apply w-full border-b border-transparent;
 		@apply transition-all duration-500 ease-power2-out;
 
-        &-outer {
-            
-        }
+		&-outer {
+		}
 
 		&-burger {
 			@apply xl:hidden flex items-center justify-center self-stretch;
@@ -25,7 +24,7 @@
 
 		&-inner {
 			@apply flex gap-[0.75rem] items-stretch justify-between;
-            @apply ~h-[3.5rem]/[4.625rem];
+			@apply ~h-[3.5rem]/[4.625rem];
 		}
 
 		&-logo {
@@ -162,9 +161,9 @@
 		&-dd-group-link {
 			@apply min-w-max relative;
 
-            p {
-                @apply hover:underline underline-offset-2;
-            }
+			p {
+				@apply hover:underline underline-offset-2;
+			}
 
 			/* &::after {
 				content: "";
@@ -206,37 +205,49 @@
 			}
 		}
 
-        &.is-light:not(.nav-scrolled) {
-            .nav {
-                &-logo {
-                    svg {
-                        path {
-                            @apply fill-white;
-                        }
-                    }
-                }
+		&.is-light:not(.nav-scrolled) {
+			.nav {
+				&-logo {
+					svg {
+						path {
+							@apply fill-white;
+						}
+					}
+				}
 
-                &-item-inner {
-                    &:not(:hover) {
-                        @apply border-white border-opacity-40;
-                    }
+                &-burger {
+					svg {
+						path {
+							@apply stroke-white;
+						}
+					}
+				}
 
-                    p {
-                        @apply text-white;
-                    }
-                }
+				&-item-inner {
+					@screen xl {
+						&:not(:hover) {
+							@apply border-white border-opacity-40;
+						}
 
-                &-actions {
-                    .btn.navi {
-                        @apply bg-green;
+						p {
+							@apply text-white;
+						}
+					}
+				}
 
-                        p {
-                            @apply text-black;
-                        }
-                    }
-                }
-            }
-        }
+				&-actions {
+					@screen xl {
+						.btn.navi {
+							@apply bg-green;
+
+							p {
+								@apply text-black;
+							}
+						}
+					}
+				}
+			}
+		}
 
 		&.nav-hidden {
 			@apply pointer-events-none;
@@ -249,7 +260,7 @@
 		}
 
 		&.mob-active {
-            @apply border-b-transparent;
+			@apply border-b-transparent;
 
 			.nav {
 				&-burger {
