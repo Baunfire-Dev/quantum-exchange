@@ -15,8 +15,7 @@ baunfire.addModule({
         const handleEntranceAnim = (self) => {
             const title = self.find(".block-title");
             const paraCTA = self.find(".block-duo");
-            const itemsNav = self.find(".items-nav");
-            const cards = self.find('.item-card');
+            const cards = self.find('.rc-card');
 
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
@@ -24,7 +23,7 @@ baunfire.addModule({
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, paraCTA, itemsNav],
+                .fromTo([title, paraCTA],
                     {
                         y: 40,
                         autoAlpha: 0
