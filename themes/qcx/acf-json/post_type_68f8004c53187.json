@@ -9,7 +9,7 @@
     "import_date": "",
     "labels": {
         "name": "Videos",
-        "singular_name": "Videos",
+        "singular_name": "Video",
         "menu_name": "Videos",
         "all_items": "All Videos",
         "edit_item": "Edit Videos",
@@ -83,5 +83,5 @@
     "delete_with_user": false,
     "register_meta_box_cb": "",
     "enter_title_here": "",
-    "modified": 1761083504
+    "modified": 1762865890
 }

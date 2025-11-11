@@ -1,5 +1,19 @@
 @layer components {
-    .hero-resources-landing {
-        /* Add your styles here */
-    }
+	.hero-resources-landing {
+		.item {
+			@apply relative;
+		}
+
+		.rc {
+			&.at-hero {
+				&:not(.ghost-card) {
+					@apply absolute top-0 left-0 w-full h-full;
+				}
+
+                &.ghost-card {
+                    @apply pointer-events-none invisible;
+                }
+			}
+		}
+	}
 }

@@ -1,18 +1,5 @@
 @layer components {
 	.hero-contact-form {
-        .form {
-            @apply ~p-[2rem]/[3rem] rounded-[0.5rem] border border-green bg-white;
-            @apply flex flex-col items-center justify-center ~gap-[2rem]/[3rem];
-
-            & > svg {
-                @apply h-[1.625rem] w-auto;
-            }
-
-            &-inner {
-                @apply min-h-[27.9375rem];
-            }
-        }
-
         .marquee {
 			@apply flex w-full;
 

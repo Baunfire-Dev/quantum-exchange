@@ -61,8 +61,112 @@
                 },
                 {
                     "key": "field_690b8d4e60283",
-                    "label": "heading",
+                    "label": "Heading",
                     "name": "heading",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_66d89f07091ae"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_690b8d4e60285",
+                    "label": "Paragraph",
+                    "name": "paragraph",
+                    "aria-label": "",
+                    "type": "clone",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "clone": [
+                        "group_6629697c3ccdf"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
+                },
+                {
+                    "key": "field_690b8d89b998b",
+                    "label": "Featured Posts",
+                    "name": "featured_posts",
+                    "aria-label": "",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "award",
+                        "resource_library",
+                        "press_release",
+                        "webinar_event",
+                        "news",
+                        "media_coverage",
+                        "blog_podcast",
+                        "post",
+                        "videos"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "taxonomy": "",
+                    "filters": [
+                        "search",
+                        "post_type",
+                        "taxonomy"
+                    ],
+                    "return_format": "object",
+                    "min": 2,
+                    "max": 2,
+                    "allow_in_bindings": 0,
+                    "elements": "",
+                    "bidirectional": 0,
+                    "bidirectional_target": []
+                },
+                {
+                    "key": "field_691337d129fbf",
+                    "label": "Form",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "top",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_691337d929fc0",
+                    "label": "Title",
+                    "name": "form_title",
                     "aria-label": "",
                     "type": "text",
                     "instructions": "",
@@ -81,11 +185,11 @@
                     "append": ""
                 },
                 {
-                    "key": "field_690b8d4e60285",
-                    "label": "Paragraph",
-                    "name": "paragraph",
+                    "key": "field_691337e229fc1",
+                    "label": "Shortcode",
+                    "name": "form_shortcode",
                     "aria-label": "",
-                    "type": "textarea",
+                    "type": "text",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -95,96 +199,11 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "acfe_textarea_code": 0,
                     "maxlength": "",
                     "allow_in_bindings": 0,
-                    "rows": "",
                     "placeholder": "",
-                    "new_lines": ""
-                },
-                {
-                    "key": "field_690b8d4e60288",
-                    "label": "Items",
-                    "name": "",
-                    "aria-label": "",
-                    "type": "tab",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "placement": "left",
-                    "endpoint": 0,
-                    "selected": 0
-                },
-                {
-                    "key": "field_690b8d89b998b",
-                    "label": "Featured Post 1",
-                    "name": "featured_post_1",
-                    "aria-label": "",
-                    "type": "post_object",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "post_type": [
-                        "post"
-                    ],
-                    "post_status": "",
-                    "taxonomy": "",
-                    "return_format": "object",
-                    "multiple": 0,
-                    "save_custom": 0,
-                    "save_post_status": "publish",
-                    "acfe_bidirectional": {
-                        "acfe_bidirectional_enabled": "0"
-                    },
-                    "allow_null": 0,
-                    "allow_in_bindings": 0,
-                    "bidirectional": 0,
-                    "ui": 1,
-                    "bidirectional_target": [],
-                    "save_post_type": ""
-                },
-                {
-                    "key": "field_690b8dc5b998c",
-                    "label": "Featured Post 2",
-                    "name": "featured_post_2",
-                    "aria-label": "",
-                    "type": "post_object",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "post_type": [
-                        "post"
-                    ],
-                    "post_status": "",
-                    "taxonomy": "",
-                    "return_format": "object",
-                    "multiple": 0,
-                    "save_custom": 0,
-                    "save_post_status": "publish",
-                    "acfe_bidirectional": {
-                        "acfe_bidirectional_enabled": "0"
-                    },
-                    "allow_null": 0,
-                    "allow_in_bindings": 0,
-                    "bidirectional": 0,
-                    "ui": 1,
-                    "bidirectional_target": [],
-                    "save_post_type": ""
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "key": "field_690b8d4e6028d",
@@ -235,12 +254,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1762369212
+    "modified": 1762867184
 }
