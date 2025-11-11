@@ -16,4 +16,8 @@
 			}
 		}
 	}
+
+    main > section.hero-resources-landing:first-child {
+        @apply ~mt-[-3.625rem]/[-4.75rem];
+    }
 }
