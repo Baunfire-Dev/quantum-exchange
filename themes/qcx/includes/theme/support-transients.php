@@ -3,6 +3,7 @@ define('TRANSIENT_PREFIX', 'qxc');
 define('TRANSIENT_DURATION', 7 * DAY_IN_SECONDS);
 
 $post_type_transient_map = [
+    'all' => ['all_grid_resources'],
     'news' => ['news_grid_resources'],
     'blog_podcast' => ['blog_podcast_grid_resources'],
     'media_coverage' => ['media_coverage_grid_resources'],
@@ -113,5 +114,10 @@ add_action('save_post', function ($post_id, $post, $update) use ($post_type_tran
     }
 
     $transients_to_clear = $post_type_transient_map[$post->post_type];
+    
+    if (!in_array('all_grid_resources', $transients_to_clear)) {
+        $transients_to_clear[] = 'all_grid_resources';
+    }
+    
     clear_transients($transients_to_clear);
 }, 10, 3);
