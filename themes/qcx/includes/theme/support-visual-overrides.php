@@ -115,68 +115,24 @@ add_filter('template_include', function ($template) {
     return $template;
 });
 
-// Rename posts to blog
-add_filter('register_post_type_args', function ($args, $post_type) {
-    if ($post_type === 'post') {
-        $args['labels']['name'] = 'Blogs';
-        $args['labels']['singular_name'] = 'Blog';
-        $args['labels']['add_new'] = 'Add New Blog';
-        $args['labels']['add_new_item'] = 'Add New Blog';
-        $args['labels']['edit_item'] = 'Edit Blog';
-        $args['labels']['new_item'] = 'New Blog';
-        $args['labels']['view_item'] = 'View Blog';
-        $args['labels']['search_items'] = 'Search Blogs';
-        $args['labels']['not_found'] = 'No Blogs Found';
-        $args['labels']['not_found_in_trash'] = 'No Blogs Found in Trash';
-        $args['menu_name'] = 'Blogs';
-    }
-    return $args;
-}, 10, 2);
+// Hide Posts from admin menu
+add_action('admin_menu', function () {
+    remove_menu_page('edit.php');
+});
 
-// Add /blog/ on posts permalink
-function custom_post_permalink_structure($permalink, $post, $leavename)
-{
-    if ($post->post_type === 'post') {
-        return home_url('/blog/' . $post->post_name . '/');
-    }
-    return $permalink;
-}
-
-add_filter('post_link', 'custom_post_permalink_structure', 10, 3);
-
-function custom_rewrite_rules()
-{
-    add_rewrite_rule('^blog/([^/]*)/?', 'index.php?name=$matches[1]', 'top');
-}
-
-add_action('init', 'custom_rewrite_rules');
-
-// Rename categories to blog types
-function rename_default_post_categories_to_blog_types() {
-    global $wp_taxonomies;
-
-    if ( isset( $wp_taxonomies['category'] ) ) {
-        $labels = &$wp_taxonomies['category']->labels;
-
-        $labels->name = 'Blog Types';
-        $labels->singular_name = 'Blog Type';
-        $labels->search_items = 'Search Blog Types';
-        $labels->all_items = 'All Blog Types';
-        $labels->parent_item = 'Parent Blog Type';
-        $labels->parent_item_colon = 'Parent Blog Type:';
-        $labels->edit_item = 'Edit Blog Type';
-        $labels->view_item = 'View Blog Type';
-        $labels->update_item = 'Update Blog Type';
-        $labels->add_new_item = 'Add New Blog Type';
-        $labels->new_item_name = 'New Blog Type Name';
-        $labels->menu_name = 'Blog Types';
-    }
-}
-add_action( 'init', 'rename_default_post_categories_to_blog_types' );
-
-// Disable tags for post
+// Remove post type support for tags and categories
 add_action('init', function () {
     unregister_taxonomy_for_object_type('post_tag', 'post');
+    unregister_taxonomy_for_object_type('category', 'post');
+});
+
+// Redirect if someone tries to access posts directly
+add_action('admin_init', function () {
+    global $pagenow;
+    if ($pagenow === 'edit.php' && !isset($_GET['post_type'])) {
+        wp_redirect(admin_url());
+        exit;
+    }
 });
 
 // Hide category

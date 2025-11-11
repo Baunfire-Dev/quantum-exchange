@@ -1,76 +1,61 @@
 <?php
+
 use Timber\Timber;
 
-/**
- * Resource Grid (V2) — All CPTs + Blog with dynamic taxonomies and AJAX
- */
+acf_setup_meta($block["data"], $block["id"], true);
 
-acf_setup_meta($block['data'], $block['id'], true);
+$context = Timber::context([
+    "block" => $block,
+    "fields" => get_field("block"),
+    "posts" => [],
+    "items_per_page" => 9
+]);
 
-$ctx = Timber::context();
-$ctx['block']  = $block;
-$ctx['fields'] = get_field('block') ?: [];
+$resource = $context["fields"]["resource"] ?? 'all';
 
-// Choose design variation
-$design = $ctx['fields']['design_variation'] ?? 'V1';
-
-// === CPTs + Taxonomies Map ===
-$cpt_map = [
+$post_types = [
     'all' => ['label' => 'All', 'tax' => null],
     'news' => ['label' => 'News & Resources', 'tax' => 'news_category'],
-    'award' => ['label' => 'Awards', 'tax' => 'award_category'],
     'blog_podcast' => ['label' => 'Blogs & Podcasts', 'tax' => 'blog_podcast_category'],
     'media_coverage' => ['label' => 'Media Coverage', 'tax' => 'media_coverage_category'],
     'resource_library' => ['label' => 'Resource Library', 'tax' => 'resource_library_category'],
     'press_release' => ['label' => 'Press Releases', 'tax' => 'press_release_category'],
-    'webinar_event' => ['label' => 'Webinars & Events', 'tax' => 'webinar_event_category'],
-    'team' => ['label' => 'Team', 'tax' => 'team_category'],
-    'post' => ['label' => 'Blog', 'tax' => 'category'],
-];
-$ctx['cpt_map'] = $cpt_map;
-
-// Get initial filters from URL params
-$type_param = sanitize_key($_GET['type'] ?? 'all');
-$cat_param  = intval($_GET['cat'] ?? 0);
-
-// === Grid Config ===
-$ctx['rg'] = [
-    'post_type'     => $type_param,
-    'tax_category'  => $cpt_map[$type_param]['tax'] ?? 'category',
-    'ppp'           => 9,
-    'design'        => $design,
+    'webinar_event' => ['label' => 'Webinars & Events', 'tax' => 'webinar_event_category']
 ];
 
-// === Initial Query ===
-$args = [
-    'post_status'    => 'publish',
-    'posts_per_page' => $ctx['rg']['ppp'],
-    'paged'          => 1,
-];
+if ($resource != "all") {
+    $terms = get_terms([
+        'taxonomy' => $post_types[$resource]['tax'],
+        'hide_empty' => false,
+    ]);
 
-if ($type_param !== 'all' && post_type_exists($type_param)) {
-    $args['post_type'] = $type_param;
-} else {
-    // all CPTs + blog
-    $args['post_type'] = array_keys(array_filter($cpt_map, fn($v, $k) => $k !== 'all', ARRAY_FILTER_USE_BOTH));
+    $post_types[$resource]['tax_items'] = array_map(function ($term) {
+        return [
+            'name' => $term->name,
+            'slug' => $term->slug
+        ];
+    }, $terms);
 }
 
-if ($cat_param && !empty($ctx['rg']['tax_category'])) {
-    $args['tax_query'] = [
-        [
-            'taxonomy' => $ctx['rg']['tax_category'],
-            'field'    => 'term_id',
-            'terms'    => [$cat_param],
-        ]
-    ];
+$context['types'] = $post_types;
+
+$transient_key = TRANSIENT_PREFIX . "_" . $resource . "_grid_resource";
+$posts = get_transient($transient_key);
+
+if (!$posts) {
+    $posts = Timber::get_posts(array(
+        'post_type' => $resource == "all" ? array_keys($post_types) : $resource,
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'order' => 'DESC'
+    ));
+
+    set_transient($transient_key, $posts, TRANSIENT_DURATION);
 }
 
-$initial = new WP_Query($args);
-$ctx['resources'] = Timber::get_posts($initial);
-wp_reset_postdata();
+$context['posts'] = $posts;
 
-// Nonce for AJAX
-$ctx['rg_nonce'] = wp_create_nonce('rg_nonce');
+$context["block"]["slug"] = preg_replace('/^acf\//', '', $block["name"]);
+acf_reset_meta($block["id"]);
 
-acf_reset_meta($block['id']);
-Timber::render(__DIR__ . '/template.twig', $ctx);
+Timber::render("./template.twig", $context);

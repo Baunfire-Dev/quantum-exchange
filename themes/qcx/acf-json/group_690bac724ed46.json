@@ -60,11 +60,11 @@
                     "selected": 0
                 },
                 {
-                    "key": "field_690bac7251cba",
-                    "label": "Design Variation",
-                    "name": "design_variation",
+                    "key": "field_69137beae1c7f",
+                    "label": "Resource",
+                    "name": "resource",
                     "aria-label": "",
-                    "type": "button_group",
+                    "type": "radio",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -74,14 +74,22 @@
                         "id": ""
                     },
                     "choices": {
-                        "v1": "V1",
-                        "v2": "V2"
+                        "all": "All",
+                        "news": "News",
+                        "videos": "Videos",
+                        "blog_podcast": "Blogs & Podcasts",
+                        "media_coverage": "Media Coverage",
+                        "resource_library": "Resource Library",
+                        "press_release": "Press Releases",
+                        "webinar_event": "Webinars & Events"
                     },
-                    "default_value": "",
+                    "default_value": "all",
                     "return_format": "value",
                     "allow_null": 0,
+                    "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "layout": "horizontal"
+                    "layout": "vertical",
+                    "save_other_choice": 0
                 },
                 {
                     "key": "field_690bac7251cc7",
@@ -132,12 +140,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1762372794
+    "modified": 1762887812
 }

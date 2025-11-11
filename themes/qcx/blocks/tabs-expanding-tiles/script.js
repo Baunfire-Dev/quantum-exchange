@@ -116,6 +116,7 @@ baunfire.addModule({
                 select.select2({
                     minimumResultsForSearch: -1,
                     width: "100%",
+                    dropdownParent: select.parent()
                 });
 
                 select.on("change", function () {

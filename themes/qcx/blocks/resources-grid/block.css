@@ -1,69 +1,26 @@
 @layer components {
-  .video-wrapper {
-    @apply relative;
-  }
+	.resources-grid {
+		.select {
+			@apply w-full md:w-[16.25rem];
+		}
 
-  .video-thumbnail,
-  .video-preview {
-    @apply w-full h-full object-cover;
-  }
+		.cards-container {
+			@apply flex flex-wrap max-sm:flex-col w-[calc(100%+1.5rem)] mx-[-0.75rem];
+		}
 
-  /* Give the card its base look here OR remove duplicates from markup */
-  .video-item {
-    @apply relative cursor-pointer rounded-[0.5rem] border border-[#D9D9D9] bg-[#F7F9FB];
-  }
+		.empty,
+		.load-more {
+			&:not(.active) {
+				@apply hidden;
+			}
+		}
 
-  /* Pseudo-element: use plain CSS, not @apply */
-  .video-item::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      95.74% 72.48% at 90.44% 105%,
-      rgba(0, 161, 255, 0.5) 0%,
-      rgba(0, 161, 255, 0) 65%
-    );
-    opacity: 0;
-    transition: opacity 300ms;
-    pointer-events: none;
-  }
+        .load-more {
+			@apply mt-[1rem];
+		}
 
-  /* Hover states (no nesting needed) */
-  .video-item:hover {
-    /* If you have a custom theme color 'green', this will work: */
-    /* border-color: theme('colors.green'); */
-
-    /* Otherwise, set a HEX or Tailwind token: */
-    border-width: 1px;
-    border-color: #08E8BD;
-  }
-
-  .video-item:hover .lg {
-  color: #000 !important;
-}
-
-  .video-item:hover::before {
-    opacity: 1;
-  }
-
-  .video-item:hover .eyebrow {
-    animation: textFlicker 0.5s ease-in-out;
-  }
-
-  .video-item:hover rect {
-    animation: svgFlicker 0.5s ease-in-out;
-  }
-}
-
-/* Keep keyframes outside the @layer or at least not nested */
-@keyframes textFlicker {
-  0% { -webkit-text-stroke: 0px; text-stroke: 0px; }
-  50% { -webkit-text-stroke: 0.5px currentColor; text-stroke: 0.5px currentColor; }
-  100% { -webkit-text-stroke: 0px; text-stroke: 0px; }
-}
-
-@keyframes svgFlicker {
-  0% { stroke: transparent; stroke-width: 0; }
-  50% { stroke: black; stroke-width: 0.5px; }
-  100% { stroke: transparent; stroke-width: 0; }
+		.empty {
+			@apply ~py-[2.5rem]/[4rem];
+		}
+	}
 }

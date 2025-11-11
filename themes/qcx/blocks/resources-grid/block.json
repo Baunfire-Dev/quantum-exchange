@@ -1,11 +1,17 @@
 {
-	"name": "resources-grid",
-	"title": "Resources Grid",
-    "viewScript": ["file:./script.js"],
-    "viewStyle": [],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "name": "resources-grid",
+    "title": "Resources Grid",
+    "viewScript": [
+        "file:./script.js"
+    ],
+    "viewStyle": [
+        "bf-select-two-style"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ]
+    }
 }

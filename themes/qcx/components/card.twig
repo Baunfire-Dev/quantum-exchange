@@ -1,4 +1,4 @@
-<article class="rc {{ custom_class ?: " default" }}">
+<article class="rc {{ custom_class ?: " default" }}" {{ show_type and type_slug ? "data-type='" ~ type_slug ~ "'" }} {{ cats ? "data-category='" ~ cats | json_encode | raw ~ "'" }}>
 	<a href="{{ permalink }}" class="rc-link"></a>
 
 	<div class="rc-card {{ animated ? " alpha" }}">
@@ -20,17 +20,19 @@
 		</div>
 
 		<div class="rc-media">
-			{% if type|lower == "video" %}
-				<div class="rc-play">
-					<img src="{{ function('svg', 'play') }}" loading="{{ loading ?: "lazy" }}" {{ loading and loading == "eager" ? 'fetchpriority="high"' }} alt="play button">
-				</div>
-			{% endif %}
-
 			<div class="rc-thumbnail">
-				{% if thumbnail %}
-					<img src="{{ thumbnail }}" alt="{{ title }}" loading="{{ loading ?: "lazy" }}" {{ loading and loading == "eager" ? 'fetchpriority="high"' }}/>
+				{% if custom_class and ("is-listing" in custom_class) %}
+					{% if thumbnail %}
+						<img data-src="{{ thumbnail }}" alt="{{ title }}" loading="{{ loading ?: "lazy" }}" loading="lazy"/>
+					{% else %}
+						<img data-src="{{ function('png', 'thumbnail') }}" loading="{{ loading ?: "lazy" }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
+					{% endif %}
 				{% else %}
-					<img src="{{ function('png', 'thumbnail') }}" loading="{{ loading ?: "lazy" }}" {{ loading and loading == "eager" ? 'fetchpriority="high"' }} alt="default qcx thumbnail placeholder"/>
+					{% if thumbnail %}
+						<img src="{{ thumbnail }}" alt="{{ title }}" loading="{{ loading ?: "lazy" }}" {{ loading and loading == "eager" ? 'fetchpriority="high"' }}/>
+					{% else %}
+						<img src="{{ function('png', 'thumbnail') }}" loading="{{ loading ?: "lazy" }}" {{ loading and loading == "eager" ? 'fetchpriority="high"' }} alt="default qcx thumbnail placeholder"/>
+					{% endif %}
 				{% endif %}
 			</div>
 		</div>

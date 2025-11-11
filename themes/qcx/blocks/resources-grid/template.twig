@@ -1,365 +1,116 @@
-{# Resource Grid V2 — All CPTs + Blog, dynamic taxonomy + URL sync #}
-<section class="{{ block.slug }} {{ block.className }} rgs" style="background:#F7F9FB;">
-  {% if block.anchor %}<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>{% endif %}
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-  <div class="mx-auto max-w-[90rem] px-[1rem] md:px-[4rem] py-[4.5rem] md:py-[7.5rem] flex flex-col items-center gap-[3rem] w-full">
+	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xxl' %}
+	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
 
-    {# FILTER BAR ------------------------------------------------------------ #}
-    <div class="flex flex-col md:flex-row flex-wrap items-start gap-[1.5rem] w-full z-[25]">
+	{% set has_posts = posts and posts|length %}
 
-      {# TYPE (post type) #}
-      <div class="rg-select relative w-full md:w-auto">
-        <button class="rg-btn flex w-full md:w-[16.25rem] h-[3.0625rem] px-5 py-3 justify-between items-center rounded-[2.5rem] border border-[#D9D9D9] bg-[#f8f9fb]"
-                type="button" data-toggle="type">
-          <span class="text-[0.75rem] font-[500] leading-[1.2] tracking-[0.075rem] uppercase">
-            {{ cpt_map[rg.post_type]['label'] ?? 'All' }}
-          </span>
-          <svg class="rg-arrow transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M18 9L12 15L6 9" stroke="black" stroke-width="1.5"/>
-          </svg>
-        </button>
+	<div class="{{ pt }} {{ pb }}">
+		<div class="container">
+			<div class="flex flex-col ~gap-[2rem]/[3rem]">
+				<div class="flex max-md:flex-col ~gap-[1rem]/[1.5rem] flex-wrap">
+					{% if fields.resource == "all" %}
+						<div class="select" id="slx">
+							<select placeholder="type">
+								{% for key, item in types %}
+									<option value="{{ key }}" {{ index == 0 ? 'selected' : '' }}>{{ item.label }}</option>
+								{% endfor %}
+							</select>
 
-        <div class="rg-menu py-[0.625rem] absolute z-[25] mt-2 w-full md:w-[16.25rem] max-h-[16rem] overflow-auto rounded-[0.5rem] border border-[#D9D9D9] bg-[#f8f9fb] shadow hidden"
-             data-menu="type">
-          {% for key, c in cpt_map %}
-            <button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[0.75rem] font-medium leading-[1.2] tracking-[1.2px] uppercase"
-                    data-value="{{ key }}" data-tax="{{ c.tax|default('') }}">{{ c.label }}</button>
-          {% endfor %}
-        </div>
-      </div>
+							<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M19 9.11772L12 16L5 9.11772L6.13683 8L12 13.7646L17.8632 8L19 9.11772Z" fill="black"/>
+							</svg>
+						</div>
+					{% endif %}
 
-      {# CATEGORY (taxonomy terms of selected CPT) #}
-      <div class="rg-select relative w-full md:w-auto">
-        {% set catDisabled = (rg.post_type == 'all') %}
-        <button class="rg-btn flex w-full md:w-[16.25rem] h-[3.0625rem] px-5 py-3 justify-between items-center rounded-[2.5rem] border border-[#D9D9D9] {{ catDisabled ? 'opacity-60' : '' }} bg-[#f8f9fb]"
-                type="button" data-toggle="cat" {{ catDisabled ? 'disabled' : '' }}>
-          <span class="text-[0.75rem] font-[500] leading-[1.2] tracking-[0.075rem] uppercase">Category</span>
-          <svg class="rg-arrow transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M18 9L12 15L6 9" stroke="black" stroke-width="1.5"/>
-          </svg>
-        </button>
-        <div class="rg-menu py-[0.625rem] absolute z-20 mt-2 w-full md:w-[16.25rem] max-h-[16rem] overflow-auto rounded-[0.5rem] border border-[#D9D9D9] bg-[#f8f9fb] shadow hidden"
-             data-menu="cat">
-          <button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 text-[0.75rem] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>
-          {# JS will inject terms when a CPT (not "All") is chosen #}
-        </div>
-      </div>
-    </div>
+					{% if fields.resource != "all" %}
+						{% set categories = types[fields.resource].tax_items %}
 
-    {# GRID ------------------------------------------------------------------ #}
-    <div class="flex flex-col items-start gap-[2rem] w-full">
-      <div id="rg-grid"
-           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-[2rem] gap-x-[1.5rem] w-full"
-           data-ppp="{{ rg.ppp }}"
-           data-page="1"
-           data-type=""              {# not used now (was parent term id) #}
-           data-cat=""               {# selected term id #}
-           data-post-type="{{ rg.post_type }}"           {# 'all' or a CPT slug #}
-           data-nonce="{{ rg_nonce }}"
-           data-ajax="{{ function('admin_url','admin-ajax.php') }}"
-           data-tax-type=""          {# deprecated in this flow #}
-           data-tax-cat="{{ rg.tax_category ?? '' }}">   {# taxonomy slug for selected CPT (blank when 'all') #}
+						{% if categories|length %}
+							<div class="select" id="slx">
+								<select placeholder="category">
+									{% for cat in categories %}
+										<option value="{{ cat.slug }}" {{ index == 0 ? 'selected' : '' }}>{{ cat.name }}</option>
+									{% endfor %}
+								</select>
 
-        {% if resources and resources|length %}
-          {% for r in resources %}
-            {% include __DIR__ ~ '/_item.twig' with { r: r, rg_tax: rg.tax_category } %}
-          {% endfor %}
-        {% else %}
-          <p id="rg-empty" class="text-center text-gray-500 w-full">No results found.</p>
-        {% endif %}
+								<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M19 9.11772L12 16L5 9.11772L6.13683 8L12 13.7646L17.8632 8L19 9.11772Z" fill="black"/>
+								</svg>
+							</div>
+						{% endif %}
+					{% endif %}
+				</div>
 
-      </div>
+				{% if has_posts %}
+					<div class="cards-outer">
+						<div class="cards-container" data-per-page="{{ items_per_page }}">
+							{% for item in posts %}
+								{% set post_id = item.ID ?? item.id %}
+								{% set post_title = item.post_title ?? item.title %}
+								{% set post_link = function('get_permalink', post_id) %}
+								{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
 
-      {# LOAD MORE ----------------------------------------------------------- #}
-      <div class="w-full flex justify-center">
-        {% include 'components/cta.twig' with {
-            'class': 'filled blue rg-more',
-            'id': 'rg-more',
-            'cta': {
-                'url': '#resource-grid',
-                'title': 'Load more',
-                'target': '_self'
-            }
-        } %}
-      </div>
-    </div>
-  </div>
+								{% set post_type_slug = function('get_post_type', post_id) %}
+								{% set post_type_obj = function('get_post_type_object', post_type_slug) %}
+								{% set post_type_name = post_type_obj.labels.singular_name %}
 
-  {# Inline JS will move after updating cards -------------------------------------------------------------- #}
-  <script>
-  (function(){
-    const root    = document.currentScript.closest('.rgs');
-    const grid    = root.querySelector('#rg-grid');
-    const more    = root.querySelector('.rg-more');
-    const selects = root.querySelectorAll('.rg-select');
-    let loading   = false;
+								{% set category_names = [] %}
+								{% set category_raw = function('wp_get_post_terms', post_id, types[post_type_obj.name].tax) %}
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+								{% for category in category_raw %}
+									{% set category_names = category_names | merge([category.slug]) %}
+								{% endfor %}
 
-    // --- URL helpers
-    const urlParams   = new URLSearchParams(window.location.search);
-    const initialType = urlParams.get('type') || grid.dataset.postType || 'all';
-    const initialCat  = urlParams.get('cat')  || '';
+								{% include 'components/card.twig' with {
+                                    custom_class: "is-listing in-filter",
+                                    title: post_title,
+                                    permalink: post_link,
+                                    type: post_type_name,
+                                    type_slug: post_type_obj.name,
+                                    show_type: true,
+                                    thumbnail: post_thumbnail,
+                                    cats: category_names
+                                } %}
+							{% endfor %}
+						</div>
 
-    function updateURL(){
-      const type = grid.dataset.postType || 'all';
-      const cat  = grid.dataset.cat || '';
-      const params = new URLSearchParams();
-      if (type && type !== 'all') params.set('type', type);
-      if (cat) params.set('cat', cat);
-      const qs = params.toString();
-      const newUrl = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
-      history.pushState({}, '', newUrl);
-    }
+						<div class="empty">
+							<div class="container">
+								<h6 class="text-center">We're sorry, there aren't any posts that match what you're looking for.
+									<br/>Try another a different filter or reset to see our latest posts.</h6>
+							</div>
+						</div>
 
-    function toggleMenu(btn){
-      const wrap  = btn.closest('.rg-select');
-      const menu  = wrap.querySelector('.rg-menu');
-      const arrow = btn.querySelector('.rg-arrow');
-      const open  = !menu.classList.contains('hidden');
-
-      root.querySelectorAll('.rg-menu').forEach(m => m.classList.add('hidden'));
-      root.querySelectorAll('.rg-arrow').forEach(a => a.classList.remove('rotate-180'));
-
-      if(open){
-        menu.classList.add('hidden');
-        arrow.classList.remove('rotate-180');
-      } else {
-        menu.classList.remove('hidden');
-        arrow.classList.add('rotate-180');
-      }
-    }
-
-    function wireCatClicks(catMenu){
-      catMenu.querySelectorAll('.rg-opt').forEach(opt=>{
-        opt.addEventListener('click', (e)=>{
-          const btn   = catMenu.closest('.rg-select').querySelector('.rg-btn');
-          const label = btn.querySelector('span');
-          const val   = e.currentTarget.dataset.value || '';
-          label.textContent = e.currentTarget.textContent.trim();
-          grid.dataset.cat = val;
-          catMenu.classList.add('hidden');
-          btn.querySelector('.rg-arrow')?.classList.remove('rotate-180');
-          refresh(true);
-          updateURL();
-        });
-      });
-    }
-
-    // Fetch top-level terms for selected taxonomy (pass tax slug)
-    function fetchTerms(taxSlug, catMenu){
-      catMenu.innerHTML = '<button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[12px] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>';
-
-      const fd = new FormData();
-      fd.append('action','rg_categories');
-      fd.append('nonce', grid.dataset.nonce);
-      fd.append('tax_type', taxSlug); // reuse endpoint: tax_type = taxonomy slug
-      fd.append('type_id',  0);       // parent=0 => top-level terms
-
-      fetch(grid.dataset.ajax, { method:'POST', body: fd })
-        .then(r=>r.json())
-        .then(data=>{
-          if (Array.isArray(data.cats) && data.cats.length){
-            data.cats.forEach(c=>{
-              const b = document.createElement('button');
-              b.className = 'rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100';
-              b.dataset.value = c.term_id;
-              b.textContent = c.name;
-              catMenu.appendChild(b);
-            });
-          } else {
-            const row = document.createElement('div');
-            row.className = 'px-4 py-3 text-gray-400 text-sm';
-            row.textContent = 'No categories';
-            catMenu.appendChild(row);
-          }
-          wireCatClicks(catMenu);
-        })
-        .catch(()=>{
-          const row = document.createElement('div');
-          row.className = 'px-4 py-3 text-red-500 text-sm';
-          row.textContent = 'Failed to load categories';
-          catMenu.appendChild(row);
-          wireCatClicks(catMenu);
-        });
-    }
-
-    function syncMoreVisibilityInitial(){
-      if(!more) return;
-      const ppp   = parseInt(grid.dataset.ppp, 10) || 9;
-      const items = grid.querySelectorAll('[data-rg-item]').length;
-      more.style.display = (items >= ppp ? 'inline-flex' : 'none');
-    }
-
-    function animateNewItems(){
-      if(!window.gsap || reduceMotion) return;
-      const newEls = Array.from(grid.querySelectorAll('[data-rg-item]:not(.is-animated)'));
-      if(!newEls.length) return;
-      gsap.set(newEls, { willChange: 'transform, opacity, filter' });
-      gsap.fromTo(newEls,
-        { autoAlpha: 0, y: 24, filter: 'blur(4px)' },
-        {
-          autoAlpha: 1, y: 0, filter: 'blur(0px)',
-          duration: 0.55, ease: 'power3.out',
-          stagger: { each: 0.06, from: 'start' },
-          onComplete: () => {
-            newEls.forEach(el => el.classList.add('is-animated'));
-            gsap.set(newEls, { clearProps: 'will-change' });
-          }
-        }
-      );
-    }
-
-    function refresh(resetPage){
-      if(loading) return;
-      loading = true;
-      if(resetPage){ grid.dataset.page = '1'; }
-
-      const fd = new FormData();
-      fd.append('action','rg_filter');
-      fd.append('nonce', grid.dataset.nonce);
-      fd.append('post_type', grid.dataset.postType || 'all'); // 'all' handled server-side (controller initial; AJAX can support via WP_Query with array if needed)
-      fd.append('ppp', grid.dataset.ppp);
-      fd.append('page', grid.dataset.page);
-
-      // Legacy fields kept but not used in this mode
-      fd.append('tax_type', '');                 // no parent taxonomy filter
-      fd.append('type_id',  '');                 // no parent term
-      fd.append('tax_cat',  grid.dataset.taxCat || ''); // selected CPT taxonomy slug
-      fd.append('cat_id',   grid.dataset.cat || '');    // selected term id
-
-      grid.style.opacity = '0.4';
-
-      fetch(grid.dataset.ajax, { method:'POST', body: fd })
-        .then(r=>r.json())
-        .then(data=>{
-          grid.style.opacity = '1';
-          if(resetPage){ grid.innerHTML = ''; }
-
-          if(data.html){
-            const beforeCount = grid.querySelectorAll('[data-rg-item]').length;
-            grid.insertAdjacentHTML('beforeend', data.html);
-
-            if(!resetPage){
-              const existing = Array.from(grid.querySelectorAll('[data-rg-item]')).slice(0, beforeCount);
-              existing.forEach(el => el.classList.add('is-animated'));
-            }
-
-            animateNewItems();
-
-            grid.dataset.page = data.page;
-            if(more){
-              more.style.display = (data.has_more ? 'inline-flex' : 'none');
-            }
-          } else {
-            grid.innerHTML = '<p id="rg-empty" class="text-center text-gray-500 w-full">No results found.</p>';
-            if(more){ more.style.display = 'none'; }
-          }
-        })
-        .catch(()=>{
-          grid.style.opacity = '1';
-        })
-        .finally(()=> loading = false);
-    }
-
-    // Wire dropdowns
-    selects.forEach(s=>{
-      const btn = s.querySelector('.rg-btn');
-      btn.addEventListener('click', ()=> toggleMenu(btn));
-
-      s.querySelectorAll('.rg-opt').forEach(opt=>{
-        opt.addEventListener('click', e=>{
-          const span = btn.querySelector('span');
-          span.textContent = e.currentTarget.textContent.trim();
-          s.querySelector('.rg-menu').classList.add('hidden');
-          btn.querySelector('.rg-arrow').classList.remove('rotate-180');
-
-          // TYPE changed (CPT)
-          if(btn.dataset.toggle === 'type'){
-            const chosenType = e.currentTarget.dataset.value || 'all';
-            const taxSlug    = e.currentTarget.dataset.tax || '';
-
-            // Update dataset for AJAX
-            grid.dataset.postType = chosenType;
-            grid.dataset.taxCat   = (chosenType === 'all') ? '' : taxSlug;
-            grid.dataset.cat      = ''; // reset selected term
-
-            // Manage Category button state
-            const catBtn  = root.querySelector('[data-toggle="cat"]');
-            const catMenu = root.querySelector('[data-menu="cat"]');
-            if (chosenType === 'all'){
-              catBtn.disabled = true;
-              catBtn.classList.add('opacity-60');
-              catBtn.querySelector('span').textContent = 'Category';
-              catMenu.innerHTML = '<button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[12px] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>';
-            } else {
-              catBtn.disabled = false;
-              catBtn.classList.remove('opacity-60');
-              catBtn.querySelector('span').textContent = 'Category';
-              catMenu.innerHTML = '<button class="rg-opt block w-full text-left px-4 py-3 hover:bg-gray-100 bg-[#f8f9fb] text-[12px] font-medium leading-[1.2] tracking-[1.2px] uppercase" data-value="">All</button>';
-              // Load top-level terms for selected taxonomy
-              fetchTerms(taxSlug, catMenu);
-            }
-
-            refresh(true);
-            updateURL();
-
-          } else {
-            // CATEGORY changed (term)
-            const val = e.currentTarget.dataset.value || '';
-            grid.dataset.cat = val;
-            refresh(true);
-            updateURL();
-          }
-        });
-      });
-    });
-
-    // Close dropdowns on outside click
-    document.addEventListener('click', (e)=>{
-      if(!e.target.closest('.rg-select')){
-        root.querySelectorAll('.rg-menu').forEach(m=>m.classList.add('hidden'));
-        root.querySelectorAll('.rg-arrow').forEach(a=>a.classList.remove('rotate-180'));
-      }
-    });
-
-    // Load more
-    if(more){
-      more.addEventListener('click', (e)=>{
-        e.preventDefault();
-        if(loading) return;
-        grid.dataset.page = String(parseInt(grid.dataset.page,10) + 1);
-        refresh(false);
-      });
-    }
-
-    // Initial states
-    syncMoreVisibilityInitial();
-
-    if(!reduceMotion && window.gsap){
-      animateNewItems();
-    } else {
-      grid.querySelectorAll('[data-rg-item]').forEach(el => el.classList.add('is-animated'));
-    }
-
-    // Preselect from URL (type + cat)
-    // We simulate a user click so labels and menus sync properly.
-    const typeMenu = root.querySelector('[data-menu="type"]');
-    const initTypeBtn = typeMenu?.querySelector(`[button][data-value="${initialType}"]`) || typeMenu?.querySelector(`[data-value="${initialType}"]`);
-    if (initialType && initialType !== (grid.dataset.postType || 'all') && initTypeBtn){
-      initTypeBtn.click();
-      if (initialCat){
-        // Wait a bit for categories to load before selecting term
-        setTimeout(()=>{
-          const catMenu = root.querySelector('[data-menu="cat"]');
-          const catBtn  = catMenu?.querySelector(`[data-value="${initialCat}"]`);
-          if(catBtn) catBtn.click();
-        }, 600);
-      }
-    } else {
-      // If initialType matches existing, still set URL (to clean unknown params)
-      updateURL();
-    }
-  })();
-  </script>
+						<div class="load-more">
+							<div class="container">
+								<div class="flex justify-center">
+									<div class="btn filled blue" type="button">
+										<p>
+											<span class="front" data-original="Load">Load</span>
+											<span class="back">Load&nbsp;</span>
+										</p>
+										<p>
+											<span class="front" data-original="more">more</span>
+											<span class="back">more</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="empty active">
+						<div class="container">
+							<h6 class="text-center">There aren't any posts here just yet.
+								<br/>Check back soon for updates.</h6>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </section>

@@ -9,7 +9,7 @@ add_action('init', function () {
 
     $types = [
         'news' => [
-            'label'     => 'News & Resources',
+            'label'     => 'News',
             'slug'      => 'news-resources',
             'icon'      => 'dashicons-megaphone',
             'tax'       => ['slug' => 'news_category', 'label' => 'News Categories']

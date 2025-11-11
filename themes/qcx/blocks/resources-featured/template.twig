@@ -3,8 +3,6 @@
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
 	{% endif %}
 
-	{# {{ not fields.dark_mode ? 'bg-' ~ fields.bg : 'bg-[#F7F9FB]' }} {{ fields.dark_mode ? 'dark' }} bg-[#F7F9FB] overflow-x-clip overflow-y-visible #}
-
 	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xxl' %}
 	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
 
@@ -48,7 +46,6 @@
                                 type: post_type_name,
                                 thumbnail: post_thumbnail,
                                 animated: true,
-                                loading: "eager"
                             } %}
 						{% endfor %}
 					</div>
