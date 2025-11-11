@@ -210,7 +210,7 @@
 		&.at-hero {
 			.rc {
 				&-card {
-					@apply border-green bg-blue bg-opacity-20 backdrop-blur-[1rem];
+					@apply border-green bg-blue bg-opacity-20 backdrop-blur-[1rem] h-auto;
 				}
 
 				&-head {
@@ -226,7 +226,7 @@
 				}
 
 				&-media {
-					@apply transition-all duration-500 ease-power2-out;
+					@apply transition-all duration-500 ease-power2-out mt-[unset];
 				}
 			}
 
