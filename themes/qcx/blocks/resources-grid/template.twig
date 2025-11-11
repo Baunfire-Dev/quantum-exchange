@@ -32,8 +32,10 @@
 						{% if categories|length %}
 							<div class="select" id="slx">
 								<select placeholder="category">
+                                    <option value="all" selected>All</option>
+                                    
 									{% for cat in categories %}
-										<option value="{{ cat.slug }}" {{ index == 0 ? 'selected' : '' }}>{{ cat.name }}</option>
+										<option value="{{ cat.slug }}">{{ cat.name }}</option>
 									{% endfor %}
 								</select>
 

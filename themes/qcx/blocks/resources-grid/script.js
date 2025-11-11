@@ -85,7 +85,7 @@ baunfire.addModule({
             if (categorySelect.length) {
                 categorySelect.on("change", function () {
                     const selectedValue = $(this).val();
-                    resData.activeCategory = selectedValue ? selectedValue : null;
+                    resData.activeCategory = selectedValue && selectedValue !== 'all' ? selectedValue : null;
                     processItems(resData);
                 });
             }
