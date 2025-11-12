@@ -293,6 +293,26 @@
                 handleEntranceAnim(self);
             };
 
+            const resourceBody = () => {
+                const self = el.find("section.rs-body");
+                if (!self.length) return;
+
+                gsap.fromTo(self,
+                    {
+                        autoAlpha: 0
+                    },
+                    {
+                        autoAlpha: 1,
+                        duration: 0.8,
+                        ease: Power2.easeOut,
+                        scrollTrigger: {
+                            trigger: self,
+                            start: baunfire.anim.start
+                        }
+                    }
+                );
+            };
+
             const subscribeCTA = () => {
                 const self = el.find("section.subscribe-cta");
                 if (!self.length) return;
@@ -452,6 +472,7 @@
             }
 
             resourceHero();
+            resourceBody();
             subscribeCTA();
             featuredResources();
             contentCTA();
