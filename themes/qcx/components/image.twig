@@ -1,12 +1,13 @@
 {% if image %}
 	{% if image matches('/^https?:\\/\\//') %}
-		<img class="{{ class ?: '' }}" src="{{ image }}" alt="bynder adaptive image" loading="{{ loading ?: 'lazy' }}" width="{{ imagsize[0] }}" height="{{ size[1] }}"/>
+		<img class="{{ class ?: '' }}" src="{{ image }}" alt="adaptive image" loading="{{ loading ?: 'lazy' }}" width="{{ imagsize[0] }}" height="{{ size[1] }}"/>
 	{% else %}
 		{{ 
             function('wp_get_attachment_image', image, size ?: "full", false, {
                 'class': class ?: '',
                 'loading': loading ?: 'lazy',
-                'alt': function('get_the_title', image)
+                'alt': function('get_the_title', image),
+                'fetchpriority': loading and loading == "eager" ? "high" : "auto"
             })
         }}
 	{% endif %}
