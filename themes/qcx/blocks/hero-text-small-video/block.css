@@ -1,5 +1,15 @@
 @layer components {
     .hero-text-small-video {
-        /* Add your styles here */
+        .media-container {
+			@apply absolute ~bottom-[-15.75rem]/[-3.5rem] aspect-[121/68] ~w-[34.75rem]/[45.375rem];
+            @apply max-md:left-[50%] max-md:translate-x-[-50%] md:right-[-11.875rem];
+            @apply mix-blend-multiply;
+
+			&.video {
+				video {
+					@apply h-full w-full;
+				}
+			}
+		}
     }
 }

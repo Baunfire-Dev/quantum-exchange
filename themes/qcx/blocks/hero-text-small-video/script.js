@@ -8,9 +8,65 @@ baunfire.addModule({
 
             els.each(function () {
                 const self = $(this);
-                /* Add your logic here */
+
+                handleVideos(self);
+                handleEntranceAnim(self);
             });
         }
+
+        const handleEntranceAnim = (self) => {
+            const title = self.find(".block-title");
+            const content = self.find(".block-content");
+            const video = self.find(".media-container video");
+
+            const entranceAnim = gsap.timeline({
+                scrollTrigger: {
+                    trigger: self,
+                    start: baunfire.anim.start
+                }
+            })
+                .fromTo([title, content, video],
+                    {
+                        y: 40,
+                        autoAlpha: 0
+                    },
+                    {
+                        y: 0,
+                        autoAlpha: 1,
+                        duration: 0.8,
+                        stagger: { each: 0.2 },
+                        ease: Power2.easeOut
+                    },
+                    "<0.4"
+                )
+        };
+
+        const handleVideos = (self) => {
+            const videoContainers = self.find(".media-container.video");
+            if (!videoContainers.length) return;
+
+            videoContainers.each(function (index) {
+                const subSelf = $(this);
+                setupVideo(self, subSelf);
+            });
+        };
+
+        const setupVideo = (self, videoContainer) => {
+            const videoRaw = videoContainer.find("video");
+            if (!videoRaw.length) return;
+
+            const video = videoRaw.get(0);
+
+            ScrollTrigger.create({
+                trigger: videoContainer,
+                start: "top center",
+                end: "bottom 30%",
+                onEnter: () => video.play(),
+                onEnterBack: () => video.play(),
+                onLeave: () => video.pause(),
+                onLeaveBack: () => video.pause()
+            });
+        };
 
         script();
     }
