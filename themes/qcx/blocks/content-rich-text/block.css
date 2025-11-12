@@ -33,18 +33,21 @@
 			}
 		}
 
-        figure {
-            @apply max-w-full;
-        }
+		figure {
+			@apply max-w-full;
+		}
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6,
-		.post-quote {
-			@apply block ~mt-[1.25rem]/[2rem];
+		& > {
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			.post-quote,
+            figure {
+				@apply block ~mt-[1.25rem]/[2rem];
+			}
 		}
 
 		& > .wp-block-heading {
