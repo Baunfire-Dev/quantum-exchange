@@ -18,6 +18,8 @@ baunfire.addModule({
             const box = self.find(".box");
             const marquee = self.find(".marquee-inner");
 
+            const elAnims = [box, marquee].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
@@ -34,7 +36,7 @@ baunfire.addModule({
                         ease: Power2.easeOut
                     }
                 )
-                .fromTo([marquee, box],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0
@@ -70,7 +72,7 @@ baunfire.addModule({
                     marquee.addClass("paused");
                 }
             });
-        }
+        };
 
         script();
     }

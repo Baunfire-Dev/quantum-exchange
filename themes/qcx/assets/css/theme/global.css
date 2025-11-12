@@ -126,6 +126,16 @@
 			}
 		}
 
+        &.susbcribe-cta {
+			.form {
+				&-inner {
+					small {
+						@apply text-white;
+					}
+				}
+			}
+		}
+
 		&-inner {
 			small {
 				@apply italic opacity-60;
@@ -286,6 +296,42 @@
 			}
 		}
 	}
+
+    .rs {
+        &-share {
+            @apply h-[2.25rem] w-[2.25rem] cursor-pointer relative;
+
+            svg {
+                @apply h-full w-full;
+            }
+        }
+
+        &-share-bubble {
+            @apply hidden absolute top-0 translate-y-[-120%] translate-x-[-50%] left-[50%] px-[0.75rem] py-[0.375rem] rounded-[0.25rem] bg-blue whitespace-nowrap;
+        }
+
+        &-back {
+			@apply flex items-center gap-[0.5rem];
+
+            p {
+                @apply text-blue;
+            }
+
+			svg {
+				@apply transition-transform duration-300 ease-power2-out;
+
+                path {
+                    @apply stroke-blue;
+                }
+			}
+
+			&:hover {
+				svg {
+					@apply translate-x-[-0.25rem];
+				}
+			}
+        }
+    }
 }
 
 input:-webkit-autofill,

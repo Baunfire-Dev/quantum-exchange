@@ -4,6 +4,7 @@
     baunfire.Global = {
         init() {
             this.handleSpecialLinks();
+            this.siteCopyURL();
         },
 
         debounce(func, delay = 300) {
@@ -225,6 +226,32 @@
             let s = (+value).toLocaleString("en-US").split(".");
             return decimals ? s[0] + "." + ((s[1] || "") + "00000000").substr(0, decimals) : s[0];
         },
+
+        siteCopyURL() {
+            const el = $(".copy-link-btn");
+            if (!el.length) return;
+
+            const siteURL = window.location.href;
+
+            el.click(function () {
+                const bubble = $(this).find(".copy-bubble");
+
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(siteURL).catch(err => {
+                        console.error("Clipboard error:", err);
+                    });
+                } else {
+                    const tempInput = $('<input type="text" style="position: absolute; left: -9999px;">');
+                    $('body').append(tempInput);
+                    tempInput.val(siteURL).select();
+                    document.execCommand('copy');
+                    tempInput.remove();
+                }
+
+                bubble.fadeIn();
+                setTimeout(() => bubble.fadeOut(), 2000);
+            });
+        }
     };
 
     baunfire.addModule(baunfire.Global);

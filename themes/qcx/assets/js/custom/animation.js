@@ -5,6 +5,7 @@
         init() {
             this.handleNav();
             this.handleButtonHover();
+            this.handleResourceAnim();
         },
 
         handleButtonHover() {
@@ -253,6 +254,208 @@
             desktopDDPanel();
             mobileDDPanel();
         },
+
+        handleResourceAnim() {
+            const el = $(".rs");
+            if (!el.length) return;
+
+            const resourceHero = () => {
+                const self = el.find("section.rs-head");
+                if (!self.length) return;
+
+                const handleEntranceAnim = (self) => {
+                    const left = self.find(".block-left");
+                    const right = self.find(".block-right");
+
+                    const elAnims = [left, right].filter(el => el.length > 0);
+
+                    const entranceAnim = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: self,
+                            start: baunfire.anim.start
+                        }
+                    })
+                        .fromTo(elAnims,
+                            {
+                                y: 40,
+                                autoAlpha: 0
+                            },
+                            {
+                                y: 0,
+                                autoAlpha: 1,
+                                duration: 0.8,
+                                stagger: { each: 0.2 },
+                                ease: Power2.easeOut
+                            }
+                        );
+                };
+
+                handleEntranceAnim(self);
+            };
+
+            const subscribeCTA = () => {
+                const self = el.find("section.subscribe-cta");
+                if (!self.length) return;
+
+                const handleEntranceAnim = (self) => {
+                    const title = self.find(".block-heading");
+                    const para = self.find(".block-para");
+                    const form = self.find(".block-form");
+                    const envelopes = self.find('.envelope');
+
+                    const elAnims = [title, para, form, envelopes].filter(el => el.length > 0);
+
+                    const entranceAnim = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: self,
+                            start: baunfire.anim.start
+                        }
+                    })
+                        .fromTo(elAnims,
+                            {
+                                y: 40,
+                                autoAlpha: 0
+                            },
+                            {
+                                y: 0,
+                                autoAlpha: 1,
+                                duration: 0.8,
+                                stagger: { each: 0.2 },
+                                ease: Power2.easeOut
+                            }
+                        );
+                };
+
+                handleEntranceAnim(self);
+            };
+
+            const featuredResources = () => {
+                const self = el.find("section.resources-featured");
+                if (!self.length) return;
+
+                const handleEntranceAnim = (self) => {
+                    const title = self.find(".block-title");
+                    const paraCTA = self.find(".block-duo");
+                    const cards = self.find('.rc-card');
+
+                    const elAnims = [title, paraCTA].filter(el => el.length > 0);
+
+                    const entranceAnim = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: self,
+                            start: baunfire.anim.start
+                        }
+                    })
+                        .fromTo(elAnims,
+                            {
+                                y: 40,
+                                autoAlpha: 0
+                            },
+                            {
+                                y: 0,
+                                autoAlpha: 1,
+                                duration: 0.8,
+                                stagger: { each: 0.2 },
+                                ease: Power2.easeOut
+                            }
+                        );
+
+                    if (cards.length) {
+                        entranceAnim
+                            .fromTo(cards,
+                                {
+                                    y: 40,
+                                    autoAlpha: 0
+                                },
+                                {
+                                    autoAlpha: 1,
+                                    y: 0,
+                                    duration: 0.6,
+                                    ease: Power2.easeOut,
+                                    stagger: { each: 0.2 }
+                                },
+                                ">-0.8"
+                            );
+                    }
+                };
+
+                handleEntranceAnim(self);
+            };
+
+            const contentCTA = () => {
+                const self = el.find("section.content-cta");
+                if (!self.length) return;
+
+                const handleEntranceAnim = (self) => {
+                    const bg = self.find(".bg");
+                    const box = self.find(".box");
+                    const marquee = self.find(".marquee-inner");
+
+                    const elAnims = [box, marquee].filter(el => el.length > 0);
+
+                    const entranceAnim = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: self,
+                            start: baunfire.anim.start
+                        }
+                    })
+                        .fromTo(bg,
+                            {
+                                autoAlpha: 0
+                            },
+                            {
+                                autoAlpha: 1,
+                                duration: 0.8,
+                                ease: Power2.easeOut
+                            }
+                        )
+                        .fromTo(elAnims,
+                            {
+                                y: 40,
+                                autoAlpha: 0
+                            },
+                            {
+                                y: 0,
+                                autoAlpha: 1,
+                                duration: 0.8,
+                                ease: Power2.easeOut,
+                                stagger: { each: 0.2 }
+                            },
+                            ">-0.6"
+                        );
+                };
+
+                const handleMarquee = (self) => {
+                    const marquee = self.find(".marquee");
+
+                    ScrollTrigger.create({
+                        trigger: marquee,
+                        start: "top 90%",
+                        end: "bottom top",
+                        onEnter: () => {
+                            marquee.removeClass("paused");
+                        },
+                        onLeave: () => {
+                            marquee.addClass("paused");
+                        },
+                        onEnterBack: () => {
+                            marquee.removeClass("paused");
+                        },
+                        onLeaveBack: () => {
+                            marquee.addClass("paused");
+                        }
+                    });
+                };
+
+                handleEntranceAnim(self);
+                handleMarquee(self);
+            }
+
+            resourceHero();
+            subscribeCTA();
+            featuredResources();
+            contentCTA();
+        }
     };
 
     baunfire.addModule(baunfire.Animation);

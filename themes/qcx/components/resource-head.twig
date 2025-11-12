@@ -1,0 +1,45 @@
+<section class="rs-head">
+	<div class="st-xxl sb-xxl">
+		<div class="container">
+			<div class="grid md:grid-cols-2 ~gap-[2rem]/[5rem]">
+				<div class="block-left alpha flex flex-col gap-[3rem] h-full">
+					<div class="flex flex-col ~gap-[2rem]/[3rem]">
+						<div class="flex justify-between gap-[1.5rem]">
+							{% set link_url = back_cta.url ?: "#" %}
+							{% set link_title = back_cta.title %}
+							{% set link_target = back_cta.target ?: "_self" %}
+                            
+							<a class="rs-back" href="{{ link_url }}" target="{{ link_target }}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+									<path d="M5 9L1 5L5 1" stroke="black" stroke-linecap="square"/>
+								</svg>
+								<p>{{ back_cta.title }}</p>
+							</a>
+
+							<small>{{ date }}</small>
+						</div>
+
+						<div class="flex flex-col ~gap-[1rem]/[1.5rem]">
+							<h1 class="h3">{{ title }}</h1>
+							<p>By
+								<a class="text-blue hover:underline underline-offset-2" href="#">{{ author }}</a>
+							</p>
+						</div>
+					</div>
+
+					{% include 'components/resource-sharing.twig' %}
+				</div>
+
+				{% if feature_image %}
+					<div class="block-right alpha rounded-[0.5rem] overflow-hidden w-full h-auto aspect-[616/476]">
+						{% include 'components/image.twig' with {
+                            image: feature_image,
+                            class: 'object-cover',
+                            size: "full",
+                        } %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>

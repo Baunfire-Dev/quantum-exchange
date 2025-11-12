@@ -17,13 +17,15 @@ baunfire.addModule({
             const paraCTA = self.find(".block-duo");
             const cards = self.find('.rc-card');
 
+            const elAnims = [title, paraCTA].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, paraCTA],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0
