@@ -48,7 +48,7 @@
 
 		.pc {
 			&-card {
-				@apply ~p-[1.25rem]/[2rem] border border-gray rounded-[0.5rem] mx-[0.75rem] ~mb-[1.25rem]/[2rem];
+				@apply ~p-[1.25rem]/[2rem] border border-gray rounded-[0.5rem] mx-[0.75rem];
 				@apply flex flex-col ~gap-[2rem]/[3rem];
 			}
 
