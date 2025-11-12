@@ -75,8 +75,8 @@
                     },
                     "choices": {
                         "all": "All",
+                        "awards": "Awards",
                         "news": "News",
-                        "videos": "Videos",
                         "blog_podcast": "Blogs & Podcasts",
                         "media_coverage": "Media Coverage",
                         "resource_library": "Resource Library",
@@ -140,5 +140,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762887812
+    "modified": 1762969493
 }
