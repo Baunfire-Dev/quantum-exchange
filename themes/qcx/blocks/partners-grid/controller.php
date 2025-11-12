@@ -1,44 +1,45 @@
 <?php
+
 use Timber\Timber;
 
-/**
- * Block Name: Partner Grid
- * Description: Displays partners with category filters and load more button.
- */
+acf_setup_meta($block["data"], $block["id"], true);
 
-acf_setup_meta($block['data'], $block['id'], true);
-
-$ctx = Timber::context();
-$ctx['block']  = $block;
-$ctx['fields'] = get_field('block') ?: [];
-
-// --- Config ---
-$ctx['pg'] = [
-  'post_type'     => 'partner',
-  'tax'           => 'partner_category',
-  'ppp'           => 9,
-];
-
-// --- Initial Query ---
-$initial = new WP_Query([
-  'post_type'      => $ctx['pg']['post_type'],
-  'post_status'    => 'publish',
-  'posts_per_page' => $ctx['pg']['ppp'],
-  'paged'          => 1,
+$context = Timber::context([
+    "block" => $block,
+    "fields" => get_field("block"),
+    "posts" => [],
+    "items_per_page" => 9
 ]);
-$ctx['partners'] = Timber::get_posts($initial);
-wp_reset_postdata();
 
-// --- Taxonomy Terms for Buttons ---
+$transient_key = TRANSIENT_PREFIX . "_partner_grid_resource";
+$posts = get_transient($transient_key);
+
 $terms = get_terms([
-  'taxonomy'   => $ctx['pg']['tax'],
-  'hide_empty' => false,
+    'taxonomy' => "partner-type",
+    'hide_empty' => false,
 ]);
-$ctx['partner_terms'] = (!is_wp_error($terms)) ? $terms : [];
 
-// --- Nonce for AJAX ---
-$ctx['pg_nonce'] = wp_create_nonce('pg_nonce');
+$context['categories'] = array_map(function ($term) {
+    return [
+        'name' => $term->name,
+        'slug' => $term->slug
+    ];
+}, $terms);
 
-acf_reset_meta($block['id']);
+if (!$posts) {
+    $posts = Timber::get_posts(array(
+        'post_type' => "partner",
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'order' => 'DESC'
+    ));
 
-Timber::render(__DIR__ . '/template.twig', $ctx);
+    set_transient($transient_key, $posts, TRANSIENT_DURATION);
+}
+
+$context['posts'] = $posts;
+
+$context["block"]["slug"] = preg_replace('/^acf\//', '', $block["name"]);
+acf_reset_meta($block["id"]);
+
+Timber::render("./template.twig", $context);

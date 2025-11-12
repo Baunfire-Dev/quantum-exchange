@@ -1,141 +1,117 @@
-<section class="{{ block.slug }} {{ block.className }} p-grid" style="background:#F7F9FB;">
-  {% if block.anchor %}
-    <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-  {% endif %}
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-  <div class="mx-auto max-w-[90rem] px-[1rem] md:px-[4rem] pt-[4.5rem] pb-[4.5rem] md:pt-[7.5rem] md:pb-[5rem] flex flex-col items-center gap-[3rem]">
+	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xl' %}
+	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
 
-    {# === CATEGORY FILTER BUTTONS === #}
-    <div class="flex flex-wrap items-start gap-[0.75rem] w-full justify-start" id="pg-filters">
-      <button class="pg-btn active" data-id="">All Partners</button>
-      {% for term in partner_terms %}
-        <button class="pg-btn" data-id="{{ term.term_id }}">{{ term.name }}</button>
-      {% endfor %}
-    </div>
+	{% set has_posts = posts and posts|length %}
 
-    {# === GRID === #}
-   {# === GRID === #}
-<div id="pg-grid"
-     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-[2rem] gap-x-[1.5rem] w-full"
-     data-ajax="{{ function('admin_url','admin-ajax.php') }}"
-     data-nonce="{{ pg_nonce }}"
-     data-post-type="{{ pg.post_type }}"
-     data-tax="{{ pg.tax }}"
-     data-ppp="{{ pg.ppp }}"
-     data-page="1"
-     data-cat="">
+	<div class="{{ pt }} {{ pb }}">
+		<div class="container">
+			<div class="flex flex-col ~gap-[2rem]/[3rem]">
+				<div class="tab-items">
+					<div class="tab-item active" data-slug="all">
+						<p class="button">All Partners</p>
+					</div>
 
+					{% for cat in categories %}
+						<div class="tab-item" data-slug="{{ cat.slug }}">
+                            <p class="button">{{ cat.name }} Partners</p>
+                        </div>
+					{% endfor %}
+				</div>
 
-      {% if partners and partners|length %}
-        {% for r in partners %}
-          {% include __DIR__ ~ '/_item.twig' with { r: r } %}
-        {% endfor %}
-      {% else %}
-        <p class="text-center text-gray-500 w-full">No partners found.</p>
-      {% endif %}
-    </div>
+				{% if has_posts %}
+					<div class="cards-outer">
+						<div class="cards-container" data-per-page="{{ items_per_page }}">
+							{% for item in posts %}
+								{% set post_id = item.ID ?? item.id %}
+								{% set post_title = item.post_title ?? item.title %}
+								{% set post_image = function("get_field", "logo", post_id) %}
+								{% set post_desc = function("get_field", "description", post_id) %}
+								{% set post_links = function("get_field", "links", post_id) %}
+								{% set post_category = function('wp_get_post_terms', post_id, "partner-type") %}
 
-    {# === LOAD MORE === #}
-    <div class="w-full flex justify-center">
-      {% include 'components/cta.twig' with {
-          'class': 'filled blue pg-more',
-          'id': 'pg-more',
-          'cta': {
-              'url': '#partner-grid',
-              'title': 'Load more',
-              'target': '_self'
-          }
-      } %}
-    </div>
-  </div>
+								<div class="pc in-filter" data-category="{{ post_category[0].slug }}">
+									<div class="pc-card">
+										<div class="pc-tag">
+											<div class="pc-square"></div>
+											<small>{{ post_category[0].name }}</small>
+										</div>
 
-  {# === INLINE SCRIPT === #}
-  <script>
-  (function(){
-    const root = document.currentScript.closest('section');
-    const grid = root.querySelector('#pg-grid');
-    const more = root.querySelector('.pg-more');
-    const buttons = root.querySelectorAll('.pg-btn');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let loading = false;
+										{% if post_image %}
+											<div class="pc-logo">
+												<img data-src="{{ post_image }}" alt="{{ post_title }}">
+											</div>
+										{% endif %}
 
-    // --- Animation ---
-    function animateNewItems() {
-      if (!window.gsap || reduceMotion) return;
-      const newEls = Array.from(grid.querySelectorAll('[data-pg-item]:not(.is-animated)'));
-      if (!newEls.length) return;
-      gsap.set(newEls, { willChange: 'transform,opacity' });
-      gsap.fromTo(newEls,
-        { autoAlpha: 0, y: 40 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          stagger: { each: 0.08 },
-          onComplete: () => {
-            newEls.forEach(el => el.classList.add('is-animated'));
-            gsap.set(newEls, { clearProps: 'will-change' });
-          }
-        });
-    }
+										<div class="pc-content">
+											<div class="pc-content-inner">
+												<p class="lg">{{ post_title }}</p>
 
-    // --- Fetch Partners ---
-    function refresh(resetPage=true){
-      if (loading) return;
-      loading = true;
-      if (resetPage) grid.dataset.page = '1';
+												{% if post_desc %}
+													<p>{{ post_desc}}</p>
+												{% endif %}
+											</div>
 
-      const fd = new FormData();
-      fd.append('action', 'pg_filter');
-      fd.append('nonce', grid.dataset.nonce);
-      fd.append('post_type', grid.dataset.postType);
-      fd.append('ppp', grid.dataset.ppp);
-      fd.append('page', grid.dataset.page);
-      fd.append('tax', grid.dataset.tax);
-      fd.append('cat', grid.dataset.cat);
+											<div class="pc-links">
+												{% for pl in post_links %}
+													{% if pl.link %}
+														{% set link_url = pl.link.url ?: "#" %}
+														{% set link_title = pl.link.title %}
+														{% set link_target = cpl.linkta.target ?: "_self" %}
 
-      fetch(grid.dataset.ajax, { method:'POST', body: fd })
-        .then(r => r.json())
-        .then(data => {
-          if (resetPage) grid.innerHTML = '';
-          if (data.html) {
-            grid.insertAdjacentHTML('beforeend', data.html);
-            animateNewItems();
-            grid.dataset.page = data.page;
-            more.style.display = data.has_more ? 'inline-flex' : 'none';
-          } else {
-            grid.innerHTML = '<p class="text-center text-gray-500 w-full">No partners found.</p>';
-            more.style.display = 'none';
-          }
-        })
-        .finally(() => loading = false);
-    }
+														<a class="pc-link" type="button" href="{{ link_url }}" target="{{ link_target }}">
+															<p class="button">{{ link_title }}</p>
 
-    // --- Filter Buttons ---
-    buttons.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        buttons.forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        grid.dataset.cat = btn.dataset.id || '';
-        refresh(true);
-      });
-    });
+															<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+																<path d="M1 1L5 5L1 9" stroke="black" stroke-linecap="square"/>
+															</svg>
+														</a>
+													{% endif %}
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
 
-    // --- Load More ---
-    if (more) {
-      more.addEventListener('click', e=>{
-        e.preventDefault();
-        if (loading) return;
-        grid.dataset.page = String(parseInt(grid.dataset.page,10) + 1);
-        refresh(false);
-      });
-    }
+						<div class="empty">
+							<div class="container">
+								<h6 class="text-center">We're sorry, there aren't any posts that match what you're looking for.
+									<br/>Try another a different filter or reset to see our latest posts.</h6>
+							</div>
+						</div>
 
-    // Initial Animation
-    animateNewItems();
-  })();
-  </script>
-
-
+						<div class="load-more">
+							<div class="container">
+								<div class="flex justify-center">
+									<div class="btn filled blue" type="button">
+										<p>
+											<span class="front" data-original="Load">Load</span>
+											<span class="back">Load&nbsp;</span>
+										</p>
+										<p>
+											<span class="front" data-original="more">more</span>
+											<span class="back">more</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="empty active">
+						<div class="container">
+							<h6 class="text-center">There aren't any posts here just yet.
+								<br/>Check back soon for updates.</h6>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </section>
