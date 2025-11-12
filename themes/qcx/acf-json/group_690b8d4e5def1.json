@@ -118,12 +118,13 @@
                         "id": ""
                     },
                     "post_type": [
+                        "award",
+                        "news",
+                        "blog_podcast",
                         "resource_library",
                         "press_release",
                         "webinar_event",
-                        "news",
-                        "media_coverage",
-                        "blog_podcast"
+                        "media_coverage"
                     ],
                     "post_status": [
                         "publish"
@@ -251,5 +252,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762893170
+    "modified": 1762969629
 }
