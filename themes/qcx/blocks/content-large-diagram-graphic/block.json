@@ -1,6 +1,6 @@
 {
-	"name": "hero-homepage-old",
-	"title": "Hero Homepage Old",
+	"name": "content-large-diagram-graphic",
+	"title": "Content Large Diagram Graphic",
     "viewScript": ["file:./script.js"],
     "viewStyle": [],
 	"acf": {
