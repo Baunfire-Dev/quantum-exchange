@@ -5,7 +5,7 @@ define('TRANSIENT_DURATION', 7 * DAY_IN_SECONDS);
 $post_type_transient_map = [
     'all' => ['all_grid_resources'],
     'news' => ['news_grid_resources'],
-    'awards' => ['awards_grid_resources'],
+    'award' => ['award_grid_resources'],
     'blog_podcast' => ['blog_podcast_grid_resources'],
     'media_coverage' => ['media_coverage_grid_resources'],
     'resource_library' => ['resource_library_grid_resources'],
