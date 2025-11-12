@@ -3,19 +3,19 @@ baunfire.addModule({
         const $ = baunfire.$;
 
         const script = () => {
-            const sections = $("section.why-partner, section.content-text-bullet");
-            if (!sections.length) return;
+            const els = $("section.hero-text-small-image");
+            if (!els.length) return;
 
-            sections.each(function () {
+            els.each(function () {
                 const self = $(this);
                 handleEntranceAnim(self);
             });
-        };
+        }
 
         const handleEntranceAnim = (self) => {
             const title = self.find(".block-title");
-            const para = self.find(".block-para");
-            const bullets = self.find(".item");
+            const content = self.find(".block-content");
+            const image = self.find(".block-image");
 
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
@@ -23,7 +23,7 @@ baunfire.addModule({
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, para],
+                .fromTo([title, content, image],
                     {
                         y: 40,
                         autoAlpha: 0
@@ -36,26 +36,8 @@ baunfire.addModule({
                         ease: Power2.easeOut
                     }
                 );
-
-            if (bullets.length) {
-                entranceAnim
-                    .fromTo(bullets,
-                        {
-                            y: 20,
-                            autoAlpha: 0
-                        },
-                        {
-                            y: 0,
-                            autoAlpha: 1,
-                            duration: 0.6,
-                            stagger: { each: 0.14 },
-                            ease: Power2.easeOut
-                        },
-                        ">-0.6"
-                    );
-            }
         };
 
         script();
-    },
+    }
 });

@@ -1,0 +1,11 @@
+{
+	"name": "hero-text-small-video",
+	"title": "Hero Text Small Video",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}
