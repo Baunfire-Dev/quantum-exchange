@@ -60,7 +60,7 @@ baunfire.addModule({
             ScrollTrigger.create({
                 trigger: videoContainer,
                 start: "top center",
-                end: "bottom 30%",
+                end: "bottom 10%",
                 onEnter: () => video.play(),
                 onEnterBack: () => video.play(),
                 onLeave: () => video.pause(),
