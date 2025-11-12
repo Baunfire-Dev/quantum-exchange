@@ -24,7 +24,7 @@
 				{% if fields.items|length %}
 					<div class="lg:flex-1 lg:basis-[47.125rem]">
 						<div class="relative overflow-hidden ~py-[2.5rem]/[4rem] ~px-[1.25rem]/[4rem] rounded-[0.5rem] border border-green bg-blue">
-							<div class="flex flex-col gap-[1.5rem] relative z-[2]">
+							<div class="flex flex-col ~gap-[1rem]/[1.5rem] relative z-[2]">
 								{% for item in fields.items %}
 									<div class="item alpha flex gap-[0.75rem] items-start">
 										<img class="h-[1.75rem] w-[1.75rem] object-contain shrink-0" src="{{ function("svg", "check") }}" loading="lazy" alt="check">

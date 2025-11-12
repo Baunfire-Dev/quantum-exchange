@@ -61,10 +61,10 @@
                 },
                 {
                     "key": "field_690c829d09b66",
-                    "label": "heading",
+                    "label": "Heading",
                     "name": "heading",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "clone",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -73,19 +73,20 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
+                    "clone": [
+                        "group_66d89f07091ae"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
                 },
                 {
                     "key": "field_690c829d09b69",
                     "label": "Paragraph",
                     "name": "paragraph",
                     "aria-label": "",
-                    "type": "textarea",
+                    "type": "clone",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -94,13 +95,13 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
-                    "acfe_textarea_code": 0,
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "rows": "",
-                    "placeholder": "",
-                    "new_lines": ""
+                    "clone": [
+                        "group_6629697c3ccdf"
+                    ],
+                    "display": "seamless",
+                    "layout": "block",
+                    "prefix_label": 0,
+                    "prefix_name": 0
                 },
                 {
                     "key": "field_690c829d09b6c",
@@ -158,10 +159,9 @@
                                 "id": ""
                             },
                             "default_value": "",
-                            "acfe_textarea_code": 0,
                             "maxlength": "",
                             "allow_in_bindings": 0,
-                            "rows": "",
+                            "rows": 3,
                             "placeholder": "",
                             "new_lines": "",
                             "parent_repeater": "field_690c829d09b6e"
@@ -217,12 +217,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1762427820
+    "modified": 1762951580
 }

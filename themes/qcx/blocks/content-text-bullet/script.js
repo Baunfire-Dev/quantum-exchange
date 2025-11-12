@@ -3,7 +3,7 @@ baunfire.addModule({
         const $ = baunfire.$;
 
         const script = () => {
-            const sections = $("section.why-partner, section.content-text-bullet");
+            const sections = $("section.content-text-bullet");
             if (!sections.length) return;
 
             sections.each(function () {
