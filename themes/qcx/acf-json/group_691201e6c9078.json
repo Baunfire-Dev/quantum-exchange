@@ -70,6 +70,13 @@
                 "operator": "==",
                 "value": "media_coverage"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "award"
+            }
         ]
     ],
     "menu_order": 0,
@@ -82,5 +89,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763050700
+    "modified": 1763055178
 }
