@@ -34,7 +34,8 @@ add_action('registered_post_type', function ($post_type, $args) {
         'resource_library',
         'press_release',
         'webinar_event',
-        'team'
+        'team',
+        'authors'
     ))) return;
 
     // Set menu icon
@@ -213,4 +214,12 @@ add_filter('acf/fields/wysiwyg/toolbars', function () {
 add_filter('tiny_mce_before_init', function ($init) {
     $init['block_formats'] = 'Paragraph=p; Heading 1=h1; Heading 2=h2; Heading 3=h3; Heading 4=h4; Heading 5=h5; Heading 6=h6;';
     return $init;
+});
+
+//Disable Author Single
+add_action('template_redirect', function () {
+    if (is_singular('authors')) {
+        wp_redirect(home_url('/'), 301);
+        exit;
+    }
 });

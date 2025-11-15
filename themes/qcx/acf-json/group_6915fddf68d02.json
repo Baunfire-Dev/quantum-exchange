@@ -1,13 +1,13 @@
 {
-    "key": "group_691201e6c9078",
-    "title": "External Link",
+    "key": "group_6915fddf68d02",
+    "title": "Resource Author",
     "fields": [
         {
-            "key": "field_691201e61957b",
-            "label": "Redirect Link",
-            "name": "redirect_link",
+            "key": "field_6915fddf773b4",
+            "label": "Resource Author",
+            "name": "resource_author",
             "aria-label": "",
-            "type": "url",
+            "type": "post_object",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,9 +16,20 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "post_type": [
+                "authors"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 0,
             "allow_in_bindings": 0,
-            "placeholder": ""
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -26,14 +37,21 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "webinar_event"
+                "value": "award"
             }
         ],
         [
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "news"
+                "value": "blog_podcast"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "media_coverage"
             }
         ],
         [
@@ -61,26 +79,12 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "blog_podcast"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "media_coverage"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "award"
+                "value": "news"
             }
         ]
     ],
     "menu_order": 0,
-    "position": "acf_after_title",
+    "position": "normal",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
@@ -89,5 +93,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763055178
+    "modified": 1763049152
 }
