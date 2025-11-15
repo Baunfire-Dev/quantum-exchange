@@ -16,13 +16,15 @@ baunfire.addModule({
             const heading = $(".heading");
             const subtext = self.find(".subtext");
 
+            const elAnims = [heading, subtext].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([heading, subtext],
+                .fromTo(elAnims,
                     {
                         y: "40",
                         autoAlpha: 0

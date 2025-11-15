@@ -19,13 +19,15 @@ baunfire.addModule({
             const content = self.find(".block-content");
             const video = self.find(".media-container video");
 
+            const elAnims = [title, content, video].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, content, video],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

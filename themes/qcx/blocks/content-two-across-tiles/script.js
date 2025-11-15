@@ -81,13 +81,15 @@ baunfire.addModule({
                 }
             )
 
+            const elAnims = [logo, heading].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: "top 20%"
                 }
             })
-                .fromTo([logo, heading],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

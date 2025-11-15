@@ -1,0 +1,11 @@
+{
+	"name": "content-large-text-paragraph",
+	"title": "Content Large Text Paragraph",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

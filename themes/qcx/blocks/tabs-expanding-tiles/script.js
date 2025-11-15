@@ -25,13 +25,15 @@ baunfire.addModule({
             const tabsNav = self.find(".block-duo");
             const cards = self.find('.tab-panel.active .item-card');
 
+            const elAnims = [title, tabsNav].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, tabsNav],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

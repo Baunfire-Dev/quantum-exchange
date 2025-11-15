@@ -17,13 +17,15 @@ baunfire.addModule({
             const content = self.find(".block-content");
             const image = self.find(".block-image");
 
+            const elAnims = [title, content, image].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, content, image],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

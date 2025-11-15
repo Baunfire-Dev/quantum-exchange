@@ -21,6 +21,8 @@ baunfire.addModule({
             const contentGroup = self.find(".content-group");
             const contentLogo = $("section.content-logos");
 
+            const elAnims = [upperText, lowerText, contentGroup, contentLogo].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
@@ -39,7 +41,7 @@ baunfire.addModule({
                         ease: Power2.easeOut
                     }
                 )
-                .fromTo([upperText, lowerText, contentGroup, contentLogo],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

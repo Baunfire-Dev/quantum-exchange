@@ -98,6 +98,8 @@ function front_js_scripts()
     wp_enqueue_script("bf-scroll-to-script", get_template_directory_uri() . '/assets/js/external/ScrollToPlugin.min.js', array('jquery'), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));
     wp_enqueue_script("bf-lenis-script", get_template_directory_uri() . '/assets/js/external/lenis.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
 
+    wp_register_script("bf-text-script", get_template_directory_uri() . '/assets/js/external/TextPlugin.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
+
     wp_register_script("bf-vimeo-script", get_template_directory_uri() . '/assets/js/external/vimeo-player.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
     wp_register_script('bf-owl-script', get_template_directory_uri() . '/assets/js/external/owl.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
     wp_register_script("bf-select-two-script", get_template_directory_uri() . '/assets/js/external/select2.min.js', array(), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));

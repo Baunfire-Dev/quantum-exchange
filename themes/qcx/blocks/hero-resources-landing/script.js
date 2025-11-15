@@ -18,13 +18,15 @@ baunfire.addModule({
             const cards = self.find(".rc.at-hero:not(.ghost-card) .rc-card");
             const form = self.find(".block-form");
 
+            const elAnims = [title, para, cards, form].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, para, cards, form],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

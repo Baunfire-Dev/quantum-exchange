@@ -21,13 +21,15 @@ baunfire.addModule({
             const form = self.find(".block-form");
             const logos = self.find('.block-logos');
 
+            const elAnims = [title, para, form, logos].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, para, form, logos],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

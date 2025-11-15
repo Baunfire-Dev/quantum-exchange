@@ -13,17 +13,20 @@ baunfire.addModule({
         };
 
         const handleEntranceAnim = (self) => {
+            const inner = self.find(".inner");
             const title = self.find(".block-title");
             const para = self.find(".block-para");
             const bullets = self.find(".item");
 
+            const elAnims = [title, para].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
-                    trigger: self,
+                    trigger: inner,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, para],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

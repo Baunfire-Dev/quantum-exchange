@@ -1,0 +1,9 @@
+@layer components {
+    .hero-full-width-image {
+        /* Add your styles here */
+    }
+
+    main > section.hero-full-width-image {
+        @apply ~mt-[-3.625rem]/[-4.75rem];
+    }
+}

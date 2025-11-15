@@ -1,0 +1,11 @@
+{
+	"name": "hero-content-with-abstract-image",
+	"title": "Hero Content With Abstract Image",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

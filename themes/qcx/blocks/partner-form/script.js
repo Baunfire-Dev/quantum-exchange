@@ -18,6 +18,8 @@ baunfire.addModule({
             const content = self.find(".block-content");
             const form = self.find(".block-form");
 
+            const elAnims = [title, content, form].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
@@ -34,7 +36,7 @@ baunfire.addModule({
                         ease: Power2.easeOut
                     }
                 )
-                .fromTo([title, content, form],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0

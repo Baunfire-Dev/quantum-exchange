@@ -1,0 +1,27 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			{% if fields.paragraph %}
+				<div class="~px-[0rem]/[13.375rem]">
+					<div class="relative w-full">
+						<h5 class="invisible">
+							{{ fields.paragraph }}
+						</h5>
+
+						<h5 class="front absolute top-0 left-0 w-full h-full" data-text="{{ fields.paragraph }}">
+							<span class="content"></span>
+							<span class="bar">_</span>
+						</h5>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</section>

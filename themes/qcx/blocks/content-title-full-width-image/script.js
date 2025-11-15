@@ -17,13 +17,15 @@ baunfire.addModule({
             const paraCTA = self.find(".block-duo");
             const media = self.find(".media-container");
 
+            const elAnims = [title, paraCTA, media].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, paraCTA, media],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0
