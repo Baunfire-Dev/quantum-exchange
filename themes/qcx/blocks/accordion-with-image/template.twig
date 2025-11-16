@@ -1,14 +1,110 @@
-<section class="{{ block.slug }} {{ block.className }}">
-    {% if block.anchor %}
-        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-    {% endif %}
+<section class="{{ block.slug }} {{ block.className }} bg-blue">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-    {# {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %} #}
-    {# {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %} #}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
 
-    <div class="container">
-        <div class="{{ pt }} {{ pb }}">
-            
-        </div>
-    </div>
+	<div class="{{ pt }} {{ pb }}">
+		<div class="container relative z-[2]">
+			<div class="flex flex-col ~gap-[2.5rem]/[4rem]">
+				{% if fields.heading or fields.paragraph %}
+					<div class="flex flex-col ~gap-[1.25rem]/[2rem] ~md:~px-[0rem]/[7rem]">
+						{% if fields.heading %}
+							<h2 class="block-title text-white alpha max-w-[54rem]">{{ fields.heading }}</h2>
+						{% endif %}
+
+						{% if fields.paragraph %}
+							<p class="block-para alpha text-white md:ml-[6.875rem] max-w-[30.5rem]">{{ fields.paragraph }}</p>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if fields.items|length %}
+					<div class="block-accs alpha accs">
+						<div class="acc-items">
+                            {% for item in fields.items %}
+                                <div class="acc {{ loop.index == 1 ? "active" }}" data-index={{ loop.index }}>
+                                    <div class="acc-head">
+                                        {% if not is_single and item.image %}
+                                            <div class="acc-image head-image">
+                                                {% include 'components/image.twig' with {
+                                                    'image': item.image,
+                                                    'size': "full",
+                                                } %}
+                                            </div>
+                                        {% endif %}
+
+                                        <h6 class="text-white">{{ item.title }}</h6>
+                                    </div>
+
+                                    <div class="acc-body">
+                                        <div class="acc-body-inner">
+                                            {% if item.description %}
+                                                <p class="text-white">{{ item.description }}</p>
+                                            {% endif %}
+
+                                            {% include 'components/cta.twig' with {
+                                                class: 'filled white',
+                                                cta: item.cta, 
+                                            } %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        {% set is_single = fields.is_single_image and fields.main_image %}
+
+						<div class="acc-images {{ is_single ? "is-single" }}">
+							{% if is_single %}
+								<div class="acc-image main-image active">
+									{% include 'components/image.twig' with {
+                                        'image': fields.main_image,
+                                        'size': "full",
+                                    } %}
+								</div>
+							{% else %}
+								{% for item in fields.items %}
+									<div class="acc-image {{ loop.index == 1 ? " active" }}" data-index={{ loop.index }}>
+										{% include 'components/image.twig' with {
+                                            'image': item.image,
+                                            'size': "full",
+                                        } %}
+									</div>
+								{% endfor %}
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="bg-graphic absolute top-0 left-0 h-full w-full pointer-events-none z-[1]">
+			<svg class="absolute center-xy w-auto h-auto min-h-full min-w-full" xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewbox="0 0 1440 900" fill="none">
+				<g filter="url(#filter0_n_8588_8815)">
+					<rect width="1440" height="900" fill="#206EEC"/>
+				</g>
+				<defs>
+					<filter id="filter0_n_8588_8815" x="0" y="0" width="1440" height="900" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
+						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+						<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+						<feTurbulence type="fractalNoise" basefrequency="0.66666668653488159 0.66666668653488159" stitchtiles="stitch" numoctaves="3" result="noise" seed="514"/>
+						<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+						<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+							<feFuncA type="discrete" tablevalues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+						</feComponentTransfer>
+						<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
+						<feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
+						<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
+						<feMerge result="effect1_noise_8588_8815">
+							<feMergeNode in="shape"/>
+							<feMergeNode in="color1"/>
+						</feMerge>
+					</filter>
+				</defs>
+			</svg>
+		</div>
+	</div>
 </section>

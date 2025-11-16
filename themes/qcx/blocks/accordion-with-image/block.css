@@ -1,5 +1,89 @@
 @layer components {
-    .accordion-with-image {
-        /* Add your styles here */
-    }
+	.accordion-with-image {
+		.accs {
+			@apply grid md:grid-cols-2 ~gap-[1rem]/[4rem];
+
+			&:has(.acc-images.is-single) {
+				@apply max-md:flex max-md:flex-col-reverse;
+			}
+		}
+
+		.acc {
+			@apply flex flex-col ~py-[1rem]/[1.5rem];
+			@apply border-b border-white border-opacity-40;
+			@apply transition-all duration-[0.8s] ease-power2-out;
+
+			&.active {
+				@apply border-opacity-100;
+
+				.acc {
+					&-head {
+						@apply opacity-100;
+					}
+
+					&-body {
+						@apply h-auto overflow-visible;
+					}
+
+					&-body-inner {
+						@apply opacity-100 translate-x-0 visible;
+						@apply transition-all duration-[0.8s] ease-power2-out;
+					}
+
+                    &-image.head-image {
+                        @apply max-md:block;
+                    }
+				}
+			}
+
+			&:first-child {
+				@apply pt-0;
+			}
+
+			&-items {
+				@apply flex flex-col xl:pt-[5.25rem];
+			}
+
+			&-head {
+				@apply cursor-pointer opacity-40;
+				@apply transition-opacity duration-[0.8s] ease-power2-out;
+                @apply flex flex-col gap-[1rem];
+			}
+
+			&-body {
+				@apply overflow-hidden h-0;
+			}
+
+			&-body-inner {
+				@apply ~pt-[1rem]/[0.75rem] opacity-0 translate-x-[1.25rem] invisible flex flex-col gap-[1rem];
+			}
+
+			&-images {
+				@apply relative w-full;
+
+				&:not(.is-single) {
+					@apply max-md:hidden;
+				}
+			}
+
+			&-image {
+                @apply h-auto aspect-[624/562] rounded-[0.5rem] overflow-hidden;
+                
+				&:not(.head-image) {
+					@apply absolute w-full top-0 left-0;
+					@apply opacity-0 translate-y-[1.25rem];
+
+					&.active {
+						@apply relative;
+						@apply opacity-100 translate-y-0;
+						@apply transition-all duration-[0.8s] ease-power2-out;
+					}
+				}
+
+                &.head-image {
+                    @apply hidden;
+                }
+			}
+		}
+	}
 }
