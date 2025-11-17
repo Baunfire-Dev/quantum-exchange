@@ -108,6 +108,8 @@ baunfire.addModule({
                     placeholder: typeSelect.attr("placeholder"),
                     minimumResultsForSearch: -1,
                     dropdownParent: typeSelect.parent()
+                }).on('select2:open', function () {
+                    $('.select2-results__options').attr('data-lenis-prevent', '');
                 });
 
                 typeSelect.on("change.select2", function () {

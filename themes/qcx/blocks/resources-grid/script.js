@@ -38,13 +38,15 @@ baunfire.addModule({
 
         const handleSelect = (resData) => {
             const { typeSelect, categorySelect } = resData;
-            
+
             if (typeSelect.length) {
                 const typeInstance = typeSelect.select2({
                     width: "100%",
                     placeholder: typeSelect.attr("placeholder"),
                     minimumResultsForSearch: -1,
                     dropdownParent: typeSelect.parent()
+                }).on('select2:open', function () {
+                    $('.select2-results__options').attr('data-lenis-prevent', '');
                 });
 
                 typeInstance.val(null).trigger("change");
@@ -56,6 +58,8 @@ baunfire.addModule({
                     placeholder: categorySelect.attr("placeholder"),
                     minimumResultsForSearch: -1,
                     dropdownParent: categorySelect.parent()
+                }).on('select2:open', function () {
+                    $('.select2-results__options').attr('data-lenis-prevent', '');
                 });
 
                 categoryInstance.val(null).trigger("change");
@@ -94,15 +98,15 @@ baunfire.addModule({
             //     reset.click(function () {
             //         resData.activeType = null;
             //         resData.activeCategory = null;
-                    
+
             //         if (typeSelect.length) {
             //             typeSelect.val(null).trigger("change");
             //         }
-                    
+
             //         if (categorySelect.length) {
             //             categorySelect.val(null).trigger("change");
             //         }
-                    
+
             //         processItems(resData);
             //     });
             // }
@@ -123,7 +127,7 @@ baunfire.addModule({
 
                 else if (activeCategory) {
                     const itemCategory = self.data("category");
-                    
+
                     if (typeof itemCategory === 'string') {
                         matchesFilter = itemCategory === activeCategory;
                     } else if (Array.isArray(itemCategory)) {

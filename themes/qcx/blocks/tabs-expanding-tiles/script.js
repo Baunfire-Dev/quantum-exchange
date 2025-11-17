@@ -119,6 +119,8 @@ baunfire.addModule({
                     minimumResultsForSearch: -1,
                     width: "100%",
                     dropdownParent: select.parent()
+                }).on('select2:open', function () {
+                    $('.select2-results__options').attr('data-lenis-prevent', '');
                 });
 
                 select.on("change", function () {
