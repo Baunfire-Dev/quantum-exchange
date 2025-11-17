@@ -33,7 +33,7 @@ baunfire.addModule({
                     {
                         autoAlpha: 1,
                         duration: 0.8,
-                        ease: Power2.easeOut
+                        ease: "power2.out"
                     }
                 )
                 .fromTo(elAnims,
@@ -45,7 +45,7 @@ baunfire.addModule({
                         y: 0,
                         autoAlpha: 1,
                         duration: 0.8,
-                        ease: Power2.easeOut,
+                        ease: "power2.out",
                         stagger: { each: 0.2 }
                     },
                     ">-0.6"

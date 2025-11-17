@@ -285,7 +285,7 @@
                                 autoAlpha: 1,
                                 duration: 0.8,
                                 stagger: { each: 0.2 },
-                                ease: Power2.easeOut
+                                ease: "power2.out"
                             }
                         );
                 };
@@ -304,7 +304,7 @@
                     {
                         autoAlpha: 1,
                         duration: 0.8,
-                        ease: Power2.easeOut,
+                        ease: "power2.out",
                         scrollTrigger: {
                             trigger: self,
                             start: baunfire.anim.start
@@ -341,7 +341,7 @@
                                 autoAlpha: 1,
                                 duration: 0.8,
                                 stagger: { each: 0.2 },
-                                ease: Power2.easeOut
+                                ease: "power2.out"
                             }
                         );
                 };
@@ -376,7 +376,7 @@
                                 autoAlpha: 1,
                                 duration: 0.8,
                                 stagger: { each: 0.2 },
-                                ease: Power2.easeOut
+                                ease: "power2.out"
                             }
                         );
 
@@ -391,7 +391,7 @@
                                     autoAlpha: 1,
                                     y: 0,
                                     duration: 0.6,
-                                    ease: Power2.easeOut,
+                                    ease: "power2.out",
                                     stagger: { each: 0.2 }
                                 },
                                 ">-0.8"
@@ -426,7 +426,7 @@
                             {
                                 autoAlpha: 1,
                                 duration: 0.8,
-                                ease: Power2.easeOut
+                                ease: "power2.out"
                             }
                         )
                         .fromTo(elAnims,
@@ -438,7 +438,7 @@
                                 y: 0,
                                 autoAlpha: 1,
                                 duration: 0.8,
-                                ease: Power2.easeOut,
+                                ease: "power2.out",
                                 stagger: { each: 0.2 }
                             },
                             ">-0.6"

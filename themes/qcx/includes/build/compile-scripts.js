@@ -21,7 +21,7 @@ function minifyBlockScript(filePath) {
 
 function bundleCustomScripts() {
     const input = path.resolve(__dirname, "../../assets/js/custom/index.js");
-    const output = path.resolve(__dirname, "../../assets/js/custom.min.js");
+    const output = path.resolve(__dirname, "../../assets/js/bundles/custom.min.js");
 
     return esbuild.build({
         entryPoints: [input],
@@ -37,22 +37,37 @@ function bundleCustomScripts() {
     });
 }
 
-function minifyAllBlocks() {
-    const blockScripts = glob.sync(path.resolve(__dirname, "../../blocks/**/script.js"));
-    return Promise.all(blockScripts.map(minifyBlockScript));
+function bundleCoreScripts() {
+    const input = path.resolve(__dirname, "../../assets/js/bundles/core-bundle.js");
+    const output = path.resolve(__dirname, "../../assets/js/bundles/core.min.js");
+
+    return esbuild.build({
+        entryPoints: [input],
+        outfile: output,
+        minify: true,
+        bundle: true,
+        sourcemap: false,
+        format: 'iife',
+        globalName: 'BFCore',
+        logLevel: "silent",
+    }).then(() => {
+        console.log("✓ Bundled core.min.js");
+    }).catch((err) => {
+        console.error("X Failed to bundle core.min.js", err.message);
+    });
 }
 
 async function buildAll() {
-    // await minifyAllBlocks();
     await bundleCustomScripts();
+    await bundleCoreScripts();
 }
 
 function startWatcher() {
     const watcher = chokidar.watch(
         [
-            // path.resolve(__dirname, "../../blocks/**/script.js"),
             path.resolve(__dirname, "../../assets/js/custom/index.js"),
-            path.resolve(__dirname, "../../assets/js/custom/**/*.js")
+            path.resolve(__dirname, "../../assets/js/custom/**/*.js"),
+            path.resolve(__dirname, "../../assets/js/bundles/core-bundle.js")
         ],
         {
             ignoreInitial: false,
@@ -79,6 +94,8 @@ function startWatcher() {
             await minifyBlockScript(filePath);
         } else if (rel.startsWith("assets/js/custom/")) {
             await bundleCustomScripts();
+        } else if (rel.includes("core-bundle.js")) {
+            await bundleCoreScripts();
         } else {
             console.log(`(Ignored) ${rel}`);
         }

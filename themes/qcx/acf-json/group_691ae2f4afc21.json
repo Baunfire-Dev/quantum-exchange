@@ -1,10 +1,10 @@
 {
-    "key": "group_6914a36e98bba",
-    "title": "Content Large Diagram Graphic",
+    "key": "group_691ae2f4afc21",
+    "title": "Hero Content With Abstract Image",
     "fields": [
         {
-            "key": "field_6914a36ea036c",
-            "label": "Content Large Diagram Graphic",
+            "key": "field_691ae2f4b6142",
+            "label": "Hero Content With Abstract Image",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -21,7 +21,7 @@
             "selected": 0
         },
         {
-            "key": "field_6914a36ea3e96",
+            "key": "field_691ae2f4b9be1",
             "label": "Block",
             "name": "block",
             "aria-label": "",
@@ -42,7 +42,7 @@
             "acfe_group_modal_size": "large",
             "sub_fields": [
                 {
-                    "key": "field_6914a36eabc63",
+                    "key": "field_691ae2f4c192b",
                     "label": "Content",
                     "name": "",
                     "aria-label": "",
@@ -60,7 +60,7 @@
                     "selected": 0
                 },
                 {
-                    "key": "field_6914a36eaf833",
+                    "key": "field_691ae2f4c548c",
                     "label": "Heading",
                     "name": "heading",
                     "aria-label": "",
@@ -82,7 +82,7 @@
                     "prefix_name": 0
                 },
                 {
-                    "key": "field_6914a36eb328e",
+                    "key": "field_691ae2f4c90bf",
                     "label": "Paragraph",
                     "name": "paragraph",
                     "aria-label": "",
@@ -109,12 +109,12 @@
                     "acfe_clone_modal_size": "large"
                 },
                 {
-                    "key": "field_6914a36eba740",
-                    "label": "Media",
-                    "name": "media",
+                    "key": "field_691ae2f4ccb37",
+                    "label": "Image",
+                    "name": "media_image",
                     "aria-label": "",
-                    "type": "clone",
-                    "instructions": "(Direct Link)",
+                    "type": "image",
+                    "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -122,16 +122,20 @@
                         "class": "",
                         "id": ""
                     },
-                    "clone": [
-                        "group_68a2e04b897ee"
-                    ],
-                    "display": "seamless",
-                    "layout": "block",
-                    "prefix_label": 0,
-                    "prefix_name": 0
+                    "return_format": "id",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium"
                 },
                 {
-                    "key": "field_6919d23f6c7b1",
+                    "key": "field_691ae2f4d079b",
                     "label": "Extras",
                     "name": "extras",
                     "aria-label": "",
@@ -160,7 +164,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/content-large-diagram-graphic"
+                "value": "acf\/hero-content-with-abstract-image"
             }
         ]
     ],
@@ -174,5 +178,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763299915
+    "modified": 1763369750
 }

@@ -42,7 +42,7 @@
 
 	h4,
 	.h4 {
-		@apply font-at-aero ~text-[2.25rem]/[3.5rem] font-normal leading-[134%] tracking-[-0.045rem];
+		@apply font-at-aero ~text-[2.25rem]/[3.5rem] font-normal leading-[100%] ~tracking-[-0.0675rem]/[-0.105rem];
 	}
 
 	h5,
@@ -103,44 +103,6 @@
 
 @layer components {
 	.rich-text {
+        @apply flex flex-col gap-[1.5rem];
 	}
-}
-
-/* ================================
-   Block List Styling
-   (Only color bullets / numbers)
-   ================================ */
-
-/* Unordered and Ordered Lists */
-ul.wp-block-list,
-ol.wp-block-list {
-  margin: 0;
-  padding-left: 1.75rem; /* keep natural indent */
-  list-style-position: outside;
-}
-
-/* Force correct list types in case theme reset removes them */
-ul.wp-block-list { list-style-type: disc; }
-ol.wp-block-list { list-style-type: decimal; }
-
-/* Bullet / Number color only */
-ul.wp-block-list > li::marker,
-ol.wp-block-list > li::marker {
-  color: #206EEC; /* Primary Blue */
-}
-
-/* Spacing between list items (optional but nice) */
-.wp-block-list > li {
-  margin-bottom: 0.75rem;
-  display: list-item;
-}
-
-/* Nested lists (maintains spacing & indent) */
-.wp-block-list .wp-block-list {
-  margin-top: 0.5rem;
-  padding-left: 1.5rem;
-}
-
-.wp-block-list .wp-block-list > li::marker {
-  color: #206EEC;
 }

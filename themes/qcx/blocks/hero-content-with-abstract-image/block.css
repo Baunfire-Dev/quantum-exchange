@@ -2,4 +2,8 @@
     .hero-content-with-abstract-image {
         /* Add your styles here */
     }
+
+    main > section.hero-content-with-abstract-image {
+        @apply ~mt-[-3.625rem]/[-4.75rem];
+    }
 }

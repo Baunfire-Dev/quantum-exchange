@@ -1,14 +1,38 @@
 <section class="{{ block.slug }} {{ block.className }}">
-    {% if block.anchor %}
-        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-    {% endif %}
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-    {# {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %} #}
-    {# {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %} #}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "~pt-[7rem]/[10.125rem]" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
 
-    <div class="container">
-        <div class="{{ pt }} {{ pb }}">
-            
-        </div>
-    </div>
+
+	<div class="{{ pt }} {{ pb }} relative">
+		<div class="container relative z-[2]">
+			<div class="flex max-md:flex-col ~gap-[2rem]/[4.875rem]">
+				<div class="flex flex-col gap-[2rem] w-full max-w-[45.375rem]">
+					{% if fields.heading %}
+						<h1 class="block-title alpha text-white">{{ fields.heading }}</h1>
+					{% endif %}
+
+					<div class="block-para alpha md:pl-[6.875rem]">
+						{% if fields.paragraph %}
+							<p class="text-white max-w-[30.5rem]">{{ fields.paragraph }}</p>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+        {% if fields.media_image %}
+            <div class="block-image-container absolute top-0 left-0 h-full w-full">
+                {% include 'components/image.twig' with {
+                    image: fields.media_image,
+                    class: 'block-image alpha h-full w-full',
+                    size: "full",
+                    loading: "eager"
+                } %}
+            </div>
+        {% endif %}
+	</div>
 </section>

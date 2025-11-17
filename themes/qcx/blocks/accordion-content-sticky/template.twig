@@ -1,14 +1,40 @@
-<section class="{{ block.slug }} {{ block.className }}">
-    {% if block.anchor %}
-        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-    {% endif %}
+{% if fields.items|length %}
+	<section class="{{ block.slug }} {{ block.className }}">
+		{% if block.anchor %}
+			<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+		{% endif %}
 
-    {# {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %} #}
-    {# {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %} #}
+		{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-sm" %}
+		{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-sm" %}
 
-    <div class="container">
-        <div class="{{ pt }} {{ pb }}">
-            
-        </div>
-    </div>
-</section>
+		<div class="{{ pt }} {{ pb }}">
+			<div class="container">
+				{% for item in fields.items %}
+					<div class="item grid md:grid-cols-2 ~gap-[1.25rem]/[4rem] ~py-[1.25rem]/[5rem] ~pb-[1.25rem]/[5rem] first:border-t-0 md:border-t border-t-gray lg:sticky top-0 bg-light-grey">
+						{% if item.heading or item.paragraph %}
+							<div class="flex flex-col ~gap-[1.25rem]/[2rem] max-md:order-2">
+								{% if item.heading %}
+									<h4 class="block-title alpha">{{ item.heading }}</h4>
+								{% endif %}
+
+								{% if item.paragraph %}
+									<div class="block-para alpha rich-text md:pl-[6.875rem]">{{ item.paragraph }}</div>
+								{% endif %}
+							</div>
+						{% endif %}
+
+                        {% if item.image %}
+                            <div class="block-image alpha w-full h-auto aspect-[624/562] rounded-[0.5rem] relative overflow-hidden max-md:order-1">
+                                {% include 'components/image.twig' with {
+                                    class: "h-full w-full absolute top-0 left-0",
+                                    image: item.image,
+                                    size: "full",
+                                } %}
+                            </div>
+                        {% endif %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+{% endif %}

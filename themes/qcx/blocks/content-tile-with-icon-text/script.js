@@ -35,7 +35,7 @@ baunfire.addModule({
                         autoAlpha: 1,
                         duration: 0.8,
                         stagger: { each: 0.2 },
-                        ease: Power2.easeOut
+                        ease: "power2.out"
                     }
                 );
 
@@ -51,7 +51,7 @@ baunfire.addModule({
                             autoAlpha: 1,
                             duration: 0.6,
                             stagger: { each: 0.14 },
-                            ease: Power2.easeOut
+                            ease: "power2.out"
                         },
                         ">-0.6"
                     );
