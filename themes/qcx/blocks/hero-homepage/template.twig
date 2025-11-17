@@ -35,7 +35,7 @@
 
 		{% if fields.media_video %}
 			<div class="media-container video">
-				<video src="{{ fields.media_video }}" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback>
+				<video src="{{ fields.media_video }}" autoplay muted loop playsinline preload="auto" fetchpriority="high" disablepictureinpicture disableremoteplayback>
 					Your browser does not support the video tag.
 				</video>
 			</div>
