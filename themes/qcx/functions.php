@@ -16,7 +16,9 @@ if (!defined('ABSPATH')) {
 require_once 'vendor/autoload.php';
 Timber\Timber::init();
 
-define('_ENV', 'development');
+if (!defined('_ENV')) {
+    define('_ENV', 'development');
+}
 
 if (!defined('_S_VERSION')) {
     if (_ENV == 'development')
@@ -80,10 +82,7 @@ add_action('enqueue_block_editor_assets', 'enqueue_block_editor_scripts');
 
 function front_css_styles()
 {
-    wp_enqueue_style('bf-normalize-style', get_template_directory_uri() . '/assets/css/theme/normalize.css', array(), _S_VERSION);
-    wp_enqueue_style('bf-admin-bar-style', get_template_directory_uri() . '/assets/css/admin/bar.css', array(), _S_VERSION);
-    wp_enqueue_style('bf-theme-style', get_template_directory_uri() . '/assets/css/theme/styles.css', array(), uniqid());
-    wp_enqueue_style('bf-lenis-style', get_template_directory_uri() . '/assets/css/external/lenis.css', array(), _S_VERSION);
+    wp_enqueue_style('bf-theme-style', get_template_directory_uri() . '/assets/css/bundles/styles.css', array(), _S_VERSION);
 
     wp_register_style('bf-owl-style', get_template_directory_uri() . '/assets/css/external/owl.css', array(), _S_VERSION);
     wp_register_style('bf-select-two-style', get_template_directory_uri() . '/assets/css/external/select2.min.css', array(), _S_VERSION);
@@ -98,10 +97,10 @@ function front_js_scripts()
 
     wp_register_script("bf-vimeo-script", get_template_directory_uri() . '/assets/js/external/vimeo-player.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
     wp_register_script('bf-owl-script', get_template_directory_uri() . '/assets/js/external/owl.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-    
+
     wp_register_script("bf-select-two-script", get_template_directory_uri() . '/assets/js/external/select2.min.js', array(), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));
     wp_register_script("bf-toastify-script", get_template_directory_uri() . '/assets/js/external/toastify.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-    
+
     wp_register_script("bf-rellax-script", get_template_directory_uri() . '/assets/js/external/rellax.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
 
     wp_enqueue_script("bf-custom-min-js", get_template_directory_uri() . '/assets/js/bundles/custom.min.js', array('jquery', 'bf-core'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));

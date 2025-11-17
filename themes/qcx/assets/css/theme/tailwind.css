@@ -1,6 +1,11 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@import "../theme/normalize.css";
+@import "../admin/bar.css";
+@import "../external/lenis.css";
+
 @import "typography";
 @import "header";
 @import "footer";
