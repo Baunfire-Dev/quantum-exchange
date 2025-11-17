@@ -10,14 +10,18 @@
 			}
 
 			&-card {
-                @apply flex flex-col gap-[2rem] p-[2.5rem] will-change-transform;
-                @apply border border-green rounded-[0.5rem] bg-blue;
+                @apply p-[2.5rem] will-change-transform;
+                @apply border border-green rounded-[0.5rem] bg-blue overflow-hidden;
+			}
+
+            &-card-inner {
+                @apply flex flex-col gap-[2rem] relative z-[2];
 
 				h5,
 				p {
 					@apply text-white;
 				}
-			}
+            }
 		}
 
 		.left-card,
