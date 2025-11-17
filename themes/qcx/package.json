@@ -17,8 +17,8 @@
     "scripts": {
         "dev": "npm-run-all --parallel tw js",
         "js": "node includes/build/compile-scripts.js --watch",
-        "tw": "npx tailwindcss -i assets/css/theme/tailwind.css -o assets/css/theme/styles.css --postcss --watch --poll --minify",
-        "build": "npx tailwindcss -i assets/css/theme/tailwind.css -o assets/css/theme/styles.css --postcss",
+        "tw": "npx tailwindcss -i assets/css/theme/tailwind.css -o assets/css/bundles/styles.css --postcss --watch --poll --minify",
+        "build": "npx tailwindcss -i assets/css/theme/tailwind.css -o assets/css/bundles/styles.css --postcss",
         "create-block": "node includes/build/create-block.js",
         "cb": "node includes/build/create-block.js"
     },
