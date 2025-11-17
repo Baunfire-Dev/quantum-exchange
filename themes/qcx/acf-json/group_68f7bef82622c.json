@@ -264,7 +264,7 @@
                         },
                         {
                             "key": "field_68f7c043e2ad1",
-                            "label": "link",
+                            "label": "Link",
                             "name": "link",
                             "aria-label": "",
                             "type": "link",
@@ -436,12 +436,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1762552414
+    "modified": 1763375758
 }

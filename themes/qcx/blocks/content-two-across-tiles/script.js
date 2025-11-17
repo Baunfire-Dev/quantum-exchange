@@ -14,27 +14,54 @@ baunfire.addModule({
         };
 
         const handleParallax = (self) => {
+            let mm = gsap.matchMedia();
+            const rellaxInstances = [];
+
             const leftCards = self.find('.item-cards.left');
             const rightCards = self.find('.item-cards.right');
 
-            if (leftCards.length) {
-                leftCards.each(function () {
-                    new Rellax(this, {
-                        speed: -1.2,
-                        center: true
+            const createParallax = () => {
+                if (leftCards.length) {
+                    leftCards.each(function () {
+                        rellaxInstances.push(new Rellax(this, {
+                            speed: -1.2,
+                            center: true
+                        }));
                     });
-                });
+                }
+
+                if (rightCards.length) {
+                    rightCards.each(function () {
+                        rellaxInstances.push(new Rellax(this, {
+                            speed: 1.2,
+                            center: true
+                        }));
+                    });
+                }
             }
 
-            if (rightCards.length) {
-                rightCards.each(function () {
-                    new Rellax(this, {
-                        speed: 1.2,
-                        center: true
-                    });
-                });
-            }
-        }
+            mm.add(
+                {
+                    isDesktop: `(min-width: 768px)`,
+                    isMobile: `(max-width: 767.98px)`,
+                },
+                (context) => {
+                    let { isDesktop, isMobile } = context.conditions;
+
+                    if (isDesktop) {
+                        createParallax();
+                    }
+
+                    if (isMobile && rellaxInstances.length) {
+                        rellaxInstances.forEach(rellax => {
+                            rellax.destroy();
+                        });
+                    }
+
+                    return () => { };
+                }
+            );
+        };
 
         const handleEntranceAnim = (self) => {
             const logo = self.find(".block-logo");

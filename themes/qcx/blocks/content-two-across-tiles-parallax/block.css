@@ -1,5 +1,28 @@
 @layer components {
     .content-two-across-tiles-parallax {
-        /* Add your styles here */
+        .item {
+			&-cards-container {
+				@apply flex lg:flex-row flex-col gap-[1.5rem];
+			}
+
+			&-cards {
+				@apply flex flex-col gap-[1.5rem] lg:mt-[4rem];
+			}
+
+			&-card {
+                @apply flex flex-col gap-[2rem] p-[2.5rem] will-change-transform;
+                @apply border border-green rounded-[0.5rem] bg-blue;
+
+				h5,
+				p {
+					@apply text-white;
+				}
+			}
+		}
+
+		.left-card,
+		.rigth-card {
+			will-change: transform;
+		}
     }
 }
