@@ -143,6 +143,10 @@
 
 					.rich-text {
 						@apply pb-[5rem];
+
+                        a {
+                            @apply underline underline-offset-2 text-white;
+                        }
 					}
 				}
 
