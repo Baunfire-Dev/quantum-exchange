@@ -87,7 +87,7 @@
 			}
 
 			&-outer {
-				@apply w-full h-auto aspect-video max-w-[90vw] bg-black relative;
+				@apply w-full h-auto aspect-video max-w-[90vw] max-h-[80svh] bg-black relative;
 			}
 
 			&-inner {

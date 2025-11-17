@@ -1,14 +1,143 @@
 <section class="{{ block.slug }} {{ block.className }}">
-    {% if block.anchor %}
-        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-    {% endif %}
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-    {# {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %} #}
-    {# {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %} #}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
 
-    <div class="container">
-        <div class="{{ pt }} {{ pb }}">
-            
-        </div>
-    </div>
+	<div class="{{ pt }} {{ pb }}">
+		<div class="container">
+			<div class="flex flex-col ~gap-[1.25rem]/[2rem]">
+				{% if fields.heading %}
+					<div class="~md:~px-[0rem]/[7rem] flex flex-col ~gap-[2.5rem]/[4rem] relative z-[2]">
+						<h2 class="block-title alpha max-w-[47.125rem]">{{ fields.heading }}</h2>
+
+						{% if categories|length %}
+							<div class="tabs-inner block-tabs alpha">
+								<div class="tab-select" id="slx">
+									<select>
+										<option value="all" selected>All</option>
+
+										{% for cat in categories %}
+											<option value="{{ cat.slug }}">{{ cat.name }}</option>
+										{% endfor %}
+									</select>
+
+									<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M19 9.11772L12 16L5 9.11772L6.13683 8L12 13.7646L17.8632 8L19 9.11772Z" fill="black"/>
+									</svg>
+								</div>
+
+								<div class="tab-items">
+									<div class="tab-item active" data-value="all">
+										<p class="button">All</p>
+									</div>
+
+									{% for cat in categories %}
+										<div class="tab-item" data-value="{{ cat.slug }}">
+											<p class="button">{{ cat.name }}</p>
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if posts|length %}
+					<div class="tab-grid">
+						{% for item in posts %}
+							{% set post_id = item.ID ?? item.id %}
+							{% set name = item.post_title ?? item.title %}
+							{% set image = function('get_the_post_thumbnail_url', post_id, 'large') %}
+
+							{% set position = function('get_field', 'position', post_id) %}
+							{% set linkedin = function('get_field', 'linkedin', post_id) %}
+							{% set description = function('get_field', 'description', post_id) %}
+							{% set type = function('get_field', 'team_type', post_id) %}
+
+							<div class="item in-filter" data-type="{{ type ? type.slug : "all" }}">
+								<div class="item-inner">
+									{% if image %}
+										<div class="item-image">
+											{% include 'components/image.twig' with {
+                                                image: image,
+                                                size: "large",
+                                            } %}
+										</div>
+									{% endif %}
+
+									<div class="item-desc">
+										<h6>{{ name }}</h6>
+
+										{% if position %}
+											<p>{{ position }}</p>
+										{% endif %}
+									</div>
+
+									<div class="item-cta">
+										<small>Read bio</small>
+										<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+											<path d="M1 1L5 5L1 9" stroke="black" stroke-linecap="square"/>
+										</svg>
+									</div>
+								</div>
+
+								<dialog class="dg">
+									<div class="dg-outer">
+										<div class="dg-inner" data-lenis-prevent>
+											{% if image %}
+												<div class="item-image">
+													{% include 'components/image.twig' with {
+                                                        image: image,
+                                                        size: "large",
+                                                    } %}
+												</div>
+											{% endif %}
+
+											<div class="item-bio">
+												<div class="item-desc">
+													<h6 class="text-white">{{ name }}</h6>
+
+													{% if position %}
+														<p class="text-white">{{ position }}</p>
+													{% endif %}
+												</div>
+
+												{% if linkedin %}
+													<a href="{{ linkedin }}" target="_blank" class="item-social" rel="nofollow noreferrer noopener">
+														<img src="{{ function("svg", "linkedin") }}" alt="linkedin" loading="lazy">
+													</a>
+												{% endif %}
+
+												{% if description %}
+													<div class="rich-text text-white">{{ description }}</div>
+												{% endif %}
+											</div>
+										</div>
+
+										<div class="dg-close">
+											<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M18 7.15063L13.1506 12L18 16.8494L16.8494 18L12 13.1506L7.15063 18L6 16.8494L10.8494 12L6 7.15063L7.15063 6L12 10.8494L16.8494 6L18 7.15063Z" fill="white"/>
+											</svg>
+										</div>
+
+										<div class="absolute top-0 bottom-0 left-0 right-0 w-full h-full pointer-events-none">
+											<img src="{{ function("png", "grainy-bg-blue" )}}" loading="eager" alt="grainy-bg-blue">
+										</div>
+									</div>
+								</dialog>
+							</div>
+						{% endfor %}
+					</div>
+
+					<div class="empty">
+						<h6 class="text-center">We're sorry, there aren't any teams that match what you're looking for.
+							<br/>Try another a different filter or reset to see all of our teams.</h6>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </section>

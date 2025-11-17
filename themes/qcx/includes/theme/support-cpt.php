@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Register multiple CPTs + their own categories.
  * CPTs: News & Resources, Awards, Blogs & Podcasts, Media Coverage,
@@ -49,13 +50,7 @@ add_action('init', function () {
             'slug'      => 'webinars-events',
             'icon'      => 'dashicons-calendar',
             'tax'       => ['slug' => 'webinar_event_category', 'label' => 'Webinar/Event Categories']
-        ],
-        'team' => [
-            'label'     => 'Team',
-            'slug'      => 'team',
-            'icon'      => 'dashicons-groups',
-            'tax'       => ['slug' => 'team_category', 'label' => 'Team Categories']
-        ],
+        ]
     ];
 
     foreach ($types as $type => $cfg) {
@@ -84,11 +79,11 @@ add_action('init', function () {
             'menu_position' => 20,
             'has_archive'   => false,
             'rewrite'       => ['slug' => $cfg['slug']],
-            'supports'      => ['title','editor','thumbnail','excerpt','revisions','custom-fields'],
+            'supports'      => ['title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields'],
         ]);
 
         // Extra safety (keeps supports even if something strips them)
-        add_post_type_support($type, ['editor','thumbnail','excerpt','revisions','custom-fields']);
+        add_post_type_support($type, ['editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields']);
 
         // ===== Taxonomy (hierarchical like categories) =====
         register_taxonomy($cfg['tax']['slug'], [$type], [
@@ -117,7 +112,7 @@ add_action('init', function () {
 
 /** Force Gutenberg on for these CPTs */
 add_filter('use_block_editor_for_post_type', function ($use, $type) {
-    $types = ['news','award','blog_podcast','media_coverage','resource_library','press_release','webinar_event','team', 'partner'];
+    $types = ['news', 'award', 'blog_podcast', 'media_coverage', 'resource_library', 'press_release', 'webinar_event', 'partner'];
     return in_array($type, $types, true) ? true : $use;
 }, 100, 2);
 
@@ -134,9 +129,8 @@ add_filter('single_template', function ($template) {
         'media_coverage',
         'resource_library',
         'press_release',
-        'webinar_event',
-        'team'
-  ];
+        'webinar_event'
+    ];
 
     if (in_array($post_type, $types, true)) {
         $default_template = locate_template(['single.php']);
@@ -158,18 +152,17 @@ add_action('template_redirect', function () {
         'media_coverage',
         'resource_library',
         'press_release',
-        'webinar_event',
-        'team'
+        'webinar_event'
     ];
 
-    if ( is_singular($types) ) {
+    if (is_singular($types)) {
 
         // ACF field
         $redirect_url = get_field('redirect_link');
 
         // Redirect ONLY if field is not empty
         if (!empty($redirect_url)) {
-            wp_redirect( esc_url($redirect_url), 301 );
+            wp_redirect(esc_url($redirect_url), 301);
             exit;
         }
     }

@@ -1,11 +1,17 @@
 {
-	"name": "tabs-team-grid",
-	"title": "Tabs Team Grid",
-    "viewScript": ["file:./script.js"],
-    "viewStyle": [],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "name": "tabs-team-grid",
+    "title": "Tabs Team Grid",
+    "viewScript": [
+        "file:./script.js"
+    ],
+    "viewStyle": [
+        "bf-select-two-style"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ]
+    }
 }

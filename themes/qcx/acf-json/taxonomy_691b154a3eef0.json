@@ -1,0 +1,73 @@
+{
+    "key": "taxonomy_691b154a3eef0",
+    "title": "Team Types",
+    "menu_order": 0,
+    "active": true,
+    "taxonomy": "team-type",
+    "object_type": [
+        "team"
+    ],
+    "advanced_configuration": 1,
+    "import_source": "",
+    "import_date": "",
+    "labels": {
+        "name": "Team Types",
+        "singular_name": "Team Type",
+        "menu_name": "Team Types",
+        "all_items": "All Team Types",
+        "edit_item": "Edit Team Type",
+        "view_item": "View Team Type",
+        "update_item": "Update Team Type",
+        "add_new_item": "Add New Team Type",
+        "new_item_name": "New Team Type Name",
+        "search_items": "Search Team Types",
+        "popular_items": "Popular Team Types",
+        "separate_items_with_commas": "Separate team types with commas",
+        "add_or_remove_items": "Add or remove team types",
+        "choose_from_most_used": "Choose from the most used team types",
+        "most_used": "",
+        "not_found": "No team types found",
+        "no_terms": "No team types",
+        "name_field_description": "",
+        "slug_field_description": "",
+        "desc_field_description": "",
+        "items_list_navigation": "Team Types list navigation",
+        "items_list": "Team Types list",
+        "back_to_items": "← Go to team types",
+        "item_link": "Team Type Link",
+        "item_link_description": "A link to a team type"
+    },
+    "description": "",
+    "capabilities": {
+        "manage_terms": "manage_categories",
+        "edit_terms": "manage_categories",
+        "delete_terms": "manage_categories",
+        "assign_terms": "edit_posts"
+    },
+    "public": 1,
+    "publicly_queryable": 0,
+    "hierarchical": 0,
+    "show_ui": 1,
+    "show_in_menu": 1,
+    "show_in_nav_menus": 1,
+    "show_in_rest": 1,
+    "rest_base": "",
+    "rest_namespace": "wp\/v2",
+    "rest_controller_class": "WP_REST_Terms_Controller",
+    "show_tagcloud": 1,
+    "show_in_quick_edit": 1,
+    "show_admin_column": 0,
+    "rewrite": {
+        "permalink_rewrite": "no_permalink"
+    },
+    "query_var": "taxonomy_key",
+    "query_var_name": "",
+    "default_term": {
+        "default_term_enabled": "0"
+    },
+    "sort": 0,
+    "meta_box": "disabled",
+    "meta_box_cb": "",
+    "meta_box_sanitize_cb": "",
+    "modified": 1763382647
+}

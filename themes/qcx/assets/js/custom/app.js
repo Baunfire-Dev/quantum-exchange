@@ -43,7 +43,7 @@
         smoothScroll() {
             this.lenis = new Lenis({
                 anchors: true,
-                allowNestedScroll: true
+                // allowNestedScroll: true
             });
 
             this.lenis.on('scroll', ScrollTrigger.update);

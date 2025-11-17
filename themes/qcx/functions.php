@@ -83,7 +83,7 @@ function front_css_styles()
     wp_enqueue_style('bf-normalize-style', get_template_directory_uri() . '/assets/css/theme/normalize.css', array(), _S_VERSION);
     wp_enqueue_style('bf-admin-bar-style', get_template_directory_uri() . '/assets/css/admin/bar.css', array(), _S_VERSION);
     wp_enqueue_style('bf-theme-style', get_template_directory_uri() . '/assets/css/theme/styles.css', array(), uniqid());
-    wp_register_style('bf-lenis-style', get_template_directory_uri() . '/assets/css/external/lenis.css', array(), _S_VERSION);
+    wp_enqueue_style('bf-lenis-style', get_template_directory_uri() . '/assets/css/external/lenis.css', array(), _S_VERSION);
 
     wp_register_style('bf-owl-style', get_template_directory_uri() . '/assets/css/external/owl.css', array(), _S_VERSION);
     wp_register_style('bf-select-two-style', get_template_directory_uri() . '/assets/css/external/select2.min.css', array(), _S_VERSION);
