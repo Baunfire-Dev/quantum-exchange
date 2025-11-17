@@ -1,14 +1,59 @@
 <section class="{{ block.slug }} {{ block.className }}">
-    {% if block.anchor %}
-        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
-    {% endif %}
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
 
-    {# {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %} #}
-    {# {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %} #}
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
 
-    <div class="container">
-        <div class="{{ pt }} {{ pb }}">
-            
-        </div>
-    </div>
+	{% set video_source = null %}
+
+	{% if fields.source == 'youtube' and fields.youtube_id %}
+		{% set video_source = fields.youtube_id %}
+	{% endif %}
+
+	{% if fields.source == 'direct' and fields.video_url %}
+		{% set video_source = fields.video_url %}
+	{% endif %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex max-md:flex-col ~gap-[2.5rem]/[4rem]">
+				{% if fields.heading %}
+					<div class="flex flex-col ~gap-[1.25rem]/[2rem] md:flex-1 md:basis-[37.5rem]">
+						{% if fields.heading %}
+							<h1 class="block-title alpha">{{ fields.heading }}</h1>
+						{% endif %}
+
+						<div class="block-para alpha md:ml-[6.875rem]">
+							{% if fields.paragraph %}
+								<p>{{ fields.paragraph }}</p>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+
+				{% if video_source %}
+                    <div class="block-video alpha md:flex-1 max-md:w-full md:basis-[40.5rem]">
+                        <div class="video" data-source="{{ fields.source }}" data-video="{{ video_source }}">
+                            <div class="video-thumbnail">
+                                <div class="video-play">
+                                    <img src="{{ function('svg', 'play') }}" loading="lazy" alt="play button">
+                                </div>
+
+                                {% if fields.thumbnail %}
+                                    {% include 'components/image.twig' with {
+                                        image: fields.thumbnail,
+                                        size: 'large'
+                                    } %}
+                                {% else %}
+                                    <img src="{{ function('png', 'thumbnail') }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+			</div>
+		</div>
+	</div>
 </section>

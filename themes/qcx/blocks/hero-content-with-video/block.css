@@ -1,5 +1,26 @@
 @layer components {
-    .hero-content-with-video {
-        /* Add your styles here */
-    }
+	.hero-content-with-video {
+		.video {
+			@apply w-full relative aspect-[648/364] cursor-pointer rounded-[0.5rem] overflow-hidden;
+
+			&:hover {
+				.video-play {
+					@apply scale-110;
+				}
+			}
+
+			&-thumbnail {
+				@apply absolute top-0 left-0 h-full w-full z-[2];
+			}
+
+			&-play {
+				@apply ~h-[4rem]/[4.75rem] ~w-[4rem]/[4.75rem] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[3];
+				@apply transition-transform duration-300 ease-power2-out;
+			}
+
+            video, iframe {
+                @apply absolute top-0 left-0 h-full w-full;
+            }
+		}
+	}
 }

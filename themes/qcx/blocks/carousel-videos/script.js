@@ -20,13 +20,15 @@ baunfire.addModule({
             const itemsNav = self.find(".items-nav");
             const cards = self.find('.item-card');
 
+            const elAnims = [title, paraCTA, itemsNav].filter(el => el.length > 0);
+
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
                     start: baunfire.anim.start
                 }
             })
-                .fromTo([title, paraCTA, itemsNav],
+                .fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0
