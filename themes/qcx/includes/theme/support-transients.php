@@ -3,14 +3,15 @@ define('TRANSIENT_PREFIX', 'qxc');
 define('TRANSIENT_DURATION', 7 * DAY_IN_SECONDS);
 
 $post_type_transient_map = [
-    'all' => ['all_grid_resources'],
-    'news' => ['news_grid_resources'],
-    'award' => ['award_grid_resources'],
-    'blog_podcast' => ['blog_podcast_grid_resources'],
-    'media_coverage' => ['media_coverage_grid_resources'],
-    'resource_library' => ['resource_library_grid_resources'],
-    'press_release' => ['press_release_grid_resources'],
-    'webinar_event' => ['webinar_event_grid_resources'],
+    'all' => ['all_grid_resource'],
+    'news' => ['news_grid_resource'],
+    'award' => ['award_grid_resource'],
+    'blog_podcast' => ['blog_podcast_grid_resource'],
+    'media_coverage' => ['media_coverage_grid_resource'],
+    'resource_library' => ['resource_library_grid_resource'],
+    'press_release' => ['press_release_grid_resource'],
+    'webinar_event' => ['webinar_event_grid_resource'],
+    'team' => ['team_grid_resource'],
 ];
 
 function clear_transients(array $transient_names = []) {
