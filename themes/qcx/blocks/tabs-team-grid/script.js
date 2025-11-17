@@ -151,8 +151,22 @@ baunfire.addModule({
                 let matchesFilter = true;
 
                 if (activeType) {
-                    const itemType = self.data("type");
-                    matchesFilter = itemType === activeType;
+                    const itemTypeAttr = self.data("type");
+                    let itemTypes = [];
+                    
+                    try {
+                        if (typeof itemTypeAttr === 'string') {
+                            itemTypes = JSON.parse(itemTypeAttr);
+                        } else if (Array.isArray(itemTypeAttr)) {
+                            itemTypes = itemTypeAttr;
+                        } else {
+                            itemTypes = [itemTypeAttr];
+                        }
+                    } catch (e) {
+                        itemTypes = [itemTypeAttr];
+                    }
+                    
+                    matchesFilter = itemTypes.includes(activeType);
                 }
 
                 if (matchesFilter) {

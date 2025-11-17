@@ -21,11 +21,11 @@
             "save_terms": 1,
             "load_terms": 1,
             "return_format": "object",
-            "field_type": "radio",
-            "allow_null": 0,
+            "field_type": "checkbox",
             "allow_in_bindings": 0,
             "bidirectional": 0,
             "multiple": 0,
+            "allow_null": 0,
             "bidirectional_target": []
         },
         {
@@ -107,5 +107,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763386017
+    "modified": 1763392913
 }

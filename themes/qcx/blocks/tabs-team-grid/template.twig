@@ -55,9 +55,15 @@
 							{% set position = function('get_field', 'position', post_id) %}
 							{% set linkedin = function('get_field', 'linkedin', post_id) %}
 							{% set description = function('get_field', 'description', post_id) %}
-							{% set type = function('get_field', 'team_type', post_id) %}
+							{% set raw_types = function('get_field', 'team_type', post_id) %}
 
-							<div class="item in-filter" data-type="{{ type ? type.slug : "all" }}">
+							{% set type_names = [] %}
+
+							{% for type in raw_types %}
+								{% set type_names = type_names | merge([type.slug]) %}
+							{% endfor %}
+
+							<div class="item in-filter" data-type='{{ type_names ? type_names | json_encode | raw : "all" }}'>
 								<div class="item-inner">
 									{% if image %}
 										<div class="item-image">
