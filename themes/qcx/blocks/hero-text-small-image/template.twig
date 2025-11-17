@@ -26,14 +26,16 @@
 					</div>
 				</div>
 
-				<div class="block-image alpha max-md:w-full md:flex-1 md:basis-[31.875rem] md:~pr-[0rem]/[5.125rem]">
-					{% include 'components/image.twig' with {
-                        image: fields.media_image,
-                        class: 'object-contain h-auto aspect-[427/379] w-full',
-                        size: "full",
-                        loading: "eager"
-                    } %}
-				</div>
+                {% if fields.media_image %}
+                    <div class="block-image alpha max-md:w-full md:flex-1 md:basis-[31.875rem] md:~pr-[0rem]/[5.125rem]">
+                        {% include 'components/image.twig' with {
+                            image: fields.media_image,
+                            class: 'object-contain h-auto aspect-[427/379] w-full',
+                            size: "full",
+                            loading: "eager"
+                        } %}
+                    </div>
+                {% endif %}
 			</div>
 		</div>
 	</div>
