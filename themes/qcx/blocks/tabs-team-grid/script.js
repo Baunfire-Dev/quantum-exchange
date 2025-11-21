@@ -36,6 +36,7 @@ baunfire.addModule({
                 const subSelf = $(this);
                 const cta = subSelf.find(".item-cta");
                 const dialog = subSelf.find("dialog");
+                const dgOuter = subSelf.find(".dg-outer");
                 const close = subSelf.find(".dg-close");
 
                 cta.click(function () {
@@ -46,6 +47,13 @@ baunfire.addModule({
                 close.click(function () {
                     dialog.get(0).close();
                     baunfire.Global.siteScrolling();
+                });
+
+                dialog.click(function (e) {
+                    if (!dgOuter.is(e.target) && dgOuter.has(e.target).length === 0) {
+                        dialog.get(0).close();
+                        baunfire.Global.siteScrolling();
+                    }
                 });
             });
         };
@@ -155,7 +163,7 @@ baunfire.addModule({
                 if (activeType) {
                     const itemTypeAttr = self.data("type");
                     let itemTypes = [];
-                    
+
                     try {
                         if (typeof itemTypeAttr === 'string') {
                             itemTypes = JSON.parse(itemTypeAttr);
@@ -167,7 +175,7 @@ baunfire.addModule({
                     } catch (e) {
                         itemTypes = [itemTypeAttr];
                     }
-                    
+
                     matchesFilter = itemTypes.includes(activeType);
                 }
 
