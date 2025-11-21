@@ -239,16 +239,6 @@
 					@apply transition-all duration-500 ease-power2-out mt-[unset];
 				}
 			}
-
-			&:not(.ghost-card) {
-				&:hover {
-					.rc {
-						&-media {
-							@apply w-[22.375rem];
-						}
-					}
-				}
-			}
 		}
 
 		&.is-listing {
