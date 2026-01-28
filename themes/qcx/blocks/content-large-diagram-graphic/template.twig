@@ -24,7 +24,7 @@
                     {% endif %}
 
 					{% if fields.media_type == "image" and fields.media_image %}
-						<div class="media-container-outer alpha">
+						<div class="media-container-inner alpha">
 							<div class="media-container image">
 								{% include 'components/image.twig' with {
                                     'image': fields.media_image,
