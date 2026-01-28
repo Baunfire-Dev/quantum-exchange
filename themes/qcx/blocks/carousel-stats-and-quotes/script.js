@@ -44,31 +44,45 @@ baunfire.addModule({
                 );
 
             if (cards.length) {
-                entranceAnim
-                    .to(itemsLine,
-                        {
-                            width: "100vw",
-                            duration: 1,
-                            ease: "power2.out",
-                            onStart: () => {
-                                items.addClass("activated")
+                if (cards.length == 1) {
+                    entranceAnim
+                        .to(cards,
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.6,
+                                ease: "power2.out",
+                                stagger: { each: 0.2 }
                             },
-                            onComplete: () => {
-                                items.addClass("completed")
-                            }
-                        },
-                        ">-0.8"
-                    )
-                    .to(cards,
-                        {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.6,
-                            ease: "power2.out",
-                            stagger: { each: 0.2 }
-                        },
-                        ">-0.6"
-                    );
+                            ">-0.6"
+                        );
+                } else {
+                    entranceAnim
+                        .to(itemsLine,
+                            {
+                                width: "100vw",
+                                duration: 1,
+                                ease: "power2.out",
+                                onStart: () => {
+                                    items.addClass("activated")
+                                },
+                                onComplete: () => {
+                                    items.addClass("completed")
+                                }
+                            },
+                            ">-0.8"
+                        )
+                        .to(cards,
+                            {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.6,
+                                ease: "power2.out",
+                                stagger: { each: 0.2 }
+                            },
+                            ">-0.6"
+                        );
+                }
             }
         };
 
@@ -104,7 +118,7 @@ baunfire.addModule({
 
             ScrollTrigger.create({
                 trigger: carousel[0],
-                start: baunfire.anim.start, 
+                start: baunfire.anim.start,
                 onEnter: () => {
                     carousel.trigger('play.owl.autoplay', [8000]);
                 },
