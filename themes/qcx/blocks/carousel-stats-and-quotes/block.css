@@ -77,6 +77,10 @@
 			&-quote-inner {
 				@apply flex flex-wrap ~gap-[0.5rem]/[0.75rem];
 			}
+
+            &.solo {
+                @apply mx-auto w-full max-w-[50.125rem];
+            }
 		}
 
 		.ar-l,

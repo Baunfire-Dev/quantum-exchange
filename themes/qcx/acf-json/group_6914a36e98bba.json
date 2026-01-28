@@ -123,12 +123,29 @@
                         "id": ""
                     },
                     "clone": [
-                        "group_68a2e04b897ee"
+                        "group_697a92707304e"
                     ],
                     "display": "seamless",
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0
+                },
+                {
+                    "key": "field_697a92db58e4a",
+                    "label": "CTA",
+                    "name": "cta",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "allow_in_bindings": 0
                 },
                 {
                     "key": "field_6919d23f6c7b1",
@@ -174,5 +191,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763299915
+    "modified": 1769640683
 }

@@ -16,7 +16,7 @@ baunfire.addModule({
         const handleEntranceAnim = (self) => {
             const title = self.find(".block-title");
             const para = self.find(".block-para");
-            const media = self.find(".media-container-outer");
+            const media = self.find(".media-container");
 
             const elAnims = [title, para, media].filter(el => el.length > 0);
 
@@ -42,29 +42,34 @@ baunfire.addModule({
         };
 
         const handleVideos = (self) => {
-            const videoContainers = self.find(".media-container.video");
-            if (!videoContainers.length) return;
+            const videoContainer = self.find(".media-container-inner.video");
+            if (!videoContainer.length) return;
 
-            videoContainers.each(function (index) {
-                const subSelf = $(this);
-                setupVideo(self, subSelf);
+            const video = videoContainer.data("video");
+            const play = videoContainer.find(".video-play");
+            const thumbnail = videoContainer.find(".video-thumbnail");
+
+            play.click(function () {
+                thumbnail.fadeOut();
+                handleDirectVideo(videoContainer, video);
             });
         };
 
-        const setupVideo = (self, videoContainer) => {
-            const videoRaw = videoContainer.find("video");
-            if (!videoRaw.length) return;
+        const handleDirectVideo = (container, video) => {
+            container.append(`
+                <video src="${video}" autoplay playsinline controls preload="auto" disablepictureinpicture disableremoteplayback>
+                    Your browser does not support the video tag.
+                </video>
+            `);
 
-            const video = videoRaw.get(0);
+            const videoEL = container.find("video").get(0);
 
             ScrollTrigger.create({
-                trigger: videoContainer,
+                trigger: container,
                 start: "top center",
-                end: "bottom 30%",
-                onEnter: () => video.play(),
-                onEnterBack: () => video.play(),
-                onLeave: () => video.pause(),
-                onLeaveBack: () => video.pause()
+                end: "bottom 10%",
+                onLeave: () => videoEL.pause(),
+                onLeaveBack: () => videoEL.pause()
             });
         };
 

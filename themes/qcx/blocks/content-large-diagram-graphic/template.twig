@@ -34,13 +34,29 @@
 
 					{% if fields.media_type == "video" and fields.media_video %}
 						<div class="media-container alpha">
-							<div class="media-container-inner video">
-								<video src="{{ fields.media_video }}" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback>
-									Your browser does not support the video tag.
-								</video>
+							<div class="media-container-inner video" data-video="{{ fields.media_video }}">
+                                <div class="video-thumbnail">
+                                    <div class="video-play">
+                                        <img src="{{ function('svg', 'play') }}" loading="lazy" alt="play button">
+                                    </div>
+
+                                    {% if fields.media_video_thumbnail %}
+                                        {% include 'components/image.twig' with {
+                                            image: fields.media_video_thumbnail,
+                                            size: 'large'
+                                        } %}
+                                    {% else %}
+                                        <img src="{{ function('png', 'thumbnail') }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
+                                    {% endif %}
+                                </div>
 							</div>
 						</div>
 					{% endif %}
+
+                    {% include 'components/cta.twig' with {
+                        'class' : 'filled blue',
+                        'cta': fields.cta,
+                    } %}
 				</div>
 			</div>
 		</div>

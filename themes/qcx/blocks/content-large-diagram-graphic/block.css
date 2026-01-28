@@ -6,15 +6,32 @@
 
 			&-inner {
 				@apply relative aspect-[545/337] w-full h-auto;
-			}
 
-			&.video {
-				@apply bg-black;
+                &.video {
+                    @apply bg-black;
 
-				video {
-					@apply absolute min-h-full min-w-full h-auto w-auto aspect-video;
-					@apply translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%];
-				}
+                    video {
+                        @apply absolute min-h-full min-w-full h-auto w-auto aspect-video;
+                        @apply translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%];
+                    }
+
+                    &:hover {
+                        .video-play {
+                            @apply scale-110;
+                        }
+                    }
+
+                    .video {
+                        &-thumbnail {
+                            @apply absolute top-0 left-0 h-full w-full z-[2] cursor-pointer;
+                        }
+
+                        &-play {
+                            @apply ~h-[4rem]/[7.75rem] ~w-[4rem]/[7.75rem] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[3];
+                            @apply transition-transform duration-300 ease-power2-out;
+                        }
+                    }
+                }
 			}
 		}
 	}
