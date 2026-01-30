@@ -29,7 +29,9 @@ baunfire.addModule({
                     start: baunfire.anim.start
                 }
             })
-                .fromTo(elAnims,
+
+            if (elAnims.length) {
+                entranceAnim.fromTo(elAnims,
                     {
                         y: 40,
                         autoAlpha: 0
@@ -42,6 +44,7 @@ baunfire.addModule({
                         ease: "power2.out"
                     }
                 );
+            }
 
             if (cards.length) {
                 if (cards.length == 1) {
@@ -54,7 +57,7 @@ baunfire.addModule({
                                 ease: "power2.out",
                                 stagger: { each: 0.2 }
                             },
-                            ">-0.6"
+                            elAnims.length ? ">-0.6" : ""
                         );
                 } else {
                     entranceAnim
