@@ -297,5 +297,11 @@ body {
                 }
             }
         }
+
+        section.content-logos {
+            &.invi {
+                @apply opacity-0 invisible;
+            }
+        }
     }
 }

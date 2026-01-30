@@ -1,6 +1,6 @@
 {% set is_home = function("is_home") or function("is_front_page") %}
 
-<section class="{{ block.slug }} {{ block.className }} {{ is_home ? "alpha" }}">
+<section class="{{ block.slug }} {{ block.className }} {{ is_home ? "invi" }}">
 	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-none" %}
 	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-sm" %}
 
