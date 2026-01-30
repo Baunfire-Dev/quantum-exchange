@@ -197,14 +197,6 @@
 			}
 		}
 
-		&.at-homepage {
-			.nav {
-				&-outer {
-					@apply opacity-0 translate-y-[-140%];
-				}
-			}
-		}
-
 		&.is-light:not(.nav-scrolled) {
 			.nav {
 				&-logo {
@@ -294,4 +286,16 @@
 			}
 		}
 	}
+}
+
+body {
+    &.home:has(.hero-homepage) {
+        .nav {
+            &.at-homepage {
+                .nav-outer {
+                    @apply opacity-0 translate-y-[-140%];
+                }
+            }
+        }
+    }
 }
