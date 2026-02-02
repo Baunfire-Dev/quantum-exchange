@@ -1,15 +1,15 @@
 @layer components {
 	.content-logos {
 		.marquee {
-			@apply flex w-full;
+			@apply flex w-full overflow-hidden;
 
 			&-content {
-				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem];
+				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem] justify-around min-w-full;
 				animation: scroll 100s linear infinite;
 			}
 
 			&-item {
-				@apply flex items-center justify-center w-auto h-[2.25rem];
+				@apply flex items-center justify-center w-auto h-[2.25rem] grayscale;
 
 				&:hover {
 					@apply grayscale-0;
