@@ -16,7 +16,7 @@ baunfire.addModule({
             const marquee = self.find(".marquee");
             if (!marquee.length) return;
 
-            gsap.fromTo(marquees,
+            gsap.fromTo(marquee,
                 {
                     x: 0,
                 },
