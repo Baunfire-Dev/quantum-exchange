@@ -13,25 +13,25 @@ baunfire.addModule({
         };
 
         const handleMarquee = (self) => {
-            const marquee = self.find(".marquee");
+            const marquees = self.find(".marquee-content");
+            if (!marquees.length) return;
 
-            ScrollTrigger.create({
-                trigger: marquee,
-                start: "top 100%",
-                end: "bottom top",
-                onEnter: () => {
-                    marquee.removeClass("paused");
+            gsap.fromTo(marquees,
+                {
+                    x: 0,
                 },
-                onLeave: () => {
-                    marquee.addClass("paused");
-                },
-                onEnterBack: () => {
-                    marquee.removeClass("paused");
-                },
-                onLeaveBack: () => {
-                    marquee.addClass("paused");
+                {
+                    x: "-100%",
+                    duration: 80,
+                    ease: "linear",
+                    repeat: -1,
+                    scrollTrigger: {
+                        trigger: self,
+                        start: "top 100%",
+                        end: "bottom top"
+                    }
                 }
-            });
+            )
         }
 
         script();
