@@ -13,15 +13,15 @@ baunfire.addModule({
         };
 
         const handleMarquee = (self) => {
-            const marquees = self.find(".marquee-content");
-            if (!marquees.length) return;
+            const marquee = self.find(".marquee");
+            if (!marquee.length) return;
 
             gsap.fromTo(marquees,
                 {
                     x: 0,
                 },
                 {
-                    x: "-100%",
+                    x: "-50%",
                     duration: 80,
                     ease: "linear",
                     repeat: -1,
