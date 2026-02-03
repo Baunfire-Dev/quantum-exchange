@@ -8,30 +8,30 @@ baunfire.addModule({
 
             els.each(function () {
                 const self = $(this);
-                // handleMarquee(self);
+                handleMarquee(self);
             });
         };
 
         const handleMarquee = (self) => {
-            const marquees = self.find(".marquee-content");
-            if (!marquees.length) return;
+            const marquee = self.find(".marquee");
 
-            gsap.fromTo(marquees,
-                {
-                    x: 0,
+            ScrollTrigger.create({
+                trigger: marquee,
+                start: "top 100%",
+                end: "bottom top",
+                onEnter: () => {
+                    marquee.removeClass("paused");
                 },
-                {
-                    x: "-100%",
-                    duration: 100,
-                    ease: "linear",
-                    repeat: -1,
-                    scrollTrigger: {
-                        trigger: self,
-                        start: "top 100%",
-                        end: "bottom top"
-                    }
+                onLeave: () => {
+                    marquee.addClass("paused");
+                },
+                onEnterBack: () => {
+                    marquee.removeClass("paused");
+                },
+                onLeaveBack: () => {
+                    marquee.addClass("paused");
                 }
-            )
+            });
         }
 
         script();
