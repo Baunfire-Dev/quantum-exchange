@@ -8,21 +8,21 @@ baunfire.addModule({
 
             els.each(function () {
                 const self = $(this);
-                handleMarquee(self);
+                // handleMarquee(self);
             });
         };
 
         const handleMarquee = (self) => {
-            const marquee = self.find(".marquee");
-            if (!marquee.length) return;
+            const marquees = self.find(".marquee-content");
+            if (!marquees.length) return;
 
-            gsap.fromTo(marquee,
+            gsap.fromTo(marquees,
                 {
                     x: 0,
                 },
                 {
-                    x: "-50%",
-                    duration: 80,
+                    x: "-100%",
+                    duration: 100,
                     ease: "linear",
                     repeat: -1,
                     scrollTrigger: {

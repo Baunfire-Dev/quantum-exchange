@@ -1,19 +1,19 @@
 @layer components {
 	.content-logos {
 		.marquee {
-			@apply flex w-full overflow-hidden;
+			@apply flex w-full;
 
 			&-content {
-				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem] justify-around min-w-full;
-				/* animation: scroll 100s linear infinite; */
+				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem] justify-around;
+                animation: scroll 10s linear infinite;
 			}
 
 			&-item {
 				@apply flex items-center justify-center w-auto h-[3.5rem] grayscale;
 			}
 
-			/* &.paused {
-				.marquee-content {
+			&.paused {
+				.marquee {
 					animation-play-state: paused;
 				}
 			}
@@ -24,9 +24,9 @@
 				}
 
 				100% {
-					transform: translateX(-100%);
+					transform: translateX(-50%);
 				}
-			} */
+			}
 		}
 	}
 }
