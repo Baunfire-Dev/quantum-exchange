@@ -11,7 +11,7 @@
 		}
 
 		&-burger {
-			@apply xl:hidden flex items-center justify-center self-stretch;
+			@apply lg:hidden flex items-center justify-center self-stretch;
 
 			svg {
 				@apply w-[1.5rem] h-[1.5rem];
@@ -38,13 +38,13 @@
 		&-items {
 			@apply flex gap-[0.75rem] ml-auto;
 
-			@media not all and (min-width: 75rem) {
+			@media not all and (min-width: 62rem) {
 				@apply flex flex-col gap-[1.5rem] w-full;
 			}
 		}
 
 		&-item {
-			@screen xl {
+			@screen lg {
 				@apply flex h-full items-center;
 
 				&.parent {
@@ -53,8 +53,8 @@
 					&.open {
 						.nav {
 							&-dd {
-								@apply xl:visible xl:pointer-events-auto xl:opacity-100 xl:translate-y-0;
-								@apply xl:transition-transform xl:duration-[0.6s] xl:ease-power2-out;
+								@apply lg:visible lg:pointer-events-auto lg:opacity-100 lg:translate-y-0;
+								@apply lg:transition-transform lg:duration-[0.6s] lg:ease-power2-out;
 							}
 						}
 					}
@@ -69,7 +69,7 @@
 				}
 			}
 
-			@media not all and (min-width: 75rem) {
+			@media not all and (min-width: 62rem) {
 				&.parent {
 					&.open {
 						.nav {
@@ -96,16 +96,16 @@
 		&-item-inner {
 			@apply flex gap-[0.75rem] items-center justify-between;
 
-			@screen xl {
+			@screen lg {
 				@apply py-[0.5625rem] px-[1rem] rounded-[2.5rem] border border-gray;
 				@apply transition-colors duration-300 ease-power2-out;
 
 				svg {
-					@apply xl:hidden;
+					@apply lg:hidden;
 				}
 			}
 
-			@media not all and (min-width: 75rem) {
+			@media not all and (min-width: 62rem) {
 				p {
 					@apply font-inter text-[1.125rem] font-normal leading-[140%] normal-case;
 				}
@@ -125,29 +125,29 @@
 		}
 
 		&-dd {
-			@screen xl {
+			@screen lg {
 				@apply absolute w-fit left-[50%] translate-x-[-50%] top-[calc(50%+1.625rem)];
 				@apply pointer-events-none invisible overflow-hidden translate-y-[1rem] opacity-0 will-change-transform;
 			}
 
-			@media not all and (min-width: 75rem) {
+			@media not all and (min-width: 62rem) {
 				@apply h-0 overflow-hidden w-full pointer-events-none;
 			}
 		}
 
 		&-dd-inner {
-			@screen xl {
+			@screen lg {
 				@apply backdrop-blur-[1.125rem] rounded-[0.75rem] border border-green p-[1.5rem];
 				background: rgba(255, 255, 255, 0.8);
 			}
 
-			@media not all and (min-width: 75rem) {
+			@media not all and (min-width: 62rem) {
 				@apply opacity-0 translate-y-[1.25rem] pt-[0.75rem];
 			}
 		}
 
 		&-dd-groups {
-			@apply flex max-xl:flex-col ~gap-[1.5rem]/[3rem];
+			@apply flex max-lg:flex-col ~gap-[1.5rem]/[3rem];
 		}
 
 		&-dd-group {
@@ -178,17 +178,17 @@
 
 		&-panel,
 		&-panel-inner {
-			@apply xl:contents;
+			@apply lg:contents;
 		}
 
 		&-panel {
-			@media not all and (min-width: 75rem) {
+			@media not all and (min-width: 62rem) {
 				@apply pointer-events-none invisible absolute top-[100%] w-full h-auto left-0;
 			}
 		}
 
 		&-panel-inner {
-			@media not all and (min-width: 75rem) {
+			@media not all and (min-width: 62rem) {
 				@apply flex flex-col gap-[3rem] opacity-0 translate-y-[1.5rem];
 				@apply backdrop-blur-[1.125rem] rounded-[0.75rem] border border-green p-[1.5rem];
 				background: rgba(255, 255, 255, 0.8);
@@ -216,7 +216,7 @@
 				}
 
 				&-item-inner {
-					@screen xl {
+					@screen lg {
 						&:not(:hover) {
 							@apply border-white border-opacity-40;
 						}
@@ -228,7 +228,7 @@
 				}
 
 				&-actions {
-					@screen xl {
+					@screen lg {
 						.btn.navi {
 							@apply bg-green;
 

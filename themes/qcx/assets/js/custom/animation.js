@@ -134,7 +134,7 @@
                 let hideTimeout = null;
                 let timeoutDuration = 300;
 
-                const isBigScreen = () => window.matchMedia("(min-width: 1200px)").matches;
+                const isBigScreen = () => window.matchMedia("(min-width: 992px)").matches;
 
                 parents.on('mouseenter', function () {
                     if (!isBigScreen()) return;
@@ -179,7 +179,7 @@
                     const inner = subSelf.find(".nav-item-inner");
 
                     inner.click(function () {
-                        if (!window.matchMedia("(max-width: 1200px)").matches) return;
+                        if (!window.matchMedia("(max-width: 992px)").matches) return;
 
                         if (subSelf.hasClass("open")) {
                             subSelf.removeClass("open");
@@ -205,8 +205,8 @@
 
                 mm.add(
                     {
-                        isDesktop: `(min-width: 1200px)`,
-                        isMobile: `(max-width: 1199.98px)`,
+                        isDesktop: `(min-width: 992px)`,
+                        isMobile: `(max-width: 991.98px)`,
                     },
                     (context) => {
                         let { isDesktop, isMobile } = context.conditions;
