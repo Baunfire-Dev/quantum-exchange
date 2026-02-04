@@ -18,162 +18,20 @@
 
 			{% if fields.logos|length %}
 				<div class="marquee paused">
-					<div class="marquee-content">
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_warpcom" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom-300x117.png 300w">
-
-
+					{% for i in 1..2 %}
+						<div class="marquee-content">
+							{% for logo in fields.logos %}
+								<div class="marquee-item">
+									{% include 'components/image.twig' with {
+                                        image: logo,
+                                        class: 'object-contain h-full w-full',
+                                        size: "full",
+                                    } %}
+								</div>
+							{% endfor %}
 						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_carahsoft" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_World Wide Tech" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_VANCHOR" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_True ZER" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_Spire" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_Iron Bow" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_ISEC7" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_GovSmart" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_Connect IT" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_Colossal" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_CYKOR" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_CTG" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI.png" class="object-contain h-full w-full ls-is-cached lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_CACI" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly.png" class="object-contain h-full w-full ls-is-cached lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_BlueAlly" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly-300x117.png 300w">
-
-
-						</div>
-					</div>
-
-					<div class="marquee-content">
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_warpcom" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_warpcom-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_carahsoft" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_carahsoft-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_World Wide Tech" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_World-Wide-Tech-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_VANCHOR" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_VANCHOR-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_True ZER" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_True-ZER-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_Spire" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Spire-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_Iron Bow" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Iron-Bow-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_ISEC7" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_ISEC7-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_GovSmart" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_GovSmart-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_Connect IT" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Connect-IT-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_Colossal" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_Colossal-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_CYKOR" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CYKOR-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG.png" class="object-contain h-full w-full lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_CTG" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CTG-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI.png" class="object-contain h-full w-full ls-is-cached lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_CACI" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_CACI-300x117.png 300w">
-
-
-						</div>
-						<div class="marquee-item">
-							<img decoding="async" width="507" height="197" data-src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly.png" class="object-contain h-full w-full ls-is-cached lazyloaded" alt="QXC-Partner Logo-Master-Website 152x63_BlueAlly" fetchpriority="auto" data-srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly-300x117.png 300w" data-sizes="auto, (max-width: 507px) 100vw, 507px" src="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly.png" style="--smush-placeholder-width: 507px; --smush-placeholder-aspect-ratio: 507/197;" sizes="auto, (max-width: 507px) 100vw, 507px" srcset="https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly.png 507w, https://qxc25.wpenginepowered.com/wp-content/uploads/QXC-Partner-Logo-Master-Website-152x63_BlueAlly-300x117.png 300w">
-
-
-						</div>
-					</div>
-				</div>
+					{% endfor %}
+				</div> 
 			{% endif %}
 		</div>
 	</div>

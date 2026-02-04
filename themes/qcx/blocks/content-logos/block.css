@@ -5,7 +5,7 @@
 
 			&-content {
 				@apply flex shrink-0 gap-[6.25rem] px-[3.125rem] justify-around;
-                animation: scroll 40s linear infinite;
+                animation: scroll 60s linear infinite;
 			}
 
 			&-item {
