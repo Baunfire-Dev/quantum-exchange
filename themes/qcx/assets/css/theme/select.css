@@ -2,7 +2,7 @@
     @apply relative hidden;
 
     & > svg {
-        @apply absolute top-[50%] translate-y-[-50%] right-[1.25rem];
+        @apply absolute top-[50%] translate-y-[-50%] right-[1.25rem] pointer-events-none;
     }
 
     .select2 {
