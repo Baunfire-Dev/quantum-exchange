@@ -23,13 +23,13 @@
 			<div class="rc-thumbnail">
 				{% if custom_class and ("is-listing" in custom_class) %}
 					{% if thumbnail %}
-						<img data-src="{{ thumbnail }}" alt="{{ title }}" loading="{{ loading ?: "lazy" }}" loading="lazy"/>
+						<img data-src="{{ thumbnail }}" alt="{{ title|striptags|e }}" loading="{{ loading ?: "lazy" }}" loading="lazy"/>
 					{% else %}
 						<img data-src="{{ function('png', 'thumbnail') }}" loading="{{ loading ?: "lazy" }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
 					{% endif %}
 				{% else %}
 					{% if thumbnail %}
-						<img src="{{ thumbnail }}" alt="{{ title }}" loading="{{ loading ?: "lazy" }}" {{ loading and loading == "eager" ? 'fetchpriority="high"' }}/>
+						<img src="{{ thumbnail }}" alt="{{ title|striptags|e }}" loading="{{ loading ?: "lazy" }}" {{ loading and loading == "eager" ? 'fetchpriority="high"' }}/>
 					{% else %}
 						<img src="{{ function('png', 'thumbnail') }}" loading="{{ loading ?: "lazy" }}" {{ loading and loading == "eager" ? 'fetchpriority="high"' }} alt="default qcx thumbnail placeholder"/>
 					{% endif %}
