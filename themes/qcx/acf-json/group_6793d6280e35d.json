@@ -57,6 +57,27 @@
                     "selected": 0
                 },
                 {
+                    "key": "field_69829d80c0120",
+                    "label": "Hide Box",
+                    "name": "hide_box",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
+                },
+                {
                     "key": "field_68f9546a2e41d",
                     "label": "Override Global Config",
                     "name": "override_global_config",
@@ -209,5 +230,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762809089
+    "modified": 1770167734
 }

@@ -1,4 +1,4 @@
-<section class="{{ block.slug }} {{ block.className }}">
+<section class="{{ block.slug }} {{ block.className }} {{ fields.hide_box ? "no-box" }}">
 	{% if block.anchor %}
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
 	{% endif %}
@@ -9,40 +9,42 @@
 	<div class="container relative z-[3]">
 		<div class="{{ pt }} {{ pb }}">
 			<div class="flex items-center justify-center ~px-[1.5rem]/[17.875rem]">
-				<div class="box alpha">
-					<div class="flex flex-col gap-[1.5rem] text-center">
-						{% if fields.override_global_config %}
-							{% if fields.content.heading %}
-								<h3 class="text-white">
-									{{ fields.content.heading }}
-								</h3>
-							{% endif %}
+				{% if not fields.hide_box %}
+                    <div class="box alpha">
+                        <div class="flex flex-col gap-[1.5rem] text-center">
+                            {% if fields.override_global_config %}
+                                {% if fields.content.heading %}
+                                    <h3 class="text-white">
+                                        {{ fields.content.heading }}
+                                    </h3>
+                                {% endif %}
 
-							{% if fields.content.paragraph %}
-								<p class="text-white">
-									{{ fields.content.paragraph }}
-								</p>
-							{% endif %}
-						{% else %}
-							{% if heading %}
-								<h3 class="text-white">
-									{{ heading }}
-								</h3>
-							{% endif %}
+                                {% if fields.content.paragraph %}
+                                    <p class="text-white">
+                                        {{ fields.content.paragraph }}
+                                    </p>
+                                {% endif %}
+                            {% else %}
+                                {% if heading %}
+                                    <h3 class="text-white">
+                                        {{ heading }}
+                                    </h3>
+                                {% endif %}
 
-							{% if paragraph %}
-								<p class="text-white">
-									{{ paragraph }}
-								</p>
-							{% endif %}
-						{% endif %}
-					</div>
+                                {% if paragraph %}
+                                    <p class="text-white">
+                                        {{ paragraph }}
+                                    </p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
 
-					{% include 'components/cta.twig' with {
-                        'class' : 'filled white',
-                        'cta': fields.override_global_config ? fields.content.cta : cta, 
-                    } %}
-				</div>
+                        {% include 'components/cta.twig' with {
+                            'class' : 'filled white',
+                            'cta': fields.override_global_config ? fields.content.cta : cta, 
+                        } %}
+                    </div>
+                {% endif %}
 			</div>
 		</div>
 	</div>

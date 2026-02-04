@@ -42,5 +42,9 @@
 			@apply w-full max-w-[46.125rem] backdrop-blur-[0.75rem] bg-black/[0.04] ~px-[1.25rem]/[5rem] ~py-[2.5rem]/[4rem];
 			@apply flex items-center flex-col ~gap-[1.25rem]/[2rem] border rounded-[0.5rem] border-green;
 		}
+
+        &.no-box {
+            @apply ~h-[23.75rem]/[30.125rem];
+        }
 	}
 }
