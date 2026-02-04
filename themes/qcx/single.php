@@ -17,40 +17,20 @@ get_header();
     use Timber\Timber;
 
     $post_id = get_the_ID();
-    $author_id = get_post_field('post_author', $post_id);
     $title = get_the_title($post_id);
     $type = get_post_type($post_id);
 
-    // 1. Fallback: WP author name (last resort)
-    $author_name = get_the_author_meta('display_name', $author_id);
+    $post_author = get_field("resource_author", $post_id);
+    $default_author = get_field("default_author", "option");
 
-    // 2. Default brand author: "The Quantum XChange" from `authors` CPT
-    $default_author = get_page_by_title('The Quantum XChange', OBJECT, 'authors');
-
-    if ($default_author && isset($default_author->ID)) {
-        $author_name = get_the_title($default_author->ID);
+    if (!$post_author) {
+        $post_author = $default_author;
     }
 
-    // 3. ACF post object field: resource_author (overrides default if set)
-    $resource_author = get_field('resource_author', $post_id);
-
-    if ($resource_author) {
-        // If it's a post object, get the ID
-        if (is_object($resource_author) && isset($resource_author->ID)) {
-            $resource_author_id = $resource_author->ID;
-        } else {
-            // If it's stored as just an ID
-            $resource_author_id = (int) $resource_author;
-        }
-
-        // Use the title of the author post as the name
-        $author_name = get_the_title($resource_author_id);
-    }
-    
     $context = Timber::context([
         "title" => $title,
         "date" => get_the_date('d M Y', $post_id),
-        "author" => $author_name,
+        "author" => get_the_title($post_author),
         "feature_image" => get_post_thumbnail_id($post_id),
         "share_title" => rawurlencode($title),
         "share_link" => rawurlencode(get_the_permalink($post_id)),
