@@ -80,6 +80,18 @@
 
             &.solo {
                 @apply mx-auto w-full max-w-[50.125rem];
+
+                .item, {
+                    &-card {
+                        @apply items-center;
+                    }
+                    
+                    &-card > p,
+                    &-quote,
+                    &-quote-inner {
+                        @apply text-center;
+                    }
+                }
             }
 		}
 
