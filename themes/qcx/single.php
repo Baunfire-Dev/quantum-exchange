@@ -53,6 +53,8 @@ get_header();
         'award' => ['label' => 'Awards', 'tax' => 'award_category']
     ];
 
+    $context['post_types'] = $post_types;
+
     if (isset($post_types[$type])) {
         $taxonomy = $post_types[$type]['tax'];
         $terms = wp_get_post_terms($post_id, $taxonomy, ['fields' => 'ids']);
