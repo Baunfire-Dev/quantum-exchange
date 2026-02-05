@@ -12,9 +12,9 @@
 
 			{% if title %}
 				{% if custom_class and ("at-hero" in custom_class) %}
-					<h5>{{ title|striptags|e }}</h5>
+					<h5>{{ title }}</h5>
 				{% else %}
-					<p class="lg">{{ title|striptags|e }}</p>
+					<p class="lg">{{ title }}</p>
 				{% endif %}
 			{% endif %}
 		</div>
