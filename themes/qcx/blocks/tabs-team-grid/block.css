@@ -31,13 +31,13 @@
 			}
 
 			&-grid {
-				@apply flex flex-wrap max-sm:flex-col w-[calc(100%+1.5rem)] mx-[-0.75rem];
+				@apply flex flex-wrap max-sm:flex-col w-[calc(100%+48px)] mx-[-1.5rem];
 			}
 		}
 
 		.item {
 			&-inner {
-				@apply mx-[0.75rem] h-full;
+				@apply mx-[1.5rem] h-full;
 				@apply flex flex-col ~gap-[1rem]/[1.5rem];
 			}
 
