@@ -32,18 +32,20 @@
 					</div>
 				</div>
 
-				{% if fields.type == "form" %}
+				{% if fields.type == "form" and fields.form_shortcode %}
 					<div class="block-box alpha lg:flex-1 lg:basis-[40.25rem]">
-						<div class="form contact">
-							<svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" viewbox="0 0 34 27" fill="none">
-								<path d="M7.3133 0H0L9.50044 13.4354L0 26.8708H7.3133L16.8138 13.4354L7.3133 0Z" fill="#838786"/>
-								<path d="M26.3237 0H33.637L24.1365 13.4354L33.637 26.8708H26.3237L16.8135 13.4354L26.3237 0Z" fill="#155086"/>
-							</svg>
+                        <div id="form-container">
+                            <div class="form contact">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" viewbox="0 0 34 27" fill="none">
+                                    <path d="M7.3133 0H0L9.50044 13.4354L0 26.8708H7.3133L16.8138 13.4354L7.3133 0Z" fill="#838786"/>
+                                    <path d="M26.3237 0H33.637L24.1365 13.4354L33.637 26.8708H26.3237L16.8135 13.4354L26.3237 0Z" fill="#155086"/>
+                                </svg>
 
-							<div class="form-inner">
-								<small>form to follow when provided</small>
-							</div>
-						</div>
+                                <div class="form-inner">
+                                    {{ function('do_shortcode', fields.form_shortcode) }}
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				{% endif %}
 

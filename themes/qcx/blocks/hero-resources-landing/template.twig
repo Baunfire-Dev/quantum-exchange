@@ -89,17 +89,19 @@
 					{% endif %}
 
 					{% if fields.form_shortcode %}
-						<div class="form block-form alpha newsletter">
-							{% if fields.form_title %}
-								<p class="text-white">
-									{{ fields.form_title}}
-								</p>
-							{% endif %}
+                        <div id="form-container">
+                            <div class="form block-form alpha newsletter">
+                                {% if fields.form_title %}
+                                    <p class="text-white">
+                                        {{ fields.form_title}}
+                                    </p>
+                                {% endif %}
 
-							<div class="form-inner">
-								<small>form to follow when provided</small>
-							</div>
-						</div>
+                                <div class="form-inner">
+                                    {{ function('do_shortcode', fields.form_shortcode) }}
+                                </div>
+                            </div>
+                        </div>
 					{% endif %}
 				</div>
 			</div>
