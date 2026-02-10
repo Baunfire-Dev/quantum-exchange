@@ -183,3 +183,24 @@ body.post-type-solution .acf-taxonomy-field .categorychecklist-holder {
         min-height: unset !important;
     }
 }
+
+.block-editor .acf-field[data-name='block_preview'] {
+    background: #f9f9f9;
+
+    .acf-label,
+    .acf-input-wrap {
+        display: none !important;
+    }
+
+    .acf-block-preview-guide {
+        img {
+            margin: 0 !important;
+            max-height: 134px;
+            max-width: 250px;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+            border: 1px solid #008dd4;
+        }
+    }
+}

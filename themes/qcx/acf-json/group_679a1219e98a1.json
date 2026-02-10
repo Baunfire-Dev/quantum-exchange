@@ -1,10 +1,10 @@
 {
-    "key": "group_690c9d1ce202f",
-    "title": "Partners Grid",
+    "key": "group_679a1219e98a1",
+    "title": "Carousel Logos",
     "fields": [
         {
-            "key": "field_690c9d1ce2ff5",
-            "label": "Partners Grid",
+            "key": "field_679a1219f0e7c",
+            "label": "Carousel Logos",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -21,7 +21,7 @@
             "selected": 0
         },
         {
-            "key": "field_698a847acaa77",
+            "key": "field_698a840edb07e",
             "label": "Block Preview",
             "name": "block_preview",
             "aria-label": "",
@@ -42,7 +42,7 @@
             "append": ""
         },
         {
-            "key": "field_690c9d1ce2ff8",
+            "key": "field_679a121a0079c",
             "label": "Block",
             "name": "block",
             "aria-label": "",
@@ -55,6 +55,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 1,
             "layout": "block",
             "acfe_seamless_style": 0,
             "acfe_group_modal": 0,
@@ -63,7 +64,74 @@
             "acfe_group_modal_size": "large",
             "sub_fields": [
                 {
-                    "key": "field_690c9d1ce406b",
+                    "key": "field_67f44d457bf7d",
+                    "label": "Content",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "left",
+                    "endpoint": 0,
+                    "selected": 0
+                },
+                {
+                    "key": "field_67f44e797bf7e",
+                    "label": "Heading",
+                    "name": "heading",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_679a121a120c8",
+                    "label": "Logos",
+                    "name": "logos",
+                    "aria-label": "",
+                    "type": "gallery",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "id",
+                    "library": "all",
+                    "min": "",
+                    "max": "",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "insert": "append",
+                    "preview_size": "thumbnail"
+                },
+                {
+                    "key": "field_67f44f3c9f992",
                     "label": "Extras",
                     "name": "extras",
                     "aria-label": "",
@@ -77,7 +145,7 @@
                         "id": ""
                     },
                     "clone": [
-                        "group_673eed0e10460"
+                        "group_67f447cf2b997"
                     ],
                     "display": "seamless",
                     "layout": "block",
@@ -97,19 +165,19 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/partners-grid"
+                "value": "acf\/content-logos"
             }
         ]
     ],
     "menu_order": 0,
     "position": "normal",
     "style": "default",
-    "label_placement": "left",
+    "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770685571
+    "modified": 1770685459
 }

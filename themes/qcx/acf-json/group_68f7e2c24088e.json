@@ -21,6 +21,27 @@
             "selected": 0
         },
         {
+            "key": "field_698a844411e83",
+            "label": "Block Preview",
+            "name": "block_preview",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68f7e2c24aa7d",
             "label": "Block",
             "name": "block",
@@ -296,5 +317,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763375767
+    "modified": 1770685513
 }

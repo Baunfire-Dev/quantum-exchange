@@ -257,3 +257,41 @@ function custom_block_category($categories, $post)
 }
 
 add_filter('block_categories_all', 'custom_block_category', 10, 2);
+
+add_filter('acf/prepare_field/name=block_preview', function($field) {
+    $field_group = acf_get_field_group($field['parent']);
+    
+    if (!$field_group || empty($field_group['location'])) {
+        return $field;
+    }
+    
+    foreach ($field_group['location'] as $rule_group) {
+        foreach ($rule_group as $rule) {
+            if ($rule['param'] === 'block' && isset($rule['value'])) {
+                $block_slug = str_replace('acf/', '', $rule['value']);
+                
+                $preview_path = get_template_directory() . '/blocks/' . $block_slug . '/preview.png';
+                $preview_url = get_template_directory_uri() . '/blocks/' . $block_slug . '/preview.png';
+                
+                if (file_exists($preview_path)) {
+                    $field['_preview_url'] = $preview_url;
+                }
+                
+                return $field;
+            }
+        }
+    }
+    
+    return $field;
+});
+
+add_action('acf/render_field/name=block_preview', function($field) {
+    if (!empty($field['_preview_url'])) {
+        echo sprintf(
+            '<div class="acf-block-preview-guide">
+                <img src="%s" alt="Block Preview">
+            </div>',
+            esc_url($field['_preview_url'])
+        );
+    }
+}, 10, 1);
