@@ -8,6 +8,7 @@ baunfire.addModule({
 
             sections.each(function () {
                 const self = $(this);
+                handleVideos(self);
                 handleEntranceAnim(self);
             });
         };
@@ -16,9 +17,9 @@ baunfire.addModule({
             const bg = self.find(".bg");
             const title = self.find(".block-title");
             const content = self.find(".block-content");
-            const form = self.find(".block-form");
+            const box = self.find(".block-box");
 
-            const elAnims = [title, content, form].filter(el => el.length > 0);
+            const elAnims = [title, content, box].filter(el => el.length > 0);
 
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
@@ -50,6 +51,38 @@ baunfire.addModule({
                     },
                     ">-0.6"
                 );
+        };
+
+        const handleVideos = (self) => {
+            const videoContainer = self.find(".media-container-inner.video");
+            if (!videoContainer.length) return;
+
+            const video = videoContainer.data("video");
+            const play = videoContainer.find(".video-play");
+            const thumbnail = videoContainer.find(".video-thumbnail");
+
+            play.click(function () {
+                thumbnail.fadeOut();
+                handleDirectVideo(videoContainer, video);
+            });
+        };
+
+        const handleDirectVideo = (container, video) => {
+            container.append(`
+                <video src="${video}" autoplay playsinline controls preload="auto" disablepictureinpicture disableremoteplayback>
+                    Your browser does not support the video tag.
+                </video>
+            `);
+
+            const videoEL = container.find("video").get(0);
+
+            ScrollTrigger.create({
+                trigger: container,
+                start: "top center",
+                end: "bottom 10%",
+                onLeave: () => videoEL.pause(),
+                onLeaveBack: () => videoEL.pause()
+            });
         };
 
         script();

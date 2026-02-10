@@ -32,18 +32,43 @@
 					</div>
 				</div>
 
-				<div class="block-form alpha lg:flex-1 lg:basis-[40.25rem]">
-					<div class="form contact">
-						<svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" viewbox="0 0 34 27" fill="none">
-							<path d="M7.3133 0H0L9.50044 13.4354L0 26.8708H7.3133L16.8138 13.4354L7.3133 0Z" fill="#838786"/>
-							<path d="M26.3237 0H33.637L24.1365 13.4354L33.637 26.8708H26.3237L16.8135 13.4354L26.3237 0Z" fill="#155086"/>
-						</svg>
+				{% if fields.type == "form" %}
+					<div class="block-box alpha lg:flex-1 lg:basis-[40.25rem]">
+						<div class="form contact">
+							<svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" viewbox="0 0 34 27" fill="none">
+								<path d="M7.3133 0H0L9.50044 13.4354L0 26.8708H7.3133L16.8138 13.4354L7.3133 0Z" fill="#838786"/>
+								<path d="M26.3237 0H33.637L24.1365 13.4354L33.637 26.8708H26.3237L16.8135 13.4354L26.3237 0Z" fill="#155086"/>
+							</svg>
 
-						<div class="form-inner">
-							<small>form to follow when provided</small>
+							<div class="form-inner">
+								<small>form to follow when provided</small>
+							</div>
 						</div>
 					</div>
-				</div>
+				{% endif %}
+
+				{% if fields.type == "video" and fields.media_video and fields.media_video_thumbnail %}
+					<div class="block-box alpha lg:flex-1 lg:basis-[40.25rem] lg:flex lg:items-center">
+						<div class="media-container">
+							<div class="media-container-inner video" data-video="{{ fields.media_video }}">
+								<div class="video-thumbnail">
+									<div class="video-play">
+										<img src="{{ function('svg', 'play') }}" loading="lazy" alt="play button">
+									</div>
+
+									{% if fields.media_video_thumbnail %}
+										{% include 'components/image.twig' with {
+                                            image: fields.media_video_thumbnail,
+                                            size: 'large'
+                                        } %}
+									{% else %}
+										<img src="{{ function('png', 'thumbnail') }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -73,6 +98,6 @@
 			</defs>
 		</svg>
 
-        <img class="~w-[32.125rem]/[52.875rem] ~h-[39.75rem]/[65.5rem] ~right-[-7rem]/[-12.5rem] ~top-[-24.875rem]/[-34.875rem] aspect-[282/350] rotate-[118deg] absolute mix-blend-multiply" src="{{ function("png", "form-graphic") }}" alt="form graphic">
+		<img class="~w-[32.125rem]/[52.875rem] ~h-[39.75rem]/[65.5rem] ~right-[-7rem]/[-12.5rem] ~top-[-24.875rem]/[-34.875rem] aspect-[282/350] rotate-[118deg] absolute mix-blend-multiply" src="{{ function("png", "form-graphic") }}" alt="form graphic">
 	</div>
 </section>
