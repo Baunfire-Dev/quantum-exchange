@@ -11,8 +11,9 @@
                     @apply bg-black;
 
                     video {
-                        @apply absolute min-h-full min-w-full h-auto w-auto aspect-video;
+                        @apply absolute min-w-full h-auto w-auto aspect-video;
                         @apply translate-x-[-50%] translate-y-[-50%] left-[50%] top-[50%];
+                        /* @apply min-h-full; */
                     }
 
                     &:hover {

@@ -16,16 +16,18 @@ if (!defined('ABSPATH')) {
 require_once 'vendor/autoload.php';
 Timber\Timber::init();
 
-if (!defined('_ENV')) {
-    define('_ENV', 'development');
-}
+// if (!defined('_ENV')) {
+//     define('_ENV', 'development');
+// }
 
-if (!defined('_S_VERSION')) {
-    if (_ENV == 'development')
-        define('_S_VERSION', uniqid());
-    else
-        define('_S_VERSION', '1.0.0');
-}
+// if (!defined('_S_VERSION')) {
+//     if (_ENV == 'development')
+//         define('_S_VERSION', uniqid());
+//     else
+//         define('_S_VERSION', uniqid());
+// }
+
+define('_S_VERSION', uniqid());
 
 if (!function_exists('bf_setup')):
     function bf_setup()
