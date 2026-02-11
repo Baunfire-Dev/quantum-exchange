@@ -14,6 +14,10 @@
 				&:hover {
 					@apply grayscale-0;
 				}
+
+                img {
+                    @apply w-fit;
+                }
 			}
 
 			&.paused {
