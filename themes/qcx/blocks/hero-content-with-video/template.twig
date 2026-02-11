@@ -8,11 +8,11 @@
 
 	{% set video_source = null %}
 
-	{% if fields.source == 'youtube' and fields.youtube_id %}
+	{% if fields.media == 'video' and fields.source == 'youtube' and fields.youtube_id %}
 		{% set video_source = fields.youtube_id %}
 	{% endif %}
 
-	{% if fields.source == 'direct' and fields.video_url %}
+	{% if fields.media == 'video' and fields.source == 'direct' and fields.video_url %}
 		{% set video_source = fields.video_url %}
 	{% endif %}
 
