@@ -6,11 +6,10 @@
 	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "~pt-[7rem]/[10.125rem]" %}
 	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
 
-
 	<div class="{{ pt }} {{ pb }} relative">
 		<div class="container relative z-[2]">
 			<div class="flex max-md:flex-col ~gap-[2rem]/[4.875rem]">
-				<div class="flex flex-col gap-[2rem] w-full max-w-[45.375rem]">
+				<div class="flex flex-col gap-[2rem] w-full max-w-[56.25rem]">
 					{% if fields.heading %}
 						<h1 class="block-title alpha text-white">{{ fields.heading }}</h1>
 					{% endif %}
