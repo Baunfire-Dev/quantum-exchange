@@ -16,7 +16,7 @@ baunfire.addModule({
         const handleEntranceAnim = (self) => {
             const title = self.find(".block-title");
             const para = self.find(".block-para");
-            const video = self.find(".block-video");
+            const video = self.find(".block-media");
 
             const elAnims = [title, para, video].filter(el => el.length > 0);
 

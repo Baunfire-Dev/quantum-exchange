@@ -33,26 +33,39 @@
 					</div>
 				{% endif %}
 
-				{% if video_source %}
-                    <div class="block-video alpha md:flex-1 max-md:w-full md:basis-[40.5rem]">
-                        <div class="video" data-source="{{ fields.source }}" data-video="{{ video_source }}">
-                            <div class="video-thumbnail">
-                                <div class="video-play">
-                                    <img src="{{ function('svg', 'play') }}" loading="lazy" alt="play button">
-                                </div>
+				{% if fields.media == "image" %}
+					<div class="block-media alpha md:flex-1 max-md:w-full md:basis-[40.5rem]">
+                        {% if fields.image %}
+                            {% include 'components/image.twig' with {
+                                image: fields.image,
+                                size: 'large',
+                                loading: 'eager'
+                            } %}
+                        {% endif %}
+					</div>
+				{% else %}
+					{% if video_source %}
+						<div class="block-media alpha md:flex-1 max-md:w-full md:basis-[40.5rem]">
+							<div class="video" data-source="{{ fields.source }}" data-video="{{ video_source }}">
+								<div class="video-thumbnail">
+									<div class="video-play">
+										<img src="{{ function('svg', 'play') }}" loading="lazy" alt="play button">
+									</div>
 
-                                {% if fields.thumbnail %}
-                                    {% include 'components/image.twig' with {
-                                        image: fields.thumbnail,
-                                        size: 'large'
-                                    } %}
-                                {% else %}
-                                    <img src="{{ function('png', 'thumbnail') }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
+									{% if fields.thumbnail %}
+										{% include 'components/image.twig' with {
+                                            image: fields.thumbnail,
+                                            size: 'large',
+                                            loading: 'eager'
+                                        } %}
+									{% else %}
+										<img src="{{ function('png', 'thumbnail') }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endif %}
 			</div>
 		</div>
 	</div>
