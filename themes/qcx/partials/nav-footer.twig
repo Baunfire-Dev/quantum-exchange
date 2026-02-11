@@ -56,23 +56,25 @@
 					</svg>
 				</a>
 
-				<div class="footer-form">
-					{% if footer_form_label %}
-						<p>{{ footer_form_label }}</p>
-					{% endif %}
+                {% if footer_form_shorcode %}
+                    <div class="footer-form">
+                        {% if footer_form_label %}
+                            <p>{{ footer_form_label }}</p>
+                        {% endif %}
 
-					<div class="footer-form-inner">
-						<input type="text" placeholder="Email">
+                        <div class="footer-form-inner">
+                            <input type="text" placeholder="Email">
 
-						<button>
-							<svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<rect x="0.5" y="0.5" width="39" height="39" rx="3.5" fill="#206EEC"/>
-								<rect x="0.5" y="0.5" width="39" height="39" rx="3.5" stroke="#206EEC"/>
-								<path d="M17.6614 26L17 25.2567L21.6772 20L17 14.7433L17.6614 14L23 20L17.6614 26Z" fill="white"/>
-							</svg>
-						</button>
-					</div>
-				</div>
+                            <button>
+                                <svg width="40" height="40" viewbox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="0.5" y="0.5" width="39" height="39" rx="3.5" fill="#206EEC"/>
+                                    <rect x="0.5" y="0.5" width="39" height="39" rx="3.5" stroke="#206EEC"/>
+                                    <path d="M17.6614 26L17 25.2567L21.6772 20L17 14.7433L17.6614 14L23 20L17.6614 26Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
 			</div>
 
 			{% if primary_footer_nav_column|length %}
