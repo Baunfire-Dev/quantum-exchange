@@ -8,7 +8,7 @@
 				@apply relative aspect-[545/337] w-full h-auto;
 
                 &.video {
-                    @apply bg-black;
+                    @apply bg-black aspect-video;
 
                     video {
                         @apply absolute min-w-full h-auto w-auto aspect-video;
