@@ -10,6 +10,10 @@
 
 			&-item {
 				@apply flex items-center justify-center w-fit h-[3.5rem] grayscale;
+
+                img {
+                    @apply w-fit;
+                }
 			}
 
 			&.paused {
