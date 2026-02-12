@@ -96,19 +96,3 @@ baunfire.addModule({
         script();
     }
 });
-  window.addEventListener("message", function (event) {
-    console.log('sasd');
-
-    // Optional but recommended: verify origin
-    if (event.origin !== "https://info.quantumxc.com") return;
-
-    if (event.data.type === "pardotFormHeight") {
-      var iframe = document.querySelector(
-        'iframe[src*="info.quantumxc.com"]'
-      );
-
-      if (!iframe) return;
-
-      iframe.style.height = event.data.height + "px";
-    }
-  });

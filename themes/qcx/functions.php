@@ -27,7 +27,7 @@ Timber\Timber::init();
 //         define('_S_VERSION', uniqid());
 // }
 
-define('_S_VERSION', '1.0.7');
+define('_S_VERSION', '1.0.8');
 
 if (!function_exists('bf_setup')):
     function bf_setup()
@@ -115,7 +115,7 @@ function back_css_styles($hook)
     wp_enqueue_style('bf-custom-admin-style', get_template_directory_uri() . '/assets/css/admin/styles.css', array(), _S_VERSION);
 
     if ($hook === 'post.php' || $hook === 'post-new.php') {
-        // wp_enqueue_style('acfe-style', get_template_directory_uri() . '/assets/css/external/acfe.css', array(), _S_VERSION);
+        wp_enqueue_style('acfe-style', get_template_directory_uri() . '/assets/css/external/acfe.css', array(), _S_VERSION);
     }
 }
 
