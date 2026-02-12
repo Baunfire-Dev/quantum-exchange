@@ -29,7 +29,7 @@
 							<div class="media-container-inner image">
 								{% include 'components/image.twig' with {
                                     'image': fields.media_image,
-                                    'size': "full",
+                                    'size': "full"
                                 } %}
 							</div>
 						</div>
@@ -40,16 +40,17 @@
 							<div class="media-container-inner video" data-video="{{ fields.media_video }}">
                                 <div class="video-thumbnail">
                                     <div class="video-play">
-                                        <img src="{{ function('svg', 'play') }}" loading="lazy" alt="play button">
+                                        <img src="{{ function('svg', 'play') }}" loading="eager" fetchpriority="high" alt="play button">
                                     </div>
 
                                     {% if fields.media_video_thumbnail %}
                                         {% include 'components/image.twig' with {
                                             image: fields.media_video_thumbnail,
-                                            size: 'large'
+                                            size: 'large',
+                                            'loading': 'eager'
                                         } %}
                                     {% else %}
-                                        <img src="{{ function('png', 'thumbnail') }}" loading="lazy" alt="default qcx thumbnail placeholder"/>
+                                        <img src="{{ function('png', 'thumbnail') }}" ding="eager" fetchpriority="high" alt="default qcx thumbnail placeholder"/>
                                     {% endif %}
                                 </div>
 							</div>

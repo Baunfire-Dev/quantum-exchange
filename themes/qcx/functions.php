@@ -81,6 +81,8 @@ add_action('admin_enqueue_scripts', 'back_js_scripts');
 
 add_action('enqueue_block_editor_assets', 'enqueue_block_editor_scripts');
 
+add_filter('style_loader_tag', 'front_deferred_styles', 10, 4);
+
 
 function front_css_styles()
 {
@@ -129,6 +131,19 @@ function enqueue_block_editor_scripts()
     wp_localize_script("bf-block-preview-script", 'theme_path', array('url' => get_template_directory_uri()));
 }
 
+function front_deferred_styles($html, $handle, $href, $media) {
+    $defer_styles = array(
+        'bf-owl-style',
+        'bf-select-two-style',
+        'bf-toastify-style'
+    );
+
+    if (in_array($handle, $defer_styles)) {
+        return "<link rel='stylesheet' href='{$href}' media='print' onload=\"this.media='all'\" />";
+    }
+
+    return $html;
+}
 
 
 
