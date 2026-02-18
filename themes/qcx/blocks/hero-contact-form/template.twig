@@ -20,7 +20,10 @@
 						{% endif %}
 					</div>
 
-                    {% if fields.form_shortcode %}
+                    {% set is_shortcode = fields.f_source == "shortcode" and fields.form_shortcode %}
+                    {% set is_embed = fields.f_source == "embed" and fields.form_embed %}
+
+                    {% if is_shortcode or is_embed %}
                         <div id="form-container" class="block-form alpha md:flex-1 md:basis-[40.25rem]">
                             <div class="form contact">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" viewbox="0 0 34 27" fill="none">
@@ -29,7 +32,13 @@
                                 </svg>
 
                                 <div class="form-inner">
-                                    {{ function('do_shortcode', fields.form_shortcode) }}
+                                    {% if is_shortcode %}
+                                        {{ function('do_shortcode', fields.form_shortcode) }}
+                                    {% endif %}
+
+                                    {% if is_embed %}
+                                        {{ fields.form_embed }}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
