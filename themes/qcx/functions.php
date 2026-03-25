@@ -27,7 +27,7 @@ Timber\Timber::init();
 //         define('_S_VERSION', uniqid());
 // }
 
-define('_S_VERSION', '1.1.0');
+define('_S_VERSION', '1.1.1');
 
 if (!function_exists('bf_stup')):
     function bf_setup()

@@ -265,8 +265,8 @@
                 searchInput.each(function () {
                     const self = $(this);
 
-                    self.on('keypress', function (e) {
-                        if (e.which == 13) {
+                    self.on('keydown', function (e) {
+                        if (e.key === 'Enter') {
                             e.preventDefault();
                             const action = self.data("action");
                             window.location.href = `${action}${self.val()}`;
