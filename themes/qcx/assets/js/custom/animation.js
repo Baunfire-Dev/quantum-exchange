@@ -4,12 +4,13 @@
     baunfire.Animation = {
         init() {
             this.handleNav();
+            this.handleSearch();
             this.handleButtonHover();
             this.handleResourceAnim();
         },
 
         handleButtonHover() {
-            const btn = $("a.btn");
+            const btn = $("a.btn, #search-load-more");
             if (!btn.length) return;
 
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -172,8 +173,6 @@
             }
 
             const mobileDDPanel = () => {
-                // const navPanel = nav.find(".nav-panel");
-
                 parents.each(function () {
                     const subSelf = $(this);
                     const inner = subSelf.find(".nav-item-inner");
@@ -186,13 +185,6 @@
                         } else {
                             parents.removeClass("open");
                             subSelf.addClass("open");
-
-                            // gsap.to(navPanel, {
-                            //     duration: 0.6,
-                            //     scrollTo: { y: subSelf, offsetY: 0, autoKill: true },
-                            //     ease: Power1.easeInOut,
-                            //     overwrite: true
-                            // });
                         }
                     })
                 })
@@ -253,6 +245,76 @@
             burgerEvent();
             desktopDDPanel();
             mobileDDPanel();
+        },
+
+        handleSearch() {
+            const toggleSearch = () => {
+                const nav = $("nav");
+                if (!nav.length) return;
+
+                const searchBtn = $(".nav-search-btn");
+
+                searchBtn.click(function () {
+                    nav.toggleClass("is-searching");
+                });
+            }
+
+            const handleSearch = () => {
+                const searchInput = $(".nav-search-input input");
+
+                searchInput.each(function () {
+                    const self = $(this);
+
+                    self.on('keypress', function (e) {
+                        if (e.which == 13) {
+                            e.preventDefault();
+                            const action = self.data("action");
+                            window.location.href = `${action}${self.val()}`;
+                        }
+                    });
+                })
+            };
+
+            const handleSearchResults = () => {
+                const searchItems = $(".search-item");
+                if (!searchItems.length) return;
+
+                const loadMore = $("#search-load-more");
+                let baseVisibleCount = 7;
+                let visibleCount = baseVisibleCount;
+                let itemsPerPage = baseVisibleCount;
+
+                loadMore.on("click", function () {
+                    visibleCount += itemsPerPage;
+                    updateDisplayLoadMore();
+                });
+
+                const updateDisplayLoadMore = (isInitial = false) => {
+                    const visibleItems = searchItems.slice(0, visibleCount);
+                    visibleItems.addClass("active");
+
+                    const newItems = isInitial ? searchItems : searchItems.slice(visibleCount - itemsPerPage, visibleCount);
+
+                    gsap.fromTo(newItems,
+                        { autoAlpha: 0, x: 20 },
+                        { autoAlpha: 1, x: 0, overwrite: true, duration: 0.6, stagger: 0.032, ease: "power2.out" }
+                    );
+
+                    baunfire.Global.screenSizeChange();
+
+                    if (visibleCount < searchItems.length) {
+                        loadMore.addClass("active");
+                    } else {
+                        loadMore.removeClass("active");
+                    }
+                };
+
+                updateDisplayLoadMore(true);
+            }
+
+            toggleSearch();
+            handleSearch();
+            handleSearchResults();
         },
 
         handleResourceAnim() {

@@ -1,0 +1,65 @@
+<section class="search">
+	<div class="st-xxl sb-md">
+		<div class="container">
+			<h1 class="max-w-[45.3125rem]">Search results</h1>
+		</div>
+	</div>
+
+	<div class="st-md sb-xxl min-h-[37.5rem]">
+		<div class="container">
+			<div class="~px-[0rem]/[13.375rem] flex flex-col ~gap-[1.25rem]/[2rem]">
+                <div class="nav-search-input">
+                    <input type="text" data-action="{{ function("home_url", "/?s=") }}" value="{{ search_term }}" placeholder="Search"/>
+
+                    <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.5973 11.0766C18.5973 6.9231 15.2302 3.55599 11.0766 3.55599C6.9231 3.55599 3.55599 6.9231 3.55599 11.0766C3.55599 15.2302 6.9231 18.5973 11.0766 18.5973C15.2302 18.5973 18.5973 15.2302 18.5973 11.0766ZM20.1533 11.0766C20.1533 13.3029 19.3501 15.3407 18.0199 16.9197L22 20.8999L20.8999 22L16.9197 18.0199C15.3407 19.3501 13.3029 20.1533 11.0766 20.1533C6.06375 20.1533 2 16.0895 2 11.0766C2 6.06375 6.06375 2 11.0766 2C16.0895 2 20.1533 6.06375 20.1533 11.0766Z" fill="black"/>
+                    </svg>
+                </div>
+
+				{% if search_term %}
+                    <p>Search results for “{{ search_term }}”</p>
+                {% endif %}
+
+				{% if results|length %}
+					<div class="flex flex-col ~gap-[2rem]/[3rem]">
+						<div class="flex flex-col">
+							{% for item in results %}
+								{% set post_type = post_types[item.post_type].label %}
+
+								<div class="search-item">
+									<a href="{{ item.link }}"></a>
+
+									<div class="search-item-inner">
+                                        <small class="text-blue">{{ post_type ?: "Page" }}</small>
+
+										<h6>{{ item.title }}</h6>
+
+										{% if item.excerpt and item.excerpt != '' %}
+											<p class="line-clamp-3">{{ item.excerpt }}</p>
+										{% endif %}
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+
+						<div class="btn filled blue mx-auto" id="search-load-more">
+							<p>
+								<span class="front" data-original="Load">Load&nbsp;</span>
+								<span class="back">Load&nbsp;</span>
+							</p>
+							<p>
+								<span class="front" data-original="more">more</span>
+								<span class="back">more</span>
+							</p>
+						</div>
+					</div>
+				{% else %}
+					<div class="max-w-[37.5rem] mx-auto flex flex-col gap-[0.625rem] text-center st-xxl sb-xxl">
+						<h6 class="text-center">We're sorry, there aren't any content that match what you're looking for.</h6>
+						<p class="lg text-[#7e7e7e]">Try another a different keyword.</p>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>

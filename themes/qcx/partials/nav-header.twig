@@ -2,7 +2,7 @@
 {% set is_home = function("is_home") or function("is_front_page") %}
 
 <header>
-	<nav class="nav {{ theme }} {{ is_home ? "at-homepage" }}">
+	<nav class="nav {{ theme }} {{ is_home ? " at-homepage" }}">
 		<div class="nav-outer">
 			<div class="container">
 				<div class="nav-inner">
@@ -111,6 +111,24 @@
 								</div>
 
 								<div class="nav-actions">
+									<div class="nav-search-btn">
+										<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M18.5973 11.0766C18.5973 6.9231 15.2302 3.55599 11.0766 3.55599C6.9231 3.55599 3.55599 6.9231 3.55599 11.0766C3.55599 15.2302 6.9231 18.5973 11.0766 18.5973C15.2302 18.5973 18.5973 15.2302 18.5973 11.0766ZM20.1533 11.0766C20.1533 13.3029 19.3501 15.3407 18.0199 16.9197L22 20.8999L20.8999 22L16.9197 18.0199C15.3407 19.3501 13.3029 20.1533 11.0766 20.1533C6.06375 20.1533 2 16.0895 2 11.0766C2 6.06375 6.06375 2 11.0766 2C16.0895 2 20.1533 6.06375 20.1533 11.0766Z" fill="black"/>
+										</svg>
+
+										<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M20 5.11614L13.1161 12L20 18.8839L18.8828 20L11.999 13.1161L5.11614 20L4 18.8839L10.8828 12L4 5.11614L5.11614 4L11.999 10.8828L18.8828 4L20 5.11614Z" fill="black"/>
+										</svg>
+									</div>
+
+									<div class="nav-search-input is-mobile">
+										<input type="text" data-action="{{ function("home_url", "/?s=") }}" placeholder="Search"/>
+
+										<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M18.5973 11.0766C18.5973 6.9231 15.2302 3.55599 11.0766 3.55599C6.9231 3.55599 3.55599 6.9231 3.55599 11.0766C3.55599 15.2302 6.9231 18.5973 11.0766 18.5973C15.2302 18.5973 18.5973 15.2302 18.5973 11.0766ZM20.1533 11.0766C20.1533 13.3029 19.3501 15.3407 18.0199 16.9197L22 20.8999L20.8999 22L16.9197 18.0199C15.3407 19.3501 13.3029 20.1533 11.0766 20.1533C6.06375 20.1533 2 16.0895 2 11.0766C2 6.06375 6.06375 2 11.0766 2C16.0895 2 20.1533 6.06375 20.1533 11.0766Z" fill="black"/>
+										</svg>
+									</div>
+
 									{% for nav_item in header_nav_item %}
 										{% if nav_item.is_cta and nav_item.link %}
 											{% set link_url = nav_item.link.url ?: "#" %}
@@ -127,6 +145,20 @@
 							</div>
 						</div>
 					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="nav-search-dd">
+			<div class="container">
+				<div class="nav-search-dd-inner">
+					<div class="nav-search-input">
+						<input type="text" data-action="{{ function("home_url", "/?s=") }}" placeholder="Search"/>
+
+						<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M18.5973 11.0766C18.5973 6.9231 15.2302 3.55599 11.0766 3.55599C6.9231 3.55599 3.55599 6.9231 3.55599 11.0766C3.55599 15.2302 6.9231 18.5973 11.0766 18.5973C15.2302 18.5973 18.5973 15.2302 18.5973 11.0766ZM20.1533 11.0766C20.1533 13.3029 19.3501 15.3407 18.0199 16.9197L22 20.8999L20.8999 22L16.9197 18.0199C15.3407 19.3501 13.3029 20.1533 11.0766 20.1533C6.06375 20.1533 2 16.0895 2 11.0766C2 6.06375 6.06375 2 11.0766 2C16.0895 2 20.1533 6.06375 20.1533 11.0766Z" fill="black"/>
+						</svg>
+					</div>
 				</div>
 			</div>
 		</div>

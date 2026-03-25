@@ -27,9 +27,9 @@ Timber\Timber::init();
 //         define('_S_VERSION', uniqid());
 // }
 
-define('_S_VERSION', '1.0.9');
+define('_S_VERSION', '1.1.0');
 
-if (!function_exists('bf_setup')):
+if (!function_exists('bf_stup')):
     function bf_setup()
     {
         add_theme_support('align-wide');
@@ -56,6 +56,8 @@ require_once 'includes/theme/support-transients.php';
 
 require_once 'includes/theme/disable-native-blocks.php';
 require_once 'includes/theme/support-cpt.php';
+
+require_once 'includes/theme/support-search.php';
 
 
 

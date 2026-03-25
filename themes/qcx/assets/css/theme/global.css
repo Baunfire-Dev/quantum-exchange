@@ -439,6 +439,38 @@
 			}
 		}
 	}
+
+    .search {
+        &-item {
+            @apply relative;
+
+            &:not(.active) {
+                @apply h-0 overflow-hidden;
+            }
+
+            a {
+                @apply absolute inset-0 w-full h-full;
+            }
+
+            &.active:has(~ .search-item.active) {
+                @apply ~mb-[1.5rem]/[2rem];
+            }
+        }
+
+        &-item-inner {
+            @apply flex flex-col gap-[0.75rem] border-b border-gray ~pb-[1rem]/[1.5rem];
+        }
+
+        #search-load-more {
+            &:not(.active) {
+                @apply hidden;
+            }
+        }
+
+        .read-more {
+            @apply hidden;
+        }
+    }
 }
 
 input:-webkit-autofill,

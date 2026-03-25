@@ -8,6 +8,7 @@
 		@apply transition-all duration-500 ease-power2-out;
 
 		&-outer {
+			@apply relative z-[2];
 		}
 
 		&-burger {
@@ -116,11 +117,65 @@
 			}
 		}
 
+		&-search {
+			&-btn {
+				@apply h-[1.5rem] w-[1.5rem] cursor-pointer relative;
+                @apply max-lg:hidden;
+
+				svg {
+					@apply h-full w-full absolute inset-0;
+					@apply transition-transform duration-300 ease-power2-out;
+
+					&:last-of-type {
+						@apply opacity-0 -rotate-90;
+					}
+				}
+			}
+
+			&-dd {
+				@apply pb-[2rem] pt-[0.5rem] absolute w-full left-0;
+				@apply bg-light-grey border-b border-b-gray;
+				@apply pointer-events-none invisible;
+				/* clip-path: inset(0% 0% 0% 0%); */
+			}
+
+			&-dd-inner {
+				@apply px-[8.875rem];
+				@apply translate-y-[1.25rem] opacity-0;
+			}
+
+			&-input {
+				@apply relative;
+
+				input {
+					@apply w-full bg-transparent ~pb-[0.25rem]/[0.625rem] border-b border-black;
+
+					&::placeholder {
+						@apply text-black;
+					}
+
+					&,
+					&::placeholder {
+						@apply font-inter ~text-[1.25rem]/[1.5rem] leading-[140%] font-normal;
+					}
+				}
+
+				svg {
+					@apply absolute size-[1.5rem] top-0 right-0;
+				}
+
+                &.is-mobile {
+                    @apply lg:hidden w-full;
+                }
+			}
+		}
+
 		&-actions {
-			@apply flex items-center;
+			@apply flex items-center gap-[0.75rem];
+            @apply max-lg:flex-col max-lg:gap-[3rem] max-lg:w-full;
 
 			.btn.navi {
-				@apply max-sm:w-full max-sm:py-[1rem];
+				@apply max-lg:w-full max-lg:py-[1rem];
 			}
 		}
 
@@ -197,7 +252,7 @@
 			}
 		}
 
-		&.is-light:not(.nav-scrolled) {
+		&.is-light:not(.nav-scrolled):not(.is-searching) {
 			.nav {
 				&-logo {
 					svg {
@@ -207,7 +262,17 @@
 					}
 				}
 
-                &-burger {
+				&-search {
+					&-btn {
+						svg {
+							path {
+								@apply fill-white;
+							}
+						}
+					}
+				}
+
+				&-burger {
 					svg {
 						path {
 							@apply stroke-white;
@@ -241,7 +306,7 @@
 			}
 		}
 
-		&.nav-hidden {
+		&.nav-hidden:not(.is-searching) {
 			@apply pointer-events-none;
 			@apply translate-y-[-100%] pointer-events-none;
 		}
@@ -285,23 +350,52 @@
 				}
 			}
 		}
+
+		&.is-searching {
+			@apply bg-light-grey;
+
+			.nav {
+				&-search {
+					&-btn {
+						svg {
+							&:first-of-type {
+								@apply opacity-0 rotate-90;
+							}
+
+							&:last-of-type {
+								@apply opacity-100 rotate-0;
+							}
+						}
+					}
+
+					&-dd {
+						@apply pointer-events-auto visible;
+					}
+
+					&-dd-inner {
+						@apply translate-y-0 opacity-100;
+						@apply transition-all duration-300 ease-power2-out;
+					}
+				}
+			}
+		}
 	}
 }
 
 body {
-    &.home:has(.hero-homepage) {
-        .nav {
-            &.at-homepage {
-                .nav-outer {
-                    @apply opacity-0 translate-y-[-140%];
-                }
-            }
-        }
+	&.home:has(.hero-homepage) {
+		.nav {
+			&.at-homepage {
+				.nav-outer {
+					@apply opacity-0 translate-y-[-140%];
+				}
+			}
+		}
 
-        section.content-logos {
-            &.invi {
-                @apply opacity-0 invisible;
-            }
-        }
-    }
+		section.content-logos {
+			&.invi {
+				@apply opacity-0 invisible;
+			}
+		}
+	}
 }
