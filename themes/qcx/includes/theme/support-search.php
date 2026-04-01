@@ -4,7 +4,7 @@ function limit_search_to_post_types($query)
 {
     if ($query->is_search() && $query->is_main_query() && !is_admin()) {
         $query->set('post_type', [
-            'page', 
+            'page',
             'news',
             'award',
             'blog_podcast',
@@ -13,6 +13,9 @@ function limit_search_to_post_types($query)
             'press_release',
             'webinar_event'
         ]);
+
+        $query->set('orderby', 'date');
+        $query->set('order', 'DESC');
 
         $query->set('posts_per_page', -1);
     }
