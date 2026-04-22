@@ -33,6 +33,36 @@
 			}
 		}
 
+		h1,
+		.h1 {
+			@apply text-[3.5rem] tracking-[-0.105rem];
+		}
+
+		h2,
+		.h2 {
+			@apply text-[3rem] tracking-[-0.09rem];
+		}
+
+		h3,
+		.h3 {
+			@apply text-[2.75rem] tracking-[-0.0825rem];
+		}
+
+		h4,
+		.h4 {
+			@apply text-[2.25rem] tracking-[-0.0675rem];
+		}
+
+		h5,
+		.h5 {
+			@apply text-[1.5rem] tracking-[-0.045rem];
+		}
+
+		h6,
+		.h6 {
+			@apply text-[1.25rem];
+		}
+
 		figure {
 			@apply max-w-full;
 		}
@@ -45,7 +75,7 @@
 			h5,
 			h6,
 			.post-quote,
-            figure {
+			figure {
 				@apply block ~mt-[1.25rem]/[2rem];
 			}
 		}
