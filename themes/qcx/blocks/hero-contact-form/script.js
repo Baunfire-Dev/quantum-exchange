@@ -12,6 +12,23 @@ baunfire.addModule({
                 handleVideos(self);
                 handleMarquee(self);
                 handleEntranceAnim(self);
+                handleFormResize(self);
+            });
+        }
+
+        const handleFormResize = (self) => {
+            const formContainer = self.find("#form-container")[0];
+            if (!formContainer) return;
+
+            const refresh = () => baunfire.Global.screenSizeChange();
+
+            const resizeObserver = new ResizeObserver(refresh);
+            resizeObserver.observe(formContainer);
+
+            const mutationObserver = new MutationObserver(refresh);
+            mutationObserver.observe(formContainer, {
+                childList: true,
+                subtree: true
             });
         }
 
