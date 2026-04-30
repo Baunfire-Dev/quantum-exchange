@@ -1,0 +1,83 @@
+<section class="{{ block.slug }} {{ block.className }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-md' %}
+	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
+
+	{% set letters = 'abcdefghijklmnopqrstuvwxyz'|split('') %}
+
+	<div class="{{ pb }}">
+		<div class="container">
+			<div class="inner alpha flex flex-col ~px-[0rem]/[13.875rem]">
+				<div class="letters {{ pt }}">
+					<div class="letter disabled">
+						<p class="lg">#</p>
+					</div>
+
+					{% for letter in letters %}
+						{% set class = 'letter' %}
+
+						{% set enabled = letter in active_letters %}
+
+						{% if loop.index == 1 %}
+							{% set class = class ~ ' active' %}
+						{% endif %}
+
+						{% if enabled %}
+							<a href="#{{ letter }}" class="{{ class }} enabled" data-letter="{{ letter }}">
+								<p class="lg uppercase">{{ letter }}</p>
+							</a>
+						{% else %}
+							<div class="{{ class }} disabled">
+								<p class="lg uppercase">{{ letter }}</p>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+
+				{% if has_posts %}
+					<div class="flex flex-col gap-[3rem] relative z-[1]">
+						{% for letter, items in posts %}
+							{% if items is not empty %}
+								<div class="letter-group alpha">
+									<div class="letter-anchor" id="{{ letter }}"></div>
+
+									<p class="h4">{{ letter|upper }}</p>
+
+									<div class="letter-group-items">
+										{% for item in items %}
+                                            {% set anchor = item.title|lower|replace({' ': '-'}) %}
+											<div class="letter-group-item">
+												<div class="letter-anchor" id="{{ anchor }}"></div>
+												<h2 class="h6">
+													{{ item.title }}
+													<div class="letter-anchor-copy" data-anchor="{{ page_link }}#{{ anchor }}">
+                                                        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M20.4615 12C20.4615 10.1106 18.9691 8.57895 17.1282 8.57895H14.0513C13.6265 8.57895 13.2821 8.22549 13.2821 7.78947C13.2821 7.35346 13.6265 7 14.0513 7H17.1282C19.8188 7 22 9.23857 22 12C22 14.7614 19.8188 17 17.1282 17H14.0513C13.6265 17 13.2821 16.6465 13.2821 16.2105C13.2821 15.7745 13.6265 15.4211 14.0513 15.4211H17.1282C18.9691 15.4211 20.4615 13.8894 20.4615 12Z" fill="#206EEC"/>
+                                                            <path d="M2 12C2 9.23858 4.18117 7 6.87179 7H9.94871C10.3735 7 10.7179 7.35346 10.7179 7.78947C10.7179 8.22549 10.3735 8.57895 9.94871 8.57895H6.87179C5.03084 8.57895 3.53846 10.1106 3.53846 12C3.53846 13.8894 5.03085 15.4211 6.87179 15.4211H9.94871C10.3735 15.4211 10.7179 15.7745 10.7179 16.2105C10.7179 16.6465 10.3735 17 9.94871 17H6.87179C4.18117 17 2 14.7614 2 12Z" fill="#206EEC"/>
+                                                            <path d="M16.6154 11.2105C17.0402 11.2105 17.3846 11.564 17.3846 12C17.3846 12.436 17.0402 12.7895 16.6154 12.7895H7.38461C6.95978 12.7895 6.61538 12.436 6.61538 12C6.61538 11.564 6.95978 11.2105 7.38461 11.2105H16.6154Z" fill="#206EEC"/>
+                                                        </svg>
+                                                    </div>
+												</h2>
+												<div class="rctxt">{{ item.description }}</div>
+											</div>
+										{% endfor %}
+									</div>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% else %}
+					<div class="empty active">
+						<div class="container">
+							<h6 class="text-center">There aren't any posts here just yet.
+								<br/>Check back soon for updates.</h6>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>

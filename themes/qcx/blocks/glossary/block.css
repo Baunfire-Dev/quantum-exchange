@@ -1,0 +1,78 @@
+@layer components {
+	.glossary {
+		.letters {
+			@apply flex flex-wrap gap-[0.5rem] pb-[3.125rem];
+			@apply sticky top-0 z-[10];
+			@apply transition-all duration-500 ease-power2-out;
+            background: linear-gradient(180deg, #f7f9fb 80%, #ffffff00);
+		}
+
+		.letter {
+			p {
+				@apply transition-colors duration-300 ease-power2-out;
+			}
+
+			&.disabled {
+				p {
+					@apply text-gray;
+				}
+			}
+
+			&:not(.disabled) {
+				@apply cursor-pointer;
+			}
+
+			&.active {
+				p {
+					@apply text-green;
+				}
+			}
+
+			&-group {
+				@apply flex flex-col gap-[3.125rem];
+				@apply relative;
+			}
+
+			&-anchor {
+				@apply absolute inset-0 h-full w-full top-[-12.5rem];
+				@apply pointer-events-none;
+			}
+
+			&-group-items {
+				@apply flex flex-col gap-[3.125rem];
+			}
+
+			&-group-item {
+				@apply flex flex-col gap-[1rem] relative;
+				@apply border-t border-gray pt-[1.875rem];
+
+                h2 {
+                    @apply relative w-fit pr-[1.875rem];
+
+                    &:hover {
+                        .letter-anchor-copy {
+                            @apply opacity-100;
+                        }
+                    }
+                }
+			}
+
+            &-anchor-copy {
+                @apply absolute h-full w-full left-0 top-0;
+                @apply flex items-center justify-end;
+                @apply cursor-pointer z-[2];
+                @apply opacity-0 transition-opacity duration-300 ease-power2-out;
+            }
+		}
+	}
+}
+
+body {
+	&:not(:has(.nav-hidden:not(.is-searching))) {
+		.glossary {
+			.letters {
+				@apply ~top-[3.5rem]/[4.625rem];
+			}
+		}
+	}
+}

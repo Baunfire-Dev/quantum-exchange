@@ -52,7 +52,7 @@
 
 	h6,
 	.h6 {
-		@apply font-at-aero ~text-[1.25rem]/[1.625rem] font-normal leading-[100%];
+		@apply font-at-aero ~text-[1.25rem]/[1.625rem] font-normal leading-[100%] tracking-normal;
 	}
 
 	b,

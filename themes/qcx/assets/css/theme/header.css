@@ -120,7 +120,7 @@
 		&-search {
 			&-btn {
 				@apply h-[1.5rem] w-[1.5rem] cursor-pointer relative;
-                @apply max-lg:hidden;
+				@apply max-lg:hidden;
 
 				svg {
 					@apply h-full w-full absolute inset-0;
@@ -164,15 +164,15 @@
 					@apply absolute size-[1.5rem] top-0 right-0;
 				}
 
-                &.is-mobile {
-                    @apply lg:hidden w-full;
-                }
+				&.is-mobile {
+					@apply lg:hidden w-full;
+				}
 			}
 		}
 
 		&-actions {
 			@apply flex items-center gap-[0.75rem];
-            @apply max-lg:flex-col max-lg:gap-[3rem] max-lg:w-full;
+			@apply max-lg:flex-col max-lg:gap-[3rem] max-lg:w-full;
 
 			.btn.navi {
 				@apply max-lg:w-full max-lg:py-[1rem];
@@ -379,6 +379,12 @@
 				}
 			}
 		}
+	}
+}
+
+header {
+	&:has(.nav-hidden:not(.is-searching)) {
+		@apply pointer-events-none;
 	}
 }
 

@@ -26,6 +26,7 @@ add_action('registered_post_type', function ($post_type, $args) {
         'press',
         'videos',
         'partner',
+        'glossary',
 
         // === New CPTs ===
         'award',
