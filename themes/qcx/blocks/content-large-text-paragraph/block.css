@@ -16,5 +16,22 @@
 				opacity: 0;
 			}
 		}
+
+        .content {
+            p {
+                @apply inline;
+            }
+
+            a {
+                @apply text-blue underline underline-offset-[0.125rem];
+            }
+        }
+
+        .back,
+        .front {
+            &, p {
+                @apply font-at-aero ~text-[1.5rem]/[2.25rem] font-normal leading-[100%] ~tracking-[-0.045rem]/[-0.0675rem];
+            }
+        }
 	}
 }

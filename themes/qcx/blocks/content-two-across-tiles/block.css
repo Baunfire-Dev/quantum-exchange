@@ -6,7 +6,7 @@
 			}
 
 			&-cards {
-				@apply flex flex-col gap-[1.5rem];
+				@apply flex flex-col gap-[1.5rem] flex-1;
 
 				&.left {
 					@apply md:mt-[4rem];
