@@ -214,8 +214,8 @@
                             "allow_in_bindings": 0,
                             "tabs": "all",
                             "toolbar": "text_and_link",
-                            "media_upload": 1,
-                            "delay": 0,
+                            "media_upload": 0,
+                            "delay": 1,
                             "parent_repeater": "field_690cad0fbde4f"
                         }
                     ]
@@ -269,5 +269,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1777573886
+    "modified": 1777575049
 }

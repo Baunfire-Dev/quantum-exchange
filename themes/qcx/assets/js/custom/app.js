@@ -28,11 +28,30 @@
             if (this.initialized) return;
             this.initialized = true;
 
-            this.modules.forEach(mod => {
+            ScrollTrigger.config({ autoRefreshEvents: "none" });
+
+            let i = 0;
+            const next = () => {
+                if (i >= this.modules.length) {
+                    ScrollTrigger.refresh();
+                    ScrollTrigger.config({ autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize" });
+                    return;
+                }
+
+                const mod = this.modules[i++];
+
+                if (mod.selector && !document.querySelector(mod.selector)) {
+                    next();
+                    return;
+                }
+
                 if (typeof mod.init === 'function') {
                     mod.init(baunfire);
                 }
-            });
+                setTimeout(next, 0);
+            };
+
+            next();
         },
         addModule(mod) {
             this.modules.push(mod);

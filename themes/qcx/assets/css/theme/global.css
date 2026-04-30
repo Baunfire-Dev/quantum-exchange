@@ -85,7 +85,7 @@
 @layer components {
 	.container {
 		@apply ~px-[1rem]/[4rem] w-full relative;
-		@apply max-w-[120rem] mx-auto;
+		@apply max-w-[100rem] mx-auto;
 
 		&.no-pd {
 			@apply px-0;
