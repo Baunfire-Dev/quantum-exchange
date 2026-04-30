@@ -67,53 +67,13 @@ baunfire.addModule({
             const logo = self.find(".block-logo");
             const heading = self.find(".block-heading");
             const cards = self.find(".item-card");
-            const bg = self.find(".bg-graphic");
-
-            gsap.fromTo(["main", self],
-                {
-                    background: "#F7F9FB"
-                },
-                {
-                    background: "#206EEC",
-                    duration: 0.8,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: self,
-                        start: "top 40%",
-                        // markers: true
-                    }
-                }
-            )
-
-            gsap.fromTo(bg,
-                {
-                    autoAlpha: 0,
-                },
-                {
-                    autoAlpha: 1,
-                    duration: 2,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: self,
-                        start: "top top",
-                    },
-                    onStart: () => {
-                        gsap.set("main",
-                            {
-                                background: "#F7F9FB",
-                                overwrite: true
-                            }
-                        )
-                    }
-                }
-            )
 
             const elAnims = [logo, heading].filter(el => el.length > 0);
 
             const entranceAnim = gsap.timeline({
                 scrollTrigger: {
                     trigger: self,
-                    start: "top 20%"
+                    start: baunfire.anim.start
                 }
             })
                 .fromTo(elAnims,
