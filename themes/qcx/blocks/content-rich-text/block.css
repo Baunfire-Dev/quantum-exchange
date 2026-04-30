@@ -131,5 +131,17 @@
 			list-style-type: lower-latin;
 			@apply ml-[1.625rem] pt-[0.5rem];
 		}
+
+        .table-outer {
+			@apply overflow-y-hidden overflow-x-auto;
+		}
+
+		table {
+			th,
+			td {
+                @apply p-[0.75rem] bg-white;
+                @apply font-inter text-[1.125rem] font-normal leading-[140%];
+			}
+		}
 	}
 }
