@@ -53,6 +53,9 @@
         "header_nav_item" => get_field("header_nav_item", "option"),
         "override_nav_theme" => get_field("override_nav_theme"),
         "nav_theme" => get_field("nav_theme"),
+        "has_anmt" => get_field("has_announcement", "option"),
+        "anmt" => get_field("nav_announcement", "option"),
+        "anmt_closed" => isset($_COOKIE['announcement_closed']) && $_COOKIE['announcement_closed'] === 'true',
     ]);
 
     Timber::render("./partials/nav-header.twig", $context); ?>

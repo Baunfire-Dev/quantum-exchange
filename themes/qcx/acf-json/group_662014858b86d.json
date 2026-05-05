@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_66d892495c243",
-            "label": "Global Navigation",
+            "label": "Nav Items",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -16,8 +16,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0,
             "selected": 0
         },
@@ -43,6 +42,7 @@
             "collapsed": "field_662021b7b7989",
             "button_label": "Add Nav Item",
             "rows_per_page": 20,
+            "acfe_repeater_stylised_button": 0,
             "sub_fields": [
                 {
                     "key": "field_662021b7b7989",
@@ -212,6 +212,7 @@
                     "collapsed": "",
                     "button_label": "Add Nav Group",
                     "rows_per_page": 20,
+                    "parent_repeater": "field_6620148613e7b",
                     "sub_fields": [
                         {
                             "key": "field_670e86ce4b03c",
@@ -275,6 +276,7 @@
                             "collapsed": "",
                             "button_label": "Add Link",
                             "rows_per_page": 20,
+                            "parent_repeater": "field_670e8409fc2c5",
                             "sub_fields": [
                                 {
                                     "key": "field_670e8443fc2c8",
@@ -294,14 +296,114 @@
                                     "allow_in_bindings": 1,
                                     "parent_repeater": "field_670e843dfc2c7"
                                 }
-                            ],
-                            "parent_repeater": "field_670e8409fc2c5"
+                            ]
                         }
-                    ],
-                    "parent_repeater": "field_6620148613e7b"
+                    ]
                 }
+            ]
+        },
+        {
+            "key": "field_69fa26d639316",
+            "label": "Nav Announcements",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_69fa273a3931c",
+            "label": "Enabled",
+            "name": "has_announcement",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "allow_in_bindings": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_69fa26ca39315",
+            "label": "Announcement",
+            "name": "nav_announcement",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69fa273a3931c",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
             ],
-            "acfe_repeater_stylised_button": 0
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "sub_fields": [
+                {
+                    "key": "field_69fa27323931a",
+                    "label": "Text",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "rows": 3,
+                    "placeholder": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_69fa27363931b",
+                    "label": "CTA",
+                    "name": "cta",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "allow_in_bindings": 0
+                }
+            ]
         }
     ],
     "location": [
@@ -323,12 +425,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "acfe_display_title": "",
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1760623403
+    "modified": 1778001844
 }

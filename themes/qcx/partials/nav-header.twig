@@ -1,8 +1,40 @@
-{% set theme = override_nav_theme and nav_theme ? "is-" ~ nav_theme %}
+{% set theme = override_nav_theme and nav_theme ? 'is-' ~ nav_theme %}
 {% set is_home = function("is_home") or function("is_front_page") %}
 
 <header>
-	<nav class="nav {{ theme }} {{ is_home ? " at-homepage" }}">
+	<nav class="nav {{ theme }} {{ is_home ? 'at-homepage' }}">
+		{% if has_anmt and not anmt_closed %}
+			<div class="nav__anmt">
+				<div class="container">
+					<div class="nav__anmt-inner">
+						{% if anmt.text %}
+							<p class="sm">{{ anmt.text }}</p>
+						{% endif %}
+
+						{% if anmt.cta %}
+							{% set link_url = anmt.cta.url ?: "#" %}
+							{% set link_title = anmt.cta.title %}
+							{% set link_target = anmt.cta.target ?: "_self" %}
+
+							<a class="nav__anmt-cta" href="{{ link_url }}" target="{{ link_target }}">
+								<small>{{ link_title }}</small>
+
+								<svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewbox="0 0 6 10" fill="none">
+									<path d="M1 1L5 5L1 9" stroke="black" stroke-linecap="square"></path>
+								</svg>
+							</a>
+						{% endif %}
+
+						<div class="nav__anmt-close">
+							<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M17.0001 17L7 7M7 17L17 7" stroke="#000" stroke-width="1.5"></path>
+							</svg>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
 		<div class="nav-outer">
 			<div class="container">
 				<div class="nav-inner">

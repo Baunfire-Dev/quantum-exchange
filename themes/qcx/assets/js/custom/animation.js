@@ -240,11 +240,28 @@
                 parents.removeClass("open");
             }
 
+            const handleAnnouncement = () => {
+                const anmt = nav.find(".nav__anmt");
+                if (!anmt.length) return;
+
+                const close = anmt.find(".nav__anmt-close");
+
+                close.click(function () {
+                    localStorage.setItem("announcement_closed", "true");
+                    document.cookie = "announcement_closed=true; path=/; max-age=86400";
+
+                    anmt.fadeOut(300, function () {
+                        $(this).remove();
+                    });
+                });
+            };
+
             toggleNav();
             toggleBGOnScroll();
             burgerEvent();
             desktopDDPanel();
             mobileDDPanel();
+            handleAnnouncement();
         },
 
         handleSearch() {

@@ -7,6 +7,45 @@
 		@apply w-full border-b border-transparent;
 		@apply transition-all duration-500 ease-power2-out;
 
+		&__anmt {
+			@apply bg-green transition-all duration-500 ease-power2-out ~h-[4.125rem]/[2.875rem] overflow-hidden z-[3] relative;
+
+            .container {
+                @apply h-full;
+            }
+		}
+
+		&__anmt-inner {
+			@apply justify-center flex max-md:gap-[0.25rem] max-md:flex-col items-center h-full py-[0.75rem] md:gap-[2rem];
+
+			& > p {
+				@apply line-clamp-1 text-ellipsis min-w-0 overflow-hidden max-w-[100%] max-md:text-center;
+			}
+		}
+
+		&__anmt-close {
+			@apply cursor-pointer w-[1.5rem] h-[1.5rem] absolute right-[0.625rem];
+            @apply md:top-1/2 md:-translate-y-1/2 max-md:top-[0.5rem];
+
+			svg {
+				@apply h-full w-full;
+			}
+		}
+
+		&__anmt-cta {
+			@apply shrink-0 flex gap-[0.5rem] items-center;
+
+			svg {
+				@apply transition-transform duration-300 ease-power2-out;
+			}
+
+			&:hover {
+				svg {
+					@apply translate-x-[0.25rem];
+				}
+			}
+		}
+
 		&-outer {
 			@apply relative z-[2];
 		}
@@ -348,6 +387,10 @@
 					@apply opacity-100 translate-y-0;
 					@apply transition-all duration-[0.4s] ease-power2-out;
 				}
+
+                &__anmt {
+                    @apply h-0 opacity-0;
+                }
 			}
 		}
 
