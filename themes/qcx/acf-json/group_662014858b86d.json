@@ -304,7 +304,7 @@
         },
         {
             "key": "field_69fa26d639316",
-            "label": "Nav Announcements",
+            "label": "Nav Announcement",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -425,5 +425,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1778001844
+    "modified": 1778003873
 }
