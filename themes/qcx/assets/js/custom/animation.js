@@ -252,6 +252,7 @@
 
                     anmt.fadeOut(300, function () {
                         $(this).remove();
+                        baunfire.Global.screenSizeChange();
                     });
                 });
             };
