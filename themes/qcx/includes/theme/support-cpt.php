@@ -33,12 +33,6 @@ add_action('init', function () {
             'icon'      => 'dashicons-media-document',
             'tax'       => ['slug' => 'media_coverage_category', 'label' => 'Media Coverage Categories']
         ],
-        'resource_library' => [
-            'label'     => 'Resource Library',
-            'slug'      => 'resource-library',
-            'icon'      => 'dashicons-portfolio',
-            'tax'       => ['slug' => 'resource_library_category', 'label' => 'Resource Categories']
-        ],
         'press_release' => [
             'label'     => 'Press Releases',
             'slug'      => 'press-releases',
@@ -112,7 +106,7 @@ add_action('init', function () {
 
 /** Force Gutenberg on for these CPTs */
 add_filter('use_block_editor_for_post_type', function ($use, $type) {
-    $types = ['news', 'award', 'blog_podcast', 'media_coverage', 'resource_library', 'press_release', 'webinar_event', 'partner'];
+    $types = ['news', 'award', 'blog_podcast', 'media_coverage', 'press_release', 'webinar_event', 'partner'];
     return in_array($type, $types, true) ? true : $use;
 }, 100, 2);
 
@@ -127,7 +121,6 @@ add_filter('single_template', function ($template) {
         'award',
         'blog_podcast',
         'media_coverage',
-        'resource_library',
         'press_release',
         'webinar_event'
     ];
@@ -150,7 +143,6 @@ add_action('template_redirect', function () {
         'award',
         'blog_podcast',
         'media_coverage',
-        'resource_library',
         'press_release',
         'webinar_event'
     ];

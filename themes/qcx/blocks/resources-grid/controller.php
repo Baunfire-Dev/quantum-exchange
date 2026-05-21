@@ -11,50 +11,70 @@ $context = Timber::context([
     "items_per_page" => 9
 ]);
 
-$resource = $context["fields"]["resource"] ?? 'all';
-
 $post_types = [
-    'all' => ['label' => 'All', 'tax' => null],
     'news' => ['label' => 'News & Resources', 'tax' => 'news_category'],
     'blog_podcast' => ['label' => 'Blogs & Podcasts', 'tax' => 'blog_podcast_category'],
     'media_coverage' => ['label' => 'Media Coverage', 'tax' => 'media_coverage_category'],
-    'resource_library' => ['label' => 'Resource Library', 'tax' => 'resource_library_category'],
     'press_release' => ['label' => 'Press Releases', 'tax' => 'press_release_category'],
     'webinar_event' => ['label' => 'Webinars & Events', 'tax' => 'webinar_event_category'],
-    'award' => ['label' => 'Awards', 'tax' => 'award_category']
+    'award' => ['label' => 'Awards', 'tax' => 'award_category'],
 ];
 
-if ($resource != "all") {
+$resources = $context["fields"]["resource"];
+
+$posts = [];
+
+foreach ($resources as $key) {
+    if (!isset($post_types[$key])) {
+        continue;
+    }
+
     $terms = get_terms([
-        'taxonomy' => $post_types[$resource]['tax'],
+        'taxonomy' => $post_types[$key]['tax'],
         'hide_empty' => false,
     ]);
 
-    $post_types[$resource]['tax_items'] = array_map(function ($term) {
+    $post_types[$key]['tax_items'] = array_map(function ($term) {
         return [
             'name' => $term->name,
-            'slug' => $term->slug
+            'slug' => $term->slug,
         ];
     }, $terms);
+
+    $transient_key = TRANSIENT_PREFIX . "_" . $key . "_grid_resource";
+    $cached = get_transient($transient_key);
+
+    if (!$cached) {
+        $cached = Timber::get_posts([
+            'post_type' => $key,
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
+            'order' => 'DESC',
+        ]);
+
+        set_transient($transient_key, $cached, TRANSIENT_DURATION);
+    }
+
+    $posts = array_merge($posts, (array) $cached);
 }
 
-$context['types'] = $post_types;
+usort($posts, fn($a, $b) => strtotime($b->post_date) - strtotime($a->post_date));
 
-$transient_key = TRANSIENT_PREFIX . "_" . $resource . "_grid_resource";
-$posts = get_transient($transient_key);
+$all_cats = [];
 
-if (!$posts) {
-    $posts = Timber::get_posts(array(
-        'post_type' => $resource == "all" ? array_keys($post_types) : $resource,
-        'posts_per_page' => -1,
-        'post_status' => 'publish',
-        'order' => 'DESC'
-    ));
-
-    set_transient($transient_key, $posts, TRANSIENT_DURATION);
+foreach ($post_types as $type) {
+    if (!empty($type['tax_items'])) {
+        foreach ($type['tax_items'] as $cat) {
+            $all_cats[$cat['slug']] = $cat;
+        }
+    }
 }
+
+usort($all_cats, fn($a, $b) => strcasecmp($a['name'], $b['name']));
 
 $context['posts'] = $posts;
+$context['types'] = array_intersect_key($post_types, array_flip($resources));
+$context['all_cats'] = $all_cats;
 
 $context["block"]["slug"] = preg_replace('/^acf\//', '', $block["name"]);
 acf_reset_meta($block["id"]);

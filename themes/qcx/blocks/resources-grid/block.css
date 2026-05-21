@@ -1,5 +1,7 @@
 @layer components {
 	.resources-grid {
+        @apply overflow-visible;
+        
 		.select {
 			@apply w-full md:w-[16.25rem];
 		}

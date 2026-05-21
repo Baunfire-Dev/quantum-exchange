@@ -9,7 +9,6 @@ function limit_search_to_post_types($query)
             'award',
             'blog_podcast',
             'media_coverage',
-            'resource_library',
             'press_release',
             'webinar_event'
         ]);

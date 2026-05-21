@@ -32,7 +32,6 @@ add_action('registered_post_type', function ($post_type, $args) {
         'award',
         'blog_podcast',
         'media_coverage',
-        'resource_library',
         'press_release',
         'webinar_event',
         'team',

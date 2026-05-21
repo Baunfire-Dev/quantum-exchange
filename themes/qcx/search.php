@@ -31,7 +31,6 @@ if ($search_term) {
             'news' => ['label' => 'News & Resources', 'tax' => 'news_category'],
             'blog_podcast' => ['label' => 'Blogs & Podcasts', 'tax' => 'blog_podcast_category'],
             'media_coverage' => ['label' => 'Media Coverage', 'tax' => 'media_coverage_category'],
-            'resource_library' => ['label' => 'Resource Library', 'tax' => 'resource_library_category'],
             'press_release' => ['label' => 'Press Releases', 'tax' => 'press_release_category'],
             'webinar_event' => ['label' => 'Webinars & Events', 'tax' => 'webinar_event_category'],
             'award' => ['label' => 'Awards', 'tax' => 'award_category']

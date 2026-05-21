@@ -163,7 +163,6 @@
                     "post_type": [
                         "news",
                         "webinar_event",
-                        "resource_library",
                         "blog_podcast",
                         "press_release",
                         "media_coverage"
@@ -234,5 +233,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770685587
+    "modified": 1779389596
 }

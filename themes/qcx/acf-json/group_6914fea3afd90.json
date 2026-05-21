@@ -54,23 +54,6 @@
             "allow_in_bindings": 0
         },
         {
-            "key": "field_6914fed3f9d3c",
-            "label": "Resource Library Back CTA",
-            "name": "resource_library_back_cta",
-            "aria-label": "",
-            "type": "link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "allow_in_bindings": 0
-        },
-        {
             "key": "field_6914fed9f9d3e",
             "label": "Press Releases Back CTA",
             "name": "press_release_back_cta",
@@ -141,5 +124,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1762983799
+    "modified": 1779389604
 }

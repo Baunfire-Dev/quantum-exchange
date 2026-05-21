@@ -38,6 +38,19 @@
         &-results {
         }
 
+        &-results__options {
+            @apply max-h-[44vh];
+        }
+
+        &-results__option--group {
+            @apply !px-0;
+        }
+
+        &-results__group {
+            @apply px-[1rem] pt-0 pb-[0.625rem];
+            @apply font-semibold !text-dark-blue;
+        }
+
         &-results__option {
             @apply px-[1rem] py-[1.125rem];
             @apply font-a-mono text-[0.75rem] font-medium tracking-[0.075rem] leading-[130%] uppercase !text-black;

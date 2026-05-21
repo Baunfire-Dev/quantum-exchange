@@ -6,6 +6,13 @@
 	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : '~pt-[4.5rem]/[8.75rem]' %}
 	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
 
+    {% set data_source = fields.featured_posts %}
+
+    {% if fields.mode == "manual" %}
+        {% set data_source = fields.featured_posts_manual %}
+    {% endif %}
+    
+
 	<div class="{{ pt }} {{ pb }} relative z-[2]">
 		<div class="container">
 			<div class="grid lg:grid-cols-2 ~gap-[1.25rem]/[4rem]">
@@ -20,24 +27,31 @@
 						{% endif %}
 					</div>
 
-					{% if fields.featured_posts|length %}
+					{% if data_source|length %}
 						<div class="item">
-							{% for item in fields.featured_posts %}
+							{% for item in data_source %}
 								{% if loop.index == 1 %}
-									{% set post_id = item.ID ?? item.id %}
-									{% set post_title = item.post_title ?? item.title %}
-									{% set post_link = function('get_permalink', post_id) %}
-									{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
+                                    {% set post_title = item.title.title %}
+                                    {% set post_link = item.title.url %}
+                                    {% set post_thumbnail = function('get_the_post_thumbnail_url', item.image, 'large') %}
+                                    {% set categories = item.eyebrow %}
 
-									{% set post_type_slug = function('get_post_type', post_id) %}
-									{% set categories_raw = function("get_the_terms", post_id, post_types[post_type_slug].tax) %}
-									{% set categories = [] %}
+									{% if fields.mode != "manual" %}
+                                        {% set post_id = item.ID ?? item.id %}
+                                        {% set post_title = item.post_title ?? item.title %}
+                                        {% set post_link = function('get_permalink', post_id) %}
+                                        {% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
 
-									{% for cat in categories_raw %}
-										{% set categories = categories | merge([cat.name]) %}
-									{% endfor %}
+                                        {% set post_type_slug = function('get_post_type', post_id) %}
+                                        {% set categories_raw = function("get_the_terms", post_id, post_types[post_type_slug].tax) %}
+                                        {% set categories = [] %}
 
-                                    {% set categories = categories | join(', ') %}
+                                        {% for cat in categories_raw %}
+                                            {% set categories = categories | merge([cat.name]) %}
+                                        {% endfor %}
+
+                                        {% set categories = categories | join(', ') %}
+                                    {% endif %}
 
 									{% include 'components/card.twig' with {
                                         custom_class: "at-hero",
@@ -46,7 +60,8 @@
                                         type: categories,
                                         thumbnail: post_thumbnail,
                                         animated: true,
-                                        loading: "eager"
+                                        loading: "eager",
+                                        no_default_image: true
                                     } %}
 								{% endif %}
 							{% endfor %}
@@ -55,24 +70,31 @@
 				</div>
 
 				<div class="flex flex-col ~gap-[1.25rem]/[2rem]">
-					{% if fields.featured_posts|length %}
+					{% if data_source|length %}
 						<div class="item">
-							{% for item in fields.featured_posts %}
+							{% for item in data_source %}
 								{% if loop.index == 2 %}
-									{% set post_id = item.ID ?? item.id %}
-									{% set post_title = item.post_title ?? item.title %}
-									{% set post_link = function('get_permalink', post_id) %}
-									{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
+									{% set post_title = item.title.title %}
+                                    {% set post_link = item.title.url %}
+                                    {% set post_thumbnail = function('get_the_post_thumbnail_url', item.image, 'large') %}
+                                    {% set categories = item.eyebrow %}
 
-									{% set post_type_slug = function('get_post_type', post_id) %}
-									{% set categories_raw = function("get_the_terms", post_id, post_types[post_type_slug].tax) %}
-									{% set categories = [] %}
+									{% if fields.mode != "manual" %}
+                                        {% set post_id = item.ID ?? item.id %}
+                                        {% set post_title = item.post_title ?? item.title %}
+                                        {% set post_link = function('get_permalink', post_id) %}
+                                        {% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
 
-									{% for cat in categories_raw %}
-										{% set categories = categories | merge([cat.name]) %}
-									{% endfor %}
+                                        {% set post_type_slug = function('get_post_type', post_id) %}
+                                        {% set categories_raw = function("get_the_terms", post_id, post_types[post_type_slug].tax) %}
+                                        {% set categories = [] %}
 
-                                    {% set categories = categories | join(', ') %}
+                                        {% for cat in categories_raw %}
+                                            {% set categories = categories | merge([cat.name]) %}
+                                        {% endfor %}
+
+                                        {% set categories = categories | join(', ') %}
+                                    {% endif %}
 
 									{% include 'components/card.twig' with {
                                         custom_class: "at-hero",
@@ -81,7 +103,8 @@
                                         type: categories,
                                         thumbnail: post_thumbnail,
                                         animated: true,
-                                        loading: "eager"
+                                        loading: "eager",
+                                        no_default_image: true
                                     } %}
 								{% endif %}
 							{% endfor %}

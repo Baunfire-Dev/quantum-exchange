@@ -125,6 +125,30 @@
                     "prefix_name": 0
                 },
                 {
+                    "key": "field_6a0f54d303671",
+                    "label": "Mode",
+                    "name": "mode",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "selection": "Selection",
+                        "manual": "Manual"
+                    },
+                    "default_value": "selection",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal"
+                },
+                {
                     "key": "field_690b8d89b998b",
                     "label": "Featured Posts",
                     "name": "featured_posts",
@@ -132,7 +156,15 @@
                     "type": "relationship",
                     "instructions": "",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_6a0f54d303671",
+                                "operator": "==",
+                                "value": "selection"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -142,7 +174,6 @@
                         "award",
                         "news",
                         "blog_podcast",
-                        "resource_library",
                         "press_release",
                         "webinar_event",
                         "media_coverage"
@@ -163,6 +194,105 @@
                     "elements": "",
                     "bidirectional": 0,
                     "bidirectional_target": []
+                },
+                {
+                    "key": "field_6a0f54f603672",
+                    "label": "Featured Posts",
+                    "name": "featured_posts_manual",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_6a0f54d303671",
+                                "operator": "==",
+                                "value": "manual"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "row",
+                    "pagination": 0,
+                    "min": 2,
+                    "max": 2,
+                    "collapsed": "",
+                    "button_label": "Add Post",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "key": "field_6a0f553f03674",
+                            "label": "Eyebrow",
+                            "name": "eyebrow",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_6a0f54f603672"
+                        },
+                        {
+                            "key": "field_6a0f550503673",
+                            "label": "Title",
+                            "name": "title",
+                            "aria-label": "",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "allow_in_bindings": 0,
+                            "parent_repeater": "field_6a0f54f603672"
+                        },
+                        {
+                            "key": "field_6a0f554503675",
+                            "label": "Image",
+                            "name": "image",
+                            "aria-label": "",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "id",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "allow_in_bindings": 0,
+                            "preview_size": "thumbnail",
+                            "parent_repeater": "field_6a0f54f603672"
+                        }
+                    ]
                 },
                 {
                     "key": "field_691337d129fbf",
@@ -273,5 +403,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770685551
+    "modified": 1779390335
 }

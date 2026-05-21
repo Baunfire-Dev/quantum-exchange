@@ -303,6 +303,10 @@
 					@apply scale-110;
 				}
 			}
+
+            &:not(:has(img)) {
+                @apply hidden;
+            }
 		}
 
 		&-thumbnail {
@@ -397,7 +401,7 @@
 				@apply max-sm:w-full sm:basis-[50%] lg:basis-[calc(100%/3)] h-auto ~mb-[1.25rem]/[2rem];
 
 				.rc-card {
-					@apply duration-500 ease-power2-out delay-200 will-change-transform;
+					@apply duration-500 ease-power2-out delay-200;
 					transition-property: opacity, transform;
 				}
 			}

@@ -88,7 +88,6 @@ add_filter('allowed_block_types_all', function ($allowed_block_types, $editor_co
         'award',
         'blog_podcast',
         'media_coverage',
-        'resource_library',
         'press_release',
         'webinar_event',
         'team'

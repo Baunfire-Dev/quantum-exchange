@@ -7,24 +7,64 @@
 	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
 
 	{% set has_posts = posts and posts|length %}
+	{% set type_keys = types|keys %}
+	{# {% set single_type = type_keys|length == 1 ? type_keys|first : null %} #}
 
 	<div class="{{ pt }} {{ pb }}">
 		<div class="container">
 			<div class="flex flex-col ~gap-[2rem]/[3rem]">
 				<div class="flex max-md:flex-col ~gap-[1rem]/[1.5rem] flex-wrap">
-                    <div class="select" id="slx">
-                        <select placeholder="category">
-                            <option value="all" selected>All</option>
+					{# {% if single_type %}
+						{% set categories = types[single_type].tax_items %}
 
-                            {% for cat in all_cats %}
-                                <option value="{{ cat.slug }}">{{ cat.name }}</option>
-                            {% endfor %}
-                        </select>
+						{% if categories|length %}
+							<div class="select" id="slx">
+								<select placeholder="category">
+									<option value="all" selected>All</option>
+									{% for cat in categories %}
+										<option value="{{ cat.slug }}">{{ cat.name }}</option>
+									{% endfor %}
+								</select>
 
-                        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 9.11772L12 16L5 9.11772L6.13683 8L12 13.7646L17.8632 8L19 9.11772Z" fill="black"/>
-                        </svg>
-                    </div>
+								<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M19 9.11772L12 16L5 9.11772L6.13683 8L12 13.7646L17.8632 8L19 9.11772Z" fill="black"/>
+								</svg>
+							</div>
+						{% endif %}
+					{% else %} #}
+						<div class="select" id="slx">
+							<select placeholder="category">
+								<option value="all" selected>All</option>
+
+								{% for key, item in types %}
+									{% if item.tax_items %}
+										{# <optgroup label="{{ item.label }}"> #}
+											{% for cat in item.tax_items %}
+												<option value="{{ cat.slug }}">{{ cat.name }}</option>
+											{% endfor %}
+										{# </optgroup> #}
+									{% endif %}
+								{% endfor %}
+							</select>
+
+							<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M19 9.11772L12 16L5 9.11772L6.13683 8L12 13.7646L17.8632 8L19 9.11772Z" fill="black"/>
+							</svg>
+						</div>
+
+						{# <div class="select" id="slx">
+							<select placeholder="type">
+								<option value="all" selected>All</option>
+								{% for key, item in types %}
+									<option value="{{ key }}">{{ item.label }}</option>
+								{% endfor %}
+							</select>
+
+							<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M19 9.11772L12 16L5 9.11772L6.13683 8L12 13.7646L17.8632 8L19 9.11772Z" fill="black"/>
+							</svg>
+						</div> #}
+					{# {% endif %} #}
 				</div>
 
 				{% if has_posts %}

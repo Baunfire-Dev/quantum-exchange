@@ -40,13 +40,6 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "resource_library"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
                 "value": "press_release"
             }
         ],
@@ -89,5 +82,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1763055178
+    "modified": 1779389607
 }
