@@ -1,0 +1,18 @@
+<section class="block-preview">
+	<div class="bp-image">
+		{% if blk_has_preview and blk_preview %}
+			<img src="{{ blk_preview }}" alt="{{ blk_title }}">
+		{% else %}
+			<img src="{{ function("png", "preview") }}" alt="{{ blk_title }}">
+		{% endif %}
+	</div>
+
+	<div class="bp-details">
+        <small>{{ blk_client }}</small>
+        <h1>{{ blk_title }}</h1>
+    </div>
+
+	<div class="bp-logo">
+		<img src="{{ blk_logo }}" alt="{{ blk_title }}">
+	</div>
+</section>
