@@ -79,19 +79,36 @@ add_action('enqueue_block_editor_assets', function () {
 
     wp_add_inline_script('wp-edit-post', "
         jQuery(document).ready(function($) {
-            setTimeout(() => {
-                if ($('.block-editor').length) {
-                    const mb = $('.edit-post-layout__metaboxes');
-                    const pse = $('.edit-post-visual-editor');
+            function repositionMetaboxes() {
+                if (!$('.block-editor').length) return false;
 
-                    if (mb.length && pse.length) {
-                        mb.insertBefore(pse);
-                        $('.postbox').addClass('closed');
-                    }
+                const mb  = $('.edit-post-layout__metaboxes');
+                const pse = $('.edit-post-visual-editor');
 
-                    mb.find('.acf-postbox .postbox-header h2').prepend(`<img src='{$block_icon}'/>`);
+                if (mb.length && pse.length) {
+                    mb.insertBefore(pse);
+                    $('.postbox').addClass('closed');
+                    mb.find('.acf-postbox .postbox-header h2').prepend('<img src=\"{$block_icon}\"/>');
+                    return true;
                 }
-            }, 1000);
+
+                return false;
+            }
+
+            if (repositionMetaboxes()) return;
+
+            const observer = new MutationObserver(function(mutations, obs) {
+                if (repositionMetaboxes()) {
+                    obs.disconnect();
+                }
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+
+            setTimeout(() => observer.disconnect(), 15000);
         });
     ");
 });
