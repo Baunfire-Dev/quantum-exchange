@@ -1,10 +1,22 @@
 {
-	"name": "content-rich-text",
-	"title": "Content Rich Text",
-    "viewScript": ["file:./script.js"],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page", "post", "webinar", "customer-story", "ebook"]
-	}
+    "name": "content-rich-text",
+    "title": "Content Rich Text",
+    "viewScript": [
+        "file:./script.js"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page",
+            "post",
+            "webinar",
+            "customer-story",
+            "ebook"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

@@ -1,10 +1,19 @@
 {
-	"name": "content-logos",
-	"title": "Carousel Logos",
-    "viewScript": ["file:./script.js"],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page", "solution"]
-	}
+    "name": "content-logos",
+    "title": "Carousel Logos",
+    "viewScript": [
+        "file:./script.js"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page",
+            "solution"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

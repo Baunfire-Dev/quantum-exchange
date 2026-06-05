@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 require_once 'vendor/autoload.php';
 Timber\Timber::init();
 
-define('_S_VERSION', '1.2.1');
+define('_S_VERSION', '20260606-eb7dd34');
 
 if (!function_exists('bf_stup')):
     function bf_setup()
@@ -24,6 +24,15 @@ if (!function_exists('bf_stup')):
         add_theme_support('align-wide');
         add_theme_support('title-tag');
         add_theme_support('post-thumbnails');
+
+        if (version_compare(get_bloginfo('version'), '7.0', '>=')) {
+            add_theme_support('editor-styles');
+            add_editor_style([
+                'assets/css/admin/block-editor.css',
+                'assets/css/admin/editor-style.css',
+                'assets/css/admin/editor-typography.css',
+            ]);
+        }
     }
 endif;
 
@@ -32,7 +41,6 @@ add_action('after_setup_theme', 'bf_setup');
 require_once 'includes/theme/allow-file-types.php';
 require_once 'includes/theme/disable-comments.php';
 
-// require_once 'includes/theme/setup-timber.php';
 require_once 'includes/theme/setup-shortcodes.php';
 
 require_once 'includes/theme/support-helpers.php';
@@ -40,274 +48,11 @@ require_once 'includes/theme/support-visual-overrides.php';
 
 require_once 'includes/theme/support-videos.php';
 require_once 'includes/theme/support-transients.php';
-// require_once 'includes/theme/support-block-templates.php';
-
 
 require_once 'includes/theme/disable-native-blocks.php';
 require_once 'includes/theme/support-cpt.php';
 
 require_once 'includes/theme/support-search.php';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/******************** LOAD CSS/JS ************************/
-add_action('wp_enqueue_scripts', 'front_css_styles');
-add_action('wp_enqueue_scripts', 'front_js_scripts');
-
-add_action('admin_enqueue_scripts', 'back_css_styles');
-add_action('admin_enqueue_scripts', 'back_js_scripts');
-
-add_action('enqueue_block_editor_assets', 'enqueue_block_editor_scripts');
-
-add_filter('style_loader_tag', 'front_deferred_styles', 10, 4);
-
-
-function front_css_styles()
-{
-    wp_enqueue_style('bf-theme-style', get_template_directory_uri() . '/assets/css/bundles/styles.css', array(), _S_VERSION);
-
-    wp_register_style('bf-owl-style', get_template_directory_uri() . '/assets/css/external/owl.css', array(), _S_VERSION);
-    wp_register_style('bf-select-two-style', get_template_directory_uri() . '/assets/css/external/select2.min.css', array(), _S_VERSION);
-    wp_register_style('bf-toastify-style', get_template_directory_uri() . '/assets/css/external/toastify.min.css', array(), _S_VERSION);
-}
-
-function front_js_scripts()
-{
-    wp_enqueue_script("bf-core", get_template_directory_uri() . '/assets/js/bundles/core.min.js', array(), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-
-    wp_register_script("bf-text-script", get_template_directory_uri() . '/assets/js/external/TextPlugin.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-
-    wp_register_script("bf-vimeo-script", get_template_directory_uri() . '/assets/js/external/vimeo-player.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-    wp_register_script('bf-owl-script', get_template_directory_uri() . '/assets/js/external/owl.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-
-    wp_register_script("bf-select-two-script", get_template_directory_uri() . '/assets/js/external/select2.min.js', array(), _S_VERSION, array('strategy' => 'defer', 'in_footer' => true));
-    wp_register_script("bf-toastify-script", get_template_directory_uri() . '/assets/js/external/toastify.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-
-    wp_register_script("bf-rellax-script", get_template_directory_uri() . '/assets/js/external/rellax.min.js', array('jquery'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-
-    wp_enqueue_script("bf-custom-min-js", get_template_directory_uri() . '/assets/js/bundles/custom.min.js', array('jquery', 'bf-core'), _S_VERSION, array('strategy'  => 'defer', 'in_footer' => true));
-}
-
-function back_css_styles($hook)
-{
-    wp_enqueue_style('bf-custom-admin-style', get_template_directory_uri() . '/assets/css/admin/styles.css', array(), _S_VERSION);
-
-    if ($hook === 'post.php' || $hook === 'post-new.php') {
-        wp_enqueue_style('acfe-style', get_template_directory_uri() . '/assets/css/external/acfe.css', array(), _S_VERSION);
-    }
-}
-
-function back_js_scripts($hook)
-{
-    if ($hook === 'post.php' || $hook === 'post-new.php') {
-    }
-}
-
-function enqueue_block_editor_scripts()
-{
-    wp_enqueue_script('bf-block-preview-script', get_template_directory_uri() . '/assets/js/admin/block-preview.js', array('jquery'), _S_VERSION, true);
-    wp_localize_script("bf-block-preview-script", 'theme_path', array('url' => get_template_directory_uri()));
-}
-
-function front_deferred_styles($html, $handle, $href, $media) {
-    $defer_styles = array(
-        'bf-owl-style',
-        'bf-select-two-style',
-        'bf-toastify-style'
-    );
-
-    if (in_array($handle, $defer_styles)) {
-        return "<link rel='stylesheet' href='{$href}' media='print' onload=\"this.media='all'\" />";
-    }
-
-    return $html;
-}
-
-function remove_jquery_migrate($scripts) {
-    if (!is_admin() && isset($scripts->registered['jquery'])) {
-        $script = $scripts->registered['jquery'];
-
-        if ($script->deps) {
-            $script->deps = array_diff($script->deps, array('jquery-migrate'));
-        }
-    }
-}
-
-add_action('wp_default_scripts', 'remove_jquery_migrate');
-
-
-
-
-
-
-
-
-
-
-
-/******************** ACF ************************/
-add_action('acf/init', 'my_acf_op_init');
-
-function my_acf_op_init()
-{
-    if (function_exists('acf_add_options_page')) {
-        acf_add_options_page(array(
-            'menu_title' => 'Global Config',
-            'menu_slug' => 'theme-general-settings',
-            'capability' => 'manage_options',
-            'redirect' => true,
-            'icon_url' => menu_icon(),
-        ));
-
-        acf_add_options_sub_page(array(
-            'page_title' => 'Theme Settings',
-            'menu_title' => 'Theme Settings',
-            'parent_slug' => 'theme-general-settings',
-            'capability' => 'manage_options',
-        ));
-
-        acf_add_options_sub_page(array(
-            'page_title' => 'Header Navigation',
-            'menu_title' => 'Header Navigation',
-            'parent_slug' => 'theme-general-settings',
-            'capability' => 'manage_options',
-        ));
-
-        acf_add_options_sub_page(array(
-            'page_title' => 'Footer Navigation',
-            'menu_title' => 'Footer Navigation',
-            'parent_slug' => 'theme-general-settings',
-            'capability' => 'manage_options',
-        ));
-
-        acf_add_options_sub_page(array(
-            'page_title' => 'Site Scripts',
-            'menu_title' => 'Site Scripts',
-            'parent_slug' => 'theme-general-settings',
-            'capability' => 'manage_options',
-        ));
-
-        acf_add_options_sub_page(array(
-            'page_title' => 'Extras',
-            'menu_title' => 'Extras',
-            'parent_slug' => 'theme-general-settings',
-            'capability' => 'manage_options',
-        ));
-
-        acf_add_options_sub_page(array(
-            'page_title' => 'Not found',
-            'menu_title' => 'Not found',
-            'parent_slug' => 'theme-general-settings',
-            'capability' => 'manage_options',
-        ));
-    }
-}
-
-add_action('init', 'register_custom_blocks');
-
-function register_custom_blocks()
-{
-    if (!function_exists('acf_register_block_type')) {
-        return;
-    }
-
-    $theme_slug = get_field("theme_slug", "option");
-    $theme_slug = $theme_slug ? $theme_slug : "baunfire";
-
-    $blocks_dir = __DIR__ . '/blocks';
-
-    if (!is_dir($blocks_dir) || !is_readable($blocks_dir)) {
-        return;
-    }
-
-    foreach (scandir($blocks_dir) as $dir) {
-        $block_path = $blocks_dir . '/' . $dir;
-
-        if ($dir === '.' || $dir === '..' || !is_dir($block_path)) {
-            continue;
-        }
-
-        $block_json = $block_path . '/block.json';
-        if (!file_exists($block_json)) {
-            continue;
-        }
-
-        register_block_type($block_path, [
-            'category' => $theme_slug,
-            'icon'     => block_icon(true),
-            'supports' => [
-                'anchor' => true,
-            ],
-        ]);
-    }
-}
-
-add_filter('block_categories_all', 'custom_block_category', 10, 2);
-
-function custom_block_category($categories, $post)
-{
-    $theme_slug = get_field("theme_slug", "option");
-    $theme_slug = $theme_slug ? $theme_slug : "baunfire";
-
-    $custom_category = array(
-        array(
-            'slug' => $theme_slug,
-            'title' => __(ucfirst(strtolower($theme_slug)) . ' Blocks', $theme_slug)
-        ),
-    );
-
-    return array_merge($custom_category, $categories);
-}
-
-add_filter('block_categories_all', 'custom_block_category', 10, 2);
-
-add_filter('acf/prepare_field/name=block_preview', function($field) {
-    $field_group = acf_get_field_group($field['parent']);
-    
-    if (!$field_group || empty($field_group['location'])) {
-        return $field;
-    }
-    
-    foreach ($field_group['location'] as $rule_group) {
-        foreach ($rule_group as $rule) {
-            if ($rule['param'] === 'block' && isset($rule['value'])) {
-                $block_slug = str_replace('acf/', '', $rule['value']);
-                
-                $preview_path = get_template_directory() . '/blocks/' . $block_slug . '/preview.png';
-                $preview_url = get_template_directory_uri() . '/blocks/' . $block_slug . '/preview.png';
-                
-                if (file_exists($preview_path)) {
-                    $field['_preview_url'] = $preview_url;
-                }
-                
-                return $field;
-            }
-        }
-    }
-    
-    return $field;
-});
-
-add_action('acf/render_field/name=block_preview', function($field) {
-    if (!empty($field['_preview_url'])) {
-        echo sprintf(
-            '<div class="acf-block-preview-guide">
-                <img src="%s" alt="Block Preview">
-            </div>',
-            esc_url($field['_preview_url'])
-        );
-    }
-}, 10, 1);
+require_once 'includes/theme/setup-enqueue.php';
+require_once 'includes/theme/setup-acf.php';

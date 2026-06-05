@@ -1,11 +1,19 @@
 {
-	"name": "content-fify-fifty-image",
-	"title": "Content 50-50 Image",
-    "viewScript": ["file:./script.js"],
+    "name": "content-fify-fifty-image",
+    "title": "Content 50-50 Image",
+    "viewScript": [
+        "file:./script.js"
+    ],
     "viewStyle": [],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

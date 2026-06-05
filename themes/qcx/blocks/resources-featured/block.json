@@ -1,11 +1,21 @@
 {
-	"name": "resources-featured",
-	"title": "Resources Featured",
-    "viewScript": ["file:./script.js"],
-    "viewStyle": ["swiper-style"],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "name": "resources-featured",
+    "title": "Resources Featured",
+    "viewScript": [
+        "file:./script.js"
+    ],
+    "viewStyle": [
+        "swiper-style"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

@@ -1,11 +1,21 @@
 {
-	"name": "glossary",
-	"title": "Glossary",
-    "viewScript": ["file:./script.js"],
-    "viewStyle": ["bf-toastify-style"],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "name": "glossary",
+    "title": "Glossary",
+    "viewScript": [
+        "file:./script.js"
+    ],
+    "viewStyle": [
+        "bf-toastify-style"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

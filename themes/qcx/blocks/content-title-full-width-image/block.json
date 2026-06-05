@@ -1,11 +1,21 @@
 {
-	"name": "content-title-full-width-image",
-	"title": "Content Title Full Width Image",
-    "viewScript": ["file:./script.js"],
-    "viewStyle": ["swiper-style"],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "name": "content-title-full-width-image",
+    "title": "Content Title Full Width Image",
+    "viewScript": [
+        "file:./script.js"
+    ],
+    "viewStyle": [
+        "swiper-style"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

@@ -1,11 +1,20 @@
 {
-	"name": "post-quote",
-	"title": "Post Quote",
-    "viewScript": ["file:./script.js"],
+    "name": "post-quote",
+    "title": "Post Quote",
+    "viewScript": [
+        "file:./script.js"
+    ],
     "viewStyle": [],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page", "post"]
-	}
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page",
+            "post"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

@@ -1,11 +1,19 @@
 {
-	"name": "content-tile-with-icon-text",
-	"title": "Content Tile with Icon and Text",
-    "viewScript": ["file:./script.js"],
+    "name": "content-tile-with-icon-text",
+    "title": "Content Tile with Icon and Text",
+    "viewScript": [
+        "file:./script.js"
+    ],
     "viewStyle": [],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

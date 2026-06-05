@@ -1,5 +1,10 @@
 <?php
 use Timber\Timber;
+
+if ($is_preview) {
+    generate_block_preview_ui($block);
+    return;
+}
 acf_setup_meta($block["data"], $block["id"], true);
 
 $context = Timber::context([

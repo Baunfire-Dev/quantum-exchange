@@ -1,11 +1,19 @@
 {
-	"name": "hero-full-width-image",
-	"title": "Hero Full Width Image",
-    "viewScript": ["file:./script.js"],
+    "name": "hero-full-width-image",
+    "title": "Hero Full Width Image",
+    "viewScript": [
+        "file:./script.js"
+    ],
     "viewStyle": [],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }

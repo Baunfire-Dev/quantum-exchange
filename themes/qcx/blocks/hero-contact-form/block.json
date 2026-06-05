@@ -1,11 +1,21 @@
 {
-	"name": "hero-contact-form",
-	"title": "Hero Contact Form",
-    "viewScript": ["file:./script.js"],
-    "viewStyle": ["swiper-style"],
-	"acf": {
-		"mode": "edit",
-		"renderTemplate": "./controller.php",
-        "postTypes": ["page"]
-	}
+    "name": "hero-contact-form",
+    "title": "Hero Contact Form",
+    "viewScript": [
+        "file:./script.js"
+    ],
+    "viewStyle": [
+        "swiper-style"
+    ],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
 }
