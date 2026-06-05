@@ -152,6 +152,26 @@ button.content-title-visibility:before {
 	color: initial;
 }
 
+
+.block-editor .acf-field[data-name="block_preview"] {
+    background: #f9f9f9;
+}
+
+.block-editor .acf-field[data-name="block_preview"] .acf-label,
+.block-editor .acf-field[data-name="block_preview"] .acf-input-wrap {
+    display: none !important;
+}
+
+.block-editor .acf-field[data-name="block_preview"] .acf-block-preview-guide img {
+    margin: 0 !important;
+    max-height: 134px;
+    max-width: 250px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    border: 1px solid #008dd4;
+}
+
 .hide-block--active section.block-preview {
     opacity: 70%;
     box-shadow: none;
