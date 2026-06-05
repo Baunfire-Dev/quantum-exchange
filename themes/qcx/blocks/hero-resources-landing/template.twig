@@ -33,7 +33,7 @@
 								{% if loop.index == 1 %}
                                     {% set post_title = item.title.title %}
                                     {% set post_link = item.title.url %}
-                                    {% set post_thumbnail = function('get_the_post_thumbnail_url', item.image, 'large') %}
+                                    {% set post_thumbnail = item.image %}
                                     {% set categories = item.eyebrow %}
 
 									{% if fields.mode != "manual" %}
@@ -76,7 +76,7 @@
 								{% if loop.index == 2 %}
 									{% set post_title = item.title.title %}
                                     {% set post_link = item.title.url %}
-                                    {% set post_thumbnail = function('get_the_post_thumbnail_url', item.image, 'large') %}
+                                    {% set post_thumbnail = item.image %}
                                     {% set categories = item.eyebrow %}
 
 									{% if fields.mode != "manual" %}
