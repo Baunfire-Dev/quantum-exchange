@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 require_once 'vendor/autoload.php';
 Timber\Timber::init();
 
-define('_S_VERSION', '20260606-3914e2d');
+define('_S_VERSION', '20260606-8a02d77');
 
 if (!function_exists('bf_stup')):
     function bf_setup()
