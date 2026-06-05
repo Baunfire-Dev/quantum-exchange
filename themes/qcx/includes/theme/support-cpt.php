@@ -73,7 +73,7 @@ add_action('init', function () {
             'menu_position' => 20,
             'has_archive'   => false,
             'rewrite'       => ['slug' => $cfg['slug']],
-            'supports'      => ['title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields'],
+            'supports'      => ['title', 'author', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields'],
         ]);
 
         // Extra safety (keeps supports even if something strips them)
