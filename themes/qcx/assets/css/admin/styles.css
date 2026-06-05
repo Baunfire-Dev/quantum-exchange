@@ -184,16 +184,20 @@ body.post-type-solution .acf-taxonomy-field .categorychecklist-holder {
     }
 }
 
-.block-editor .acf-field[data-name="block_preview"] {
+.block-editor .acf-field[data-name="block_preview"],
+.acf-modal-block-form-container .acf-field[data-name="block_preview"] {
     background: #f9f9f9;
 }
 
 .block-editor .acf-field[data-name="block_preview"] .acf-label,
-.block-editor .acf-field[data-name="block_preview"] .acf-input-wrap {
+.block-editor .acf-field[data-name="block_preview"] .acf-input-wrap,
+.acf-modal-block-form-container .acf-field[data-name="block_preview"] .acf-label,
+.acf-modal-block-form-container .acf-field[data-name="block_preview"] .acf-input-wrap {
     display: none !important;
 }
 
-.block-editor .acf-field[data-name="block_preview"] .acf-block-preview-guide img {
+.block-editor .acf-field[data-name="block_preview"] .acf-block-preview-guide img,
+.acf-modal-block-form-container .acf-field[data-name="block_preview"] .acf-block-preview-guide img {
     margin: 0 !important;
     max-height: 134px;
     max-width: 250px;
