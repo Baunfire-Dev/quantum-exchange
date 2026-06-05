@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 require_once 'vendor/autoload.php';
 Timber\Timber::init();
 
-define('_S_VERSION', '20260606-293ee13');
+define('_S_VERSION', '20260606-06b3226');
 
 if (!function_exists('bf_stup')):
     function bf_setup()
@@ -25,14 +25,12 @@ if (!function_exists('bf_stup')):
         add_theme_support('title-tag');
         add_theme_support('post-thumbnails');
 
-        if (version_compare(get_bloginfo('version'), '7.0', '>=')) {
-            add_theme_support('editor-styles');
-            add_editor_style([
-                'assets/css/admin/block-editor.css',
-                'assets/css/admin/editor-style.css',
-                'assets/css/admin/editor-typography.css',
-            ]);
-        }
+        add_theme_support('editor-styles');
+        add_editor_style([
+            'assets/css/admin/block-editor.css',
+            'assets/css/admin/editor-style.css',
+            'assets/css/admin/editor-typography.css',
+        ]);
     }
 endif;
 
