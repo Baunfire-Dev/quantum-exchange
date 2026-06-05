@@ -51,48 +51,26 @@ function clear_transients(array $transient_names = [])
 
 function get_all_transients()
 {
-    global $wpdb;
+    global $post_type_transient_map;
 
     $prefix     = TRANSIENT_PREFIX;
     $transients = [];
-    $like       = $wpdb->esc_like('_transient_' . $prefix . '_') . '%';
 
-    $db_transients = $wpdb->get_results(
-        $wpdb->prepare(
-            "SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE %s",
-            $like
-        )
-    );
+    $all_keys = array_unique(array_merge(...array_values($post_type_transient_map)));
 
-    foreach ($db_transients as $transient) {
-        $key              = str_replace('_transient_', '', $transient->option_name);
-        $transients[$key] = [
-            'key'    => $key,
-            'value'  => maybe_unserialize($transient->option_value),
-            'source' => 'database',
-        ];
-    }
+    foreach ($all_keys as $name) {
+        $full_key = $prefix . '_' . $name;
+        $value    = get_transient($full_key);
 
-    if (wp_using_ext_object_cache()) {
-        $cache_keys = wp_cache_get($prefix . '_index', $prefix . '_transients');
-
-        if (is_array($cache_keys)) {
-            foreach ($cache_keys as $cache_key) {
-                if (isset($transients[$cache_key])) {
-                    continue;
-                }
-
-                $value = wp_cache_get($cache_key, $prefix . '_transients');
-
-                if ($value !== false) {
-                    $transients[$cache_key] = [
-                        'key'    => $cache_key,
-                        'value'  => $value,
-                        'source' => 'object_cache',
-                    ];
-                }
-            }
+        if ($value === false) {
+            continue;
         }
+
+        $transients[$full_key] = [
+            'key'    => $full_key,
+            'value'  => $value,
+            'source' => wp_using_ext_object_cache() ? 'object_cache' : 'database',
+        ];
     }
 
     return $transients;
@@ -123,7 +101,7 @@ function clear_transients_callback()
     echo '<h1>' . ucfirst($prefix) . ' Transients</h1>';
 
     if (wp_using_ext_object_cache()) {
-        echo '<div class="notice notice-info"><p><strong>Object Cache Active:</strong> This server is using Redis/Memcached. Transients are stored in memory cache, not the database.</p></div>';
+        echo '<div class="notice notice-info"><p><strong>Object Cache Active:</strong> This server is using an external object cache. Transients are stored in memory, not the database.</p></div>';
     }
 
     echo '<form method="post">';
@@ -152,7 +130,7 @@ function clear_transients_callback()
             }
 
             $source_badge = $transient['source'] === 'object_cache'
-                ? '<span style="background: #00a0d2; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px;">REDIS</span>'
+                ? '<span style="background: #00a0d2; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px;">CACHE</span>'
                 : '<span style="background: #82878c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px;">DB</span>';
 
             echo '<tr>';
