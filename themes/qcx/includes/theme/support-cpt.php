@@ -71,7 +71,7 @@ add_action('init', function () {
             'show_in_rest'  => true,
             'menu_icon'     => $cfg['icon'],
             'menu_position' => 20,
-            'has_archive'   => false,
+            'has_archive'   => true,
             'rewrite'       => ['slug' => $cfg['slug']],
             'supports'      => ['title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields'],
         ]);
