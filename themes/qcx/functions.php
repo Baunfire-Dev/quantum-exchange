@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 require_once 'vendor/autoload.php';
 Timber\Timber::init();
 
-define('_S_VERSION', '20260606-8a02d77');
+define('_S_VERSION', '20260606-60c084c');
 
 if (!function_exists('bf_stup')):
     function bf_setup()
@@ -54,3 +54,23 @@ require_once 'includes/theme/support-search.php';
 
 require_once 'includes/theme/setup-enqueue.php';
 require_once 'includes/theme/setup-acf.php';
+
+
+
+
+
+add_filter('wpseo_schema_article_types', function ($types) {
+    $types['Article'] = 'Article';
+    return $types;
+});
+
+$posts = get_posts([
+    'post_type'      => 'blog_podcast',
+    'posts_per_page' => -1,
+    'fields'         => 'ids',
+    'post_status'    => 'publish',
+]);
+
+foreach ($posts as $post_id) {
+    update_post_meta($post_id, '_yoast_wpseo_schema_article_type', 'Article');
+}

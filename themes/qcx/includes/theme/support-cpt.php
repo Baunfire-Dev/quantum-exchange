@@ -136,8 +136,6 @@ add_filter('single_template', function ($template) {
 });
 
 add_action('template_redirect', function () {
-
-    // All CPTs that should support redirect
     $types = [
         'news',
         'award',
@@ -148,11 +146,8 @@ add_action('template_redirect', function () {
     ];
 
     if (is_singular($types)) {
-
-        // ACF field
         $redirect_url = get_field('redirect_link');
-
-        // Redirect ONLY if field is not empty
+        
         if (!empty($redirect_url)) {
             wp_redirect(esc_url($redirect_url), 301);
             exit;
