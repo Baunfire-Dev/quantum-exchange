@@ -71,7 +71,7 @@ add_action('init', function () {
             'show_in_rest'  => true,
             'menu_icon'     => $cfg['icon'],
             'menu_position' => 20,
-            'has_archive'   => true,
+            'has_archive'   => false,
             'rewrite'       => ['slug' => $cfg['slug']],
             'supports'      => ['title', 'editor', 'thumbnail', 'excerpt', 'revisions', 'custom-fields'],
         ]);
@@ -147,10 +147,21 @@ add_action('template_redirect', function () {
 
     if (is_singular($types)) {
         $redirect_url = get_field('redirect_link');
-        
+
         if (!empty($redirect_url)) {
             wp_redirect(esc_url($redirect_url), 301);
             exit;
         }
     }
+});
+
+add_filter('wpseo_schema_article_post_types', function ($post_types) {
+    return array_merge($post_types, [
+        'news',
+        'award',
+        'blog_podcast',
+        'media_coverage',
+        'press_release',
+        'webinar_event',
+    ]);
 });
