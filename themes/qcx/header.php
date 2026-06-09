@@ -54,7 +54,7 @@
         "override_nav_theme" => get_field("override_nav_theme"),
         "nav_theme" => get_field("nav_theme"),
         "has_anmt" => get_field("has_announcement", "option"),
-        "anmt" => get_field("nav_announcement", "option"),
+        "anmts" => get_field("nav_announcement", "option"),
         "anmt_closed" => isset($_COOKIE['announcement_closed']) && $_COOKIE['announcement_closed'] === 'true',
     ]);
 

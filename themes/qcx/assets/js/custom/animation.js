@@ -244,17 +244,70 @@
                 const anmt = nav.find(".nav__anmt");
                 if (!anmt.length) return;
 
-                const close = anmt.find(".nav__anmt-close");
+                const handleClose = () => {
+                    const close = anmt.find(".nav__anmt-close");
 
-                close.click(function () {
-                    localStorage.setItem("announcement_closed", "true");
-                    document.cookie = "announcement_closed=true; path=/; max-age=86400";
+                    close.click(function () {
+                        localStorage.setItem("announcement_closed", "true");
+                        document.cookie = "announcement_closed=true; path=/; max-age=86400";
 
-                    anmt.fadeOut(300, function () {
-                        $(this).remove();
-                        baunfire.Global.screenSizeChange();
+                        anmt.fadeOut(300, function () {
+                            $(this).remove();
+                            baunfire.Global.screenSizeChange();
+                        });
                     });
-                });
+                };
+
+                const handleCarousel = () => {
+                    const carousel = anmt.find(".owl-carousel");
+                    if (!carousel.length) return;
+
+                    const isMoreThanOne = anmt.find(".nav__anmt-item").length > 1;
+
+                    const carouselInstance = carousel.owlCarousel({
+                        rewind: true,
+                        dots: isMoreThanOne ? true : false,
+                        dotsEach: true,
+                        margin: 24,
+                        loop: isMoreThanOne ? true : false,
+                        autoplayTimeout: 5000,
+                        autoplayHoverPause: true,
+                        autoplay: true,
+                        items: 1,
+                        mouseDrag: isMoreThanOne ? true : false,
+                        touchDrag: isMoreThanOne ? true : false,
+                        onInitialized: () => {
+                            baunfire.Global.screenSizeChange();
+                        },
+                        onResized: () => {
+                            baunfire.Global.screenSizeChange();
+                        }
+                    });
+
+                    const element = carousel.get(0);
+
+                    let timeout;
+                    let previousWidth = element.offsetWidth;
+
+                    const observer = new ResizeObserver((entries) => {
+                        const width = entries[0].contentRect.width;
+
+                        if (width === previousWidth) return;
+                        previousWidth = width;
+                        
+                        carousel.addClass("is-resizing");
+
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                            carousel.removeClass("is-resizing");
+                        }, 300);
+                    });
+
+                    observer.observe(element);
+                };
+
+                handleClose();
+                handleCarousel();
             };
 
             toggleNav();

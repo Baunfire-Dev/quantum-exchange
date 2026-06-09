@@ -251,7 +251,7 @@
                 bubble.fadeIn();
                 setTimeout(() => bubble.fadeOut(), 2000);
             });
-        }
+        },
     };
 
     baunfire.addModule(baunfire.Global);

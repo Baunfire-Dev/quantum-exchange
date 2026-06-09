@@ -346,7 +346,7 @@
             "label": "Announcement",
             "name": "nav_announcement",
             "aria-label": "",
-            "type": "group",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": [
@@ -364,6 +364,12 @@
                 "id": ""
             },
             "layout": "row",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add New Announcement",
+            "rows_per_page": 20,
             "sub_fields": [
                 {
                     "key": "field_69fa27323931a",
@@ -384,7 +390,8 @@
                     "allow_in_bindings": 0,
                     "rows": 3,
                     "placeholder": "",
-                    "new_lines": ""
+                    "new_lines": "",
+                    "parent_repeater": "field_69fa26ca39315"
                 },
                 {
                     "key": "field_69fa27363931b",
@@ -401,7 +408,8 @@
                         "id": ""
                     },
                     "return_format": "array",
-                    "allow_in_bindings": 0
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_69fa26ca39315"
                 }
             ]
         }
@@ -425,5 +433,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1778003873
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1780961238
 }
