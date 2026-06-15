@@ -245,7 +245,7 @@
                 if (!anmt.length) return;
 
                 const CAROUSEL_CONFIG = {
-                    autoplayDelay: 8000,
+                    autoplayDelay: 10000,
                     animDuration: 0.5,
                     ease: "power2.inOut",
                 };
