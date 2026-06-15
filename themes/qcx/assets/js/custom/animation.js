@@ -244,70 +244,88 @@
                 const anmt = nav.find(".nav__anmt");
                 if (!anmt.length) return;
 
-                const handleClose = () => {
-                    const close = anmt.find(".nav__anmt-close");
-
-                    close.click(function () {
-                        localStorage.setItem("announcement_closed", "true");
-                        document.cookie = "announcement_closed=true; path=/; max-age=86400";
-
-                        anmt.fadeOut(300, function () {
-                            $(this).remove();
-                            baunfire.Global.screenSizeChange();
-                        });
-                    });
+                const CAROUSEL_CONFIG = {
+                    autoplayDelay: 8000,
+                    animDuration: 0.5,
+                    ease: "power2.inOut",
                 };
 
-                const handleCarousel = () => {
-                    const carousel = anmt.find(".owl-carousel");
-                    if (!carousel.length) return;
+                const inner = anmt.find(".nav__anmt-inner");
+                const itemsWrap = inner.find(".nav__anmt-items");
+                const items = itemsWrap.find(".nav__anmt-item");
+                const count = items.length;
 
-                    const isMoreThanOne = anmt.find(".nav__anmt-item").length > 1;
+                if (count < 2) return;
 
-                    const carouselInstance = carousel.owlCarousel({
-                        rewind: true,
-                        dots: isMoreThanOne ? true : false,
-                        dotsEach: true,
-                        margin: 24,
-                        loop: isMoreThanOne ? true : false,
-                        autoplayTimeout: 5000,
-                        autoplayHoverPause: true,
-                        autoplay: true,
-                        items: 1,
-                        mouseDrag: isMoreThanOne ? true : false,
-                        touchDrag: isMoreThanOne ? true : false,
-                        onInitialized: () => {
-                            baunfire.Global.screenSizeChange();
+                const dotsWrap = inner.find(".nav__anmt-dots").empty();
+
+                for (let i = 0; i < count; i++) {
+                    $("<div>", { class: "nav__anmt-dot" + (i === 0 ? " active" : "") }).data("index", i).appendTo(dotsWrap);
+                }
+
+                let current = 0;
+                let timer = null;
+                let isAnimating = false;
+
+                items.each(function (i) {
+                    gsap.set(this, {
+                        position: i === 0 ? "relative" : "absolute",
+                        top: 0, left: 0, width: "100%",
+                        opacity: i === 0 ? 1 : 0,
+                        yPercent: i === 0 ? 0 : 100,
+                        zIndex: i === 0 ? 2 : 1,
+                    });
+                });
+
+                gsap.set(itemsWrap[0], { position: "relative" });
+                anmt.addClass("active");
+
+                const goTo = (next) => {
+                    if (isAnimating || next === current) return;
+                    isAnimating = true;
+
+                    const curr = items.eq(current);
+                    const nextItem = items.eq(next);
+                    const { animDuration, ease } = CAROUSEL_CONFIG;
+
+                    gsap.set(nextItem[0], { yPercent: 100, opacity: 1, zIndex: 3 });
+                    gsap.set(curr[0], { zIndex: 2 });
+
+                    gsap.timeline({
+                        onComplete() {
+                            gsap.set(curr[0], { opacity: 0, yPercent: 100, zIndex: 1, position: "absolute" });
+                            gsap.set(nextItem[0], { zIndex: 2, position: "relative" });
+                            current = next;
+                            isAnimating = false;
                         },
-                        onResized: () => {
-                            baunfire.Global.screenSizeChange();
-                        }
-                    });
+                    })
+                        .to(curr[0], { yPercent: -80, opacity: 0, duration: animDuration, ease }, 0)
+                        .to(nextItem[0], { yPercent: 0, opacity: 1, duration: animDuration, ease }, 0);
 
-                    const element = carousel.get(0);
-
-                    let timeout;
-                    let previousWidth = element.offsetWidth;
-
-                    const observer = new ResizeObserver((entries) => {
-                        const width = entries[0].contentRect.width;
-
-                        if (width === previousWidth) return;
-                        previousWidth = width;
-                        
-                        carousel.addClass("is-resizing");
-
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => {
-                            carousel.removeClass("is-resizing");
-                        }, 300);
-                    });
-
-                    observer.observe(element);
+                    dotsWrap.find(".nav__anmt-dot").removeClass("active").eq(next).addClass("active");
                 };
 
-                handleClose();
-                handleCarousel();
+                const startTimer = () => {
+                    stopTimer();
+                    timer = setInterval(() => goTo((current + 1) % count), CAROUSEL_CONFIG.autoplayDelay);
+                };
+
+                const stopTimer = () => {
+                    clearInterval(timer);
+                    timer = null;
+                };
+
+                dotsWrap.on("click", ".nav__anmt-dot", function () {
+                    stopTimer();
+                    goTo($(this).data("index"));
+                    startTimer();
+                });
+
+                inner
+                    .on("mouseenter", stopTimer)
+                    .on("mouseleave", startTimer);
+
+                startTimer();
             };
 
             toggleNav();

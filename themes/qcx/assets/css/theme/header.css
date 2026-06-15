@@ -9,62 +9,43 @@
 
 		&__anmt {
 			@apply bg-green transition-all duration-500 ease-power2-out ~h-[4.125rem]/[2.875rem] overflow-hidden z-[3] relative;
+            
+			&:not(.active) {
+				@apply opacity-0;
+			}
 
 			.container {
 				@apply h-full;
-			}
-
-			&:not(:has(.owl-carousel.owl-loaded)) {
-				@apply opacity-0 delay-300;
 			}
 		}
 
 		&__anmt-inner {
 			@apply relative w-full h-full;
-			@apply max-xl:pr-[1.875rem];
+			@apply flex gap-[1.875rem] max-xl:pr-[1.875rem];
+		}
 
-			.owl-carousel {
-				@apply flex-1 min-w-0 h-full;
-
-				&.owl-loaded {
-					@apply flex ~gap-[1.25rem]/[2.5rem];
-
-					&.is-resizing {
-						@apply opacity-0;
-					}
-
-					&:not(.is-resizing) {
-						@apply transition-all duration-500 ease-power2-out;
-					}
-				}
-			}
-
-			.owl-stage {
-				@apply flex items-center h-full;
-			}
-
-			.owl-stage-outer {
-				@apply w-full max-w-full;
-			}
-
-			.owl-dots {
-				@apply flex gap-[0.5rem] items-center shrink-0;
-			}
-
-			.owl-dot {
-				@apply h-[0.5rem] w-[0.5rem] rounded-full !bg-blue;
-
-				&:not(.active) {
-					@apply opacity-20;
-				}
-			}
+		&__anmt-items {
+			@apply flex-1 min-w-0 h-full;
+			@apply flex ~gap-[1.25rem]/[2.5rem];
 		}
 
 		&__anmt-item {
-			@apply flex max-md:gap-[0.25rem] max-md:flex-col md:items-center h-full py-[0.75rem] md:gap-[2rem] pl-[1px];
+			@apply flex justify-center max-md:gap-[0.25rem] max-md:flex-col md:items-center h-full py-[0.75rem] md:gap-[2rem] pl-[1px];
 
 			& > p {
 				@apply line-clamp-1 text-ellipsis min-w-0 overflow-hidden max-w-[80%];
+			}
+		}
+
+		&__anmt-dots {
+			@apply h-full flex gap-[0.5rem] items-center shrink-0;
+		}
+
+		&__anmt-dot {
+			@apply h-[0.5rem] w-[0.5rem] rounded-full bg-blue cursor-pointer;
+
+			&:not(.active) {
+				@apply opacity-20;
 			}
 		}
 

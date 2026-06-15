@@ -7,7 +7,7 @@
 			<div class="nav__anmt">
 				<div class="container">
 					<div class="nav__anmt-inner">
-						<div class="owl-carousel">
+						<div class="nav__anmt-items">
 							{% for anmt in anmts %}
 								<div class="nav__anmt-item">
 									{% if anmt.text %}
@@ -30,6 +30,10 @@
 								</div>
 							{% endfor %}
 						</div>
+
+                        <div class="nav__anmt-dots">
+                            <div class="nav__anmt-dot active"></div>
+                        </div>
 					</div>
 				</div>
 
