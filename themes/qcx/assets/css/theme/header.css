@@ -11,7 +11,9 @@
 			@apply bg-green transition-all duration-500 ease-power2-out ~h-[4.125rem]/[2.875rem] overflow-hidden z-[3] relative;
             
 			&:not(.active) {
-				@apply opacity-0;
+				.nav__anmt-inner {
+                    @apply opacity-0;
+                }
 			}
 
 			.container {
@@ -22,6 +24,7 @@
 		&__anmt-inner {
 			@apply relative w-full h-full;
 			@apply flex gap-[1.875rem] max-xl:pr-[1.875rem];
+            @apply transition-opacity duration-500 ease-power2-out;
 		}
 
 		&__anmt-items {
