@@ -7,6 +7,7 @@
             this.handleSearch();
             this.handleButtonHover();
             this.handleResourceAnim();
+            this.handleAuthorsPage();
         },
 
         handleButtonHover() {
@@ -620,14 +621,128 @@
 
                 handleEntranceAnim(self);
                 handleMarquee(self);
-            }
+            };
 
             resourceHero();
             resourceBody();
             subscribeCTA();
             featuredResources();
             contentCTA();
-        }
+        },
+
+        handleAuthorsPage() {
+            const authorHead = () => {
+                const script = () => {
+                    const el = $(".auth-head");
+                    if (!el.length) return;
+
+                    handleEntranceAnim(el);
+                };
+
+                const handleEntranceAnim = (self) => {
+                    const title = self.find(".block-title");
+                    const para = self.find(".block-para");
+                    const bio = self.find(".block-bio");
+
+                    const elAnims = [title, para, bio].filter(el => el.length > 0);
+
+                    gsap.fromTo(elAnims,
+                        {
+                            y: 40,
+                            autoAlpha: 0
+                        },
+                        {
+                            y: 0,
+                            autoAlpha: 1,
+                            duration: 0.8,
+                            stagger: { each: 0.2 },
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: self,
+                                start: baunfire.anim.start
+                            }
+                        },
+                    )
+                };
+
+                script();
+            };
+
+            const authorBody = () => {
+                const script = () => {
+                    const el = $(".auth-body");
+                    if (!el.length) return;
+
+                    const cardsContainer = el.find(".cards-container");
+                    const baseVisibleCount = cardsContainer.data("per-page");
+
+                    const items = el.find(".rc");
+                    if (!items.length) return;
+
+                    const resData = {
+                        parent: el,
+                        items: items,
+                        baseVisibleCount: baseVisibleCount,
+                        activeVisibleCount: baseVisibleCount,
+                        loadMore: el.find(".load-more"),
+                        emptyText: el.find(".empty"),
+                        reset: el.find(".reset"),
+                    }
+
+                    handleLoadMore(resData);
+                    refreshVisibleItems(resData);
+                };
+
+                const handleLoadMore = (resData) => {
+                    const { loadMore, baseVisibleCount } = resData;
+
+                    loadMore.click(function () {
+                        resData.activeVisibleCount += baseVisibleCount;
+                        refreshVisibleItems(resData);
+                    });
+                };
+
+                const refreshVisibleItems = (resData, reset = false) => {
+                    const { parent, activeVisibleCount, loadMore, emptyText } = resData;
+                    emptyText.removeClass("active");
+
+                    const items = (resData.items || $()).filter(".in-filter");
+
+                    if (items.length) {
+                        items.removeClass("active");
+                        const visibleItems = items.slice(0, activeVisibleCount).addClass("active");
+
+                        visibleItems.find(".rc-thumbnail img[data-src]").each(function () {
+                            const image = $(this);
+                            image.attr("src", image.data("src")).removeAttr("data-src");
+                            image.closest(".rc-thumbnail").addClass("active");
+                        });
+
+                        loadMore.toggleClass("active", activeVisibleCount < items.length);
+                    } else {
+                        loadMore.removeClass("active");
+                        emptyText.addClass("active");
+                    }
+
+                    baunfire.Global.screenSizeChange();
+
+                    if (reset) repositionScroll(parent);
+                };
+
+                const repositionScroll = (el) => {
+                    baunfire.lenis?.scrollTo(el.get(0), {
+                        duration: 1,
+                        offset: 0,
+                        lock: false
+                    })
+                };
+
+                script();
+            };
+
+            authorHead();
+            authorBody();
+        },
     };
 
     baunfire.addModule(baunfire.Animation);

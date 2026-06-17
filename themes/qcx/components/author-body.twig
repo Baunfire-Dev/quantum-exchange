@@ -1,0 +1,82 @@
+{% set has_posts = posts and posts|length %}
+
+{% if has_posts %}
+	<section class="auth-body">
+		<section class="resources-grid">
+			<div class="st-xxl sb-xxl">
+				<div class="container">
+					<div class="flex flex-col ~gap-[2rem]/[3rem]">
+						{% if has_posts %}
+							<div class="cards-outer">
+								<div class="cards-container" data-per-page="9">
+									{% for item in posts %}
+										{% set post_id = item.ID ?? item.id %}
+										{% set post_title = item.post_title ?? item.title %}
+										{% set post_link = function('get_permalink', post_id) %}
+										{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
+
+										{% set post_type_slug = function('get_post_type', post_id) %}
+										{% set post_type_obj = function('get_post_type_object', post_type_slug) %}
+
+										{% set category_names = [] %}
+										{% set category_taxes = [] %}
+										{% set category_raw = function('wp_get_post_terms', post_id, types[post_type_obj.name].tax) %}
+
+										{% for category in category_raw %}
+											{% set category_taxes = category_taxes | merge([category.slug]) %}
+											{% set category_names = category_names | merge([category.name]) %}
+										{% endfor %}
+
+										{% set category_names = category_names | join(', ') %}
+
+										{% include 'components/card.twig' with {
+                                            custom_class: "is-listing in-filter",
+                                            title: post_title,
+                                            permalink: post_link,
+                                            type: category_names,
+                                            type_slug: post_type_obj.name,
+                                            show_type: true,
+                                            thumbnail: post_thumbnail,
+                                            cats: category_taxes
+                                        } %}
+									{% endfor %}
+								</div>
+
+								<div class="empty">
+									<div class="container">
+										<h6 class="text-center">We're sorry, there aren't any posts that match what you're looking for.
+											<br/>Try another a different filter or reset to see our latest posts.</h6>
+									</div>
+								</div>
+
+								<div class="load-more">
+									<div class="container">
+										<div class="flex justify-center">
+											<div class="btn filled blue">
+												<p>
+													<span class="front" data-original="Load">Load</span>
+													<span class="back">Load&nbsp;</span>
+												</p>
+												<p>
+													<span class="front" data-original="more">more</span>
+													<span class="back">more</span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% else %}
+							<div class="empty active">
+								<div class="container">
+									<h6 class="text-center">There aren't any posts here just yet.
+										<br/>Check back soon for updates.</h6>
+								</div>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
+{% endif %}

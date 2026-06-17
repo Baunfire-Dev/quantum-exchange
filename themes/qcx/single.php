@@ -31,6 +31,7 @@ get_header();
         "title" => $title,
         "date" => get_the_date('d M Y', $post_id),
         "author" => get_the_title($post_author),
+        "author_link" => get_the_permalink($post_author),
         "feature_image" => get_post_thumbnail_id($post_id),
         "share_title" => rawurlencode($title),
         "share_link" => rawurlencode(get_the_permalink($post_id)),
