@@ -3,6 +3,9 @@
 		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
 	{% endif %}
 
+    {% set uid = block.id ~ "-filter-" ~ "now"|date('U') ~ "-" ~ random(999999) %}
+    {% set pid = block.id ~ "-paint-" ~ "now"|date('U') ~ "-" ~ random(999999) %}
+
 	<div class="container">
 		<div class="relative bg-blue rounded-[0.5rem] overflow-hidden border border-green">
 			<div class="flex flex-col ~gap-[1.25rem]/[2rem] ~p-[2.5rem]/[4rem] relative z-[2]">
@@ -36,11 +39,11 @@
 			</div>
 
 			<svg class="h-auto w-auto min-w-full min-h-full object-cover absolute top-0 left-0" xmlns="http://www.w3.org/2000/svg" width="886" height="483" viewbox="0 0 886 483" fill="none">
-				<g filter="url(#filter0_n_7554_4293)">
-					<rect x="-277" y="-276" width="1440" height="1035" fill="url(#paint0_linear_7554_4293)"/>
+				<g filter="url(#{{ uid }})">
+					<rect x="-277" y="-276" width="1440" height="1035" fill="url(#{{ pid }})"/>
 				</g>
 				<defs>
-					<filter id="filter0_n_7554_4293" x="-277" y="-276" width="1440" height="1035" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
+					<filter id="{{ uid }}" x="-277" y="-276" width="1440" height="1035" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
 						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
 						<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 						<feTurbulence type="fractalNoise" basefrequency="0.66666668653488159 0.66666668653488159" stitchtiles="stitch" numoctaves="3" result="noise" seed="514"/>
@@ -56,7 +59,7 @@
 							<feMergeNode in="color1"/>
 						</feMerge>
 					</filter>
-					<linearGradient id="paint0_linear_7554_4293" x1="615" y1="104" x2="827" y2="618" gradientunits="userSpaceOnUse">
+					<linearGradient id="{{ pid }}" x1="615" y1="104" x2="827" y2="618" gradientunits="userSpaceOnUse">
 						<stop stop-color="#206EEC"/>
 						<stop offset="1" stop-color="#040D20"/>
 					</linearGradient>

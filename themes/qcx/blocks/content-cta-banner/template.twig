@@ -1,0 +1,64 @@
+{% if fields.title or fields.paragraph or fields.cta.title %}
+	<section class="{{ block.slug }} {{ block.className }}">
+		{% if block.anchor %}
+			<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+		{% endif %}
+
+		{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+		{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+		{% set uid = block.id ~ "-filter-" ~ "now"|date('U') ~ "-" ~ random(999999) %}
+		{% set pid = block.id ~ "-paint-" ~ "now"|date('U') ~ "-" ~ random(999999) %}
+
+		<div class="container">
+			<div class="{{ pt }} {{ pb }}">
+				<div class="relative ~px-[3.5rem]/[5rem] ~py-[2.5rem]/[4rem] rounded-[0.5rem] border border-green overflow-hidden bg-blue">
+					<div class="flex flex-col ~gap-[1rem]/[1.5rem] relative z-[2] text-center items-center">
+						{% if fields.heading %}
+							<p class="text-white h5 block-title alpha">{{ fields.heading }}</p>
+						{% endif %}
+
+						{% if fields.paragraph %}
+							<p class="text-white block-para alpha">{{ fields.paragraph }}</p>
+						{% endif %}
+
+						{% include 'components/cta.twig' with {
+                            class : 'filled white block-cta alpha',
+                            cta: fields.cta, 
+                        } %}
+					</div>
+
+					<div class="absolute top-0 left-0 h-full w-full pointer-events-none z-[1]">
+						<svg class="absolute center-xy w-auto h-auto min-h-full min-w-full" xmlns="http://www.w3.org/2000/svg" width="1312" height="347" viewbox="0 0 1312 347" fill="none">
+							<g filter="url(#{{ uid }})">
+								<rect x="-64" y="-344" width="1440" height="1035" fill="url(#{{ pid }})"/>
+							</g>
+							<defs>
+								<filter id="{{ uid }}" x="-64" y="-344" width="1440" height="1035" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
+									<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+									<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+									<feTurbulence type="fractalNoise" basefrequency="0.66666668653488159 0.66666668653488159" stitchtiles="stitch" numoctaves="3" result="noise" seed="514"/>
+									<feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+									<feComponentTransfer in="alphaNoise" result="coloredNoise1">
+										<feFuncA type="discrete" tablevalues="1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+									</feComponentTransfer>
+									<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped"/>
+									<feFlood flood-color="rgba(0, 0, 0, 0.1)" result="color1Flood"/>
+									<feComposite operator="in" in2="noise1Clipped" in="color1Flood" result="color1"/>
+									<feMerge result="effect1_noise_9032_3528">
+										<feMergeNode in="shape"/>
+										<feMergeNode in="color1"/>
+									</feMerge>
+								</filter>
+								<linearGradient id="{{ pid }}" x1="828" y1="36" x2="1040" y2="550" gradientunits="userSpaceOnUse">
+									<stop stop-color="#206EEC"/>
+									<stop offset="1" stop-color="#040D20"/>
+								</linearGradient>
+							</defs>
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endif %}

@@ -11,7 +11,8 @@
     {% if fields.mode == "manual" %}
         {% set data_source = fields.featured_posts_manual %}
     {% endif %}
-    
+
+    {% set uid = block.id ~ "-" ~ "now"|date('U') ~ "-" ~ random(999999) %}
 
 	<div class="{{ pt }} {{ pb }} relative z-[2]">
 		<div class="container">
@@ -133,11 +134,11 @@
 
 	<div class="absolute top-0 left-0 h-full w-full pointer-events-none z-[1]">
 		<svg class="absolute center-xy w-auto h-auto min-h-full min-w-full" xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewbox="0 0 1440 900" fill="none">
-			<g filter="url(#filter0_n_8588_8815)">
+			<g filter="url(#{{ uid }})">
 				<rect width="1440" height="900" fill="#206EEC"/>
 			</g>
 			<defs>
-				<filter id="filter0_n_8588_8815" x="0" y="0" width="1440" height="900" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
+				<filter id="{{ uid }}" x="0" y="0" width="1440" height="900" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB">
 					<feFlood flood-opacity="0" result="BackgroundImageFix"/>
 					<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 					<feTurbulence type="fractalNoise" basefrequency="0.66666668653488159 0.66666668653488159" stitchtiles="stitch" numoctaves="3" result="noise" seed="514"/>
