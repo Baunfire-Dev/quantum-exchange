@@ -1,0 +1,15 @@
+{
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3,
+    "name": "logo-grid",
+    "title": "Logo Grid",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": ["page"],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    }
+}
