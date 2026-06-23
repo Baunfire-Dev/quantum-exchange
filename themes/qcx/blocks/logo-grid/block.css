@@ -107,6 +107,10 @@
 
         &__image {
             @apply object-contain w-auto h-auto max-w-full max-h-[2.25rem] mx-auto grayscale;
+
+            .no-grayscale & {
+                @apply grayscale-0;
+            }
         }
     }
 }

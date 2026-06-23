@@ -107,6 +107,27 @@
                 },
                 {
                     "key": "field_6a399d7c4b007",
+                    "label": "Disable Grayscale",
+                    "name": "disable_grayscale",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "Turn on to show uploaded logo colors.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "Show original logo colors",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "Original",
+                    "ui_off_text": "Grayscale",
+                    "allow_in_bindings": 0
+                },
+                {
+                    "key": "field_6a399d7c4b00d",
                     "label": "Heading",
                     "name": "heading",
                     "aria-label": "",

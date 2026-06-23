@@ -21,7 +21,7 @@
                 {% endif %}
 
                 {% if logos %}
-                    <div class="logo-grid__items {{ is_design_3 ? "is-design-3" : design in ["design_2", "design-2", "2"] ? "is-design-2" : "is-design-1" }}">
+                    <div class="logo-grid__items {{ is_design_3 ? "is-design-3" : design in ["design_2", "design-2", "2"] ? "is-design-2" : "is-design-1" }} {{ fields.disable_grayscale ? "no-grayscale" }}">
                         {% if is_design_3 %}
                             {% set row_size = 5 %}
                         {% else %}
