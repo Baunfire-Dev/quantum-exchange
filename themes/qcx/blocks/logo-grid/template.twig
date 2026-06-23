@@ -22,29 +22,39 @@
 
                 {% if logos %}
                     <div class="logo-grid__items {{ is_design_3 ? "is-design-3" : design in ["design_2", "design-2", "2"] ? "is-design-2" : "is-design-1" }}">
-                        {% for item in logos %}
-                            {% set raw_logo = item.logo ?: item.image %}
-                            {% set logo = raw_logo.ID ?: raw_logo.id ?: raw_logo.url ?: raw_logo %}
-                            {% set link = item.link %}
-                            {% set tag = link ? "a" : "div" %}
+                        {% if is_design_3 %}
+                            {% set row_size = 5 %}
+                        {% else %}
+                            {% set row_size = 7 %}
+                        {% endif %}
 
-                            {% if logo %}
-                                <{{ tag }}
-                                    class="logo-grid__item"
-                                    {% if link %}
-                                        href="{{ link.url ?: link }}"
-                                        target="{{ link.target ?: "_self" }}"
-                                        {% if link.target == "_blank" %}rel="noopener"{% endif %}
-                                        aria-label="{{ link.title ?: raw_logo.alt ?: raw_logo.title ?: function("get_the_title", logo) }}"
+                        {% for row in logos|batch(row_size) %}
+                            <div class="logo-grid__row">
+                                {% for item in row %}
+                                    {% set raw_logo = item.logo ?: item.image %}
+                                    {% set logo = raw_logo.ID ?: raw_logo.id ?: raw_logo.url ?: raw_logo %}
+                                    {% set link = item.link %}
+                                    {% set tag = link ? "a" : "div" %}
+
+                                    {% if logo %}
+                                        <{{ tag }}
+                                            class="logo-grid__item"
+                                            {% if link %}
+                                                href="{{ link.url ?: link }}"
+                                                target="{{ link.target ?: "_self" }}"
+                                                {% if link.target == "_blank" %}rel="noopener"{% endif %}
+                                                aria-label="{{ link.title ?: raw_logo.alt ?: raw_logo.title ?: function("get_the_title", logo) }}"
+                                            {% endif %}
+                                        >
+                                            {% include 'components/image.twig' with {
+                                                image: logo,
+                                                class: 'logo-grid__image',
+                                                size: "full",
+                                            } %}
+                                        </{{ tag }}>
                                     {% endif %}
-                                >
-                                    {% include 'components/image.twig' with {
-                                        image: logo,
-                                        class: 'logo-grid__image',
-                                        size: "full",
-                                    } %}
-                                </{{ tag }}>
-                            {% endif %}
+                                {% endfor %}
+                            </div>
                         {% endfor %}
                     </div>
                 {% endif %}

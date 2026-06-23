@@ -25,18 +25,54 @@
         }
 
         &__items {
-            @apply flex flex-wrap gap-[1.5rem] w-full;
+            @apply w-full;
 
             &.is-design-1 {
-                @apply gap-[0.75rem] justify-center;
+                @apply flex flex-col gap-[0.75rem] lg:max-w-[74rem] lg:mx-auto;
             }
 
             &.is-design-2 {
-                @apply justify-center;
+                @apply flex flex-col gap-[1.5rem] lg:max-w-[70rem] lg:mx-auto;
             }
 
             &.is-design-3 {
-                @apply flex-1;
+                @apply flex flex-col gap-[0.75rem] flex-1;
+            }
+        }
+
+        &__row {
+            @apply flex flex-wrap justify-center w-full;
+
+            .is-design-1 & {
+                @apply gap-[0.75rem] lg:mx-auto;
+
+                &:first-child {
+                    @apply lg:max-w-[64rem];
+                }
+
+                &:nth-child(n + 2) {
+                    @apply lg:max-w-[74rem];
+                }
+            }
+
+            .is-design-2 & {
+                @apply gap-[1.5rem] lg:flex-nowrap lg:justify-between;
+
+                &:nth-child(n + 2) {
+                    @apply lg:max-w-[58rem] lg:mx-auto;
+                }
+            }
+
+            .is-design-3 & {
+                @apply gap-[0.75rem] lg:ml-auto lg:mr-0;
+
+                &:nth-child(odd) {
+                    @apply lg:max-w-[45.5rem] lg:justify-end;
+                }
+
+                &:nth-child(even) {
+                    @apply lg:max-w-[49rem] lg:justify-end;
+                }
             }
         }
 
@@ -49,18 +85,19 @@
             }
 
             .is-design-1 & {
-                @apply h-[5.375rem] border border-gray p-[1.5rem] items-start gap-[0.5rem];
+                @apply h-[5.375rem] border border-gray p-[1.5rem] items-center justify-center gap-[0.5rem];
                 @apply lg:basis-[calc((100%-4.5rem)/7)];
             }
 
             .is-design-2 & {
                 @apply h-[5.375rem] justify-center items-center p-[0.75rem_1.5rem] gap-[0.5rem];
-                @apply lg:basis-[calc((100%-9rem)/7)];
+                @apply lg:basis-[7.5rem] lg:shrink-0 lg:p-0;
             }
 
             .is-design-3 & {
-                @apply h-[5.375rem] border border-gray p-[1.5rem] items-start gap-[0.5rem];
-                @apply basis-full sm:basis-[calc(100%/2-0.75rem)] xl:basis-[calc(100%/3-1rem)];
+                @apply h-[5.375rem] border border-gray p-[1.5rem] items-center justify-center gap-[0.5rem];
+                @apply basis-full sm:basis-[calc(100%/2-0.75rem)] md:basis-[calc(100%/3-1rem)] lg:basis-[calc((100%-3rem)/5)];
+                padding: var(--margin, 1.5rem);
             }
 
             &[href]:hover {
@@ -69,7 +106,7 @@
         }
 
         &__image {
-            @apply object-contain w-full h-full max-w-[8.75rem] max-h-[2.25rem] mx-auto;
+            @apply object-contain w-auto h-auto max-w-full max-h-[2.25rem] mx-auto;
         }
     }
 }
