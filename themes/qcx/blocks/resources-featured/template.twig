@@ -34,6 +34,7 @@
 							{% set post_id = item.ID ?? item.id %}
 							{% set post_title = item.post_title ?? item.title %}
 							{% set post_link = function('get_permalink', post_id) %}
+							{% set custom_url = function('get_field', 'custom_url', post_id) %}
 							{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
 
 							{% set post_type_slug = function('get_post_type', post_id) %}
@@ -48,7 +49,8 @@
 
 							{% include 'components/card.twig' with {
                                 title: post_title,
-                                permalink: post_link,
+                                permalink: custom_url ? custom_url : post_link,
+																target: custom_url ? '_blank' : '_self',
                                 type: post_type_name,
                                 thumbnail: post_thumbnail,
                                 animated: true,
