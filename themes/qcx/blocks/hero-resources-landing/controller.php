@@ -1,4 +1,5 @@
 <?php
+
 use Timber\Timber;
 
 if ($is_preview) {
@@ -20,6 +21,22 @@ $context = Timber::context([
     ]
 ]);
 
+$mode = $context['fields']['mode'];
+$data_source = $context['fields']['featured_posts'];
+
+if ($mode == "manual") {
+    $data_source = $context['fields']['featured_posts_manual'];
+} else if ($mode == "recent") {
+    $type = $context['fields']['source'];
+    $data_source = Timber::get_posts([
+        'post_type' => $type,
+        'posts_per_page' => 2,
+        'post_status' => 'publish',
+        'order' => 'DESC',
+    ]);
+}
+
+$context['data_source'] = $data_source;
 
 $context["block"]["slug"] = preg_replace('/^acf\//', '', $block["name"]);
 

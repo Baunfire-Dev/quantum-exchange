@@ -1,0 +1,16 @@
+{
+    "name": "json-schema",
+    "title": "JSON Schema",
+    "viewStyle": [],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "./controller.php",
+        "postTypes": [
+            "page"
+        ],
+        "blockVersion": 3,
+        "hideFieldsInSidebar": true
+    },
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 3
+}

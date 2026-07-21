@@ -1,45 +1,45 @@
 <section class="rs-foot">
-    {% if sc_form_shortcode %}
-        <section class="subscribe-cta">
-            <div class="container">
-                <div class="st-xl sb-xl">
-                    <div class="overflow-hidden relative bg-[#040D20] rounded-[0.5rem] ~py-[2rem]/[3rem] ~px-[1.25rem]/[7.5rem]">
-                        <div class="flex flex-col ~gap-[1.25rem]/[2rem] relative z-[2]">
-                            <div class="flex flex-col ~gap-[1rem]/[1.5rem] max-w-[44.1875rem]">
-                                {% if sc_heading %}
-                                    <h4 class="block-heading alpha text-white">
-                                        {{ sc_heading }}
-                                    </h4>
-                                {% endif %}
+	{% if sc_form_shortcode %}
+		<section class="subscribe-cta">
+			<div class="container">
+				<div class="st-xl sb-xl">
+					<div class="overflow-hidden relative bg-[#040D20] rounded-[0.5rem] ~py-[2rem]/[3rem] ~px-[1.25rem]/[7.5rem]">
+						<div class="flex flex-col ~gap-[1.25rem]/[2rem] relative z-[2]">
+							<div class="flex flex-col ~gap-[1rem]/[1.5rem] max-w-[44.1875rem]">
+								{% if sc_heading %}
+									<h4 class="block-heading alpha text-white">
+										{{ sc_heading }}
+									</h4>
+								{% endif %}
 
-                                {% if sc_paragraph %}
-                                    <p class="block-para alpha text-white">
-                                        {{ sc_paragraph }}
-                                    </p>
-                                {% endif %}
-                            </div>
+								{% if sc_paragraph %}
+									<p class="block-para alpha text-white">
+										{{ sc_paragraph }}
+									</p>
+								{% endif %}
+							</div>
 
-                            <div id="form-container">
-                                <div class="block-form alpha form susbcribe-cta">
-                                    <div class="form-inner">
-                                        {{ function('do_shortcode', sc_form_shortcode) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+							<div id="form-container">
+								<div class="block-form alpha form susbcribe-cta">
+									<div class="form-inner">
+										{{ function('do_shortcode', sc_form_shortcode) }}
+									</div>
+								</div>
+							</div>
+						</div>
 
-                        <div class="envelope alpha lg:blur-[0.125rem] absolute top-[-2rem] ~right-[0.375rem]/[7.5rem] ~w-[6.875rem]/[8rem] ~h-[6.625rem]/[7.75rem]">
-                            <img src="{{ function("png", "env-two") }}" alt="bg graphic envelope" loading="lazy" class="object-contain"/>
-                        </div>
+						<div class="envelope alpha lg:blur-[0.125rem] absolute top-[-2rem] ~right-[0.375rem]/[7.5rem] ~w-[6.875rem]/[8rem] ~h-[6.625rem]/[7.75rem]">
+							<img src="{{ function("png", "env-two") }}" alt="bg graphic envelope" loading="lazy" class="object-contain"/>
+						</div>
 
-                        <div class="envelope alpha absolute bottom-[-1.625rem] right-[11.125rem] w-[13.5rem] h-[11.625rem]">
-                            <img src="{{ function("png", "env-one") }}" alt="bg graphic envelope" loading="lazy" class="object-contain max-lg:opacity-0 transition-opacity duration-300 ease-power2-out"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    {% endif %}
+						<div class="envelope alpha absolute bottom-[-1.625rem] right-[11.125rem] w-[13.5rem] h-[11.625rem]">
+							<img src="{{ function("png", "env-one") }}" alt="bg graphic envelope" loading="lazy" class="object-contain max-lg:opacity-0 transition-opacity duration-300 ease-power2-out"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endif %}
 
 	{% if related_posts|length %}
 		<section class="resources-featured">
@@ -56,18 +56,30 @@
 							{% for item in related_posts %}
 								{% set post_id = item.ID ?? item.id %}
 								{% set post_title = item.post_title ?? item.title %}
-								{% set post_link = function('get_permalink', post_id) %}
-								{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
 
-								{% set post_type_slug = function('get_post_type', post_id) %}
-                                {% set categories_raw = function("get_the_terms", post_id, post_types[post_type_slug].tax) %}
-                                {% set categories = [] %}
+								{% set post_link = fn('get_permalink', post_id) %}
+								{% set external_link = fn('get_field', 'redirect_link', post_id) %}
+								{% set custom_link = fn('get_field', 'res_custom_url', post_id) %}
 
-                                {% for cat in categories_raw %}
-                                    {% set categories = categories | merge([cat.name]) %}
-                                {% endfor %}
+								{% if not external_link %}
+									{% if custom_link %}
+										{% set post_link = custom_link %}
+									{% endif %}
+								{% else %}
+									{% set post_link = external_link %}
+								{% endif %}
 
-                                {% set categories = categories | join(', ') %}
+								{% set post_thumbnail = fn('get_the_post_thumbnail_url', post_id, 'large') %}
+
+								{% set post_type_slug = fn('get_post_type', post_id) %}
+								{% set categories_raw = fn("get_the_terms", post_id, post_types[post_type_slug].tax) %}
+								{% set categories = [] %}
+
+								{% for cat in categories_raw %}
+									{% set categories = categories | merge([cat.name]) %}
+								{% endfor %}
+
+								{% set categories = categories | join(', ') %}
 
 								{% include 'components/card.twig' with {
                                     title: post_title,

@@ -6,6 +6,8 @@
 	{% set pt = fields.padding_top and fields.padding_top != 'unset' ? fields.padding_top : 'st-xxl' %}
 	{% set pb = fields.padding_bottom and fields.padding_bottom != 'unset' ? fields.padding_bottom : 'sb-xxl' %}
 
+	{% set is_in_thank_you_page = fields.is_in_thank_you_page %}
+
 	<div class="container">
 		<div class="{{ pt }} {{ pb }}">
 			<div class="flex flex-col items-center ~gap-[2.5rem]/[4rem]">
@@ -33,18 +35,35 @@
 						{% for item in featured_posts %}
 							{% set post_id = item.ID ?? item.id %}
 							{% set post_title = item.post_title ?? item.title %}
-							{% set post_link = function('get_permalink', post_id) %}
-							{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
 
-							{% set post_type_slug = function('get_post_type', post_id) %}
-                            {% set categories_raw = function("get_the_terms", post_id, post_types[post_type_slug].tax) %}
-                            {% set categories = [] %}
+							{% set post_link = fn('get_permalink', post_id) %}
+							{% set external_link = fn('get_field', 'redirect_link', post_id) %}
+							{% set custom_link = fn('get_field', 'res_custom_url', post_id) %}
+							{% set thank_you_link = fn('get_field', 'res_thank_you_page_url', post_id) %}
 
-                            {% for cat in categories_raw %}
-                                {% set categories = categories | merge([cat.name]) %}
-                            {% endfor %}
+							{% if not external_link %}
+								{% if custom_link and not is_in_thank_you_page %}
+									{% set post_link = custom_link %}
+								{% endif %}
 
-                            {% set categories = categories | join(', ') %}
+								{% if thank_you_link and is_in_thank_you_page %}
+									{% set post_link = thank_you_link %}
+								{% endif %}
+							{% else %}
+								{% set post_link = external_link %}
+							{% endif %}
+
+							{% set post_thumbnail = fn('get_the_post_thumbnail_url', post_id, 'large') %}
+
+							{% set post_type_slug = fn('get_post_type', post_id) %}
+							{% set categories_raw = fn("get_the_terms", post_id, post_types[post_type_slug].tax) %}
+							{% set categories = [] %}
+
+							{% for cat in categories_raw %}
+								{% set categories = categories | merge([cat.name]) %}
+							{% endfor %}
+
+							{% set categories = categories | join(', ') %}
 
 							{% include 'components/card.twig' with {
                                 title: post_title,

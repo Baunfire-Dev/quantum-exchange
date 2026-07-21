@@ -1,14 +1,14 @@
 {
-    "key": "group_691201e6c9078",
-    "title": "Post Configuration",
+    "key": "group_6a4573aa00335",
+    "title": "Single - Resource",
     "fields": [
         {
-            "key": "field_691201e61957b",
-            "label": "External URL",
-            "name": "redirect_link",
+            "key": "field_6a4573aa3d49e",
+            "label": "Single - Resource",
+            "name": "",
             "aria-label": "",
-            "type": "url",
-            "instructions": "Priority 1 - Redirects the resource to an external URL.",
+            "type": "tab",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,35 +16,17 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "allow_in_bindings": 0,
-            "placeholder": ""
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         },
         {
-            "key": "field_6a5fc4dec8033",
+            "key": "field_6a4573f53d4a3",
             "label": "Custom URL",
-            "name": "res_custom_url",
+            "name": "custom_url",
             "aria-label": "",
             "type": "url",
-            "instructions": "Priority 2 - Overrides the resource link in the Resources Featured block.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "allow_in_bindings": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_6a5fc4f0c8034",
-            "label": "Thank You Page URL",
-            "name": "res_thank_you_page_url",
-            "aria-label": "",
-            "type": "url",
-            "instructions": "Priority 3 - Overrides the resource link in the Resources Featured block on Thank You pages only.",
+            "instructions": "This link is used to overwrite the link on the 'Resources Featured' block",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -62,21 +44,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "webinar_event"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
                 "value": "news"
-            }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "press_release"
             }
         ],
         [
@@ -97,14 +65,14 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "media_coverage"
+                "value": "press_release"
             }
         ],
         [
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "award"
+                "value": "media_coverage"
             }
         ]
     ],
@@ -114,11 +82,11 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": true,
+    "active": false,
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1784661665
+    "modified": 1784663088
 }

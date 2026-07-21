@@ -147,6 +147,27 @@
                     "allow_in_bindings": 0
                 },
                 {
+                    "key": "field_6a5fc66421e87",
+                    "label": "Is In Thank You Page",
+                    "name": "is_in_thank_you_page",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "allow_in_bindings": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "ui": 1
+                },
+                {
                     "key": "field_68f7de68e3ded",
                     "label": "Featured",
                     "name": "featured",
@@ -233,5 +254,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1779389596
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1784661687
 }

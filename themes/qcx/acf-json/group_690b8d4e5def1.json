@@ -140,7 +140,8 @@
                     },
                     "choices": {
                         "selection": "Selection",
-                        "manual": "Manual"
+                        "manual": "Manual",
+                        "recent": "Recent"
                     },
                     "default_value": "selection",
                     "return_format": "value",
@@ -295,6 +296,42 @@
                     ]
                 },
                 {
+                    "key": "field_6a5fcc6689a58",
+                    "label": "Source",
+                    "name": "source",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_6a0f54d303671",
+                                "operator": "==",
+                                "value": "recent"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "award": "Awards",
+                        "blog_podcast": "Blogs & Podcasts",
+                        "media_coverage": "Media Coverage",
+                        "news": "News & Resources",
+                        "press_release": "Press Releases",
+                        "webinar_event": "Webinars & Events"
+                    },
+                    "default_value": "award",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal"
+                },
+                {
                     "key": "field_691337d129fbf",
                     "label": "Form",
                     "name": "",
@@ -403,5 +440,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1779390335
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1784663330
 }
