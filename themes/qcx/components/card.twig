@@ -1,5 +1,5 @@
 <article class="rc {{ custom_class ?: " default" }}" {{ show_type and type_slug ? "data-type='" ~ type_slug ~ "'" }} {{ cats ? "data-category='" ~ cats | json_encode | raw ~ "'" }}>
-	<a href="{{ permalink }}" class="rc-link"></a>
+	<a href="{{ permalink }}" target="{{ target ? target : '_self' }}" class="rc-link"></a>
 
 	<div class="rc-card {{ animated ? " alpha" }}">
 		<div class="rc-head">

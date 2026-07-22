@@ -1,0 +1,64 @@
+<section class="{{ block.slug }} {{ block.className }}">
+    {% if block.anchor %}
+        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+    {% endif %}
+
+    {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+    {% set pb = fields.padding_bottom and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+    {% set design = fields.design ?: fields.design_option ?: fields.layout ?: fields.style ?: "design_1" %}
+    {% set is_design_3 = design in ["design_3", "design-3", "3"] %}
+    {% set logos = fields.logos ?: fields.logo_items ?: fields.items %}
+
+    <div class="container">
+        <div class="{{ pt }} {{ pb }}">
+            <div class="logo-grid__inner {{ is_design_3 ? "is-design-3" : "is-standard" }}">
+                {% if fields.heading %}
+                    {% if is_design_3 %}
+                        <h4 class="logo-grid__heading">{{ fields.heading }}</h4>
+                    {% else %}
+                        <p class="logo-grid__heading text-center">{{ fields.heading }}</p>
+                    {% endif %}
+                {% endif %}
+
+                {% if logos %}
+                    <div class="logo-grid__items {{ is_design_3 ? "is-design-3" : design in ["design_2", "design-2", "2"] ? "is-design-2" : "is-design-1" }} {{ fields.disable_grayscale ? "no-grayscale" }}">
+                        {% if is_design_3 %}
+                            {% set row_size = 5 %}
+                        {% else %}
+                            {% set row_size = 7 %}
+                        {% endif %}
+
+                        {% for row in logos|batch(row_size) %}
+                            <div class="logo-grid__row">
+                                {% for item in row %}
+                                    {% set raw_logo = item.logo ?: item.image %}
+                                    {% set logo = raw_logo.ID ?: raw_logo.id ?: raw_logo.url ?: raw_logo %}
+                                    {% set link = item.link %}
+                                    {% set tag = link ? "a" : "div" %}
+
+                                    {% if logo %}
+                                        <{{ tag }}
+                                            class="logo-grid__item"
+                                            {% if link %}
+                                                href="{{ link.url ?: link }}"
+                                                target="{{ link.target ?: "_self" }}"
+                                                {% if link.target == "_blank" %}rel="noopener"{% endif %}
+                                                aria-label="{{ link.title ?: raw_logo.alt ?: raw_logo.title ?: function("get_the_title", logo) }}"
+                                            {% endif %}
+                                        >
+                                            {% include 'components/image.twig' with {
+                                                image: logo,
+                                                class: 'logo-grid__image',
+                                                size: "full",
+                                            } %}
+                                        </{{ tag }}>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

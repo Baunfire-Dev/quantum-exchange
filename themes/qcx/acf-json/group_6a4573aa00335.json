@@ -82,11 +82,19 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
+<<<<<<< HEAD
     "active": false,
+=======
+    "active": true,
+>>>>>>> 5b5685561546548b1dc9b5de6114b063b063cbdb
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
+<<<<<<< HEAD
     "modified": 1784663088
+=======
+    "modified": 1782936785
+>>>>>>> 5b5685561546548b1dc9b5de6114b063b063cbdb
 }

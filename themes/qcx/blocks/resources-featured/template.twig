@@ -35,6 +35,12 @@
 						{% for item in featured_posts %}
 							{% set post_id = item.ID ?? item.id %}
 							{% set post_title = item.post_title ?? item.title %}
+<<<<<<< HEAD
+=======
+							{% set post_link = function('get_permalink', post_id) %}
+							{% set custom_url = function('get_field', 'custom_url', post_id) %}
+							{% set post_thumbnail = function('get_the_post_thumbnail_url', post_id, 'large') %}
+>>>>>>> 5b5685561546548b1dc9b5de6114b063b063cbdb
 
 							{% set post_link = fn('get_permalink', post_id) %}
 							{% set external_link = fn('get_field', 'redirect_link', post_id) %}
@@ -67,7 +73,8 @@
 
 							{% include 'components/card.twig' with {
                                 title: post_title,
-                                permalink: post_link,
+                                permalink: custom_url ? custom_url : post_link,
+																target: custom_url ? '_blank' : '_self',
                                 type: post_type_name,
                                 thumbnail: post_thumbnail,
                                 animated: true,
