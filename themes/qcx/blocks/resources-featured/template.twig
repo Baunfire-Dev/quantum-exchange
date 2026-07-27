@@ -34,7 +34,7 @@
 					<div class="grid md:grid-cols-2 lg:grid-cols-3 ~gap-[1rem]/[1.5rem]">
 						{% for item in featured_posts %}
 							{% set post_id = item.ID ?? item.id %}
-							{% set post_title = item.post_title ?? item.title %}\
+							{% set post_title = item.post_title ?? item.title %}
 
 							{% set post_link = fn('get_permalink', post_id) %}
 							{% set external_link = fn('get_field', 'redirect_link', post_id) %}
