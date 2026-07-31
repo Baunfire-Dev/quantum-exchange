@@ -11,7 +11,9 @@
 		}
 
 		&-details {
-			@apply lg:flex-1 lg:basis-[19.875rem] flex flex-col ~gap-[1.25rem]/[6.25rem];
+			@apply lg:flex-1 lg:basis-[19.875rem] flex flex-col;
+            /* @apply ~gap-[1.25rem]/[6.25rem]; */
+            @apply ~gap-[1.25rem]/[2.5rem];
 		}
 
 		&-columns {

@@ -13,8 +13,7 @@
 use Timber\Timber;
 
 $context = Timber::context([
-    "footer_form_label" => get_field("footer_form_label", "option"),
-    "footer_form_shorcode" => get_field("footer_form", "option"),
+    "footer_subscribe_cta" => get_field("footer_subscribe_cta", "option"),
     "footer_social" => get_field("footer_social", "option"),
     "primary_footer_nav_column" => get_field("primary_footer_nav_column", "option"),
     "secondary_footer_nav_item" => get_field("secondary_footer_nav_item", "option"),
