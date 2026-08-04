@@ -56,27 +56,40 @@ get_header();
     $context['post_types'] = $post_types;
 
     if (isset($post_types[$type])) {
-        $taxonomy = $post_types[$type]['tax'];
-        $terms = wp_get_post_terms($post_id, $taxonomy, ['fields' => 'ids']);
+        $source = get_field("res_rel_source", $post_id);
 
-        if (!empty($terms) && !is_wp_error($terms)) {
-            $args = [
-                'post_type' => $type,
+        if ($source == "manual") {
+            $manual_ids = get_field("res_rel_posts", $post_id);
+
+            $context['related_posts'] = Timber::get_posts([
+                'post_type' => 'any',
                 'posts_per_page' => 3,
-                'post__not_in' => [$post_id],
-                'tax_query' => [
-                    [
-                        'taxonomy' => $taxonomy,
-                        'field' => 'term_id',
-                        'terms' => $terms,
-                    ],
-                ],
-            ];
+                'post__in'  => $manual_ids,
+            ]);
+        } else {
+            $taxonomy = $post_types[$type]['tax'];
+            $terms = wp_get_post_terms($post_id, $taxonomy, ['fields' => 'ids']);
 
-            $related_posts = Timber::get_posts($args);
-            $context['related_posts'] = $related_posts;
-            $context['post_type_label'] = $post_types[$type]['label'];
+            if (!empty($terms) && !is_wp_error($terms)) {
+                $args = [
+                    'post_type' => $type,
+                    'posts_per_page' => 3,
+                    'post__not_in' => [$post_id],
+                    'tax_query' => [
+                        [
+                            'taxonomy' => $taxonomy,
+                            'field' => 'term_id',
+                            'terms' => $terms,
+                        ],
+                    ],
+                ];
+
+                $related_posts = Timber::get_posts($args);
+                $context['related_posts'] = $related_posts;
+            }
         }
+
+        $context['post_type_label'] = $post_types[$type]['label'];
     }
 
     Timber::render("./components/resource-head.twig", $context);
