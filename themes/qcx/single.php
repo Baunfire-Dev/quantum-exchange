@@ -64,6 +64,7 @@ get_header();
             $context['related_posts'] = Timber::get_posts([
                 'post_type' => 'any',
                 'posts_per_page' => 3,
+                'post_status' => 'publish',
                 'post__in'  => $manual_ids,
             ]);
         } else {
@@ -74,7 +75,10 @@ get_header();
                 $args = [
                     'post_type' => $type,
                     'posts_per_page' => 3,
+                    'post_status' => 'publish',
                     'post__not_in' => [$post_id],
+                    'orderby' => 'date',                 // Order by creation/publish date
+                    'order' => 'DESC',
                     'tax_query' => [
                         [
                             'taxonomy' => $taxonomy,

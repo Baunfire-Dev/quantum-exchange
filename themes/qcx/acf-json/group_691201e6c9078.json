@@ -146,7 +146,9 @@
                 "media_coverage",
                 "award"
             ],
-            "post_status": "",
+            "post_status": [
+                "publish"
+            ],
             "taxonomy": "",
             "filters": [
                 "search",
@@ -218,5 +220,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1785863359
+    "modified": 1785863790
 }
