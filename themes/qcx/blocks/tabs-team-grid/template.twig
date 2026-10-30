@@ -17,10 +17,8 @@
 							<div class="tabs-inner block-tabs alpha">
 								<div class="tab-select" id="slx">
 									<select>
-										<option value="all" selected>All</option>
-
 										{% for cat in categories %}
-											<option value="{{ cat.slug }}">{{ cat.name }}</option>
+											<option {{ loop.index == 1 ? "selected" }} value="{{ cat.slug }}">{{ cat.name }}</option>
 										{% endfor %}
 									</select>
 
@@ -30,12 +28,8 @@
 								</div>
 
 								<div class="tab-items">
-									<div class="tab-item active" data-value="all">
-										<p class="button">All</p>
-									</div>
-
 									{% for cat in categories %}
-										<div class="tab-item" data-value="{{ cat.slug }}">
+										<div class="tab-item {{ loop.index == 1 ? "active" }}" data-value="{{ cat.slug }}">
 											<p class="button">{{ cat.name }}</p>
 										</div>
 									{% endfor %}
