@@ -498,3 +498,29 @@ video {
 		background-position: -100% 0;
 	}
 }
+
+.rs-content {
+	.wp-block-columns.is-layout-flex {
+		@apply !gap-[2rem];
+
+		.wp-block-column.is-layout-flow {
+			@apply flex flex-col gap-[1.5rem];
+		}
+	}
+
+	.wp-block-quote {
+		@apply relative border-l-4 border-blue bg-light-grey rounded-r-[0.5rem] ~my-[1.5rem]/[2.5rem] ~py-[1.25rem]/[2rem] ~pl-[1.5rem]/[2.5rem] ~pr-[1.25rem]/[2rem];
+
+		p {
+			@apply italic ~text-[1.125rem]/[1.375rem] leading-[1.5] text-dark-blue;
+		}
+
+		cite {
+			@apply block not-italic font-semibold text-blue ~text-[0.875rem]/[1rem] mt-[1rem];
+
+			&::before {
+				content: "— ";
+			}
+		}
+	}
+}
