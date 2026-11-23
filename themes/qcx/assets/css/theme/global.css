@@ -513,14 +513,25 @@ video {
 
 		p {
 			@apply italic ~text-[1.125rem]/[1.375rem] leading-[1.5] text-dark-blue;
+
+			&:first-child {
+				&::before {
+					content: "\201C";
+				}
+
+				&::after {
+					content: "\201D";
+				}
+			}
+
+			/* Attribution line, e.g. <p><strong>– Gartner</strong></p> */
+			&:has(> strong:only-child) {
+				@apply not-italic mt-[1rem];
+			}
 		}
 
-		cite {
-			@apply block not-italic font-semibold text-blue ~text-[0.875rem]/[1rem] mt-[1rem];
-
-			&::before {
-				content: "— ";
-			}
+		strong {
+			@apply font-bold;
 		}
 	}
 }
